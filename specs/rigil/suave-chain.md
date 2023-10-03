@@ -76,8 +76,8 @@ Utilizing Ethereum's Clique PoA mechanism, the SUAVE Rigil testnet ensures rapid
 
 ### Network Parameters
 
-- **Network ID**: `424242`
-- **Chain ID**: `424242`
+- **Network ID**: `16813125`
+- **Chain ID**: `16813125`
 - **RPC Endpoint**: `https://rpc.suave.io` (?? Do we post our RPC here?? )
 
 ### Genesis Settings
@@ -105,11 +105,11 @@ Clique, an Ethereum-based Proof-of-Authority consensus protocol defined [here](h
 
 ## Gas and Transaction Fees
 
-The SUAVE chain employs the same gas pricing mechanism as Ethereum pre-Cancun hardfork (no blob transactions) where gas prices adjust based on network demand. Nodes currently track Confidential Compute Request gas usage, but do not charge (??? I believe correct @ MM?). 
+The SUAVE chain employs the same gas pricing mechanism as Ethereum pre-Cancun hardfork (no blob transactions) where gas prices adjust based on network demand. Nodes currently track Confidential Compute Request gas usage, but do not charge (??? I believe correct @ MM?).
 
 ## Security Considerations
 
-- **Security Risk**: The protocol is unaudited. The protocol currently does not make any gurantees about the confidentiality of data in the network outside of a best effort. 
+- **Security Risk**: The protocol is unaudited. The protocol currently does not make any gurantees about the confidentiality of data in the network outside of a best effort.
 - **DoS Risk**: Nodes have not yet been audited for DoS.
 - **Secure Key Management**: Store private keys with mininmal to know  on securely, preferably in hardware wallets. Private keys on SUAVE should be considered not secured for the time being so please keep minimal amounts of testnet eth on them.
 
