@@ -19,7 +19,7 @@ todo?
 
 # Specs
 
-Specifications for the SUAVE protocol can be found in [specs](./specs/). Specs are currently organized by testnet during early protocol development.Some testnets will be developed in parallel.
+Our specs are currently organized by testnet during early protocol development. Some testnets will be developed in parallel.
 
 ### In-development Specifications
 
