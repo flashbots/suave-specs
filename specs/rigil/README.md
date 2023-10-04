@@ -31,11 +31,11 @@ SUAVE is a platform for building MEV applications like OFAs and block builders i
 
 ### High-level Rigil architecture diagram
 
-![Rigil architecture](https://raw.githubusercontent.com/flashbots/suave-specs/main/assets/rigil-architecture.svg?token=GHSAT0AAAAAAB4AFGK5IHWCAO274YXIXIAGZI5RU5A)
+![Rigil architecture](/assets/rigil-architecture.svg)
 
 ### Transaction-flow diagram
 
-![Rigil transaction flow](https://raw.githubusercontent.com/flashbots/suave-specs/main/assets/rigil-tx-flow.svg?token=GHSAT0AAAAAAB4AFGK5RMURNGLY4JVMHTTQZI5RWLA)
+![Rigil transaction flow](/assets/rigil-tx-flow.svg)
 
 Steps:
 
