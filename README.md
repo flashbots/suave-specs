@@ -1,13 +1,15 @@
 # SUAVE Protocol Specifications
 
-todo?
-- docs link
-- website link
-- discord link
-- forum link
-- contribution guide
+For the large part, the SUAVE protocol is still in a state where the code is the most up-to-date protocol spec, but this repository aims to be a starting places to gradually evolve into a non-programming-language based specification language.
 
-For the large part, the SUAVE protocol is still in a state where the code is the most up-to-date protocol spec, but this repository aims to be a starting places to gradually evolve into a non-programmaing langauge based specification language.
+Links:
+
+- [Flashbots Forum](https://collective.flashbots.net/)
+- [Flashbots Website](https://www.flashbots.net/)
+- SUAVE Docs (coming soon)
+
+todo?
+- contribution guide
 
 # Specs
 
