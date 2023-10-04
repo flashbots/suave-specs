@@ -42,7 +42,7 @@ Here is a rough outline of the initial governance process for adding precompiles
 
 ### `IsConfidential`
 
-[Implementation](link-to-github-or-other-source)
+Implementation (link-to-github-or-other-source)
 
 Address: `0x42010000`
 
@@ -50,7 +50,7 @@ Determines if the current execution mode is regular (on-chain) or confidential. 
 
 ### `ConfidentialInputs`
 
-[Implementation](link-to-github-or-other-source)
+Implementation (link-to-github-or-other-source)
 
 Address: `0x42010001`
 
@@ -58,7 +58,7 @@ Provides the confidential inputs associated with a confidential computation requ
 
 ### `ConfidentialStore`
 
-[Implementation](link-to-github-or-other-source)
+Implementation (link-to-github-or-other-source)
 
 Address: `0x42020000`
 
@@ -66,7 +66,7 @@ Handles the storage of values in the confidential store. Requires the caller to 
 
 ### `ConfidentialRetrieve`
 
-[Implementation](link-to-github-or-other-source)
+Implementation (link-to-github-or-other-source)
 
 Address: `0x42020001`
 
@@ -74,7 +74,7 @@ Retrieves values from the confidential store. Also mandates the caller's presenc
 
 ### `NewBid`
 
-[Implementation](link-to-github-or-other-source)
+Implementation (link-to-github-or-other-source)
 
 Address: `0x42030000`
 
@@ -82,7 +82,7 @@ Initializes bids within the ConfidentialStore. Prior to storing data, all bids s
 
 ### `FetchBids`
 
-[Implementation](link-to-github-or-other-source)
+Implementation (link-to-github-or-other-source)
 
 Address: `0x42030001`
 
@@ -90,7 +90,7 @@ Retrieves all bids correlating with a specified decryption condition.
 
 ### `SimulateBundle`
 
-[Implementation](link-to-github-or-other-source)
+Implementation (link-to-github-or-other-source)
 
 Address: `0x42100000`
 
@@ -98,7 +98,7 @@ Conducts a simulation of the bundle, building a block that includes it. Outputs 
 
 ### `ExtractHint`
 
-[Implementation](link-to-github-or-other-source)
+Implementation (link-to-github-or-other-source)
 
 Address: `0x42100037`
 
@@ -106,7 +106,7 @@ Interprets the bundle data and extracts hints, such as the "To" address and call
 
 ### `BuildEthBlock`
 
-[Implementation](link-to-github-or-other-source)
+Implementation (link-to-github-or-other-source)
 
 Address: `0x42100001`
 
@@ -114,7 +114,7 @@ Constructs an Ethereum block based on the provided bid. The construction follows
 
 ### `SubmitEthBlockBidToRelay`
 
-[Implementation](link-to-github-or-other-source)
+Implementation (link-to-github-or-other-source)
 
 Address: `0x42100002`
 
