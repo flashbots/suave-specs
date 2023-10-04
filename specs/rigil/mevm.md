@@ -114,7 +114,7 @@ Other than ability to access new precompiles, the contracts aiming to be execute
 
 ### Confidential APIs
 
-In the [suave-geth](https://github.com/flashbots/suave-geth/tree/main) reference implementation, confidential precompiles have access to the following [Confidential APIs](suave/core/types.go) during execution.
+In the [suave-geth](https://github.com/flashbots/suave-geth/tree/main) reference implementation, confidential precompiles have access to the following [Confidential APIs](https://github.com/flashbots/suave-geth/tree/main/suave/core/types.go) during execution.
 This is subject to change!
 
 ```go
