@@ -1,6 +1,10 @@
 # SUAVE Protocol Specifications
 
+SUAVE is a platform for building MEV applications like OFAs and block builders in a decentralized and private way. SUAVE is looking to create a new paradigm for computation, where computation can be private and run at the speed of block building.
+
 For the large part, the SUAVE protocol is still in a state where the code is the most up-to-date protocol spec, but this repository aims to be a starting places to gradually evolve into a non-programming-language based specification language.
+
+---
 
 Links:
 

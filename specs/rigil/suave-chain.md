@@ -1,5 +1,8 @@
 # Suave Chain
 
+## Table of Contents
+
+
 ## Introduction
 
 This document outlines the specifications for the SUAVE Rigil testnet. The main purpose of these the suave chain in the suave protocol is to agree upon smart contract code for use cases such as OFAs, solvers, block builders, etc, in some cases store data onchain for better censorship guarantees, and in some cases, broadcast data. In the initial phases of SUAVE development, the chain is generated and maintained by a proof-of-authority consensus protocol clique over a network of permissioned nodes. The reason for this network configuration is to enable rapid iteration during architectural shift during protocol development.
@@ -120,12 +123,3 @@ If you find a security vulnerability in Suave, please let us know sending an ema
 ## Appendices
 
 - **Appendix A**: Sample code snippets for DApp integration. (?) DM: this isn't very spec like, but I don't think we're trying to pretend too hard that this is a "formal spec"
-- **Appendix B**: Diagrammatic representation of transaction flow.
-
-![TransactionFlow Diagram](https://github.com/flashbots/suave-geth/assets/22778355/66210b57-dc97-4aa8-a335-a5ce4e6487a3)
-
-- User -># RPC:
-- RPC -> MEVM:
-- MEVM -> Chain:
-
-- **Appendix C**: Example confidential compute request and response
