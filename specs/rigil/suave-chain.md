@@ -12,6 +12,7 @@
     - [MEVM Execution](#mevm-execution)
     - [Geth Version](#geth-version)
 - [Custom Types](#custom-types)
+    - [Confidential Compute Record](#confidential-compute-record)
     - [Confidential Compute Request](#confidential-compute-request)
     - [Suave Transaction](#suave-transaction)
 - [Suave JSON-RPC](#suave-json-rpc)
@@ -62,27 +63,51 @@ Suave-geth is based on geth v1.12.0 ([`e501b3`](https://github.com/flashbots/sua
 
 There are two main additional types that the SUAVE protocol adds onto the base ethereum protocol that it's currently a fork of. Those two types are seen below. `ConfidentialComputeRequest` is how a user requests compute over their data and interacting with SUAVE computors. `SuaveTransaction` is the resulting data type from confidential compute.
 
+### Confidential Compute Record
+
+This type serves as an onchain record of computation. It's a part of both the [Confidential Compute Request](#confidential-compute-request) and [Suave Transaction](#suave-transaction).  
+
+
+```go
+type ConfidentialComputeRecord struct {
+    ExecutionNode          common.Address
+    ConfidentialInputsHash common.Hash
+
+    // LegacyTx fields
+    Nonce    uint64
+    GasPrice *big.Int
+    Gas      uint64
+    To       *common.Address `rlp:"nil"`
+    Value    *big.Int
+    Data     []byte
+
+    // Signature fields
+}
+```
+
+
 ### Confidential Compute Request
 
-This type primarily facilitates users in expressing their preferences for order flow processing in the SUAVE system.
+This type facilitates users in interacting with the MEVM through the `eth_sendRawTransaction` method. After processing, the request's `ConfidentialComputeRecord` is embedded into `SuaveTransaction.ConfidentialComputeRequest` and serves as an onchain record of computation.  
 
 ```go
 type ConfidentialComputeRequest struct {
-	ExecutionNode: address,
-	Wrapped       Transaction,
+    ConfidentialComputeRecord
+    ConfidentialInputs []byte
 }
 ```
 
 ### Suave Transaction
 
-A specialized transaction type that encapsulates the result of a confidential computation request.
+A specialized transaction type that encapsulates the result of a confidential computation request. It includes the `ConfidentialComputeRequest`, signed by the user, which ensures that the result comes from the expected computor, as the `SuaveTransaction`'s signer must match the `ExecutionNode`.  
 
 ```go
 type SuaveTransaction struct {
-    ExecutionNode: address,
-    ConfidentialComputeRequest: transaction,
-    ConfidentialComputeResult: bytes,
-    // node's signature fields
+    ExecutionNode              Address
+    ConfidentialComputeRequest ConfidentialComputeRecord
+    ConfidentialComputeResult  []byte
+
+    // Signature fields
 }
 ```
 In the future the signature fields here will represent various different types of proof of computation and more.
