@@ -26,3 +26,7 @@ Specifications for the SUAVE protocol can be found in [specs](specs/). Specs are
 | Testnet | Phase      | ChainID   | Specs                                                                                                                                                                                                                                     |
 |---------|------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Rigil](./specs/rigil/)  | **Big Bang** | `16813125` | **Core** <br/> - [The suave chain](./specs/rigil/suave-chain.md) <br/> - [mevm](./specs/rigil/mevm.md) <br/> - [Confidential Data Store](./specs/rigil/confidential-data-store.md) <br/> - [Bridge](./specs/rigil/bridge.md) <br/> - [MEV Related Precompiles](./specs/rigil/precompiles.md) |
+
+### Contributing
+
+You are welcome to open PRs and issues. We invite you to discuss your ideas in the [Flashbots Forum](https://collective.flashbots.net/) for greater visibility and to avoid doing work that is unlikely to be widely accepted and merged into the core specs.
