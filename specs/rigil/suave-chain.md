@@ -50,7 +50,7 @@ type SuaveTransaction struct {
 ```
 In the future the signature fields here will represent various different types of proof of computation and more.
 
-### 2.3. JSON-RPC
+## 2.3. JSON-RPC
 
 SUAVE JSON-RPC can be seen as a super set of Ethereum JSON-RPC, but for the most part, the entirety of the [Ethereum JSON-RPC standard](https://geth.ethereum.org/docs/interacting-with-geth/rpc) remains the same in interacting with the SUAVE chain.
 
@@ -64,6 +64,12 @@ The confidential data is made available to the EVM in the confidential mode via 
 3. The return type of all RPCs that get transaction or receipt objects back will be of type `SuaveTransaction`, a super set of regular Ethereum transactions.
 
 Appendix C for an example of confideintial compute request and response objects.
+
+### `suavex` namespace
+
+`suavex_buildEthBlockFromBundles` - takes an array of bundles and transactions, calculates state root and related fields, and returns a valid Ethereum L1 block.
+
+`suavex_buildEthBlock` - takes an array of transactions, calculates state root and related fields, and returns a valid Ethereum L1 block.
 
 ## Configuration
 
@@ -116,6 +122,11 @@ The SUAVE chain employs the same gas pricing mechanism as Ethereum pre-Cancun ha
 ## Appendices
 
 - **Appendix A**: Sample code snippets for DApp integration. (?) DM: this isn't very spec like, but I don't think we're trying to pretend too hard that this is a "formal spec"
-- **Appendix B**: Diagrammatic representation of transaction flow.
+### **Appendix B**: Diagrammatic representation of transaction flow.
+
+![TransactionFlow Diagram](https://github.com/flashbots/suave-geth/assets/22778355/66210b57-dc97-4aa8-a335-a5ce4e6487a3)
+- User -> RPC:
+- RPC -> MEVM:
+- MEVM -> Chain:
 
 - **Appendix C**: Example confidential compute request and response
