@@ -1,8 +1,29 @@
 # Suave Chain
 
-## Table of Contents
+**Table of Contents**
 
+<!-- TOC -->
 
+- [Introduction](#introduction)
+- [Configuration](#configuration)
+    - [Network Parameters](#network-parameters)
+    - [Genesis Settings](#genesis-settings)
+- [Consensus Mechanism: Proof-of-Authority (Clique)](#consensus-mechanism-proof-of-authority-clique)
+    - [MEVM Execution](#mevm-execution)
+    - [Geth Version](#geth-version)
+- [Custom Types](#custom-types)
+    - [Confidential Compute Request](#confidential-compute-request)
+    - [Suave Transaction](#suave-transaction)
+- [Suave JSON-RPC](#suave-json-rpc)
+    - [`suavex` namespace](#suavex-namespace)
+- [Node Requirements and Setup](#node-requirements-and-setup)
+- [Gas and Transaction Fees](#gas-and-transaction-fees)
+- [Security Considerations](#security-considerations)
+- [Appendices](#appendices)
+
+<!-- /TOC -->
+
+---
 ## Introduction
 
 This document outlines the specifications for the SUAVE Rigil testnet. The main purpose of these the suave chain in the suave protocol is to agree upon smart contract code for use cases such as OFAs, solvers, block builders, etc, in some cases store data onchain for better censorship guarantees, and in some cases, broadcast data. In the initial phases of SUAVE development, the chain is generated and maintained by a proof-of-authority consensus protocol clique over a network of permissioned nodes. The reason for this network configuration is to enable rapid iteration during architectural shift during protocol development.
@@ -66,7 +87,7 @@ type SuaveTransaction struct {
 ```
 In the future the signature fields here will represent various different types of proof of computation and more.
 
-## 2.3. JSON-RPC
+## Suave JSON-RPC
 
 SUAVE JSON-RPC can be seen as a super set of Ethereum JSON-RPC, but for the most part, the entirety of the [Ethereum JSON-RPC standard](https://geth.ethereum.org/docs/interacting-with-geth/rpc) remains the same in interacting with the SUAVE chain.
 
