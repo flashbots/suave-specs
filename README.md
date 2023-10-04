@@ -28,3 +28,8 @@ Specifications for the SUAVE protocol can be found in [specs](specs/). Specs are
 | - | - | - | - |
 | [Rigil](/specs/rigil/) | **Big Bang** |`16813125` | <ul><li>Core</li><ul><li>[The suave chain](specs/rigil/suave-chain.md)</li><li>[mevm](specs/rigil/mevm.md)</li><li>[Confidential Data Store](specs/rigil/confidential-data-store.md)</li><li>[Bridge](specs/rigil/bridge.md)</li><li>[MEV Related Precompiles](specs/rigil/precompiles.md)</li></ul></ul></ul>|
 
+
+### Contributing
+
+* Feel free to open PRs and issues, and feel invited to discuss ideas in the [Flashbots Forum](https://collective.flashbots.net/)
+* For creating tables of contents, we've started using this VS code extension: [xavierguarch.auto-markdown-toc](https://marketplace.visualstudio.com/items?itemName=xavierguarch.auto-markdown-toc) (recommend the following user setting: `"markdown-toc.depthFrom": 2`)
