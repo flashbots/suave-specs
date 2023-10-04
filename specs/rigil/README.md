@@ -1,5 +1,22 @@
 # SUAVE Rigil Testnet
 
-This is a high-level Rigil architecture diagram:
+Specs to get started:
+- [Suave Chain](./suave-chain.md)
+- [MEVM](./mevm.md)
+- [Confidential Data Store](./confidential-data-store.md)
+- [Precompiles](./precompiles.md)
+- [Computor](./computor.md)
+- [Bridge](./bridge.md)
 
-![rigil architecture](/assets/rigil-architecture.svg)
+---
+
+High-level Rigil architecture diagram:
+
+![Rigil architecture](/assets/rigil-architecture.svg)
+
+---
+
+TODO:
+
+- tx flow diag?
+- OFA diagram
