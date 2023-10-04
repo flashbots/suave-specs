@@ -19,7 +19,7 @@
 
 Precompiles are a convenient tool within the Ethereum Virtual Machine (EVM) that allows for the execution of predefined functions directly by the EVM, bypassing the need for an actual contract. Each precompile is associated with a fixed address defined within the EVM, and unlike regular contracts, there is no associated bytecode at that address.
 
-Within the context of the SUAVE protocol, the concept of "precompiles" extends to the MEVM. The MEVM serves as a modified version of the EVM and introduces a collection of specialized and optimized functions, often referred to as precompiles. These precompiles are purpose-built to cater to specific Miner/Maximal Extractable Value (MEV) use cases.
+Within the context of the SUAVE protocol, the concept of "precompiles" extends to the MEVM. The MEVM serves as a modified version of the EVM and introduces a collection of specialized and optimized functions, often referred to as precompiles. These precompiles are purpose-built to cater to specific Maximal Extractable Value (MEV) use cases.
 
 For a comprehensive reference, consult the [`suave-geth` reference implementation](link).
 
