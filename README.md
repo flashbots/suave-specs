@@ -1,8 +1,11 @@
 # SUAVE Protocol Specifications
 
-- docs link?
-- website link?
-- discord link?
+todo?
+- docs link
+- website link
+- discord link
+- forum link
+- contribution guide
 
 For the large part, the SUAVE protocol is still in a state where the code is the most up-to-date protocol spec, but this repository aims to be a starting places to gradually evolve into a non-programmaing langauge based specification language.
 
