@@ -64,12 +64,21 @@ There are two main additional types that the SUAVE protocol adds onto the base e
 
 ### Confidential Compute Request
 
-This type primarily facilitates users in expressing their preferences for order flow processing in the SUAVE system.
+This type facilitates users in interacting with the MEVM. After processing, the request is embedded into `SuaveTransaction.ConfidentialComputeRequest` and serves as an onchain record of computation.  
 
 ```go
 type ConfidentialComputeRequest struct {
-	ExecutionNode: address,
-	Wrapped       Transaction,
+	ExecutionNode Address
+
+    // LegacyTx fields
+	Nonce         uint64
+	GasPrice      *big.Int
+	Gas           uint64
+	To            Address
+	Value         *big.Int
+	Data          []byte
+
+    // Signature fields
 }
 ```
 
@@ -79,10 +88,11 @@ A specialized transaction type that encapsulates the result of a confidential co
 
 ```go
 type SuaveTransaction struct {
-    ExecutionNode: address,
-    ConfidentialComputeRequest: transaction,
-    ConfidentialComputeResult: bytes,
-    // node's signature fields
+    ExecutionNode              Address
+    ConfidentialComputeRequest Transaction
+    ConfidentialComputeResult  []byte
+
+    // Signature fields
 }
 ```
 In the future the signature fields here will represent various different types of proof of computation and more.
