@@ -21,15 +21,8 @@ todo?
 
 Specifications for the SUAVE protocol can be found in [specs](specs/). Specs are currently organized by testnet during early protocol development.Some testnets will be developed in parallel.
 
-
 ### In-development Specifications
 
-| Testnet | Phase | ChainID | Specs |
-| - | - | - | - |
-| [Rigil](/specs/rigil/) | **Big Bang** |`16813125` | <ul><li>Core</li><ul><li>[The suave chain](specs/rigil/suave-chain.md)</li><li>[mevm](specs/rigil/mevm.md)</li><li>[Confidential Data Store](specs/rigil/confidential-data-store.md)</li><li>[Bridge](specs/rigil/bridge.md)</li><li>[MEV Related Precompiles](specs/rigil/precompiles.md)</li></ul></ul></ul>|
-
-
-### Contributing
-
-* Feel free to open PRs and issues, and feel invited to discuss ideas in the [Flashbots Forum](https://collective.flashbots.net/)
-* For creating tables of contents, we've started using this VS code extension: [xavierguarch.auto-markdown-toc](https://marketplace.visualstudio.com/items?itemName=xavierguarch.auto-markdown-toc) (recommend the following user setting: `"markdown-toc.depthFrom": 2`)
+| Testnet | Phase      | ChainID   | Specs                                                                                                                                                                                                                                     |
+|---------|------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Rigil](./specs/rigil/)  | **Big Bang** | `16813125` | **Core** <br/> - [The suave chain](./specs/rigil/suave-chain.md) <br/> - [mevm](./specs/rigil/mevm.md) <br/> - [Confidential Data Store](./specs/rigil/confidential-data-store.md) <br/> - [Bridge](./specs/rigil/bridge.md) <br/> - [MEV Related Precompiles](./specs/rigil/precompiles.md) |
