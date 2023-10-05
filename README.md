@@ -12,11 +12,9 @@ Discussions about design rationale and proposed changes can be brought up and di
 
 ---
 
-
 # Specs
 
 Specifications for the SUAVE protocol can be found in the [`specs`](specs/) subdirectory. Specs are currently organized by testnet during early protocol development.Some testnets will be developed in parallel.
-
 
 ## In-development Specifications
 
@@ -28,5 +26,10 @@ Specifications for the SUAVE protocol can be found in the [`specs`](specs/) subd
 
 # Contributing
 
-* Feel free to open PRs and issues, and feel invited to discuss ideas in the [Flashbots Forum](https://collective.flashbots.net/)
-* For creating tables of contents, we've started using this VS code extension: [xavierguarch.auto-markdown-toc](https://marketplace.visualstudio.com/items?itemName=xavierguarch.auto-markdown-toc) (recommend the following user setting: `"markdown-toc.depthFrom": 2`)
+* You are welcome to open PRs and issues. We invite you to discuss your ideas in the [Flashbots Forum](https://collective.flashbots.net/) for greater visibility and to avoid doing work that is unlikely to be widely accepted and merged into the core specs.
+
+<div class="toc">
+
+* For creating tables of contents, we use the [xavierguarch.auto-markdown-toc VS code extension](https://marketplace.visualstudio.com/items?itemName=xavierguarch.auto-markdown-toc) and recommend the following user setting: `"markdown-toc.depthFrom": 2`. However, we don't need these ToCs rendered in the documentation frontend. Therefore, please add the `<div class="toc"></div>` to any content that should not appear in the FE.
+
+</div>
