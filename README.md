@@ -25,7 +25,7 @@ Specifications for the SUAVE protocol are currently organized by testnet during 
 | Testnet | Phase | ChainID | Specs |
 | - | - | - | - |
 | [**Rigil**](./specs/rigil/)  | [Big Bang](/assets/future_roadmap_draft.png) | `16813125` | • [SUAVE chain](./specs/rigil/suave-chain.md) <br/> • [MEVM](./specs/rigil/mevm.md) <br/> • [Confidential Data Store](./specs/rigil/confidential-data-store.md) <br/> • [Precompiles](./specs/rigil/precompiles.md) <br/> • [Bridge](./specs/rigil/bridge.md)  |
-| **Sirrah** | [Proto-Collision](/assets/future_roadmap_draft.png) | | |
+| [**Sirrah**](./specs/sirrah/) | [Proto-Collision](/assets/future_roadmap_draft.png) | | |
 
 ---
 
@@ -35,7 +35,7 @@ You are welcome to open PRs and issues. We invite you to discuss your ideas in t
 
 <div class="hideInDocs">
 
-For creating tables of contents, we use the [xavierguarch.auto-markdown-toc VS code extension](https://marketplace.visualstudio.com/items?itemName=xavierguarch.auto-markdown-toc) and recommend the following user setting: `"markdown-toc.depthFrom": 2`. 
+For creating tables of contents, we use the [xavierguarch.auto-markdown-toc VS code extension](https://marketplace.visualstudio.com/items?itemName=xavierguarch.auto-markdown-toc) and recommend the following user setting: `"markdown-toc.depthFrom": 2`.
 
 However, we don't need the ToCs and some other content (like this paragraph) rendered in the documentation frontend. Therefore, please add the `<div class="hideInDocs"></div>` to any content that should not appear in the FE.
 
