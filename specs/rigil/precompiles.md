@@ -1,6 +1,6 @@
 # Precompiles
 
-<div class="toc">
+<div class="hideInDocs">
 
 **Table of Contents**
 
