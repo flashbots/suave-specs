@@ -24,10 +24,8 @@ Specifications for the SUAVE protocol are currently organized by testnet during 
 
 | Testnet | Phase | ChainID | Specs |
 | - | - | - | - |
-| [**Rigil**](/specs/rigil/) | [Big Bang](/assets/future_roadmap_draft.png) |`16813125` | <ul><li>[Suave Chain](specs/rigil/suave-chain.md)</li><li>[MEVM](specs/rigil/mevm.md)</li><li>[Confidential Data Store](specs/rigil/confidential-data-store.md)</li><li>[Precompiles](specs/rigil/precompiles.md)</li><li>[Bridge](specs/rigil/bridge.md)</li></ul></ul>|
-| [**Sirrah**](/specs/sirrah/) | [Proto-Collision](/assets/future_roadmap_draft.png) | | |
-
-
+| **Rigil**  | [Big Bang](/assets/future_roadmap_draft.png) | `16813125` | • [SUAVE chain](./specs/rigil/suave-chain.md) <br/> • [MEVM](./specs/rigil/mevm.md) <br/> • [Confidential Data Store](./specs/rigil/confidential-data-store.md) <br/> • [Precompiles](./specs/rigil/precompiles.md) <br/> • [Bridge](./specs/rigil/bridge.md)  |
+| **Sirrah** | [Proto-Collision](/assets/future_roadmap_draft.png) | | |
 
 ---
 
