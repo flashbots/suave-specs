@@ -1,5 +1,7 @@
 # Precompiles
 
+<div class="toc">
+
 **Table of Contents**
 
 <!-- TOC -->
@@ -21,6 +23,8 @@
 <!-- /TOC -->
 
 ---
+
+</div>
 
 ## Overview
 

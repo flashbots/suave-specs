@@ -1,5 +1,7 @@
 # Suave Chain
 
+<div class="toc">
+
 **Table of Contents**
 
 <!-- TOC -->
@@ -25,6 +27,9 @@
 <!-- /TOC -->
 
 ---
+
+</div>
+
 ## Introduction
 
 This document outlines the specifications for the SUAVE Rigil testnet. The main purpose of these the suave chain in the suave protocol is to agree upon smart contract code for use cases such as OFAs, solvers, block builders, etc, in some cases store data onchain for better censorship guarantees, and in some cases, broadcast data. In the initial phases of SUAVE development, the chain is generated and maintained by a proof-of-authority consensus protocol clique over a network of permissioned nodes. The reason for this network configuration is to enable rapid iteration during architectural shift during protocol development.
