@@ -23,11 +23,13 @@
 
 ## Overview
 
-This document provides the technical specification for the `mevm` system, a modified version of the Ethereum Virtual Machine (EVM). With the integration of `SuaveExecutionBackend`, the `mevm` introduces confidential computation and allows for enhanced interaction with APIs.
+This document provides the technical specification for the MEVM, a modified version of the Ethereum Virtual Machine (EVM). The MEVM enables confidential computation via the `SuaveExecutionBackend`, as well as providing an extended set of APIs.
 
 ## Core Architecture
 
-The MEVM is a modified runtime exposed to the EVM. The MEVM is a combination of an interpreter as well as a `SuaveExecutionBackend`. A diagram from our [suave-geth](https://github.com/flashbots/suave-geth/tree/main)  reference implementation can be seen below.
+We have modified the EVM by adding a new runtime, interpreter, and execution backend. This means that the MEVM has the extra components required to access confidential information (when allowed), and leverage a set of new precompiles tailored for MEV applications. 
+
+The structure of these modifications is most easily explained visually:
 
 ```mermaid
 graph TB
@@ -60,7 +62,6 @@ graph TB
     classDef lightgreen fill:#b3c69f,stroke:#444,stroke-width:2px, color:#333;
 ```
 
-
 ### SuaveExecutionBackend
 
 Functioning as a foundation for the MEVM, the `SuaveExecutionBackend` facilitates the execution of confidential processes. Key features include:
@@ -83,13 +84,13 @@ type SuaveExecutionBackend struct {
 
 The modified interpreter not only handles standard EVM operations but also caters to the complexities introduced by confidential computations.
 
-In our current [suave-geth](https://github.com/flashbots/suave-geth/tree/main) reference implementation this looks like:
+In our current [suave-geth](https://github.com/flashbots/suave-geth/) reference implementation this looks like:
 
 - Introduction of `IsConfidential` to the interpreter's configuration.
 - Alterations to the `Run` function to accommodate confidential APIs.
 - Modifications to the `Run` function to trace the caller stack.
 
-From the [suave-geth](https://github.com/flashbots/suave-geth/tree/main)  reference implementation, the capabilities enabled by this modified interpreter are exposed to the virtual machine via `SuaveContext` and its components.
+The capabilities enabled by this modified interpreter are exposed to the virtual machine via `SuaveContext` and its components.
 
 ```go
 type SuaveContext struct {
@@ -103,22 +104,26 @@ type SuaveContext struct {
 
 ## Additional Capabilities
 
-The MEVM has several additional capabilities over the regular EVM.
+The MEVM adds several capabilities to the regular EVM.
 
 ### Confidential execution of smart contracts
 
-The virtual machine (MEVM) inside SUAVE nodes have two modes of operation: regular and confidential. Regular on-chain environment is your usual Ethereum virtual machine environment.
+The virtual machine (MEVM) inside SUAVE nodes have two modes of operation: regular and confidential. 
 
-The confidential execution environment provides additional precompiles, both directly and through a convenient [library](#suave-library). Confidential execution is *not* verifiable during on-chain state transition, instead the result of the confidential execution is cached in the transaction (`SuaveTransaction`). Users requesting confidential compute requests specify which execution nodes they trust with execution, and the execution nodes' signature is used for verifying the transaction on-chain.
+Regular mode is equivalent to the usual Ethereum virtual machine environment, with all computation occurring on-chain.
 
-The cached result of confidential execution is used as calldata in the transaction that inevitably makes its way onto the SUAVE chain.
+Confidential mode accesses additional precompiles, both directly and through a convenient [library](https://github.com/flashbots/suave-geth/blob/main/suave/sol/libraries/Suave.sol). Confidential execution is *not* verifiable during on-chain state transition. The result of the confidential execution is instead cached in the `SuaveTransaction`. 
 
-Other than ability to access new precompiles, the contracts aiming to be executed confidentially are written as usual in Solidity (or any other language) and compiled to EVM bytecode.
+Users requesting confidential compute specify which SUAVE computor they trust with execution.
 
+The cached result of confidential execution is used as calldata in the `SuaveTransaction` that is included in the SUAVE chain. This transaction is verified by comparing the signature of the SUAVE computor which submitted the result against the public key specified by the user when requesting confidential compute. 
+
+Other than the ability to access new precompiles, contracts which enable confidential execution are written as usual in Solidity (or any other language) and compiled to EVM bytecode.
 
 ### Confidential APIs
 
 In the [suave-geth](https://github.com/flashbots/suave-geth/tree/main) reference implementation, confidential precompiles have access to the following [Confidential APIs](https://github.com/flashbots/suave-geth/tree/main/suave/core/types.go) during execution.
+
 This is subject to change!
 
 ```go
@@ -139,7 +144,6 @@ type ConfidentialEthBackend interface {
     BuildEthBlockFromBundles(ctx context.Context, args *BuildBlockArgs, bundles []types.SBundle) (*engine.ExecutionPayloadEnvelope, error)
 }
 ```
-
 
 ## MEVM Example Flow + Diagram
 
