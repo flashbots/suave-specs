@@ -1,7 +1,7 @@
-# SUAVE Protocol Specifications
+# ☀️ SUAVE Protocol Specifications
 
-[![Rigil specs ./specs/rigil/](https://img.shields.io/badge/jump%20into-Rigil%20Specs-blue.svg)](./specs/rigil/)
-[![Docs at https://suave.flashbots.net/](https://img.shields.io/badge/SUAVE%20docs-blue.svg)](https://suave.flashbots.net/)
+[![Rigil specs ./specs/rigil/](https://img.shields.io/badge/jump%20into-Rigil%20Specs-purple.svg)](./specs/rigil/)
+[![Docs at https://suave.flashbots.net/](https://img.shields.io/badge/read-SUAVE%20docs-blue.svg)](https://suave.flashbots.net/)
 [![Join the chat at https://collective.flashbots.net/](https://img.shields.io/badge/chat-on%20Flashbots%20forum-blue.svg)](https://collective.flashbots.net/)
 
 This repository hosts the current SUAVE specifications.
@@ -20,7 +20,10 @@ Specifications for the SUAVE protocol can be found in the [`specs`](specs/) subd
 
 | Testnet | Phase | ChainID | Specs |
 | - | - | - | - |
-| [Rigil](/specs/rigil/) | [**Big Bang**](/assets/future_roadmap_draft.png) |`16813125` | <ul><li>Core</li><ul><li>[Suave Chain](specs/rigil/suave-chain.md)</li><li>[mevm](specs/rigil/mevm.md)</li><li>[Confidential Data Store](specs/rigil/confidential-data-store.md)</li><li>[Bridge](specs/rigil/bridge.md)</li><li>[MEV Related Precompiles](specs/rigil/precompiles.md)</li></ul></ul></ul>|
+| [**Rigil**](/specs/rigil/) | [Big Bang](/assets/future_roadmap_draft.png) |`16813125` | <ul><li>[Suave Chain](specs/rigil/suave-chain.md)</li><li>[MEVM](specs/rigil/mevm.md)</li><li>[Confidential Data Store](specs/rigil/confidential-data-store.md)</li><li>[Precompiles](specs/rigil/precompiles.md)</li><li>[Bridge](specs/rigil/bridge.md)</li></ul></ul>|
+| [Sirrah](/specs/sirrah/) | [Proto-Collision](/assets/future_roadmap_draft.png) | | |
+
+
 
 ---
 
