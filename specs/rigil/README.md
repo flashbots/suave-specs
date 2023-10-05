@@ -12,7 +12,7 @@
 
 ### About Suave
 
-SUAVE is a platform for building MEV applications like OFAs and block builders in a decentralized and private way. SUAVE is looking to create a new paradigm for computation, where computation can be private and run at the speed of block building.
+SUAVE is a platform for building MEV applications such as OFAs and block builders in a decentralized and private way. SUAVE is looking to create a new paradigm for computation, where computation can be private and run at the speed of block building.
 
 ---
 
