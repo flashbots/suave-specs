@@ -35,7 +35,7 @@ TODO: high-level diagram
 
 ### ConfidentialStore
 
-From our [suave-geth](https://github.com/flashbots/suave-geth/tree/main)  reference implementation, `LocalConfidentialStore` serves as the foundation for the Confidential Store. Implemented as a thread-safe struct, it provides secured access to bid data.
+From our [suave-geth](https://github.com/flashbots/suave-geth/tree/main) reference implementation, `LocalConfidentialStore` serves as the foundation for the Confidential Store. Implemented as a thread-safe struct, it provides secure access to bid data.
 
 TODO: This section is very implementation specific, worth it to generalzie a bit
 
