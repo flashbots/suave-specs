@@ -64,20 +64,20 @@ SUAVE Computors house all components necessary to perform confidential compute a
 
 ![Rigil architecture](/assets/rigil-architecture.svg)
 
-- **Confidential Compute Request (CCR) [**[🔗spec](./specs/rigil/suave-chain.md#confidential-compute-request)**]**: A user request to Suave that contains:
+- **Confidential Compute Request (CCR) [**[🔗spec](./suave-chain.md#confidential-compute-request)**]**: A user request to Suave that contains:
     1. a wrapped transaction
     2. confidential inputs, and 
     3. a list of programs (contracts) (← list of Exec nodes) allowed to operate on confidential inputs.
-- **Computor[**[🔗spec](./specs/rigil/computor.md)**]**: accepts and processes confidential compute requests and maintains the SUAVE chain; the logical unit of the SUAVE network and main protocol actor.
-- **Confidential Data Store (CDS) [**[🔗spec](./specs/rigil/confidential-data-store.md)**]**: stores confidential data from MEV applications (L1 transactions, EIP 712 signed messages, userOps, privateKeys(?), etc).
-- **SUAVE Chain [**[🔗spec](./specs/rigil/suave-chain.md#suave-chain)**]**: a fork of Ethereum designed for usage alongside credible off-chain execution in MEV use cases. Running Clique PoA consensus for the Rigil Testnet.
-- **MEVM [**[🔗spec](./specs/rigil/mevm.md)**]**: modified EVM with MEV-specific precompiles that allow developers to define orderflow auctions and builder rules as smart contracts written in Solidity.
-- **Precompiles [**[🔗spec](./specs/rigil/precompiles.md)**]:** purpose-built functions with extended capabilities that can be called from Builder Solidity
+- **Computor[**[🔗spec](./computor.md)**]**: accepts and processes confidential compute requests and maintains the SUAVE chain; the logical unit of the SUAVE network and main protocol actor.
+- **Confidential Data Store (CDS) [**[🔗spec](./confidential-data-store.md)**]**: stores confidential data from MEV applications (L1 transactions, EIP 712 signed messages, userOps, privateKeys(?), etc).
+- **SUAVE Chain [**[🔗spec](./suave-chain.md)**]**: a fork of Ethereum designed for usage alongside credible off-chain execution in MEV use cases. Running Clique PoA consensus for the Rigil Testnet.
+- **MEVM [**[🔗spec](./mevm.md)**]**: modified EVM with MEV-specific precompiles that allow developers to define orderflow auctions and builder rules as smart contracts written in Solidity.
+- **Precompiles [**[🔗spec](./precompiles.md)**]:** purpose-built functions with extended capabilities that can be called from Builder Solidity
 
 
 ### Transaction-flow
 
-The SUAVE-enabled node and the MEVM support multiple new data types, which are all specified in the [SUAVE Chain spec](./specs/rigil/suave-chain.md#custom-types). 
+The SUAVE-enabled node and the MEVM support multiple new data types, which are all specified in the [SUAVE Chain spec](./suave-chain.md#custom-types). 
 
 The diagram below showcases how these different types interact to enable confidential computation on SUAVE computors.
 
