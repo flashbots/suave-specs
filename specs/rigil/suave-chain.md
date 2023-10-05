@@ -81,16 +81,6 @@ The SUAVE protocol adds two main types to the base Ethereum protocol of which it
 
 Taken together, these two form a `ConfidentialComputeRecord`, which is also specified below.
 
-### Transaction-flow diagram
-
-![Rigil transaction flow](/assets/rigil-tx-flow.svg)
-
-Conceptually, transaction on SUAVE can be split into three distinct steps:
-
-1. User -> RPC
-2. RPC -> MEVM
-3. MEVM -> Chain
-
 ### Confidential Compute Request
 
 This type enables users to requests the MEVM to compute over their data via the `eth_sendRawTransaction` method. After processing, the request's `ConfidentialComputeRecord` is embedded into `SuaveTransaction.ConfidentialComputeRequest` and serves as an onchain record of computation.  

@@ -12,7 +12,11 @@ This repository hosts the current SUAVE specifications.
 
 Discussions about design rationale and proposed changes can be brought up and discussed on the [Flashbots forum](https://collective.flashbots.net/). Solidified, agreed-upon changes to the spec can be made through pull requests.
 
-⚠️ The SUAVE protocol is still in a state where [the code](https://github.com/flashbots/suave-geth) is the most up-to-date protocol spec, but this repository aims to be a starting places to gradually evolve into an implementation agnostic specification. ⚠️
+<div class="warning">
+
+⚠️ The SUAVE protocol is still in a state where [the code](https://github.com/flashbots/suave-geth) is the most up-to-date protocol spec. The goal of these notes is to gradually evolve into an implementation agnostic specification. ⚠️
+
+</div>
 
 ---
 
