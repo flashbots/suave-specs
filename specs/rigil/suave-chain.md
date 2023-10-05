@@ -167,10 +167,4 @@ todo: clarify usage of legacyTx + baseFee
 - **DoS Risk**: Nodes have not yet been reviewed and there may be DoS vectors at this early stage.
 - **Secure Key Management**: Storing private keys on Suave is experimental and should be considered unsecured.
 
-If you find a security vulnerability in Suave, please let us know sending an email to security@flashbots.net.
-
----
-
-## Appendices
-
-- **Appendix A**: Sample code snippets for DApp integration. (?) DM: this isn't very spec like, but I don't think we're trying to pretend too hard that this is a "formal spec"
+If you find a security vulnerability in SUAVE, please let us know sending an email to security@flashbots.net.
