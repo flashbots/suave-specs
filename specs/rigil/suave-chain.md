@@ -4,6 +4,8 @@
 
 **Table of Contents**
 
+<!-- TOC -->
+
 - [Introduction](#introduction)
 - [Configuration](#configuration)
     - [Network Parameters](#network-parameters)
@@ -21,6 +23,8 @@
 - [Gas and Transaction Fees](#gas-and-transaction-fees)
 - [Security Considerations](#security-considerations)
 - [Appendices](#appendices)
+
+<!-- /TOC -->
 
 ---
 

@@ -4,6 +4,8 @@
 
 **Table of Contents**
 
+<!-- TOC -->
+
 - [Introduction](#introduction)
 - [Architecture Diagram](#architecture-diagram)
 - [Core Components](#core-components)
@@ -14,6 +16,8 @@
     - [Initialization & Access Control](#initialization--access-control)
     - [Store & Retrieve Processes](#store--retrieve-processes)
 - [Security and Confidentiality](#security-and-confidentiality)
+
+<!-- /TOC -->
 
 ---
 

@@ -4,6 +4,8 @@
 
 **Table of Contents**
 
+<!-- TOC -->
+
 - [Overview](#overview)
 - [Precompiles Governance](#precompiles-governance)
 - [Precompiles](#precompiles)
@@ -17,6 +19,8 @@
     - [`ExtractHint`](#extracthint)
     - [`BuildEthBlock`](#buildethblock)
     - [`SubmitEthBlockBidToRelay`](#submitethblockbidtorelay)
+
+<!-- /TOC -->
 
 ---
 

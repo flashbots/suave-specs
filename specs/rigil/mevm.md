@@ -4,6 +4,8 @@
 
 **Table of Contents**
 
+<!-- TOC -->
+
 - [Overview](#overview)
 - [Core Architecture](#core-architecture)
     - [SuaveExecutionBackend](#suaveexecutionbackend)
@@ -12,6 +14,8 @@
     - [Confidential execution of smart contracts](#confidential-execution-of-smart-contracts)
     - [Confidential APIs](#confidential-apis)
 - [MEVM Example Flow + Diagram](#mevm-example-flow--diagram)
+
+<!-- /TOC -->
 
 ---
 
