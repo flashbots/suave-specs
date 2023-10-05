@@ -1,6 +1,10 @@
 # SUAVE Rigil Testnet
 
+<div class="wipSection">
+
 ⚠️ The SUAVE protocol is still in a state where [the code](https://github.com/flashbots/suave-geth) is the most up-to-date protocol spec. The goal of these notes is to gradually evolve into an implementation agnostic specification. ⚠️
+
+</div>
 
 <div class="hideInDocs">
 
