@@ -1,8 +1,8 @@
 # MEVM
 
-**Table of Contents**
+<div class="toc">
 
-<!-- TOC -->
+**Table of Contents**
 
 - [Overview](#overview)
 - [Core Architecture](#core-architecture)
@@ -13,9 +13,9 @@
     - [Confidential APIs](#confidential-apis)
 - [MEVM Example Flow + Diagram](#mevm-example-flow--diagram)
 
-<!-- /TOC -->
-
 ---
+
+</div>
 
 ## Overview
 

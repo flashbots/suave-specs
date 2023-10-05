@@ -1,8 +1,8 @@
 # Precompiles
 
-**Table of Contents**
+<div class="toc">
 
-<!-- TOC -->
+**Table of Contents**
 
 - [Overview](#overview)
 - [Precompiles Governance](#precompiles-governance)
@@ -18,9 +18,9 @@
     - [`BuildEthBlock`](#buildethblock)
     - [`SubmitEthBlockBidToRelay`](#submitethblockbidtorelay)
 
-<!-- /TOC -->
-
 ---
+
+</div>
 
 ## Overview
 

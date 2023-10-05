@@ -1,8 +1,8 @@
 # Confidential Data Store
 
-**Table of Contents**
+<div class="toc">
 
-<!-- TOC -->
+**Table of Contents**
 
 - [Introduction](#introduction)
 - [Architecture Diagram](#architecture-diagram)
@@ -15,9 +15,9 @@
     - [Store & Retrieve Processes](#store--retrieve-processes)
 - [Security and Confidentiality](#security-and-confidentiality)
 
-<!-- /TOC -->
-
 ---
+
+</div>
 
 ## Introduction
 
