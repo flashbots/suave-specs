@@ -62,6 +62,12 @@ Here is a list of design decisions and tradeoffs:
     - Reason: [SUAVE consensus](https://collective.flashbots.net/t/suave-consensus/2152) is an active open question, which whether or not answered does not drastically impact UX on Rigil Testnet.
 - Decision 3: **No SGX Nodes (yet)**
     - Reason: Research continues on the best wa to implement this, which will be detailed in a later spec.
+- Decision *1*: ***Weak DA Layer Guarantees***
+    - *reason*: [Compute Output Validity and Heterogenous DA](https://collective.flashbots.net/t/suave-ensuring-output-validity-and-heterogenous-da/2184) is an active open question, which whether or not answered does not drastically impact UX of users on **Rigil Testnet**.
+- Decision *2*: **Proof-of-Authority Consensus**
+    - *reason*: [SUAVE consensus](https://collective.flashbots.net/t/suave-consensus/2152) is an active open question, which whether or not answered does not drastically impact UX of users on **Rigil Testnet**.
+- Decision *3*: **No SGX Nodes (yet)**
+    - reason: SGX SUAVVE nodes are an active area of research and development and does not drastically impact UX of users on **Rigil Testnet**.
 
 ---
 
@@ -100,20 +106,24 @@ The SUAVE-enabled node and the MEVM support multiple new data types, which are a
 The diagram below showcases how these different types interact to enable confidential computation on SUAVE computors.
 
 ![Rigil transaction flow](/assets/rigil-tx-flow.svg)
+[ TODO : add numbers/steps for tx flow]
 
-Conceptually, transactions on SUAVE can be split into three steps:
+Transaction Flow:
+1. User sends a Confidential Compute Request to the RPC - Confidential Compute Requests are made up of two components, Compute Transaction and Confidential Inputs. The Compute request will reference data inside of the Confidential Inputs that the MEVM is able to use during computation.
+2. Once the RPC receives the Confidential Compute Request, it will extract the confidential inputs and send them to the confidential data store. It will then send the Compute Request to the MEVM to process.
+3. Confidential Compute Phase - During this phase the MEVM will process the compute transaction similar to an EVM transaction except it will also have access to the confidential inputs. After doing the initial computation with the confidential data, it will then grab the results and information from the Compute Transaction and put them into their final home a SUAVE transaction.
+4. Block Inclusion - Once the SUAVE transaction has been created it will then quickly be included in a block by a SUAVE proposer.
 
-1. User -> RPC
-2. RPC -> MEVM
-3. MEVM -> Confidential compute result to SUAVE Chain
-
----
 
 ## OFA Example
 
 If we consider a specific use case, like an order flow auction, the high-level series of steps taken to complete the auction can represented as below:
 
 ![OFA example flow](/assets/OFA-example-flow.svg)
+[TODO : add numbers/steps for tx flow. And change `newBid` maybe]
+
+1. The user sends a Confidential Compute Request interacting with a SUAVapp by calling it's `newBid`
+
 
 Conceptually, such auction mechanisms can be split into seven steps:
 

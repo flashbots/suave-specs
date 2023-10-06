@@ -1,14 +1,27 @@
 # Suave Chain
 
 <div class="hideInDocs">
-
-**Table of Contents**
-
 <!-- TOC depthfrom:2 -->
 
 - [Introduction](#introduction)
 - [Configuration](#configuration)
     - [Network Parameters](#network-parameters)
+    - [Genesis Settings](#genesis-settings)
+- [Consensus Mechanism](#consensus-mechanism)
+    - [MEVM Execution](#mevm-execution)
+    - [Geth Version](#geth-version)
+- [Custom Types](#custom-types)
+    - [Suave Transaction](#suave-transaction)
+- [Suave JSON-RPC](#suave-json-rpc)
+    - [suavex namespace](#suavex-namespace)
+- [Node Requirements and Setup](#node-requirements-and-setup)
+- [Gas and Transaction Fees](#gas-and-transaction-fees)
+- [Security Considerations](#security-considerations)
+- [Appendices](#appendices)
+    - [Appendix A](#appendix-a)
+    - [Appendix B](#appendix-b)
+
+<!-- /TOC -->k Parameters](#network-parameters)
     - [Genesis Settings](#genesis-settings)
 - [Consensus Mechanism: Proof-of-Authority (Clique)](#consensus-mechanism-proof-of-authority-clique)
     - [MEVM Execution](#mevm-execution)
@@ -32,7 +45,7 @@
 
 ## Introduction
 
-This document outlines the specifications for the SUAVE Rigil testnet.
+This document outlines the specifications for the SUAVE Rigil chain.
 
 In the context of the SUAVE protocol, the main purpose of the SUAVE chain is to reach (and maintain) consensus about smart contract code for use cases such as order flow auctions, solvers, block builders, etc.
 
@@ -72,27 +85,10 @@ Suave-geth is based on geth v1.12.0 ([`e501b3`](https://github.com/flashbots/sua
 
 ---
 
-## Custom Types
+## Suave Transaction
 
-The SUAVE protocol adds two main types to the base Ethereum protocol of which it is currently a fork.
+The SUAVE protocol adds a new transaction type to the base Ethereum protocol of which it is currently a fork of called a `SuaveTransaction`. This new transaction type contains the results and original request record of confidential compute requests which are detailed in the [Computor](/specs/rigil/computor.md) spec.
 
-1. `ConfidentialComputeRequest`
-2. `SuaveTransaction`
-
-Taken together, these two form a `ConfidentialComputeRecord`, which is also specified below.
-
-### Confidential Compute Request
-
-This type enables users to requests the MEVM to compute over their data via the `eth_sendRawTransaction` method. After processing, the request's `ConfidentialComputeRecord` is embedded into `SuaveTransaction.ConfidentialComputeRequest` and serves as an onchain record of computation.
-
-```go
-type ConfidentialComputeRequest struct {
-    ConfidentialComputeRecord
-    ConfidentialInputs []byte
-}
-```
-
-### Suave Transaction
 
 A specialized transaction type that encapsulates the result of a confidential computation request. It includes the `ConfidentialComputeRequest`, signed by the user, which ensures that the result comes from the expected SUAVE computor, as the `SuaveTransaction`'s signer must match the `ExecutionNode`.
 
@@ -107,27 +103,6 @@ type SuaveTransaction struct {
 ```
 In the future the signature fields here will represent various different types of proof of computation and more.
 
-### Confidential Compute Record
-
-This type serves as an onchain record of computation. It's part of both the [Confidential Compute Request](#confidential-compute-request) and [Suave Transaction](#suave-transaction).
-
-
-```go
-type ConfidentialComputeRecord struct {
-    ExecutionNode          common.Address
-    ConfidentialInputsHash common.Hash
-
-    // LegacyTx fields
-    Nonce    uint64
-    GasPrice *big.Int
-    Gas      uint64
-    To       *common.Address `rlp:"nil"`
-    Value    *big.Int
-    Data     []byte
-
-    // Signature fields
-}
-```
 
 ## Suave JSON-RPC
 
@@ -183,14 +158,3 @@ todo: clarify usage of legacyTx + baseFee
 
 If you find a security vulnerability in Suave, please let us know sending an email to security@flashbots.net.
 
----
-
-## Appendices
-
-### Appendix A
-
-Sample code snippets for DApp integration. (?) DM: this isn't very spec like, but I don't think we're trying to pretend too hard that this is a "formal spec"
-
-### Appendix B
-
-Example of confidential compute request and response objects.
