@@ -18,6 +18,11 @@ Discussions about design rationale and proposed changes can be brought up and di
 
 </div>
 
+<!-- TOC depthFrom:10 -->
+
+<!-- /TOC -->
+
+
 ---
 
 # About Suave
@@ -49,7 +54,7 @@ You are welcome to open PRs and issues. We invite you to discuss your ideas in t
 
 <div class="hideInDocs">
 
-For creating tables of contents, we use the [xavierguarch.auto-markdown-toc VS code extension](https://marketplace.visualstudio.com/items?itemName=xavierguarch.auto-markdown-toc) and recommend the following user setting: `"markdown-toc.depthFrom": 2`.
+For creating tables of contents, we use the [huntertran.auto-markdown-toc VS code extension](https://marketplace.visualstudio.com/items?itemName=huntertran.auto-markdown-toc).
 
 However, we don't need the ToCs and some other content (like this paragraph) rendered in the documentation frontend. Therefore, please add the `<div class="hideInDocs"></div>` to any content that should not appear in the FE.
 

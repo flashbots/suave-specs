@@ -4,7 +4,7 @@
 
 **Table of Contents**
 
-<!-- TOC -->
+<!-- TOC depthfrom:2 -->
 
 - [Introduction](#introduction)
 - [Configuration](#configuration)
@@ -34,7 +34,7 @@
 
 This document outlines the specifications for the SUAVE Rigil testnet.
 
-In the context of the SUAVE protocol, the main purpose of the SUAVE chain is to reach (and maintain) consensus about smart contract code for use cases such as order flow auctions, solvers, block builders, etc. 
+In the context of the SUAVE protocol, the main purpose of the SUAVE chain is to reach (and maintain) consensus about smart contract code for use cases such as order flow auctions, solvers, block builders, etc.
 
 The SUAVE chain can also be used to store and/or broadcast data for better censorship guarantees.
 
@@ -58,7 +58,7 @@ In the initial phases of development, the SUAVE chain runs a proof-of-authority 
 | `GAS_LIMIT`| 30000000 | `gwei`
 | `NUM_VALIDATORS` | 3 | Nodes
 
-## Consensus Mechanism 
+## Consensus Mechanism
 
 **Proof-of-Authority**.
 
@@ -74,7 +74,7 @@ Suave-geth is based on geth v1.12.0 ([`e501b3`](https://github.com/flashbots/sua
 
 ## Custom Types
 
-The SUAVE protocol adds two main types to the base Ethereum protocol of which it is currently a fork. 
+The SUAVE protocol adds two main types to the base Ethereum protocol of which it is currently a fork.
 
 1. `ConfidentialComputeRequest`
 2. `SuaveTransaction`
@@ -83,7 +83,7 @@ Taken together, these two form a `ConfidentialComputeRecord`, which is also spec
 
 ### Confidential Compute Request
 
-This type enables users to requests the MEVM to compute over their data via the `eth_sendRawTransaction` method. After processing, the request's `ConfidentialComputeRecord` is embedded into `SuaveTransaction.ConfidentialComputeRequest` and serves as an onchain record of computation.  
+This type enables users to requests the MEVM to compute over their data via the `eth_sendRawTransaction` method. After processing, the request's `ConfidentialComputeRecord` is embedded into `SuaveTransaction.ConfidentialComputeRequest` and serves as an onchain record of computation.
 
 ```go
 type ConfidentialComputeRequest struct {
@@ -94,7 +94,7 @@ type ConfidentialComputeRequest struct {
 
 ### Suave Transaction
 
-A specialized transaction type that encapsulates the result of a confidential computation request. It includes the `ConfidentialComputeRequest`, signed by the user, which ensures that the result comes from the expected SUAVE computor, as the `SuaveTransaction`'s signer must match the `ExecutionNode`.  
+A specialized transaction type that encapsulates the result of a confidential computation request. It includes the `ConfidentialComputeRequest`, signed by the user, which ensures that the result comes from the expected SUAVE computor, as the `SuaveTransaction`'s signer must match the `ExecutionNode`.
 
 ```go
 type SuaveTransaction struct {
@@ -109,7 +109,7 @@ In the future the signature fields here will represent various different types o
 
 ### Confidential Compute Record
 
-This type serves as an onchain record of computation. It's part of both the [Confidential Compute Request](#confidential-compute-request) and [Suave Transaction](#suave-transaction).  
+This type serves as an onchain record of computation. It's part of both the [Confidential Compute Request](#confidential-compute-request) and [Suave Transaction](#suave-transaction).
 
 
 ```go

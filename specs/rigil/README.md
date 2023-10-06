@@ -11,9 +11,16 @@ This repository hosts the current SUAVE Rigil testnet specifications and design 
 
 </div>
 
+<div class="hideInDocs">
+
+
+<!-- TOC depthFrom:10 -->
+
+<!-- /TOC -->
+
+
 ---
 
-<div class="hideInDocs">
 
 # Specs
 - [Suave Chain](./suave-chain.md)
