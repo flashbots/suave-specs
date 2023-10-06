@@ -33,6 +33,11 @@ Read more about SUAVE:
 - https://writings.flashbots.net/the-future-of-mev-is-suave
 - https://writings.flashbots.net/mevm-suave-centauri-and-beyond
 
+
+SUAVE is a protocol for creating a private data storage layer on which confidential compute can be programmed to process orderflow,
+
+that enables self-organizing MEV supply networks.
+
 ---
 
 # Specs
@@ -59,3 +64,7 @@ For creating tables of contents, we use the [huntertran.auto-markdown-toc VS cod
 However, we don't need the ToCs and some other content (like this paragraph) rendered in the documentation frontend. Therefore, please add the `<div class="hideInDocs"></div>` to any content that should not appear in the FE.
 
 </div>
+
+---
+
+Made with ☀️ by the ⚡🤖 collective.
