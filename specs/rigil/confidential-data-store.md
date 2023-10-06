@@ -4,7 +4,7 @@
 
 **Table of Contents**
 
-<!-- TOC -->
+<!-- TOC depthfrom:2 -->
 
 - [Introduction](#introduction)
 - [Architecture Diagram](#architecture-diagram)

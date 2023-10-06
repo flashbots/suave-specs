@@ -4,7 +4,7 @@
 
 **Table of Contents**
 
-<!-- TOC -->
+<!-- TOC depthfrom:2 -->
 
 - [Overview](#overview)
 - [Core Architecture](#core-architecture)
@@ -27,7 +27,7 @@ This document provides the technical specification for the MEVM, a modified vers
 
 ## Core Architecture
 
-We have modified the EVM by adding a new runtime, interpreter, and execution backend. This means that the MEVM has the extra components required to access confidential information (when allowed), and leverage a set of new precompiles tailored for MEV applications. 
+We have modified the EVM by adding a new runtime, interpreter, and execution backend. This means that the MEVM has the extra components required to access confidential information (when allowed), and leverage a set of new precompiles tailored for MEV applications.
 
 The structure of these modifications is most easily explained visually:
 
@@ -108,15 +108,15 @@ The MEVM adds several capabilities to the regular EVM.
 
 ### Confidential execution of smart contracts
 
-The virtual machine (MEVM) inside SUAVE nodes have two modes of operation: regular and confidential. 
+The virtual machine (MEVM) inside SUAVE nodes have two modes of operation: regular and confidential.
 
 Regular mode is equivalent to the usual Ethereum virtual machine environment, with all computation occurring on-chain.
 
-Confidential mode accesses additional precompiles, both directly and through a convenient [library](https://github.com/flashbots/suave-geth/blob/main/suave/sol/libraries/Suave.sol). Confidential execution is *not* verifiable during on-chain state transition. The result of the confidential execution is instead cached in the `SuaveTransaction`. 
+Confidential mode accesses additional precompiles, both directly and through a convenient [library](https://github.com/flashbots/suave-geth/blob/main/suave/sol/libraries/Suave.sol). Confidential execution is *not* verifiable during on-chain state transition. The result of the confidential execution is instead cached in the `SuaveTransaction`.
 
 Users requesting confidential compute specify which SUAVE computor they trust with execution.
 
-The cached result of confidential execution is used as calldata in the `SuaveTransaction` that is included in the SUAVE chain. This transaction is verified by comparing the signature of the SUAVE computor which submitted the result against the public key specified by the user when requesting confidential compute. 
+The cached result of confidential execution is used as calldata in the `SuaveTransaction` that is included in the SUAVE chain. This transaction is verified by comparing the signature of the SUAVE computor which submitted the result against the public key specified by the user when requesting confidential compute.
 
 Other than the ability to access new precompiles, contracts which enable confidential execution are written as usual in Solidity (or any other language) and compiled to EVM bytecode.
 

@@ -4,7 +4,7 @@
 
 **Table of Contents**
 
-<!-- TOC -->
+<!-- TOC depthfrom:2 -->
 
 - [Overview](#overview)
 - [Precompiles Governance](#precompiles-governance)

@@ -1,5 +1,10 @@
 # SUAVE Rigil Testnet
 
+[![Docs at https://suave.flashbots.net/](https://img.shields.io/badge/read-SUAVE%20docs-blue.svg)](https://suave.flashbots.net/)
+[![Join the discourse at https://collective.flashbots.net/](https://img.shields.io/badge/chat-on%20Flashbots%20forum-blue.svg)](https://collective.flashbots.net/)
+
+This repository hosts the current SUAVE Rigil testnet specifications and design docs.
+
 <div class="warning">
 
 ⚠️ The SUAVE protocol is still in a state where [the code](https://github.com/flashbots/suave-geth) is the most up-to-date protocol spec. The goal of these notes is to gradually evolve into an implementation agnostic specification. ⚠️
@@ -8,7 +13,16 @@
 
 <div class="hideInDocs">
 
-## Specs
+
+<!-- TOC depthFrom:10 -->
+
+<!-- /TOC -->
+
+
+---
+
+
+# Specs
 - [Suave Chain](./suave-chain.md)
 - [MEVM](./mevm.md)
 - [Confidential Data Store](./confidential-data-store.md)
@@ -18,15 +32,19 @@
 
 ---
 
-## About Suave
+# About Suave
 
-SUAVE is a platform for building MEV applications such as OFAs and block builders in a decentralized and private way. SUAVE is looking to create a new paradigm for computation, where computation can be private and run at the speed of block building.
+SUAVE - Single Unifying Auction for Value Expression - is a platform for building MEV applications such as OFAs and block builders in a decentralized and private way.
+
+Read more about SUAVE:
+- https://writings.flashbots.net/the-future-of-mev-is-suave
+- https://writings.flashbots.net/mevm-suave-centauri-and-beyond
 
 ---
 
 </div>
 
-## 🥅 Design Goals
+# Rigil Design Goals
 
 1. **Market for Mechanisms** - create a robust environment which offers basic programmable privacy and useful MEV precompiles.
 2. **Permissionless SUApp Deployment & Interaction** - Enable permissionless innovation by allowing anyone to deploy and interact with contracts.
@@ -34,7 +52,7 @@ SUAVE is a platform for building MEV applications such as OFAs and block builder
 
 ---
 
-## 🔒 Design Decisions
+## Design Decisions
 
 Here is a list of design decisions and tradeoffs:
 
@@ -47,9 +65,9 @@ Here is a list of design decisions and tradeoffs:
 
 ---
 
-## Overview
+# Rigil Overview
 
-### Users
+## Users
 
 The Rigil testnet is initially focused on a specific set of actors:
 
@@ -58,7 +76,7 @@ The Rigil testnet is initially focused on a specific set of actors:
 3. **Proposers/Sequencer** - extend another blockchain with a new block.
 4. **Builders** - can be implemented as smart contracts inside Suave. In the Rigil Tesnet, Suave submits bundles to several external builders.
 
-### Architecture
+## Architecture
 
 SUAVE Computors house all components necessary to perform confidential compute and are the main protocol actor in the SUAVE protocol. Below is a high level architectural overview followed by a brief descriptions of the main components.
 
@@ -66,7 +84,7 @@ SUAVE Computors house all components necessary to perform confidential compute a
 
 - **Confidential Compute Request (CCR) [**[🔗spec](./suave-chain.md#confidential-compute-request)**]**: A user request to Suave that contains:
     1. a wrapped transaction
-    2. confidential inputs, and 
+    2. confidential inputs, and
     3. a list of programs (contracts) (← list of Exec nodes) allowed to operate on confidential inputs.
 - **Computor[**[🔗spec](./computor.md)**]**: accepts and processes confidential compute requests and maintains the SUAVE chain; the logical unit of the SUAVE network and main protocol actor.
 - **Confidential Data Store (CDS) [**[🔗spec](./confidential-data-store.md)**]**: stores confidential data from MEV applications (L1 transactions, EIP 712 signed messages, userOps, privateKeys(?), etc).
@@ -75,9 +93,9 @@ SUAVE Computors house all components necessary to perform confidential compute a
 - **Precompiles [**[🔗spec](./precompiles.md)**]:** purpose-built functions with extended capabilities that can be called from Builder Solidity
 
 
-### Transaction-flow
+## Transaction-flow
 
-The SUAVE-enabled node and the MEVM support multiple new data types, which are all specified in the [SUAVE Chain spec](./suave-chain.md#custom-types). 
+The SUAVE-enabled node and the MEVM support multiple new data types, which are all specified in the [SUAVE Chain spec](./suave-chain.md#custom-types).
 
 The diagram below showcases how these different types interact to enable confidential computation on SUAVE computors.
 
@@ -91,7 +109,7 @@ Conceptually, transactions on SUAVE can be split into three steps:
 
 ---
 
-### OFA Example
+## OFA Example
 
 If we consider a specific use case, like an order flow auction, the high-level series of steps taken to complete the auction can represented as below:
 
@@ -101,7 +119,7 @@ Conceptually, such auction mechanisms can be split into seven steps:
 
 1. User -> RPC
 2. RPC -> MEVM
-3. MEVM -> Confidential compute result to SUAVE Chain 
+3. MEVM -> Confidential compute result to SUAVE Chain
 4. Searcher, listening to events on SUAVE -> RPC
 5. RPC -> MEVM
 6. MEVM -> internal simulation (based on contract logic)

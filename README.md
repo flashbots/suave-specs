@@ -4,7 +4,7 @@
 
 [![Rigil specs ./specs/rigil/](https://img.shields.io/badge/jump%20into-Rigil%20Specs-purple.svg)](./specs/rigil/)
 [![Docs at https://suave.flashbots.net/](https://img.shields.io/badge/read-SUAVE%20docs-blue.svg)](https://suave.flashbots.net/)
-[![Join the chat at https://collective.flashbots.net/](https://img.shields.io/badge/chat-on%20Flashbots%20forum-blue.svg)](https://collective.flashbots.net/)
+[![Join the discourse at https://collective.flashbots.net/](https://img.shields.io/badge/chat-on%20Flashbots%20forum-blue.svg)](https://collective.flashbots.net/)
 
 This repository hosts the current SUAVE specifications.
 
@@ -17,6 +17,21 @@ Discussions about design rationale and proposed changes can be brought up and di
 ⚠️ The SUAVE protocol is still in a state where [the code](https://github.com/flashbots/suave-geth) is the most up-to-date protocol spec. The goal of these notes is to gradually evolve into an implementation agnostic specification. ⚠️
 
 </div>
+
+<!-- TOC depthFrom:10 -->
+
+<!-- /TOC -->
+
+
+---
+
+# About Suave
+
+SUAVE - Single Unifying Auction for Value Expression - is a platform for building MEV applications such as OFAs and block builders in a decentralized and private way.
+
+Read more about SUAVE:
+- https://writings.flashbots.net/the-future-of-mev-is-suave
+- https://writings.flashbots.net/mevm-suave-centauri-and-beyond
 
 ---
 
@@ -39,7 +54,7 @@ You are welcome to open PRs and issues. We invite you to discuss your ideas in t
 
 <div class="hideInDocs">
 
-For creating tables of contents, we use the [xavierguarch.auto-markdown-toc VS code extension](https://marketplace.visualstudio.com/items?itemName=xavierguarch.auto-markdown-toc) and recommend the following user setting: `"markdown-toc.depthFrom": 2`.
+For creating tables of contents, we use the [huntertran.auto-markdown-toc VS code extension](https://marketplace.visualstudio.com/items?itemName=huntertran.auto-markdown-toc).
 
 However, we don't need the ToCs and some other content (like this paragraph) rendered in the documentation frontend. Therefore, please add the `<div class="hideInDocs"></div>` to any content that should not appear in the FE.
 
