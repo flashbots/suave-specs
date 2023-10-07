@@ -1,6 +1,7 @@
 # Suave Chain
 
 <div class="hideInDocs">
+
 <!-- TOC depthfrom:2 -->
 
 - [Introduction](#introduction)
@@ -10,32 +11,12 @@
 - [Consensus Mechanism](#consensus-mechanism)
     - [MEVM Execution](#mevm-execution)
     - [Geth Version](#geth-version)
-- [Custom Types](#custom-types)
-    - [Suave Transaction](#suave-transaction)
+- [Suave Transaction](#suave-transaction)
 - [Suave JSON-RPC](#suave-json-rpc)
     - [suavex namespace](#suavex-namespace)
 - [Node Requirements and Setup](#node-requirements-and-setup)
 - [Gas and Transaction Fees](#gas-and-transaction-fees)
 - [Security Considerations](#security-considerations)
-- [Appendices](#appendices)
-    - [Appendix A](#appendix-a)
-    - [Appendix B](#appendix-b)
-
-<!-- /TOC -->k Parameters](#network-parameters)
-    - [Genesis Settings](#genesis-settings)
-- [Consensus Mechanism: Proof-of-Authority (Clique)](#consensus-mechanism-proof-of-authority-clique)
-    - [MEVM Execution](#mevm-execution)
-    - [Geth Version](#geth-version)
-- [Custom Types](#custom-types)
-    - [Confidential Compute Record](#confidential-compute-record)
-    - [Confidential Compute Request](#confidential-compute-request)
-    - [Suave Transaction](#suave-transaction)
-- [Suave JSON-RPC](#suave-json-rpc)
-    - [`suavex` namespace](#suavex-namespace)
-- [Node Requirements and Setup](#node-requirements-and-setup)
-- [Gas and Transaction Fees](#gas-and-transaction-fees)
-- [Security Considerations](#security-considerations)
-- [Appendices](#appendices)
 
 <!-- /TOC -->
 
