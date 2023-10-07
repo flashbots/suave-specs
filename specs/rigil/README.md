@@ -14,7 +14,9 @@ This repository hosts the current SUAVE Rigil testnet specifications and design 
 <div class="hideInDocs">
 
 
-<!-- TOC depthFrom:10 -->
+<!-- TOC depthfrom:10 -->
+
+
 
 <!-- /TOC -->
 
@@ -62,12 +64,6 @@ Here is a list of design decisions and tradeoffs:
     - Reason: [SUAVE consensus](https://collective.flashbots.net/t/suave-consensus/2152) is an active open question, which whether or not answered does not drastically impact UX on Rigil Testnet.
 - Decision 3: **No SGX Nodes (yet)**
     - Reason: Research continues on the best wa to implement this, which will be detailed in a later spec.
-- Decision *1*: ***Weak DA Layer Guarantees***
-    - *reason*: [Compute Output Validity and Heterogenous DA](https://collective.flashbots.net/t/suave-ensuring-output-validity-and-heterogenous-da/2184) is an active open question, which whether or not answered does not drastically impact UX of users on **Rigil Testnet**.
-- Decision *2*: **Proof-of-Authority Consensus**
-    - *reason*: [SUAVE consensus](https://collective.flashbots.net/t/suave-consensus/2152) is an active open question, which whether or not answered does not drastically impact UX of users on **Rigil Testnet**.
-- Decision *3*: **No SGX Nodes (yet)**
-    - reason: SGX SUAVVE nodes are an active area of research and development and does not drastically impact UX of users on **Rigil Testnet**.
 
 ---
 
