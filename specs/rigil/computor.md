@@ -1,29 +1,36 @@
-# Computor
+# Computor <!-- omit from toc -->
+
+<div class="hideInDocs">
+
+**Table of Contents**
 
 <!-- TOC -->
+
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)
 - [Computor Responsibilities](#computor-responsibilities)
 - [Becoming a Computor](#becoming-a-computor)
-    - [Computor Identification](#computor-identification)
+  - [Computor Identification](#computor-identification)
 - [Computor Architecture](#computor-architecture)
-    - [RPC](#rpc)
-    - [SUAVE PoA Chain](#suave-poa-chain)
-    - [MEVM](#mevm)
-    - [Confidential Data Store](#confidential-data-store)
-    - [Domain Specific Services](#domain-specific-services)
-    - [Precompiles](#precompiles)
+  - [RPC](#rpc)
+  - [SUAVE PoA Chain](#suave-poa-chain)
+  - [MEVM](#mevm)
+  - [Confidential Data Store](#confidential-data-store)
+  - [Domain Specific Services](#domain-specific-services)
+  - [Precompiles](#precompiles)
 - [Containers](#containers)
-    - [Confidential Compute Record](#confidential-compute-record)
-    - [ConfidentialComputeRequest](#confidentialcomputerequest)
-    - [Suave Transaction](#suave-transaction)
-    - [Bid](#bid)
+  - [Confidential Compute Record](#confidential-compute-record)
+  - [ConfidentialComputeRequest](#confidentialcomputerequest)
+  - [Suave Transaction](#suave-transaction)
+  - [Bid](#bid)
 - [Confidential Computation](#confidential-computation)
-    - [Confidential Compute Process](#confidential-compute-process)
+  - [Confidential Compute Process](#confidential-compute-process)
 - [Honest Computor](#honest-computor)
 - [Self Organization](#self-organization)
 
 <!-- /TOC -->
+
+</div>
 
 ## Overview
 This document provides the technical specification for the SUAVE computor: one of the main protocol actors in the SUAVE protocol. The computor contains all necessary components to aceept, process, and route confidential compute requests and results. With these basic primitives computors can self-organize their topology and functionality to conform to specific portions of the MEV supply network.
@@ -55,7 +62,7 @@ A computor has several primary responsibilities within the SUAVE network:
 
 ## Becoming a Computor
 
-Computors are currently permissioned in the SUAVE network, to become one you need your computor's ECDSA pubkey to be contained within the clique PoA genesis settings. 
+Computors are currently permissioned in the SUAVE network, to become one you need your computor's ECDSA pubkey to be contained within the clique PoA genesis settings.
 
 While permissioned now, Computors will one day become permisisonless.
 
@@ -160,7 +167,7 @@ type SuaveTransaction struct {
 
 ### Bid
 
-Bids are the underlying data structure used to track and access data from confidential data storage. 
+Bids are the underlying data structure used to track and access data from confidential data storage.
 
 ```go
 type Bid struct {
@@ -197,8 +204,8 @@ On the Rigil testnet Computors do not live inside of Trusted Execution Environme
 
 ## Self Organization
 
-Traditionally, synchrony has been viewed as a cooperative event. However, evidence from the mempool suggests that a collective synchronous display can also be an incidental outcome of signal "jamming" activities, often known as priority gas auctions, between actors competing for blockspace. 
+Traditionally, synchrony has been viewed as a cooperative event. However, evidence from the mempool suggests that a collective synchronous display can also be an incidental outcome of signal "jamming" activities, often known as priority gas auctions, between actors competing for blockspace.
 
-In this light, the existing MEV supply chain we have today can be seen as a [Turing Pattern](https://en.wikipedia.org/wiki/Turing_pattern) resulting from instability in the supply chain. 
+In this light, the existing MEV supply chain we have today can be seen as a [Turing Pattern](https://en.wikipedia.org/wiki/Turing_pattern) resulting from instability in the supply chain.
 
 SUAVE computors embrace this phenomenon with the capability to reconfigure their network communication to fit into the specific subsection of the MEV supply network they serve. Currently, SUAVE computors route the outcomes of confidential compute, bundles, and blocks directly to the desired recipient party as the network maintains a small and compact topology. The eventual goal is to foster a more dynamic self-organization to cater to a broader network topology and enable autonomous self organization.

@@ -1,18 +1,18 @@
-# MEVM
+# MEVM <!-- omit from toc -->
 
 <div class="hideInDocs">
 
 **Table of Contents**
 
-<!-- TOC depthfrom:2 -->
+<!-- TOC -->
 
 - [Overview](#overview)
 - [Core Architecture](#core-architecture)
-    - [SuaveExecutionBackend](#suaveexecutionbackend)
-    - [MEVM Interpreter](#mevm-interpreter)
+  - [SuaveExecutionBackend](#suaveexecutionbackend)
+  - [MEVM Interpreter](#mevm-interpreter)
 - [Additional Capabilities](#additional-capabilities)
-    - [Confidential execution of smart contracts](#confidential-execution-of-smart-contracts)
-    - [Confidential APIs](#confidential-apis)
+  - [Confidential execution of smart contracts](#confidential-execution-of-smart-contracts)
+  - [Confidential APIs](#confidential-apis)
 - [MEVM Example Flow + Diagram](#mevm-example-flow--diagram)
 
 <!-- /TOC -->

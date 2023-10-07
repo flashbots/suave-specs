@@ -1,4 +1,5 @@
-# Bridge
+<!-- no toc -->
+# Bridge <!-- omit from toc -->
 
 SUAVE uses a bridge with the Goerli Ethereum network to transfer assets for gas and MEV applications.
 

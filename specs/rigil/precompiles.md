@@ -1,24 +1,24 @@
-# Precompiles
+# Precompiles <!-- omit from toc -->
 
 <div class="hideInDocs">
 
 **Table of Contents**
 
-<!-- TOC depthfrom:2 -->
+<!-- TOC -->
 
 - [Overview](#overview)
 - [Precompiles Governance](#precompiles-governance)
 - [Precompiles](#precompiles)
-    - [`IsConfidential`](#isconfidential)
-    - [`ConfidentialInputs`](#confidentialinputs)
-    - [`ConfidentialStore`](#confidentialstore)
-    - [`ConfidentialRetrieve`](#confidentialretrieve)
-    - [`NewBid`](#newbid)
-    - [`FetchBids`](#fetchbids)
-    - [`SimulateBundle`](#simulatebundle)
-    - [`ExtractHint`](#extracthint)
-    - [`BuildEthBlock`](#buildethblock)
-    - [`SubmitEthBlockBidToRelay`](#submitethblockbidtorelay)
+  - [`IsConfidential`](#isconfidential)
+  - [`ConfidentialInputs`](#confidentialinputs)
+  - [`ConfidentialStore`](#confidentialstore)
+  - [`ConfidentialRetrieve`](#confidentialretrieve)
+  - [`NewBid`](#newbid)
+  - [`FetchBids`](#fetchbids)
+  - [`SimulateBundle`](#simulatebundle)
+  - [`ExtractHint`](#extracthint)
+  - [`BuildEthBlock`](#buildethblock)
+  - [`SubmitEthBlockBidToRelay`](#submitethblockbidtorelay)
 
 <!-- /TOC -->
 
