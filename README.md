@@ -1,16 +1,10 @@
 # ☀️ SUAVE Protocol Specifications
 
-<div class="hideInDocs">
 <!-- TOC depthfrom:10 -->
 
 
-<<<<<<< Updated upstream
-This repository hosts the current SUAVE specifications.
 
-</div>
-
-Discussions about design rationale and proposed changes can be brought up and discussed on the [Flashbots forum](https://collective.flashbots.net/). Solidified, agreed-upon changes to the spec can be made through pull requests.
-
+<!-- /TOC -->
 <div class="warning">
 
 ⚠️ The SUAVE protocol is still in a state where [the code](https://github.com/flashbots/suave-geth) is the most up-to-date protocol spec. The goal of these notes is to gradually evolve into an implementation agnostic specification. ⚠️
@@ -20,28 +14,18 @@ Discussions about design rationale and proposed changes can be brought up and di
 <!-- TOC depthfrom:10 -->
 
 
-=======
->>>>>>> Stashed changes
 
 <!-- /TOC -->
 
 # About Suave
 
-<<<<<<< Updated upstream
 SUAVE - Single Unifying Auction for Value Expression - is a platform for building MEV applications such as OFAs and block builders in a decentralized and private way.
 
-SUAVE is a protocol for creating a private data storage layer on which confidential compute can be programmed to process orderflow, and which enables self-organizing MEV supply networks.
+Alternate?: SUAVE is a protocol for creating private data storage layers on which confidential compute can be programmed to process orderflow, and which enables self-organizing MEV supply networks.
 
 Read more about SUAVE:
 - https://writings.flashbots.net/the-future-of-mev-is-suave
 - https://writings.flashbots.net/mevm-suave-centauri-and-beyond
-=======
-SUAVE is a protocol for creating a private data storage layer on which confidential compute can be programmed to process orderflow,
-
-that enables self-organizing MEV supply networks.
-
-Before SUAVE all bundles and transactions were taken as is at block build time and scored via various algorithms assessing their value in the block. SUAVE allows for programmatic hooks into the block building process including orderflow specific logic, 
->>>>>>> Stashed changes
 
 ---
 
