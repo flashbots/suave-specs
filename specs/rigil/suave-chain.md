@@ -4,7 +4,7 @@
 
 <!-- TOC depthfrom:2 -->
 
-- [Introduction](#introduction)
+- [Overview](#overview)
 - [Configuration](#configuration)
     - [Network Parameters](#network-parameters)
     - [Genesis Settings](#genesis-settings)
@@ -19,7 +19,13 @@
 - [Security Considerations](#security-considerations)
 
 <!-- /TOC -->
+## Overview
 
+This document outlines the specifications for the SUAVE Rigil chain.
+
+In the context of the SUAVE protocol, the main purpose of the SUAVE chain is to reach (and maintain) consensus about smart contract code for use cases such as order flow auctions, solvers, block builders, etc.
+
+The SUAVE chain can also be used to store and/or broadcast data for better censorship guarantees.
 In the initial phases of development, the SUAVE chain runs a proof-of-authority consensus protocol called Clique, over a network of permissioned nodes. We do so in order to experiment and iterate quickly during protocol development. This will change in later testnets.
 
 ## Configuration
