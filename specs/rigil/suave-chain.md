@@ -4,11 +4,11 @@
 
 <!-- TOC -->
 
-- [Introduction](#introduction)
+- [Overview](#overview)
 - [Configuration](#configuration)
   - [Network Parameters](#network-parameters)
   - [Genesis Settings](#genesis-settings)
-- [Consensus Mechanism](#consensus-mechanism)
+- [Consensus Mechanism: Proof-of-Authority (Clique)](#consensus-mechanism-proof-of-authority-clique)
   - [MEVM Execution](#mevm-execution)
   - [Geth Version](#geth-version)
 - [Suave Transaction](#suave-transaction)
@@ -24,7 +24,7 @@
 
 </div>
 
-## Introduction
+## Overview
 
 This document outlines the specifications for the SUAVE Rigil chain.
 
@@ -52,9 +52,7 @@ In the initial phases of development, the SUAVE chain runs a proof-of-authority 
 | `GAS_LIMIT`      | 30000000 | `gwei`   |
 | `NUM_VALIDATORS` | 3        | Nodes    |
 
-## Consensus Mechanism
-
-**Proof-of-Authority**.
+## Consensus Mechanism: Proof-of-Authority (Clique)
 
 Clique, an Ethereum-based Proof-of-Authority consensus protocol defined [here](https://eips.ethereum.org/EIPS/eip-225#:~:text=A%20PoA%20scheme%20is%20based,the%20list%20of%20trusted%20signers), restricts block minting to a predefined list of trusted signers. Because of this, every block header that a client sees can be checked against the list of trusted signers.
 
@@ -69,7 +67,6 @@ Suave-geth is based on geth v1.12.0 ([`e501b3`](https://github.com/flashbots/sua
 ## Suave Transaction
 
 The SUAVE protocol adds a new transaction type to the base Ethereum protocol of which it is currently a fork of called a `SuaveTransaction`. This new transaction type contains the results and original request record of confidential compute requests which are detailed in the [Computor](/specs/rigil/computor.md) spec.
-
 
 A SUAVE Transaction is a specialized transaction type that encapsulates the result of a confidential computation request. It includes the `ConfidentialComputeRequest`, signed by the user, which ensures that the result comes from the expected SUAVE computor, as the `SuaveTransaction`'s signer must match the `ExecutionNode`.
 
