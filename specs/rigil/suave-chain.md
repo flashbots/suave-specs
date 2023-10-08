@@ -1,10 +1,7 @@
 # Suave Chain
 
-<<<<<<< Updated upstream
 <div class="hideInDocs">
 
-=======
->>>>>>> Stashed changes
 <!-- TOC depthfrom:2 -->
 
 - [Introduction](#introduction)

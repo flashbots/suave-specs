@@ -1,16 +1,5 @@
 # SUAVE Rigil Testnet
 
-<!-- TOC depthfrom:2 -->
-
-- [Design Decisions](#design-decisions)
-- [Users](#users)
-- [Architecture](#architecture)
-- [Transaction-flow](#transaction-flow)
-- [OFA Example](#ofa-example)
-- [Block Building Example](#block-building-example)
-
-<!-- /TOC -->
-
 <div class="hideInDocs">
 
 # Specs
@@ -20,16 +9,6 @@
 - [Precompiles](./precompiles.md)
 - [Computor](./computor.md)
 - [Bridge](./bridge.md)
-
----
-
-# About Suave
-
-SUAVE - Single Unifying Auction for Value Expression - is a platform for building MEV applications such as OFAs and block builders in a decentralized and private way.
-
-Read more about SUAVE:
-- https://writings.flashbots.net/the-future-of-mev-is-suave
-- https://writings.flashbots.net/mevm-suave-centauri-and-beyond
 
 ---
 
