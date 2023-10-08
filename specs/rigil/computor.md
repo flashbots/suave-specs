@@ -1,6 +1,6 @@
 # Computor
 
-<!-- TOC -->
+<!-- TOC depthfrom:2 -->
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)
 - [Computor Responsibilities](#computor-responsibilities)

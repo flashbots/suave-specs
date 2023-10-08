@@ -1,14 +1,17 @@
 # Suave Chain
 
+<<<<<<< Updated upstream
 <div class="hideInDocs">
 
+=======
+>>>>>>> Stashed changes
 <!-- TOC depthfrom:2 -->
 
 - [Introduction](#introduction)
 - [Configuration](#configuration)
     - [Network Parameters](#network-parameters)
     - [Genesis Settings](#genesis-settings)
-- [Consensus Mechanism](#consensus-mechanism)
+- [Consensus Mechanism: Proof-of-Authority Clique](#consensus-mechanism-proof-of-authority-clique)
     - [MEVM Execution](#mevm-execution)
     - [Geth Version](#geth-version)
 - [Suave Transaction](#suave-transaction)
@@ -19,18 +22,6 @@
 - [Security Considerations](#security-considerations)
 
 <!-- /TOC -->
-
----
-
-</div>
-
-## Introduction
-
-This document outlines the specifications for the SUAVE Rigil chain.
-
-In the context of the SUAVE protocol, the main purpose of the SUAVE chain is to reach (and maintain) consensus about smart contract code for use cases such as order flow auctions, solvers, block builders, etc.
-
-The SUAVE chain can also be used to store and/or broadcast data for better censorship guarantees.
 
 In the initial phases of development, the SUAVE chain runs a proof-of-authority consensus protocol called Clique, over a network of permissioned nodes. We do so in order to experiment and iterate quickly during protocol development. This will change in later testnets.
 
@@ -52,9 +43,7 @@ In the initial phases of development, the SUAVE chain runs a proof-of-authority 
 | `GAS_LIMIT`| 30000000 | `gwei`
 | `NUM_VALIDATORS` | 3 | Nodes
 
-## Consensus Mechanism
-
-**Proof-of-Authority**.
+## Consensus Mechanism: Proof-of-Authority (Clique)
 
 Clique, an Ethereum-based Proof-of-Authority consensus protocol defined [here](https://eips.ethereum.org/EIPS/eip-225#:~:text=A%20PoA%20scheme%20is%20based,the%20list%20of%20trusted%20signers), restricts block minting to a predefined list of trusted signers. Because of this, every block header that a client sees can be checked against the list of trusted signers.
 

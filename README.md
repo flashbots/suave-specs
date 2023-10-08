@@ -1,11 +1,10 @@
 # ☀️ SUAVE Protocol Specifications
 
 <div class="hideInDocs">
+<!-- TOC depthfrom:10 -->
 
-[![Rigil specs ./specs/rigil/](https://img.shields.io/badge/jump%20into-Rigil%20Specs-purple.svg)](./specs/rigil/)
-[![Docs at https://suave.flashbots.net/](https://img.shields.io/badge/read-SUAVE%20docs-blue.svg)](https://suave.flashbots.net/)
-[![Join the discourse at https://collective.flashbots.net/](https://img.shields.io/badge/chat-on%20Flashbots%20forum-blue.svg)](https://collective.flashbots.net/)
 
+<<<<<<< Updated upstream
 This repository hosts the current SUAVE specifications.
 
 </div>
@@ -21,14 +20,14 @@ Discussions about design rationale and proposed changes can be brought up and di
 <!-- TOC depthfrom:10 -->
 
 
+=======
+>>>>>>> Stashed changes
 
 <!-- /TOC -->
 
-
----
-
 # About Suave
 
+<<<<<<< Updated upstream
 SUAVE - Single Unifying Auction for Value Expression - is a platform for building MEV applications such as OFAs and block builders in a decentralized and private way.
 
 SUAVE is a protocol for creating a private data storage layer on which confidential compute can be programmed to process orderflow, and which enables self-organizing MEV supply networks.
@@ -36,6 +35,13 @@ SUAVE is a protocol for creating a private data storage layer on which confident
 Read more about SUAVE:
 - https://writings.flashbots.net/the-future-of-mev-is-suave
 - https://writings.flashbots.net/mevm-suave-centauri-and-beyond
+=======
+SUAVE is a protocol for creating a private data storage layer on which confidential compute can be programmed to process orderflow,
+
+that enables self-organizing MEV supply networks.
+
+Before SUAVE all bundles and transactions were taken as is at block build time and scored via various algorithms assessing their value in the block. SUAVE allows for programmatic hooks into the block building process including orderflow specific logic, 
+>>>>>>> Stashed changes
 
 ---
 
