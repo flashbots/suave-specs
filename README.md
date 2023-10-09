@@ -25,7 +25,7 @@ Discussions about design rationale and proposed changes can be brought up and di
 
 SUAVE - Single Unifying Auction for Value Expression - is a platform for building MEV applications such as OFAs and block builders in a decentralized and private way.
 
-SUAVE is a protocol for creating a private data storage layer on which confidential compute can be programmed to process orderflow, and which enables self-organizing MEV supply networks.
+SUAVE is a protocol for creating private data storage layers on which confidential compute can be programmed to process orderflow, and which enables self-organizing MEV supply networks.
 
 Read more about SUAVE:
 - https://writings.flashbots.net/the-future-of-mev-is-suave
