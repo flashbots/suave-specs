@@ -1,3 +1,4 @@
+<!-- no toc -->
 # SUAVE Rigil Testnet
 
 [![Docs at https://suave.flashbots.net/](https://img.shields.io/badge/read-SUAVE%20docs-blue.svg)](https://suave.flashbots.net/)
@@ -12,14 +13,6 @@ This repository hosts the current SUAVE Rigil testnet specifications and design 
 </div>
 
 <div class="hideInDocs">
-
-
-<!-- TOC depthfrom:10 -->
-
-
-
-<!-- /TOC -->
-
 
 ---
 

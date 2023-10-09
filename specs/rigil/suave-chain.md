@@ -1,19 +1,19 @@
-# Suave Chain
+# Suave Chain <!-- omit from toc -->
 
 <div class="hideInDocs">
 
-<!-- TOC depthfrom:2 -->
+<!-- TOC -->
 
 - [Introduction](#introduction)
 - [Configuration](#configuration)
-    - [Network Parameters](#network-parameters)
-    - [Genesis Settings](#genesis-settings)
+  - [Network Parameters](#network-parameters)
+  - [Genesis Settings](#genesis-settings)
 - [Consensus Mechanism](#consensus-mechanism)
-    - [MEVM Execution](#mevm-execution)
-    - [Geth Version](#geth-version)
+  - [MEVM Execution](#mevm-execution)
+  - [Geth Version](#geth-version)
 - [Suave Transaction](#suave-transaction)
 - [Suave JSON-RPC](#suave-json-rpc)
-    - [suavex namespace](#suavex-namespace)
+  - [`suavex` namespace](#suavex-namespace)
 - [Node Requirements and Setup](#node-requirements-and-setup)
 - [Gas and Transaction Fees](#gas-and-transaction-fees)
 - [Security Considerations](#security-considerations)
@@ -44,13 +44,13 @@ In the initial phases of development, the SUAVE chain runs a proof-of-authority 
 
 ### Genesis Settings
 
-| Name | Value | Unit |
-| - | - | - |
-| `PERIOD` | 4 | `block`
-| `EPOCH` | 30000 | `block`
-| `BLOCK_TIME` | 3 | `second`
-| `GAS_LIMIT`| 30000000 | `gwei`
-| `NUM_VALIDATORS` | 3 | Nodes
+| Name             | Value    | Unit     |
+| ---------------- | -------- | -------- |
+| `PERIOD`         | 4        | `block`  |
+| `EPOCH`          | 30000    | `block`  |
+| `BLOCK_TIME`     | 3        | `second` |
+| `GAS_LIMIT`      | 30000000 | `gwei`   |
+| `NUM_VALIDATORS` | 3        | Nodes    |
 
 ## Consensus Mechanism
 

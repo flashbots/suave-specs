@@ -1,3 +1,4 @@
+<!-- no toc -->
 # ☀️ SUAVE Protocol Specifications
 
 <div class="hideInDocs">
@@ -17,13 +18,6 @@ Discussions about design rationale and proposed changes can be brought up and di
 ⚠️ The SUAVE protocol is still in a state where [the code](https://github.com/flashbots/suave-geth) is the most up-to-date protocol spec. The goal of these notes is to gradually evolve into an implementation agnostic specification. ⚠️
 
 </div>
-
-<!-- TOC depthfrom:10 -->
-
-
-
-<!-- /TOC -->
-
 
 ---
 
@@ -45,10 +39,10 @@ Specifications for the SUAVE protocol are currently organized by testnet during 
 
 ## In-development Specifications
 
-| Testnet | Phase | ChainID | Specs |
-| - | - | - | - |
-| [**Rigil**](./specs/rigil/)  | [Big Bang](/assets/future_roadmap_draft.png) | `16813125` | • [SUAVE chain](./specs/rigil/suave-chain.md) <br/> • [MEVM](./specs/rigil/mevm.md) <br/> • [Confidential Data Store](./specs/rigil/confidential-data-store.md) <br/> • [Precompiles](./specs/rigil/precompiles.md) <br/> • [Bridge](./specs/rigil/bridge.md)  |
-| [**Sirrah**](./specs/sirrah/) | [Proto-Collision](/assets/future_roadmap_draft.png) | | |
+| Testnet                       | Phase                                               | ChainID    | Specs                                                                                                                                                                                                                                                         |
+| ----------------------------- | --------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**Rigil**](./specs/rigil/)   | [Big Bang](/assets/future_roadmap_draft.png)        | `16813125` | • [SUAVE chain](./specs/rigil/suave-chain.md) <br/> • [MEVM](./specs/rigil/mevm.md) <br/> • [Confidential Data Store](./specs/rigil/confidential-data-store.md) <br/> • [Precompiles](./specs/rigil/precompiles.md) <br/> • [Bridge](./specs/rigil/bridge.md) |
+| [**Sirrah**](./specs/sirrah/) | [Proto-Collision](/assets/future_roadmap_draft.png) |            |                                                                                                                                                                                                                                                               |
 
 ---
 
@@ -58,7 +52,7 @@ You are welcome to open PRs and issues. We invite you to discuss your ideas in t
 
 <div class="hideInDocs">
 
-For creating tables of contents, we use the [huntertran.auto-markdown-toc VS code extension](https://marketplace.visualstudio.com/items?itemName=huntertran.auto-markdown-toc).
+For creating tables of contents, we use the ["Markdown All in One" VS code extension](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one). This extension comes with a lot of keyboard shortcuts, which may override the ones you are already using. You can disable keyboard shortcuts for this extension by going to "Settings -> Keyboard Shortcuts" (cmd+K cmd+S) and searching for `markdown.ext` (see [#22](https://github.com/flashbots/suave-specs/pull/22) for more details).
 
 However, we don't need the ToCs and some other content (like this paragraph) rendered in the documentation frontend. Therefore, please add the `<div class="hideInDocs"></div>` to any content that should not appear in the FE.
 

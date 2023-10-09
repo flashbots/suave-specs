@@ -1,20 +1,20 @@
-# Confidential Data Store
+# Confidential Data Store <!-- omit from toc -->
 
 <div class="hideInDocs">
 
 **Table of Contents**
 
-<!-- TOC depthfrom:2 -->
+<!-- TOC -->
 
 - [Introduction](#introduction)
 - [Architecture Diagram](#architecture-diagram)
 - [Core Components](#core-components)
-    - [ConfidentialStore](#confidentialstore)
-    - [SUAVE Mempool](#suave-mempool)
-    - [Interface Definitions](#interface-definitions)
+  - [ConfidentialStore](#confidentialstore)
+  - [SUAVE Mempool](#suave-mempool)
+  - [Interface Definitions](#interface-definitions)
 - [Data Management](#data-management)
-    - [Initialization & Access Control](#initialization--access-control)
-    - [Store & Retrieve Processes](#store--retrieve-processes)
+  - [Initialization \& Access Control](#initialization--access-control)
+  - [Store \& Retrieve Processes](#store--retrieve-processes)
 - [Security and Confidentiality](#security-and-confidentiality)
 
 <!-- /TOC -->
