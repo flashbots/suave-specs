@@ -63,7 +63,7 @@ Here is a list of design decisions and tradeoffs:
 - Decision 2: **Proposer Centralization**
     - Reason: [SUAVE consensus](https://collective.flashbots.net/t/suave-consensus/2152) is an active open question, which whether or not answered does not drastically impact UX on Rigil Testnet.
 - Decision 3: **No SGX Nodes (yet)**
-    - Reason: Research continues on the best wa to implement this, which will be detailed in a later spec.
+    - Reason: Research continues on the best way to implement this, which will be detailed in a later spec.
 
 ---
 
