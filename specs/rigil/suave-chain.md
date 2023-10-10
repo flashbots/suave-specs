@@ -49,7 +49,7 @@ In the initial phases of development, the SUAVE chain runs a proof-of-authority 
 | `PERIOD`         | 4        | `block`  |
 | `EPOCH`          | 30000    | `block`  |
 | `BLOCK_TIME`     | 3        | `second` |
-| `GAS_LIMIT`      | 30000000 | `gwei`   |
+| `GAS_LIMIT`      | 30000000 | `gas`    |
 | `NUM_VALIDATORS` | 3        | Nodes    |
 
 ## Consensus Mechanism: Proof-of-Authority (Clique)
