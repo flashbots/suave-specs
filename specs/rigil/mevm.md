@@ -148,3 +148,30 @@ type ConfidentialEthBackend interface {
 ## MEVM Example Flow + Diagram
 
 TODO
+
+
+
+## Suave JSON-RPC
+
+SUAVE JSON-RPC can be seen as a super set of Ethereum JSON-RPC. This means that the [Ethereum JSON-RPC standard](https://geth.ethereum.org/docs/interacting-with-geth/rpc) remains the same when interacting with the SUAVE chain, with the following exceptions:
+
+1. New `IsConfidential` and `ExecutionNode` fields are added to the transaction arguments used in the `eth_sendTransaction` and `eth_call` methods.
+    1. If `IsConfidential` is set to true, the call will be performed as a confidential call, using the SUAVE Computor passed in when constructing a `ConfidentialComputeRequest`.
+    2. A `SuaveTransaction` is the result of `eth_sendTransaction`. If `IsConfidential` is unset or false in the request, this `SuaveTransaction` will be processed as a regular Ethereum Legacy or EIP1559 transaction.
+
+2. New optional argument - `confidential_data` - is added to `eth_sendRawTransaction`, `eth_sendTransaction` and `eth_call` methods.
+    1. Confidential data is made available to the MEVM via a precompile, but does not become a part of the transaction that makes it to chain.
+
+3. All RPCs that return transaction or receipt objects will do so with type `SuaveTransaction`, a super set of regular Ethereum transactions.
+
+See [Appendix B](#appendix-b) for an example of confidential compute request and response objects.
+
+### `suavex` namespace
+
+Any API endpoints defined in this namespace are used internally to connect the MEVM node and the SUAVE-enabled node. We take this approach to make upstream updates and maintenance easier. Current endpoints include:
+
+* `suavex_buildEthBlockFromBundles` - takes an array of bundles and transactions, calculates state root and related fields, and returns a valid Ethereum L1 block.
+
+* `suavex_buildEthBlock` - takes an array of transactions, calculates state root and related fields, and returns a valid Ethereum L1 block.
+
+---

@@ -1,42 +1,13 @@
-# SUAVE Rigil Testnet <!-- omit from toc -->
-
-[![Docs at https://suave.flashbots.net/](https://img.shields.io/badge/read-SUAVE%20docs-blue.svg)](https://suave.flashbots.net/)
-[![Join the discourse at https://collective.flashbots.net/](https://img.shields.io/badge/chat-on%20Flashbots%20forum-blue.svg)](https://collective.flashbots.net/)
-
-This repository hosts the current SUAVE Rigil testnet specifications and design docs.
-
-<div class="hideInDocs">
-
-<div class="warning">
-
-⚠️ The SUAVE protocol is still in a state where [the code](https://github.com/flashbots/suave-geth) is the most up-to-date protocol spec. The goal of these notes is to gradually evolve into an implementation agnostic specification. ⚠️
-
-</div>
-
-
----
-
-
-**Table of Contents**
-
 <!-- TOC -->
 
-- [Specs](#specs)
-- [About Suave](#about-suave)
-- [Rigil Design Goals](#rigil-design-goals)
-  - [Design Decisions](#design-decisions)
-- [Rigil Overview](#rigil-overview)
-  - [Users](#users)
-  - [Architecture](#architecture)
-  - [Transaction-flow](#transaction-flow)
-  - [OFA Example](#ofa-example)
-  - [Block Building Example](#block-building-example)
+- [Design Decisions](#design-decisions)
+- [Users](#users)
+- [Architecture](#architecture)
+- [Transaction-flow](#transaction-flow)
+- [OFA Example](#ofa-example)
+- [Block Building Example](#block-building-example)
 
 <!-- /TOC -->
-
----
-
-
 # Specs
 - [Suave Chain](./suave-chain.md)
 - [MEVM](./mevm.md)
@@ -46,7 +17,6 @@ This repository hosts the current SUAVE Rigil testnet specifications and design 
 - [Bridge](./bridge.md)
 
 ---
-
 
 # About Suave
 
@@ -58,32 +28,11 @@ Read more about SUAVE:
 
 ---
 
-</div>
-
-# Rigil Design Goals
-
-1. **Market for Mechanisms** - create a robust environment which offers basic programmable privacy and useful MEV precompiles.
-2. **Permissionless SUApp Deployment & Interaction** - Enable permissionless innovation by allowing anyone to deploy and interact with contracts.
-3. **SGX UX Closeness** - Get as close to SGX user experience as possible and minimize breaking changes down the road.
-
----
-
-## Design Decisions
-
-Here is a list of design decisions and tradeoffs:
-
-- Decision 1: **Weak DA Layer Guarantees**
-    - Reason: [Compute Output Validity and Heterogenous DA](https://collective.flashbots.net/t/suave-ensuring-output-validity-and-heterogenous-da/2184) is an active open question, which whether or not answered does not drastically impact UX on Rigil Testnet.
-- Decision *2*: **Proof-of-Authority Consensus**
-    - *reason*: [SUAVE consensus](https://collective.flashbots.net/t/suave-consensus/2152) is an active open question, which whether or not answered does not drastically impact UX of users on **Rigil Testnet**.
-- Decision *3*: **No SGX Nodes (yet)**
-    - reason: SGX SUAVE computors are an active area of research and development and does not drastically impact UX of users on **Rigil Testnet**.
-- Decision *4*: **Centralized Builder Interoperability**
-    - reason: Blocks emitted from SUAVE computors will have unpredictable inclusion in early development so SUAVE rigil supports a precompile to send bundles to off-SUAVE block builders.
-
----
-
 # Rigil Overview
+
+This set of specs proposes the Rigil Testnet, a continuation of the star system theme (Centauri, Andromeda, Helios) laid out in [The Future of MEV](https://writings.flashbots.net/mevm-suave-centauri-and-beyond); and the first in a series of SUAVE testnets based on stars in the [(Alpha) Centauri system](https://en.wikipedia.org/wiki/Alpha_Centauri): Rigil Kentaurus (Alpha Centauri A), Toliman (B) and Proxima Centauri (C).  the initial .
+
+The Rigil Testnet seeks to be an experimental sandbox for the SUAVE protocol, aiming to provide a foundation for building MEV applications in a decentralized and private manner. Applications built atop this platform gain access to encrypted orderflow and process it using confidential computation and data storage. This empowers stakeholders to articulate the intricate facets of the MEV supply chain pertinent to their order flow as smart contracts written in solidity. Catering to a diverse set of players, from developers and users to proposers, sequencers, and block builders, this testnet facilitates the design and governance of smart contracts on the SUAVE Chain, which define MEV application rules. Rigil's key features comprise fostering a market for mechanism designs, replicating the SGX user experience, and Proof-of-Authority consensus to allow for rapid prototyping. The network's architecture is composed of SUAVE Computors for confidential computation, the Confidential Data Store for secure and private storage, a blockchain to store MEV application rules and transparent dissemination of public data, and the MEVM, a modified EVM that exposes confidential execution and storage APIs to deevlopers. Rigil's core objective remains clear: to ensure sensitive data remains offchain unless intentionally programmed, and directing such data efficiently across all SUAVE computors, thus optimizing bundle and block construction throughout the network.
 
 ## Users
 
@@ -94,6 +43,32 @@ The Rigil testnet is initially focused on a specific set of actors:
 3. **Proposers/Sequencers** - extend another blockchain with a new block.
 4. **Block Builders** - can be implemented as smart contracts inside Suave. In the Rigil Tesnet, Suave has the capability to submit bundles to several external builders to help transaction inclusion during early stages of development.
 5. **Auctions** - L1 Transactions, EIP 712 signed messages, UserOps, the right to update an oracle, and more can be programmably auctioned and utilize privacy primitives.
+5. **Solvers** - upload solver code to the chain and plug into encrypted orderflow, or monitor the chain and submit solutions based on emitted logs.
+
+</div>
+
+# Rigil Design Goals
+
+1. **Market for Mechanisms** - Enable permissionless innovation by allowing anyone to deploy mechanisms as smart contracts and allowing users of those mechanisms to choose from a market of options.
+2. **SGX UX Closeness** - Get as close to SGX user experience as possible and minimize breaking changes down the road.
+
+---
+
+## Design Decisions
+
+Here is a list of design decisions made for the Rigil testnet and associated reasoning:
+
+- Decision *1*: **Proof-of-Authority Consensus**
+    - *reason*: [SUAVE consensus](https://collective.flashbots.net/t/suave-consensus/2152) is an active open question, which whether or not answered does not drastically impact UX of users on **Rigil Testnet**.
+- Decision *2*: **No SGX Nodes (yet)**
+    - reason: SGX SUAVE computors are an active area of research and development and does not drastically impact UX of users on **Rigil Testnet**.
+- Decision *3*: **Weak DA Layer Guarantees**
+    - Reason: The Confidential Data Store currently only keeps private data available for one day. [Compute Output Validity and Heterogenous DA](https://collective.flashbots.net/t/suave-ensuring-output-validity-and-heterogenous-da/2184) are active open questions, which whether or not answered does not drastically impact UX on Rigil Testnet.
+- Decision *4*: **Centralized Builder Interoperability**
+    - reason: Blocks emitted from SUAVE computors will have unpredictable inclusion in early development so SUAVE rigil supports a precompile to send bundles to off-SUAVE block builders.
+
+---
+
 
 ## Architecture
 
@@ -138,12 +113,12 @@ If we consider a specific use case, like an order flow auction, the high-level s
 1. The user sends a Confidential Compute Request interacting with a SUAPP by calling it's `newBid` function. Included in this request is also the user's L1 transaction as a confidential Input.
 2. The computor will receive the transaction and process it. To do so it first runs the offchain logic assocaited with `newBid` which will extract the transaction's data and then return a callback:
 ```go
-return bytes.concat(this.emitBid.selector, abi.encode(bid));
+return bytes.concat(this.emitHint.selector, abi.encode(hint));
 ```
 which points to another function:
 ```go
-function emitBid(Suave.Bid calldata bid) public {
-    emit BidEvent(bid.id, bid.decryptionCondition, bid.allowedPeekers);
+function emitHint(Suave.Bid calldata bid, bytes memory hint) public {
+    emit HintEvent(bid.id, hint);
 }
 ```
 3. The callback is inserted into the calldata of a SUAVE transaction and then shipped off to the SUAVE mempool.
