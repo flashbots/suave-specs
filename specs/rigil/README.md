@@ -1,3 +1,23 @@
+# SUAVE Rigil Testnet <!-- omit from toc -->
+
+[![Docs at https://suave.flashbots.net/](https://img.shields.io/badge/read-SUAVE%20docs-blue.svg)](https://suave.flashbots.net/)
+[![Join the discourse at https://collective.flashbots.net/](https://img.shields.io/badge/chat-on%20Flashbots%20forum-blue.svg)](https://collective.flashbots.net/)
+
+This repository hosts the current SUAVE Rigil testnet specifications and design docs.
+
+<div class="hideInDocs">
+
+<div class="warning">
+
+⚠️ The SUAVE protocol is still in a state where [the code](https://github.com/flashbots/suave-geth) is the most up-to-date protocol spec. The goal of these notes is to gradually evolve into an implementation agnostic specification. ⚠️
+
+</div>
+
+
+---
+
+**Table of Contents**
+
 <!-- TOC -->
 
 - [Users](#users)
@@ -11,21 +31,6 @@
     - [OFA Example](#ofa-example)
     - [Block Building Example](#block-building-example)
 
-<!-- /TOC -->
-
----
-
-**Table of Contents**
-
-<!-- TOC -->
-
-- [Users](#users)
-- [Rigil Design Goals](#rigil-design-goals)
-- [Design Decisions](#design-decisions)
-- [Architecture](#architecture)
-- [Transaction-flow](#transaction-flow)
-- [OFA Example](#ofa-example)
-- [Block Building Example](#block-building-example)
 
 <!-- /TOC -->
 # Specs
@@ -50,9 +55,11 @@ Read more about SUAVE:
 
 # Rigil Overview
 
-This set of specs proposes the Rigil Testnet, a continuation of the star system theme (Centauri, Andromeda, Helios) laid out in [The Future of MEV](https://writings.flashbots.net/mevm-suave-centauri-and-beyond); and the first in a series of SUAVE testnets based on stars in the [(Alpha) Centauri system](https://en.wikipedia.org/wiki/Alpha_Centauri): Rigil Kentaurus (Alpha Centauri A), Toliman (B) and Proxima Centauri (C).  the initial .
+This set of specs proposes the Rigil Testnet, a continuation of the star system theme (Centauri, Andromeda, Helios) laid out in [The Future of MEV](https://writings.flashbots.net/mevm-suave-centauri-and-beyond); and the first in a series of SUAVE testnets based on stars in the [(Alpha) Centauri system](https://en.wikipedia.org/wiki/Alpha_Centauri): Rigil Kentaurus (Alpha Centauri A), Toliman (B) and Proxima Centauri (C).
 
-The Rigil Testnet seeks to be an experimental sandbox and foundation for building MEV applications in a decentralized and private manner. Applications built atop this platform gain access to encrypted orderflow and process it using confidential computation and data storage. This empowers stakeholders to articulate the intricate facets of the MEV supply chain pertinent to their order flow as smart contracts written in solidity. Catering to a diverse set of players, from developers and users to proposers, sequencers, and block builders, this testnet facilitates the design and governance of smart contracts on the SUAVE Chain, which define these MEV application rules. Rigil's key features comprise fostering a market for mechanism designs, replicating the SGX user experience, and Proof-of-Authority consensus to allow for rapid prototyping. The network's architecture is composed of SUAVE Computors for confidential computation, the Confidential Data Store for secure and private storage, a blockchain to store MEV application rules and transparent dissemination of public data, and the MEVM, a modified EVM that exposes confidential execution and storage APIs to deevlopers. Rigil's core objective remains clear: to ensure sensitive data remains offchain unless intentionally programmed, and directing such data efficiently across all SUAVE computors, thus optimizing bundle and block construction throughout the network.
+The Rigil Testnet is an experimental sandbox and foundation for building MEV applications in a decentralized and private manner. Applications built atop this platform gain access to encrypted orderflow and process it using confidential computation and data storage. This empowers stakeholders to articulate the intricate facets of the MEV supply chain pertinent to their order flow as smart contracts written in solidity. Catering to a diverse set of players, from developers and users to proposers, sequencers, and block builders, this testnet facilitates the design and governance of smart contracts on the SUAVE Chain, which define these MEV application rules. Rigil's key features comprise fostering a market for mechanism designs, replicating the SGX user experience, and Proof-of-Authority consensus to allow for rapid prototyping. 
+
+The network's architecture is composed of SUAVE Computors for confidential computation, the Confidential Data Store for secure and private storage, a blockchain to store MEV application rules and transparent dissemination of public data, and the MEVM, a modified EVM that exposes confidential execution and storage APIs to deevlopers. Rigil's core objective remains clear: to ensure sensitive data remains offchain unless intentionally programmed, and directing such data efficiently across all SUAVE computors, thus optimizing bundle and block construction throughout the network.
 
 
 ## Users
@@ -117,7 +124,16 @@ The example flows in the following sections are used to illustrate some of the p
 
 ### High Level - OFA + Block Builder
 
+Below we can see the journey of orderflow from transaction, to searcher back-run, to a block emitted from SUAVE.
+
 ![OFA + Block Builder flow](/assets/OFA_And_Block_Flow.svg)
+
+1. A user sends their L1 transaction, EIP-712 message, UserOp, or Intent into a SUAVE computor.
+2. MEVM processes this L1 transaction, extracts a hint, and emits it onchain.
+3. Searchers listening to the chain see the hint, craft a backrun transactions, and send them to a SUAVE computor.
+4. SUAVE computors will process the backrun, combine it into a bundle with the original transaction, include the bundle in a block, and then emit the block to an offchain relay.
+
+*Optionally*, bundles can be sent straight to a centralized block builder, or the block can also be sent to an onchain relay instead of offchain.
 
 ### Confindential Compute Request Flow
 
@@ -126,7 +142,6 @@ The SUAVE-enabled node and the MEVM support multiple new data types, which are a
 The diagram below showcases how these different types interact to enable confidential computation on SUAVE computors.
 
 ![Rigil transaction flow](/assets/rigil-tx-flow.svg)
-[ TODO : add numbers/steps for tx flow]
 
 Transaction Flow:
 1. User sends a Confidential Compute Request to the RPC - Confidential Compute Requests are made up of two components, Compute Transaction and Confidential Inputs. The Compute request will reference data inside of the Confidential Inputs that the MEVM is able to use during computation.
@@ -140,7 +155,6 @@ Transaction Flow:
 If we consider a specific use case, like an order flow auction, the high-level series of steps taken to complete the auction can represented as below:
 
 ![OFA example flow](/assets/OFA-example-flow.svg)
-[TODO : add numbers/steps for tx flow. And change `newBid` maybe]
 
 1. The user sends a Confidential Compute Request interacting with a SUAPP by calling it's `newBid` function. Included in this request is also the user's L1 transaction as a confidential Input.
 2. The computor will receive the transaction and process it. To do so it first runs the offchain logic assocaited with `newBid` which will extract the transaction's data and then return a callback:

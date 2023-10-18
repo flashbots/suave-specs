@@ -124,20 +124,21 @@ This type serves as a record of computation. It's part of both the [Confidential
 
 ```go
 type ConfidentialComputeRecord struct {
-    ExecutionNode          common.Address
-    ConfidentialInputsHash common.Hash
+	Nonce    uint64
+	GasPrice *big.Int
+	Gas      uint64
+	To       *common.Address
+	Value    *big.Int
+	Data     []byte
 
-    // LegacyTx fields
-    Nonce    uint64
-    GasPrice *big.Int
-    Gas      uint64
-    To       *common.Address
-    Value    *big.Int
-    Data     []byte
+	ExecutionNode          common.Address
+	ConfidentialInputsHash common.Hash
 
-    // Signature fields
+	ChainID *big.Int
+	V, R, S *big.Int
 }
 ```
+
 
 ### ConfidentialComputeRequest
 
@@ -156,12 +157,18 @@ A computor's signature is used as the integrity gurantee for the computation's r
 ### Suave Transaction
 
 The final home of compute results and intentionally leaked data from confidential compute requests is a SUAVE transaciton, see [🔗 SUAVE chain](/specs/rigil/suave-chain.md) specs for more details
+
 ```go
 type SuaveTransaction struct {
-    ExecutionNode              common.Address
-    ConfidentialComputeRequest ConfidentialComputeRecord
-    ConfidentialComputeResult  []byte
-    /* Execution node's signature fields */
+	ExecutionNode              common.Address
+	ConfidentialComputeRequest ConfidentialComputeRecord
+	ConfidentialComputeResult  []byte
+
+	// ExecutionNode's signature
+	ChainID *big.Int
+	V       *big.Int
+	R       *big.Int
+	S       *big.Int
 }
 ```
 
@@ -185,7 +192,6 @@ type Bid struct {
 To successfuly process a request for confidential computation Computors must engage the the Confidential Compute Process.
 
 ### Confidential Compute Process
-(TODO: Better name for this)
 
 Confidential compute is defined by use of an [offchain function call](https://docs.soliditylang.org/en/latest/contracts.html#view-functions), signified in solidity via the `view` modifier.
 

@@ -13,7 +13,7 @@
 - [Additional Capabilities](#additional-capabilities)
   - [Confidential execution of smart contracts](#confidential-execution-of-smart-contracts)
   - [Confidential APIs](#confidential-apis)
-- [MEVM Example Flow + Diagram](#mevm-example-flow--diagram)
+- [Suave JSON-RPC](#suave-json-rpc)
 
 <!-- /TOC -->
 
@@ -145,12 +145,6 @@ type ConfidentialEthBackend interface {
 }
 ```
 
-## MEVM Example Flow + Diagram
-
-TODO
-
-
-
 ## Suave JSON-RPC
 
 SUAVE JSON-RPC can be seen as a super set of Ethereum JSON-RPC. This means that the [Ethereum JSON-RPC standard](https://geth.ethereum.org/docs/interacting-with-geth/rpc) remains the same when interacting with the SUAVE chain, with the following exceptions:
@@ -164,14 +158,15 @@ SUAVE JSON-RPC can be seen as a super set of Ethereum JSON-RPC. This means that 
 
 3. All RPCs that return transaction or receipt objects will do so with type `SuaveTransaction`, a super set of regular Ethereum transactions.
 
-See [Appendix B](#appendix-b) for an example of confidential compute request and response objects.
-
 ### `suavex` namespace
 
-Any API endpoints defined in this namespace are used internally to connect the MEVM node and the SUAVE-enabled node. We take this approach to make upstream updates and maintenance easier. Current endpoints include:
+The `suavex` namespace is used internally by the MEVM to enable functionality like block building and external API calls via MEVM precompiles. We take this approach to make upstream updates and maintenance easier. Current endpoints include:
 
-* `suavex_buildEthBlockFromBundles` - takes an array of bundles and transactions, calculates state root and related fields, and returns a valid Ethereum L1 block.
+#### Methods
 
-* `suavex_buildEthBlock` - takes an array of transactions, calculates state root and related fields, and returns a valid Ethereum L1 block.
+`suavex_buildEthBlockFromBundles` - takes an array of bundles and transactions, calculates state root and related fields, and returns a valid Ethereum L1 block.
 
----
+`suavex_buildEthBlock` - takes an array of transactions, calculates state root and related fields, and returns a valid Ethereum L1 block.
+
+
+Domain specific services which seek to be used by SUAVE must implement the methods in this namespace. More details will be expanded in future iterations.
