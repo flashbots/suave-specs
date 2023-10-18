@@ -1,15 +1,17 @@
-# Confidential Data Store <!-- omit from toc -->
-
-<div class="hideInDocs">
-
-**Table of Contents**
-
 <!-- TOC -->
 
-- [Introduction](#introduction)
+- [Overview](#overview)
 - [Architecture Diagram](#architecture-diagram)
 - [Core Components](#core-components)
-  - [ConfidentialStore](#confidentialstore)
+    - [ConfidentialStore](#confidentialstore)
+    - [SUAVE Mempool](#suave-mempool)
+    - [Interface Definitions](#interface-definitions)
+- [Data Management](#data-management)
+    - [Initialization & Access Control](#initialization--access-control)
+    - [Store & Retrieve Processes](#store--retrieve-processes)
+- [Security and Confidentiality](#security-and-confidentiality)
+
+<!-- /TOC -->tialStore](#confidentialstore)
   - [SUAVE Mempool](#suave-mempool)
   - [Interface Definitions](#interface-definitions)
 - [Data Management](#data-management)
@@ -27,11 +29,19 @@
 
 This document provides an overview of the Confidential Data Store, an essential component of the SUAVE protocol. The Confidential Store serves as a secure and privacy-focused storage system, by exposing a key-value store for safeguarding confidential bid-related data. Only those with appropriate permissions (peekers) can access the stored data, thus ensuring privacy and control.
 
-TODO : Add more here?
+The Confidential Store is an integral part of the SUAVE chain, designed to facilitate secure and privacy-preserving transactions and smart contract interactions. It functions as a key-value store where users can safely store and retrieve confidential data related to their bids. The Confidential Store restricts access (both reading and writing) only to the allowed peekers of each bid, allowing developers to define the entire data model of their application!
+
+The current, and certainly not final, implementation of the Confidential Store is managed by the ConfidentialStoreEngine. The engine consists of a storage backend, which holds the raw data, and a transport topic, which relays synchronization messages between nodes.
+We provide two storage backends to the confidential store engine: the LocalConfidentialStore, storing data in memory in a simple dictionary, and RedisStoreBackend, storing data in redis. To enable redis as the storage backed, pass redis endpoint via --suave.confidential.redis-store-endpoint.
+For synchronization of confidential stores via transport we provide an implementation using a shared Redis PubSub in RedisPubSubTransport, as well as a crude synchronization protocol. To enable redis transport, pass redis endpoint via --suave.confidential.redis-transport-endpoint. Note that Redis transport only synchronizes current state, there is no initial synchronization - a newly connected node will not have access to old data.
+Redis as either storage backend or transport is temporary and will be removed once we have a well-tested p2p solution.
+
 
 ## Architecture Diagram
 
 TODO: high-level diagram
+
+![Confidential Data Store Diagram](/assets/rigil_confidential_data_store.svg)
 
 ## Core Components
 
@@ -84,3 +94,7 @@ Confidential data can be safely stored using the `Store` method and later retrie
 ## Security and Confidentiality
 
 TODO: Document security concerns (confidential data isn't actually confidential right now)
+
+
+
+
