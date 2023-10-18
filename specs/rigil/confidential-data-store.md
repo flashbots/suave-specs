@@ -1,3 +1,10 @@
+<!-- omit from toc -->
+# Confidential Data Store
+
+<div class="hideInDocs">
+
+**Table of Contents**
+
 <!-- TOC -->
 
 - [Overview](#overview)
@@ -17,6 +24,7 @@
 
 </div>
 
+<!-- omit from toc -->
 ## Overview
 
 This document provides an overview of the Confidential Data Store, an essential component of the SUAVE protocol. The Confidential Store serves as a secure and privacy-focused storage system, by exposing a key-value store for safeguarding confidential bid-related data. Only those with appropriate permissions (peekers) can access the stored data, thus ensuring privacy and control.

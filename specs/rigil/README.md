@@ -1,4 +1,5 @@
-# SUAVE Rigil Testnet <!-- omit from toc -->
+<!-- omit from toc -->
+# SUAVE Rigil Testnet
 
 [![Docs at https://suave.flashbots.net/](https://img.shields.io/badge/read-SUAVE%20docs-blue.svg)](https://suave.flashbots.net/)
 [![Join the discourse at https://collective.flashbots.net/](https://img.shields.io/badge/chat-on%20Flashbots%20forum-blue.svg)](https://collective.flashbots.net/)
