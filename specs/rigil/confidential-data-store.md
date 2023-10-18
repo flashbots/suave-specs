@@ -1,3 +1,9 @@
+<!-- omit from toc -->
+# Confidential Data Store
+
+<div class="hideInDocs">
+
+**Table of Contents**
 <!-- TOC -->
 
 - [Overview](#overview)
