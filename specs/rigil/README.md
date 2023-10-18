@@ -1,3 +1,13 @@
+---
+title: Rigil Testnet
+description: Rigil is the first testnet for SUAVE. It is an experimental sandbox and foundation for building MEV applications in a decentralized and private manner.
+keywords:
+  - rigil
+  - tesnet
+  - suave
+  - experimental
+---
+
 <!-- omit from toc -->
 # SUAVE Rigil Testnet
 
