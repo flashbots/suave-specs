@@ -1,4 +1,5 @@
-# Precompiles <!-- omit from toc -->
+<!-- omit from toc -->
+# Precompiles
 
 <div class="hideInDocs">
 
@@ -8,7 +9,7 @@
 
 - [Overview](#overview)
 - [Precompiles Governance](#precompiles-governance)
-- [Precompiles](#precompiles)
+- [Precompiles](#precompiles-1)
   - [`IsConfidential`](#isconfidential)
   - [`ConfidentialInputs`](#confidentialinputs)
   - [`ConfidentialStore`](#confidentialstore)

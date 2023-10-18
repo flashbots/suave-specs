@@ -1,4 +1,5 @@
-# Suave Chain <!-- omit from toc -->
+<!-- omit from toc -->
+# Suave Chain
 
 <div class="hideInDocs">
 
