@@ -1,3 +1,11 @@
+---
+title: Suave Chain
+description: The main purpose of the SUAVE chain is to reach (and maintain) consensus about smart contract code for use cases such as order flow auctions, solvers, block builders, etc.
+keywords:
+  - chain
+  - suave
+---
+
 <!-- omit from toc -->
 # Suave Chain
 

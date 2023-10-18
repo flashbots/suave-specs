@@ -1,3 +1,11 @@
+---
+title: Bridge
+description: A description of our current bridge implementation, which is meant to enable rapid prototyping.
+keywords:
+  - bridge
+  - suave
+---
+
 <!-- no toc -->
 <!-- omit from toc -->
 # Bridge

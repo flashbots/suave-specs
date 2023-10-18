@@ -1,3 +1,11 @@
+---
+title: Computor
+description: SUAVE computors contain all necessary components to accept, process, and route confidential compute requests and results.
+keywords:
+  - computor
+  - suave
+---
+
 <!-- omit from toc -->
 # Computor
 
@@ -34,13 +42,14 @@
 </div>
 
 ## Overview
-This document provides the technical specification for the SUAVE computor: one of the main protocol actors in the SUAVE protocol. The computor contains all necessary components to aceept, process, and route confidential compute requests and results. With these basic primitives computors can self-organize their topology and functionality to conform to specific portions of the MEV supply network.
+
+This document provides the technical specification for the SUAVE computor: one of the main protocol actors in the SUAVE protocol. The computor contains all necessary components to accept, process, and route confidential compute requests and results. With these basic primitives computors can self-organize their topology and functionality to conform to specific portions of the MEV supply network.
 
 This document includes the expected behavior of an "honest computor" with respect to Rigil testnet version of the SUAVE protocol. This document does not distinguish between a "SUAVE computor" and a "SUAVE validator client". The separation of concerns between these two pieces of software is left as a design decision that is out of scope.
 
 ## Prerequisites
 
-All terminology, functions, and protocol mechanics defined in [SUAVE chain](/specs/rigil/suave-chain.md), [Confidential Data Store](/specs/rigil/confidential-data-store.md), and [MEVM](/specs/rigil/mevm.md) are prerequisites for this document and used throughout. Please see the Rigil overview before continuing and use as a reference throughout.
+All terminology, functions, and protocol mechanics defined in [SUAVE chain](./suave-chain.md), [Confidential Data Store](./confidential-data-store.md), and [MEVM](./mevm.md) are prerequisites for this document and used throughout. Please see the Rigil overview before continuing and use as a reference throughout.
 
 ## Computor Responsibilities
 
@@ -87,19 +96,19 @@ The SUAVE chain is maintains consensus about smart contract code for use cases s
 
 Computors are required to keep a lively copy of the SUAVE chain state in order to process Confidential Compute Requests. Liveliness requirements are not defined in the Rigil Computor but will in the future.
 
-For more details see the [🔗 SUAVE chain](/specs/rigil/suave-chain.md) spec.
+For more details see the [🔗 SUAVE chain](./suave-chain.md) spec.
 
 ### MEVM
 
 MEVM is a modified version of the EVM which includes a new runtime, interpreter, and execution backend. Confidential Compute Requests are ultimately handled by the MEVM which has an interface into the confidential data store and leverage a set of new precompiles tailored for MEV applications.
 
-For more details see the [🔗 MEVM](/specs/rigil/mevm.md) spec.
+For more details see the [🔗 MEVM](./mevm.md) spec.
 
 ### Confidential Data Store
 
 The Confidential Store serves as a secure and privacy-focused storage system, exposing a key-value store for safeguarding confidential compute and orderflow related data. Only those with appropriate permissions (peekers) can access the stored data, thus ensuring privacy and control.
 
-For more details see the [🔗 Confidential Data Store](/specs/rigil/confidential-data-store.md) spec.
+For more details see the [🔗 Confidential Data Store](./confidential-data-store.md) spec.
 
 ### Domain Specific Services
 
@@ -109,11 +118,11 @@ Domain Specific Services allow computors to scale horizontally by hosting Nodes 
 
 Eventually domain specific services may be recorded onto the SUAVE chain and the network topology will route your request to a computor offering such domain specific services.
 
-For more details on how to support the needed APIs to enable a domain see [🔗 SUAVE Execution API](/specs/rigil/confidential-data-store.md) spec.
+For more details on how to support the needed APIs to enable a domain see [🔗 SUAVE Execution API](./confidential-data-store.md) spec.
 
 ### Precompiles
 
-For more details see the [🔗 Precompiles](/specs/rigil/precompiles.md) spec.
+For more details see the [🔗 Precompiles](./precompiles.md) spec.
 
 ## Containers
 
@@ -157,7 +166,7 @@ A computor's signature is used as the integrity gurantee for the computation's r
 
 ### Suave Transaction
 
-The final home of compute results and intentionally leaked data from confidential compute requests is a SUAVE transaciton, see [🔗 SUAVE chain](/specs/rigil/suave-chain.md) specs for more details
+The final home of compute results and intentionally leaked data from confidential compute requests is a SUAVE transaciton, see [🔗 SUAVE chain](./suave-chain.md) specs for more details
 
 ```go
 type SuaveTransaction struct {
