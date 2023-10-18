@@ -11,14 +11,6 @@
     - [Store & Retrieve Processes](#store--retrieve-processes)
 - [Security and Confidentiality](#security-and-confidentiality)
 
-<!-- /TOC -->tialStore](#confidentialstore)
-  - [SUAVE Mempool](#suave-mempool)
-  - [Interface Definitions](#interface-definitions)
-- [Data Management](#data-management)
-  - [Initialization \& Access Control](#initialization--access-control)
-  - [Store \& Retrieve Processes](#store--retrieve-processes)
-- [Security and Confidentiality](#security-and-confidentiality)
-
 <!-- /TOC -->
 
 ---
