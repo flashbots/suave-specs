@@ -1,9 +1,6 @@
 ---
 title: Precompiles
 description: Precompiles are a convenient tool within the EVM that enable direct execution of predefined functions, simplifying development of complex applications.
-keywords:
-  - precompiles
-  - suave
 ---
 
 <!-- omit from toc -->

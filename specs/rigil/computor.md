@@ -1,9 +1,6 @@
 ---
 title: Computor
 description: SUAVE computors contain all necessary components to accept, process, and route confidential compute requests and results.
-keywords:
-  - computor
-  - suave
 ---
 
 <!-- omit from toc -->

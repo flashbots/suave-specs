@@ -1,10 +1,6 @@
 ---
 title: MEVM
 description: The MEVM modifies the EVM by adding a new runtime, interpreter, and execution backend so as to enable anyone to create MEV applications.
-keywords:
-  - MEVM
-  - EVM
-  - suave
 ---
 
 <!-- omit from toc -->
