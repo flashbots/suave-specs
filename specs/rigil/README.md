@@ -1,12 +1,17 @@
+---
+title: Rigil Testnet
+description: Rigil is the first testnet for SUAVE. It is an experimental sandbox and foundation for building MEV applications in a decentralized and private manner.
+---
+
 <!-- omit from toc -->
 # SUAVE Rigil Testnet
+
+<div class="hideInDocs">
 
 [![Docs at https://suave.flashbots.net/](https://img.shields.io/badge/read-SUAVE%20docs-blue.svg)](https://suave.flashbots.net/)
 [![Join the discourse at https://collective.flashbots.net/](https://img.shields.io/badge/chat-on%20Flashbots%20forum-blue.svg)](https://collective.flashbots.net/)
 
 This repository hosts the current SUAVE Rigil testnet specifications and design docs.
-
-<div class="hideInDocs">
 
 <div class="warning">
 
@@ -14,13 +19,14 @@ This repository hosts the current SUAVE Rigil testnet specifications and design 
 
 </div>
 
-
 ---
 
 **Table of Contents**
 
 <!-- TOC -->
 
+- [About SUAVE](#about-suave)
+- [Rigil Overview](#rigil-overview)
 - [Users](#users)
 - [Rigil Design Goals](#rigil-design-goals)
 - [Design Decisions](#design-decisions)
@@ -32,8 +38,10 @@ This repository hosts the current SUAVE Rigil testnet specifications and design 
     - [OFA Example](#ofa-example)
     - [Block Building Example](#block-building-example)
 
-
 <!-- /TOC -->
+
+---
+
 # Specs
 - [Suave Chain](./suave-chain.md)
 - [MEVM](./mevm.md)
@@ -44,13 +52,15 @@ This repository hosts the current SUAVE Rigil testnet specifications and design 
 
 ---
 
-# About Suave
+# About SUAVE
 
 SUAVE - Single Unifying Auction for Value Expression - is a platform for building MEV applications such as OFAs and block builders in a decentralized and private way. SUAVE does not replace other blockchains: it is intended to aggregate and coordinate all the things that ultimately change the state of other chains.
 
 Read more about SUAVE:
 - https://writings.flashbots.net/the-future-of-mev-is-suave
 - https://writings.flashbots.net/mevm-suave-centauri-and-beyond
+
+</div>
 
 ---
 
@@ -74,7 +84,6 @@ The Rigil testnet is initially focused on a specific set of actors:
 5. **Auctions** - L1 Transactions, EIP 712 signed messages, UserOps, the right to update an oracle, and more can be programmably auctioned and utilize privacy primitives.
 5. **Solvers** - upload solver code to the chain and plug into encrypted orderflow, or monitor the chain and submit solutions based on emitted logs.
 
-</div>
 
 ## Rigil Design Goals
 

@@ -1,3 +1,8 @@
+---
+title: MEVM
+description: The MEVM modifies the EVM by adding a new runtime, interpreter, and execution backend so as to enable anyone to create MEV applications.
+---
+
 <!-- omit from toc -->
 # MEVM
 
@@ -28,7 +33,7 @@ This document provides the technical specification for the MEVM, a modified vers
 
 ## Core Architecture
 
-The MEVM is a modified version of the EVM by adding a new runtime, interpreter, and execution backend. This means that the MEVM has the extra components required to access confidential information (when allowed), and leverage a set of new precompiles tailored for MEV applications.
+The MEVM modifies the EVM by adding a new runtime, interpreter, and execution backend. This means that the MEVM has the extra components required to access confidential information (when allowed), and leverage a set of new precompiles tailored for MEV applications.
 
 The structure of these modifications is most easily explained visually:
 
