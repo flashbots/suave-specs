@@ -79,12 +79,6 @@ Rigil's architecture is composed of several parts:
 
 The goal of the Rigil testnet is to gather feedback on developer experience and harden the overall SUAVE software stack. The testnet is not intended to be a long-lived network and may be reset in the future.
 
-// COMMENT: As it is I think this overview can be made much more clear. The writing intiially was a bit "wordy" using terms like "intricate" and "pertinent" where not necessary. I think that we can speak more plainly and directly about the testnet.
-
-// COMMENT: Moreover, the "key features" are not features that I think would be compelling to people, they were things like "fosters a market for mechanisms" and "proof-of-authority consensus" which is more of a goal than a feature. A feature is something like "fast block times" "private compute" "fresh off-chain data" etc.
-
-// COMMENT: Maybe put another way, this section should be more focused on why someone should deploy an application on SUAVE.
-
 ## Users
 
 The Rigil testnet is initially focused on a specific set of actors:
