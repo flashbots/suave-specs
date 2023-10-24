@@ -173,7 +173,7 @@ If we consider a specific use case, like an order flow auction, the high-level s
 ![OFA example flow](/assets/OFA-example-flow.svg)
 
 1. The user sends a Confidential Compute Request interacting with a SUAPP by calling it's `newBid` function. Included in this request is also the user's L1 transaction as a confidential Input.
-2. The computor will receive the transaction and process it. To do so it first runs the offchain logic assocaited with `newBid` which will extract the transaction's data and then return a callback:
+2. The computor will receive the transaction and process it. To do so it first runs the offchain logic associated with `newBid` which will extract the transaction's data and then return a callback:
 ```go
 return bytes.concat(this.emitHint.selector, abi.encode(hint));
 ```
