@@ -53,6 +53,7 @@ In the initial phases of development, the SUAVE chain runs a proof-of-authority 
 | `GAS_LIMIT`      | 30000000 | `gas`    |
 | `NUM_VALIDATORS` | 5        | Nodes    |
 
+
 ## Consensus Mechanism: Proof-of-Authority (Clique)
 
 Clique, an Ethereum-based Proof-of-Authority consensus protocol defined [here](https://eips.ethereum.org/EIPS/eip-225#:~:text=A%20PoA%20scheme%20is%20based,the%20list%20of%20trusted%20signers), restricts block minting to a predefined list of trusted signers. Because of this, every block header that a client sees can be checked against the list of trusted signers.
@@ -66,7 +67,7 @@ Suave-geth is based on geth v1.12.0 ([`e501b3`](https://github.com/flashbots/sua
 
 ## Suave Transaction
 
-The SUAVE protocol adds a new transaction type to the base Ethereum protocol of which it is currently a fork of called a `SuaveTransaction`. Blocks on the SUAVE chain consist of lists of SUAVE transactions. This new transaction type is meant to facilitate and capture key information involved in Confidential Compute Requests which are detailed in the [Computor](./computor.md) spec. These fields encapsulates the result and record of a confidential computation request. It includes the `ConfidentialComputeRequest`, signed by the user, which ensures that the result comes from the expected SUAVE computor, as the `SuaveTransaction`'s signer must match the `ExecutionNode`. Additionally it includes the original request as the `ConfidentialComputeRecord`.
+The SUAVE protocol adds a new transaction type to the base Ethereum protocol of which it is currently a fork of called a `SuaveTransaction`. The main purpose of this new transaction type is to process fees for offchain computation and to support the new data primitives associated with confidential compute. Blocks on the SUAVE chain consist of lists of SUAVE transactions. This new transaction type is meant to facilitate and capture key information involved in Confidential Compute Requests which are detailed in the [Computor](./computor.md) spec. These fields encapsulates the result and record of a confidential computation request. It includes the `ConfidentialComputeRequest`, signed by the user, which ensures that the result comes from the expected SUAVE computor, as the `SuaveTransaction`'s signer must match the `ExecutionNode`. Additionally it includes the original request as the `ConfidentialComputeRecord`.
 
 ```go
 type SuaveTransaction struct {
@@ -98,9 +99,9 @@ In the future the signature fields here will represent various different types o
 
 ## Gas and Transaction Fees
 
-The SUAVE chain employs the same gas pricing mechanism as Ethereum pre-Cancun hardfork (no blob transactions) where gas prices adjust based on network demand. Nodes currently track Confidential Compute Request gas usage, but do not charge for it and there is no cap for offchain compute.
+The SUAVE chain employs the same gas pricing mechanism as Ethereum pre-Cancun hardfork (no blob transactions) where gas prices adjust based on network demand. Nodes currently track Confidential Compute Request gas usage, but only charge a small flat fee for it and there is no cap for offchain compute.
 
-Currently SUAVE transactions can only be expressed as Legacy transaction types, although they will get converted into EIP-1559 base fee model under the hood.
+Currently SUAVE transactions can only be expressed as Legacy transaction types, but they will get converted into EIP-1559 base fee model under the hood.
 
 ---
 

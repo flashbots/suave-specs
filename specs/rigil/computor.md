@@ -71,8 +71,6 @@ A computor has several primary responsibilities within the SUAVE network:
 
 Computors are currently permissioned in the SUAVE network, to become one you need your computor's ECDSA pubkey to be contained within the clique PoA genesis settings.
 
-While permissioned now, Computors will one day become permisisonless.
-
 ### Computor Identification
 
 A unique identifier in the form of Ethereum compatible public key must be generated for each computor to ensure proper tracking and verification of Confidential Computation, as well as responsibility assignment within the network.
@@ -176,21 +174,6 @@ type SuaveTransaction struct {
 	V       *big.Int
 	R       *big.Int
 	S       *big.Int
-}
-```
-
-### Bid
-
-Bids are the underlying data structure used to track and access data from confidential data storage.
-
-```go
-type Bid struct {
-	Id                  BidId            `json:"id"`
-	Salt                BidId            `json:"salt"`
-	DecryptionCondition uint64           `json:"decryptionCondition"`
-	AllowedPeekers      []common.Address `json:"allowedPeekers"`
-	AllowedStores       []common.Address `json:"allowedStores"`
-	Version             string           `json:"version"`
 }
 ```
 

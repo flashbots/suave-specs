@@ -25,19 +25,20 @@ This repository hosts the current SUAVE Rigil testnet specifications and design 
 
 <!-- TOC -->
 
+- [SUAVE Rigil Testnet](#suave-rigil-testnet)
 - [Specs](#specs)
 - [About SUAVE](#about-suave)
 - [Rigil Overview](#rigil-overview)
-  - [Users](#users)
-  - [Rigil Design Goals](#rigil-design-goals)
-  - [Design Decisions](#design-decisions)
-  - [Architecture](#architecture)
-  - [How To Use SUAVE?](#how-to-use-suave)
-  - [Example Flows](#example-flows)
-    - [High Level - OFA + Block Builder](#high-level---ofa--block-builder)
-    - [Confindential Compute Request Flow](#confindential-compute-request-flow)
-    - [OFA Example](#ofa-example)
-    - [Block Building Example](#block-building-example)
+    - [Users](#users)
+    - [Rigil Design Goals](#rigil-design-goals)
+    - [Design Decisions](#design-decisions)
+    - [Glossary](#glossary)
+    - [Architecture](#architecture)
+    - [Example Flows](#example-flows)
+        - [High Level - OFA + Block Builder](#high-level---ofa--block-builder)
+        - [Confindential Compute Request Flow](#confindential-compute-request-flow)
+        - [OFA Example](#ofa-example)
+        - [Block Building Example](#block-building-example)
 
 <!-- /TOC -->
 
@@ -69,7 +70,7 @@ Read more about SUAVE:
 
 This set of specs outlines the Rigil Testnet, a continuation of the star system theme (Centauri, Andromeda, Helios) laid out in [The Future of MEV](https://writings.flashbots.net/mevm-suave-centauri-and-beyond); and the first in a series of SUAVE testnets based on stars in the [(Alpha) Centauri system](https://en.wikipedia.org/wiki/Alpha_Centauri): Rigil Kentaurus (Alpha Centauri A), Toliman (B) and Proxima Centauri (C).
 
-The Rigil Testnet serves as a sandbox for the development of MEV applications, termed SUAPPs, in both a decentralized and confidential environment. The MEVM, an adaptation of the EVM, grants developers access to unique MEV-specific precompiles. Leveraging these tools, developers can seamlessly represent MEV supply chain intricacies relevant to their needs through smart contracts in Solidity. By augmenting your dApp with a SUAPP, transactions and intents linked to your application can confidentially connect to a network of searchers, solvers, decentralized block builders, and more. Rigil offers a live test network for rapid prototyping hosted by Flashbots that uses Goerli ETH for gas and a proof-of-authority consensus mechanism.
+The Rigil Testnet serves as a sandbox for the development of MEV applications, termed SUAPPs, in both a decentralized and confidential environment. The MEVM, an adaptation of the EVM, grants developers access to unique MEV-specific precompiles. Leveraging the MEVM, developers can seamlessly represent MEV supply chain intricacies relevant to their needs through smart contracts in Solidity. By augmenting your dApp with a SUAPP, transactions and intents linked to your application can confidentially connect to a network of searchers, solvers, decentralized block builders, and more. Rigil offers a live test network for rapid prototyping hosted by Flashbots that uses Goerli ETH for gas and a proof-of-authority consensus mechanism.
 
 Rigil's architecture is composed of several parts:
 * SUAVE "Computors": a network of actors that provide confidential computation for SUAPPs.
