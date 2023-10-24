@@ -136,7 +136,7 @@ SUAVE Computors house all components necessary to perform confidential compute a
 
 ## Example Flows
 
-The example flows in the following sections are used to illustrate some of the possibilities for MEV applications on SUAVE. We start at a high level showing how an OFA and Block Builder smart contracts work together to emit a block from a SUAVE node. To understand more deeply the Confindential Compute Request Flow is detailed and from there a deeper dive into the specifics of how the OFA and Block Builder contracts work individually.
+The example flows in the following sections are used to illustrate some of the possibilities for MEV applications on SUAVE. We start at a high level showing how OFA and Block Builder smart contracts work together to emit a block from a SUAVE node. To understand more deeply the Confindential Compute Request Flow is detailed and from there a deeper dive into the specifics of how the OFA and Block Builder contracts work individually.
 
 ### High Level - OFA + Block Builder
 
