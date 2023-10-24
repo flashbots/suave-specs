@@ -32,11 +32,17 @@ Read more about SUAVE:
 
 ---
 
-# Specs
+# Specs - In-development
 
-Specifications for the SUAVE protocol are currently organized by testnet during early protocol development. Several testnets might be developed in parallel.
+Specifications for the SUAVE protocol are split into two main tracks, Centauri and Andromeda.
 
-## In-development Specifications
+*Centauri is focused on exploration and developer experience, serving as a spec for the secure instantiation. The plan is a progression of three testnets in the direction of increasing functionality and scalability.*
+
+*Andromeda is the secure instantiation using SGX and cryptography, focusing on privacy with trust minimization. The plan is a progression of three milestones in the direction of better hardening and trust minimization.*
+
+*Proto-Collisions are plans to sync up between these two development tracks. They represents points where parts of Centauri testnets can be run in secure and trust minimized fashion. Permissioned components from Proto-Collisions, if self-contained, could be run on mainnet.*
+
+*Collision is where the entirety of the SUAVE protocol can be safely deployed to Ethereum mainnet in a trust minimized and permissionless fashion.*
 
 | Testnet                       | Phase                                               | ChainID    | Specs                                                                                                                                                                                                                                                         |
 | ----------------------------- | --------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

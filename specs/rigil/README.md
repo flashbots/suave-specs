@@ -69,7 +69,6 @@ Read more about SUAVE:
 
 This set of specs outlines the Rigil Testnet, a continuation of the star system theme (Centauri, Andromeda, Helios) laid out in [The Future of MEV](https://writings.flashbots.net/mevm-suave-centauri-and-beyond); and the first in a series of SUAVE testnets based on stars in the [(Alpha) Centauri system](https://en.wikipedia.org/wiki/Alpha_Centauri): Rigil Kentaurus (Alpha Centauri A), Toliman (B) and Proxima Centauri (C).
 
-
 The Rigil Testnet serves as a sandbox for the development of MEV applications, termed SUAPPs, in both a decentralized and confidential environment. The MEVM, an adaptation of the EVM, grants developers access to unique MEV-specific precompiles. Leveraging these tools, developers can seamlessly represent MEV supply chain intricacies relevant to their needs through smart contracts in Solidity. By augmenting your dApp with a SUAPP, transactions and intents linked to your application can confidentially connect to a network of searchers, solvers, decentralized block builders, and more. Rigil offers a live test network for rapid prototyping hosted by Flashbots that uses Goerli ETH for gas and a proof-of-authority consensus mechanism.
 
 Rigil's architecture is composed of several parts:
@@ -84,11 +83,11 @@ The goal of the Rigil testnet is to gather feedback on developer experience and 
 
 The Rigil testnet is initially focused on a specific set of actors:
 
-1. **Developers** - create smart contracts on SUAVE Chain that define rules for MEV applications like orderflow auctions, block building, and intent executors.
-2. **Users** - leverage unique applications on SUAVE, e.g. to send private transactions or execute your intents.
+1. **Developers** - create smart contracts on SUAVE Chain that define rules for SUAPPs like orderflow auctions, block building, and intent executors.
+2. **Transaction Originators** - leverage unique applications on SUAVE, e.g. to send private transactions or execute your intents.
 3. **Proposers** - outsource block building to SUAVE. Initially, this is focused only on Ethereum.
 4. **Block Builders** - can be implemented as smart contracts inside Suave. In the Rigil Tesnet, Suave has the capability to submit bundles to several external builders to help transaction inclusion during early stages of development.
-5. **Auction protocols** - can program their auctions as a smart contract.
+5. **Auction Protocols** - can program their auctions as a smart contract.
 
 
 ## Rigil Design Goals
@@ -148,7 +147,7 @@ SUAVE Computors house all components necessary to perform confidential compute a
 
 ## Example Flows
 
-The example flows in the following sections are used to illustrate some of the possibilities for MEV applications on SUAVE. We start at a high level showing how an OFA and Block Builder smart contracts work together to emit a block from a SUAVE node. To understand more deeply the Confindential Compute Request Flow is detailed and from there a deeper dive into the specifics of how the OFA and Block Builder contracts work individually.
+The example flows in the following sections are used to illustrate some of the possibilities for MEV applications on SUAVE. Flows start at a high level showing how an OFA and Block Builder smart contracts work together to emit a block from a SUAVE node. Then to understand the Confindential Compute Request Flow more deeply there is a detailed data flow diagram. Lastly there two deeper dives into the specifics of how the OFA and Block Builder flows work individually.
 
 ### High Level - OFA + Block Builder
 
