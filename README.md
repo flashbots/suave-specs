@@ -36,20 +36,20 @@ Read more about SUAVE:
 
 Specifications for the SUAVE protocol are split into two main tracks, Centauri and Andromeda.
 
-*Centauri is focused on exploration and developer experience, serving as a spec for the secure instantiation. The plan is a progression of three testnets in the direction of increasing functionality and scalability.*
-
-*Andromeda is the secure instantiation using SGX and cryptography, focusing on privacy with trust minimization. The plan is a progression of three milestones in the direction of better hardening and trust minimization.*
-
-*Proto-Collisions are plans to sync up between these two development tracks. They represents points where parts of Centauri testnets can be run in secure and trust minimized fashion. Permissioned components from Proto-Collisions, if self-contained, could be run on mainnet.*
-
-*Collision is where the entirety of the SUAVE protocol can be safely deployed to Ethereum mainnet in a trust minimized and permissionless fashion.*
-
 | Testnet                       | Phase                                               | ChainID    | Specs                                                                                                                                                                                                                                                         |
 | ----------------------------- | --------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**Rigil**](./specs/rigil/)   | [Big Bang](/assets/future_roadmap_draft.png)        | `16813125` | • [SUAVE chain](./specs/rigil/suave-chain.md) <br/> • [MEVM](./specs/rigil/mevm.md) <br/> • [Confidential Data Store](./specs/rigil/confidential-data-store.md) <br/> • [Precompiles](./specs/rigil/precompiles.md) <br/> • [Bridge](./specs/rigil/bridge.md) |
 | [**Sirrah**](./specs/sirrah/) | [Proto-Collision](/assets/future_roadmap_draft.png) |            |                                                                                                                                                                                                                                                               |
 
 ## Roadmap
+
+**Centauri* is focused on exploration and developer experience, serving as a spec for the secure instantiation. The plan is a progression of three testnets in the direction of increasing functionality and scalability.*
+
+**Andromeda* is the secure instantiation using SGX and cryptography, focusing on privacy with trust minimization. The plan is a progression of three milestones in the direction of better hardening and trust minimization.*
+
+**Proto-Collisions* are plans to sync up between these two development tracks. They represents points where parts of Centauri testnets can be run in secure and trust minimized fashion. Permissioned components from Proto-Collisions, if self-contained, could be run on mainnet.*
+
+**Collision* is where the entirety of the SUAVE protocol can be safely deployed to Ethereum mainnet in a trust minimized and permissionless fashion.*
 
 ![SUAVE Roadmap](/assets/future_roadmap_draft.png)
 

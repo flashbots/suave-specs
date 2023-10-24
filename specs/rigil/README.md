@@ -156,11 +156,16 @@ Below we can see the journey of orderflow from transaction, to searcher back-run
 ![OFA + Block Builder flow](/assets/OFA_And_Block_Flow.svg)
 
 1. A user sends their L1 transaction, EIP-712 message, UserOp, or Intent into a SUAVE computor.
-2. MEVM processes this L1 transaction, extracts a hint, and emits it onchain.
-3. Searchers listening to the chain see the hint, craft a backrun transactions, and send them to a SUAVE computor.
-4. SUAVE computors will process the backrun, combine it into a bundle with the original transaction, include the bundle in a block, and then emit the block to an offchain relay.
+2. MEVM processes this L1 transaction, extracts a hint, and does two things:
+    - Stores the L1 transaction in the confidential data store
+    - Sends a SUAVE transaction to the mempool which when executed emits the hint as a log
+3. Searchers will be listening on two different lanes for hints:
+    - The fast lane which is the mempool
+    - The global lane which is the SUAVE chain, which is slower, but will surface any hints that may have been censored by your specific peer in the mempool
+4. Once a hint is received, searchers craft a backrun transaction and send them to a SUAVE computor.
+5. SUAVE computors will process the backrun, combine it into a bundle with the original transaction, include the bundle in a block, and then submit the block to a relay.
 
-*Optionally*, bundles can be sent straight to a centralized block builder, or the block can also be sent to an onchain relay instead of offchain.
+*Optionally*, bundles can be sent straight to a centralized block builder.
 
 ### Confindential Compute Request Flow
 
@@ -209,7 +214,7 @@ The important thing to note here is that this Confidential Compute pattern makes
 
 ### Block Building Example
 
-Blocks built from SUAVE will be unpredictable in the beginning, but adventurers are invited to hook into the block building flow already achievable today. Below is a walkthrough of a block being built via a solidity smart contract.
+Blocks built from SUAVE will have unpredictable inclusion in the beginning, but adventurers are invited to hook into the block building flow already achievable today. Below is a walkthrough of a block being built via a solidity smart contract.
 
 ![Block Building Flow](/assets/block-building-flow.svg)
 
