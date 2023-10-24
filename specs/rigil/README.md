@@ -69,15 +69,16 @@ Read more about SUAVE:
 
 This set of specs outlines the Rigil Testnet, a continuation of the star system theme (Centauri, Andromeda, Helios) laid out in [The Future of MEV](https://writings.flashbots.net/mevm-suave-centauri-and-beyond); and the first in a series of SUAVE testnets based on stars in the [(Alpha) Centauri system](https://en.wikipedia.org/wiki/Alpha_Centauri): Rigil Kentaurus (Alpha Centauri A), Toliman (B) and Proxima Centauri (C).
 
-The Rigil Testnet is a sandbox for building MEV applications in a decentralized and private manner that is initially targetted towards developers. Developers are empowered with the MEVM, a modification of the EVM which gives them access to new MEV specific precompiles that allow them to write their applications as smart contracts in Solidity. Further, Rigil offers a live test network for rapid prototyping hosted by Flashbots that uses Goerli ETH for gas and a proof-of-authority consensus mechanism.
+
+The Rigil Testnet serves as a sandbox for the development of MEV applications, termed SUAPPs, in both a decentralized and confidential environment. The MEVM, an adaptation of the EVM, grants developers access to unique MEV-specific precompiles. Leveraging these tools, developers can seamlessly represent MEV supply chain intricacies relevant to their needs through smart contracts in Solidity. By augmenting your dApp with a SUAPP, transactions and intents linked to your application can confidentially connect to a network of searchers, solvers, decentralized block builders, and more. Rigil offers a live test network for rapid prototyping hosted by Flashbots that uses Goerli ETH for gas and a proof-of-authority consensus mechanism.
 
 Rigil's architecture is composed of several parts:
-* SUAVE "Computors" - a network of actors that provide private computation for MEV applications
-* Confidential data storage: a private place to store sensitive data (e.g. user transactions)
-* SUAVE Chain: to store MEV applications and public data
+* SUAVE "Computors": a network of actors that provide confidential computation for SUAPPs.
+* Confidential data storage: a private place to store data (e.g. user transactions)
+* SUAVE Chain: to store SUAPPs and public data
 * MEVM: a modified EVM that exposes confidential execution and storage APIs to developers
 
-The goal of the Rigil testnet is to gather feedback on developer experience and harden the overall SUAVE software stack. The testnet is not intended to be a long-lived network and may be reset in the future.
+The goal of the Rigil testnet is to gather feedback on developer experience and harden the overall SUAVE software stack. The testnet is not intended to be a long-lived network and will be decomissioned after launch of the next testnet Toliman.
 
 ## Users
 
@@ -105,34 +106,45 @@ Here is a list of design decisions made for the Rigil testnet and associated rea
     - *reason*: [SUAVE consensus](https://collective.flashbots.net/t/suave-consensus/2152) is an active open question, which whether or not answered does not drastically impact UX of users on **Rigil Testnet**.
 - Decision *2*: **No SGX Nodes (yet)**
     - reason: SGX SUAVE computors are an active area of research and development and does not drastically impact UX of users on **Rigil Testnet**.
-- Decision *3*: **Weak DA Layer Guarantees**
+- Decision *3*: **Weak Data Availability Guarantees**
     - Reason: The Confidential Data Store currently only keeps private data available for one day. [Compute Output Validity and Heterogenous DA](https://collective.flashbots.net/t/suave-ensuring-output-validity-and-heterogenous-da/2184) are active open questions, which whether or not answered does not drastically impact UX on Rigil Testnet.
 - Decision *4*: **Centralized Builder Interoperability**
     - reason: Blocks emitted from SUAVE computors will have unpredictable inclusion in early development so SUAVE rigil supports a precompile to send bundles to off-SUAVE block builders.
 
+## Glossary 
+
+- **User**: sender of confidential compute requests (CCR)
+- **SUAPP**: SUAVE application, smart contracts on Suave chain with rules for confidential computation and functions to submit to target domains (i.e. chains).
+- **Developer:** creates smart contracts on SUAVE Chain that define rules for SUAPPs.
+- **Confidential Compute Request (CCR) [**[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/suave-chain.md#confidential-compute-request)**]**: A user request to Suave that contains (1) a wrapped transaction, (2) confidential inputs, and (3) a list of programs (contracts) (← list of Exec nodes) allowed to operate on confidential inputs.
+- **Builder solidity**: Solidity with access to precompiles that help facilitate the processing of order flow.
+- **Precompiles [[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/precompiles.md)]:** purpose-built functions with extended capabilities that can be called from Builder Solidity
+- **Computor[[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/computor.md)]**: accepts and processes confidential compute requests and maintains the SUAVE chain; the logical unit of the SUAVE network and main protocol actor.
+- **Confidential Data Store [[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/confidential-data-store.md)]**: stores confidential data from MEV applications (L1 transactions, EIP 712 signed messages, userOps, privateKeys(?), etc).
+- **SUAVE Chain [**[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/suave-chain.md#suave-chain)**]**: a fork of Ethereum designed for usage alongside credible offchain execution in MEV use cases. In Rigil running in PoA mode.
+- **MEVM [[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/mevm.md)]**: modified EVM with MEV-specific precompiles that allow developers to define orderflow auctions and builder rules as smart contracts written in Solidity.
+- **Domain-Specific Services (Execution Node?):** provide functionality to interact with target domains (i.e. for Goerli or Arbitrum, simulate transactions, build bundles, build blocks, …)
+- **RPC** - Receives user transactions, moves confidential input to Confidential Data Store and passes the compute request to MEVM.
+- **OFA** - Application that receives transactions and either facilitates an auction ontop of it, or routes it elsewhere.
+- **Solver** - Actor who takes many user token trades as an input and competes on provide a solution to the mathematically optimal way to route all trades.
+- **Intent** - Refers to “what” the desired outcome of that action should be as opposed to transactions which specify “how” an action should be performed.
+- **Relay** - Component in the mev-boost protocol that is responsible for validating blocks and offering them to validators upon request.
 
 ## Architecture
 
-SUAVE Computors house all components necessary to perform confidential compute and are the main protocol actor in the SUAVE protocol. Below is a high level architectural overview followed by a brief descriptions of the main components.
+SUAVE Computors house all components necessary to perform confidential compute and are the main protocol actor in the SUAVE protocol. Below is a high level architectural overview.
 
 ![Rigil architecture](/assets/rigil-architecture.svg)
 
-- **Confidential Compute Request (CCR) [**[🔗spec](./suave-chain.md#confidential-compute-request)**]**: A user request to Suave that contains:
-    1. a wrapped transaction
-    2. confidential data, and
-    3. a list of programs (contracts) allowed to access and operate on confidential data.
-- **Computor[**[🔗spec](./computor.md)**]**: accepts and processes confidential compute requests and maintains the SUAVE chain; the logical unit of the SUAVE network and main protocol actor.
-- **Confidential Data Store (CDS) [**[🔗spec](./confidential-data-store.md)**]**: stores confidential data from MEV applications (L1 transactions, EIP 712 signed messages, userOps, privateKeys(?), etc).
-- **SUAVE Chain [**[🔗spec](./suave-chain.md)**]**: a fork of Ethereum designed for usage alongside credible off-chain execution in MEV use cases. Running Clique PoA consensus for the Rigil Testnet.
-- **MEVM [**[🔗spec](./mevm.md)**]**: modified EVM with MEV-specific precompiles that allow developers to define orderflow auctions and builder rules as smart contracts written in Solidity.
-- **Precompiles [**[🔗spec](./precompiles.md)**]:** purpose-built functions with extended capabilities that can be called from Builder Solidity
-- **MEV Application :** MEVM compatible Solidity which defines how orderflow should be processed and routed.
-
-
-## How To Use SUAVE?
-- **Deploy smart contracts** - Smart contracts on SUAVE function the same way as traditional EVM chains and can be developed with your favorite existing EVM toolset. But, they can leverage additional precompiles that give developers the ability to create MEV applications as smart contracts.
-
-- **Use MEV applications** - Users can use applications on SUAVE by making a confidential computation request, which is a special SUAVE transaction. See [INSERT LINK HERE] for more details.
+1. **Developers** create contracts, which contain the logic for their SUAPP. A typical flow might look like: validate user L1 transaction, simulate it on L1 state, then do something based on the simulation results. These contracts are deployed to the SUAVE chain by sending to a **Computor**.
+2. **Users** send confidential compute requests directed to a **Computor** or multiple.
+3. Inside the **Computor**:
+   - Requests are routed using the **RPC** to the appropriate services.
+   - The **MEVM** processes the smart contracts and other computations.
+   - Data might be stored in or retrieved from the **Suave Chain State** or **Conf Store** based on SUAPP needs.
+   - **Precompiles** aid in the efficient execution of certain functions.
+   - **Domain-Specific Services** handle execution on different domains and return results to **MEVM**.
+4. The **Suave PoA Chain** results of confidential computation are written to the chain and communicated over p2p network.
 
 ## Example Flows
 
