@@ -71,7 +71,7 @@ A computor has several primary responsibilities within the SUAVE network:
 
 Computors are currently permissioned in the SUAVE network, to become one you need your computor's ECDSA pubkey to be contained within the clique PoA genesis settings.
 
-While permissioned now, Computors will one day become permisisonless.
+While permissioned now, Computors will one day become permissionless.
 
 ### Computor Identification
 
