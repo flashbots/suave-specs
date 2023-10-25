@@ -3,32 +3,21 @@ title: Confidential Data Store
 description: This essential component of the SUAVE protocol serves as a secure and privacy-focused storage system.
 ---
 
-<!-- omit from toc -->
-# Confidential Data Store
-
-<div class="hideInDocs">
-
-**Table of Contents**
 <!-- TOC -->
 
-- [Overview](#overview)
-- [Architecture Diagram](#architecture-diagram)
-- [Core Components](#core-components)
-    - [ConfidentialStore](#confidentialstore)
-    - [SUAVE Mempool](#suave-mempool)
-    - [Interface Definitions](#interface-definitions)
-- [Data Management](#data-management)
-    - [Initialization & Access Control](#initialization--access-control)
-    - [Store & Retrieve Processes](#store--retrieve-processes)
-- [Security and Confidentiality](#security-and-confidentiality)
+- [Confidential Data Store](#confidential-data-store)
+    - [Overview](#overview)
+    - [Architecture](#architecture)
+    - [Core Components](#core-components)
+        - [Confidential Store Engine](#confidential-store-engine)
+        - [Confidential Store](#confidential-store)
+        - [Transport](#transport)
+        - [Confidential APIs](#confidential-apis)
+    - [Data Management](#data-management)
+        - [Initialization & Access Control](#initialization--access-control)
+        - [Security and Confidentiality](#security-and-confidentiality)
 
 <!-- /TOC -->
-
----
-
-</div>
-
-## Overview
 
 This document provides an overview of the Confidential Data Store, an essential component of the SUAVE protocol. The Confidential Store serves as a secure and privacy-focused storage system by exposing a key-value store for safeguarding confidential data related to your MEV application. Examples of data that can be stored here are: transactions, UserOps, signed messages, bundles, simulation results and intermediate values, partial blocks, full blocks, netflix passwords and more. Only contracts with appropriate permissions (peekers) can access the stored data, allowing developers to define the entire data model of their application!
 
@@ -58,6 +47,21 @@ The `ConfidentialStoreEngine` provides the following key methods:
 
 It is important to note that the actual implementation of the Confidential Store will vary depending on future requirements and the privacy mechanisms used.
 
+```go
+type ConfidentialStoreEngine struct {
+	ctx    context.Context
+	cancel context.CancelFunc
+
+	storage        ConfidentialStorageBackend
+	transportTopic StoreTransportTopic
+
+	daSigner    DASigner
+	chainSigner ChainSigner
+
+	storeUUID      uuid.UUID
+	localAddresses map[common.Address]struct{}
+}
+```
 
 ### Confidential Store
 
@@ -80,32 +84,6 @@ type ACData struct {
   dataMap map[string][]byte
 }
 ```
-
-#### Mempool On ConfidentialStore
-
-The SUAVE mempool is an example of structures that can be built on the confidential data store. This mempool, `MempoolOnConfidentialStore`, operates on the Confidential Store, hence facilitating the privacy-preserving handling of transactions. The `MempoolOnConfidentialStore` is designed to handle SUAVE bids, namely the submission, retrieval, and grouping of bids by decryption condition such as block number and protocol. It provides a secure and efficient mechanism for managing these transactions while preserving their confidentiality.
-
-The `MempoolOnConfidentialStore` interacts directly with the `ConfidentialStoreBackend` interface.
-
-```go
-type MempoolOnConfidentialStore struct {
-  cs suave.ConfidentialStoreBackend
-}
-```
-
-It is initialized with a predefined `mempoolConfidentialStoreBid` that's only accessible by a particular address mempoolConfStoreAddr.
-```go
-mempoolConfidentialStoreBid = suave.Bid{Id: mempoolConfStoreId, AllowedPeekers: []common.Address{mempoolConfStoreAddr}}
-```
-The MempoolOnConfidentialStore includes three primary methods:
-
-- *SubmitBid*: This method submits a bid to the mempool. The bid is stored in the Confidential Store with its ID as the key. Additionally, the bid is grouped by block number and protocol, which are also stored in the Confidential Store.
-
-- *FetchBidById*: This method retrieves a bid from the mempool using its ID.
-
-- *FetchBidsByProtocolAndBlock*: This method fetches all bids from a particular block that match a specified protocol.
-
-The mempool operates on the underlying Confidential Store, thereby maintaining the confidentiality of the bids throughout the transaction process. As such, all data access is subject to the Confidential Store's security controls, ensuring privacy and integrity. Please note that while this initial implementation provides an idea of the ideal functionality, the final version will most likely incorporate additional features or modifications.
 
 ### Transport
 
@@ -140,21 +118,13 @@ As the network grows, and more sophisticated needs arise, we might also consider
 Confidential precompiles have access to the following Confidential APIs during execution. This is subject to change!
 
 ```go
-type ConfidentialStoreEngine interface {
-    Initialize(bid Bid, creationTx *types.Transaction, key string, value []byte) (Bid, error)
-    Store(bidId BidId, sourceTx *types.Transaction, caller common.Address, key string, value []byte) (Bid, error)
-    Retrieve(bid BidId, caller common.Address, key string) ([]byte, error)
-}
-
-type MempoolBackend interface {
-    SubmitBid(Bid) error
-    FetchBidById(BidId) (Bid, error)
-    FetchBidsByProtocolAndBlock(blockNumber uint64, namespace string) []Bid
-}
-
-type ConfidentialEthBackend interface {
-    BuildEthBlock(ctx context.Context, args *BuildBlockArgs, txs types.Transactions) (*engine.ExecutionPayloadEnvelope, error)
-    BuildEthBlockFromBundles(ctx context.Context, args *BuildBlockArgs, bundles []types.SBundle) (*engine.ExecutionPayloadEnvelope, error)
+type ConfidentialStorageBackend interface {
+	InitializeBid(bid suave.Bid) error
+	Store(bid suave.Bid, caller common.Address, key string, value []byte) (suave.Bid, error)
+	Retrieve(bid suave.Bid, caller common.Address, key string) ([]byte, error)
+	FetchBidById(suave.BidId) (suave.Bid, error)
+	FetchBidsByProtocolAndBlock(blockNumber uint64, namespace string) []suave.Bid
+	Stop() error
 }
 ```
 

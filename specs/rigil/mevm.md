@@ -40,7 +40,10 @@ This document provides the technical specification for the MEVM, a modified vers
 
 ## Core Architecture
 
-The MEVM modifies the EVM by adding a new runtime, interpreter, and execution backend. This means that the MEVM has the extra components required to access confidential information (when allowed), and leverage a set of new precompiles tailored for MEV applications.
+The MEVM modifies the EVM by adding a new:
+- runtime
+- interpreter
+- execution backend
 
 The structure of these modifications is most easily explained visually:
 
@@ -77,33 +80,24 @@ graph TB
 
 ### SuaveExecutionBackend
 
-The `SuaveExecutionBackend` includes three key functionalities:
-
-- **Confidential APIs**: Dedicated endpoints for secure data interactions.
-- **Confidential Input Management**: Streamlined processing of confidential data inputs.
-- **Caller Stack Tracing**: Tracing capabilities for tracking transaction initiators.
-
-Reference Implementation (Golang):
+`SuaveExecutionBackend` is used by precompiles to access the confidential store as well as functionality in the SUAVE ex namespace which is detailed later on.
 
 ```go
 type SuaveExecutionBackend struct {
-    ConfidentialStoreEngine *suave.ConfidentialStoreEngine
-    MempoolBackend          suave.MempoolBackend
-    ConfidentialEthBackend  suave.ConfidentialEthBackend
+	ConfidentialStore      ConfidentialStore
+	ConfidentialEthBackend suave.ConfidentialEthBackend
 }
 ```
 
 ### MEVM Interpreter
 
-The modified interpreter not only handles standard EVM operations but also caters to the complexities introduced by confidential computations.
+The modified interpreter has three differences over stock EVM interpreter.
 
-In our current [suave-geth](https://github.com/flashbots/suave-geth/) reference implementation this looks like:
-
-- Introduction of `IsConfidential` to the interpreter's configuration.
+- Introduction of `IsConfidential` to the interpreter's configuration allow for introspection on computation mode.
 - Alterations to the `Run` function to accommodate confidential APIs.
 - Modifications to the `Run` function to trace the caller stack.
 
-The capabilities enabled by this modified interpreter are exposed to the virtual machine via `SuaveContext` and its components.
+The capabilities enabled by this modified interpreter are exposed to the virtual machine via `SuaveContext` which maintains the runtime state and context for Suave operations.
 
 ```go
 type SuaveContext struct {
@@ -122,21 +116,27 @@ In the [suave-geth](https://github.com/flashbots/suave-geth/tree/main) reference
 This is subject to change!
 
 ```go
-type ConfidentialStoreEngine interface {
-    Initialize(bid Bid, creationTx *types.Transaction, key string, value []byte) (Bid, error)
-    Store(bidId BidId, sourceTx *types.Transaction, caller common.Address, key string, value []byte) (Bid, error)
-    Retrieve(bid BidId, caller common.Address, key string) ([]byte, error)
+type ConfidentialStoreEngine struct {
+	ctx    context.Context
+	cancel context.CancelFunc
+
+	storage        ConfidentialStorageBackend
+	transportTopic StoreTransportTopic
+
+	daSigner    DASigner
+	chainSigner ChainSigner
+
+	storeUUID      uuid.UUID
+	localAddresses map[common.Address]struct{}
 }
 
-type MempoolBackend interface {
-    SubmitBid(Bid) error
-    FetchBidById(BidId) (Bid, error)
-    FetchBidsByProtocolAndBlock(blockNumber uint64, namespace string) []Bid
-}
-
-type ConfidentialEthBackend interface {
-    BuildEthBlock(ctx context.Context, args *BuildBlockArgs, txs types.Transactions) (*engine.ExecutionPayloadEnvelope, error)
-    BuildEthBlockFromBundles(ctx context.Context, args *BuildBlockArgs, bundles []types.SBundle) (*engine.ExecutionPayloadEnvelope, error)
+type ConfidentialStorageBackend interface {
+	InitializeBid(bid suave.Bid) error
+	Store(bid suave.Bid, caller common.Address, key string, value []byte) (suave.Bid, error)
+	Retrieve(bid suave.Bid, caller common.Address, key string) ([]byte, error)
+	FetchBidById(suave.BidId) (suave.Bid, error)
+	FetchBidsByProtocolAndBlock(blockNumber uint64, namespace string) []suave.Bid
+	Stop() error
 }
 ```
 
