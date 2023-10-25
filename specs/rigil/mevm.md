@@ -89,9 +89,9 @@ type SuaveExecutionBackend struct {
 }
 ```
 
-### MEVM Interpreter
+### SuaveContext
 
-The modified interpreter has three differences over stock EVM interpreter.
+The MEVM provides three differences over the stock EVM interpreter.
 
 - Introduction of `IsConfidential` to the interpreter's configuration allow for introspection on computation mode.
 - Alterations to the `Run` function to accommodate confidential APIs.

@@ -128,6 +128,7 @@ Here is a list of design decisions made for the Rigil testnet and associated rea
 - **OFA** - Application that receives transactions and either facilitates an auction ontop of it, or routes it elsewhere.
 - **Solver** - Actor who takes many user token trades as an input and competes on provide a solution to the mathematically optimal way to route all trades.
 - **Intent** - Refers to “what” the desired outcome of that action should be as opposed to transactions which specify “how” an action should be performed.
+- **Intent Executor** - TODO
 - **Relay** - Component in the mev-boost protocol that is responsible for validating blocks and offering them to validators upon request.
 
 ## Architecture
