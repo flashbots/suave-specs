@@ -196,7 +196,7 @@ type Bid struct {
 
 ## Confidential Computation
 
-To successfuly process a request for confidential computation Computors must engage the the Confidential Compute Process.
+To successfuly process a request for confidential computation Computors must engage the Confidential Compute Process.
 
 ### Confidential Compute Process
 
