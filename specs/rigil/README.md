@@ -130,6 +130,7 @@ Here is a list of design decisions made for the Rigil testnet and associated rea
 - **Intent** - Refers to “what” the desired outcome of that action should be as opposed to transactions which specify “how” an action should be performed.
 - **Intent Executor** - TODO
 - **Relay** - Component in the mev-boost protocol that is responsible for validating blocks and offering them to validators upon request.
+- **Domains** - TODO
 
 ## Architecture
 

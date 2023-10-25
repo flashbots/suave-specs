@@ -96,15 +96,22 @@ The `suavex` namespace is used internally by the MEVM to enable functionality li
 
 `suavex_buildEthBlockFromBundles` - takes an array of bundles and transactions, calculates state root and related fields, and returns a valid Ethereum L1 block.
 
+```go
+BuildEthBlockFromBundles(ctx context.Context, buildArgs *types.BuildBlockArgs, bundles []types.SBundle) (*engine.ExecutionPayloadEnvelope, error)
+```
+
 `suavex_buildEthBlock` - takes an array of transactions, calculates state root and related fields, and returns a valid Ethereum L1 block.
 
+```go
+BuildEthBlock(ctx context.Context, buildArgs *types.BuildBlockArgs, txs types.Transactions) (*engine.ExecutionPayloadEnvelope, error)
+```
 
 Domain specific services which seek to be used by SUAVE must implement the methods in this namespace. More details will be expanded in future iterations.
 
 ## Precompiles
 
 
-Precompile are MEVM contracts that are implemented in native code instead of bytecode. Precompiles additonally can communicate with internal APIs. Currently the MEVM introduces four new types of precompiles:
+Precompile are MEVM contracts that are implemented in native code instead of bytecode. Precompiles additonally can communicate with internal APIs. Currently the MEVM supports all existing Ethereum Precompiles up to Dencun, and introduces four new classes of precompiles:
 - offchain computation that is too expensive in solidity
 - calls to API methods to interact with the Confidential Data Store
 - calls to `sauvex` API Methods to interact with Domain Specific Services 
