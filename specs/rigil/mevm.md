@@ -7,10 +7,9 @@ description: The MEVM modifies the EVM by adding a new runtime, interpreter, and
 
 - [Overview](#overview)
 - [Modified Interpreter](#modified-interpreter)
+        - [Confidential Data Store APIs](#confidential-data-store-apis)
+        - [suavex namespace](#suavex-namespace)
 - [Precompiles](#precompiles)
-    - [Confidential Data Store APIs](#confidential-data-store-apis)
-    - [suavex namespace](#suavex-namespace)
-    - [Available Precompiles](#available-precompiles)
         - [IsConfidential](#isconfidential)
         - [ConfidentialInputs](#confidentialinputs)
         - [ConfidentialStore](#confidentialstore)
@@ -77,16 +76,7 @@ type SuaveExecutionBackend struct {
 }
 ```
 
-## Precompiles
-
-
-Precompile are MEVM contracts that are implemented in native code instead of bytecode. Precompiles additonally can communicate with internal APIs. Currently the MEVM introduces four new types of precompiles:
-- offchain computation that is too expensive in solidity
-- calls to API methods to interact with the Confidential Data Store
-- calls to `sauvex` API Methods to interact with Domain Specific Services 
-- calls to retrieve context for the confidential compute requests
-
-### Confidential Data Store APIs
+#### Confidential Data Store APIs
 
 For more information on the capabilities exposed by the Confidential Data Store, see it's related [🔗 spec](/specs/rigil/confidential-data-store.md). The interface exposed to precompiles:
 
@@ -100,7 +90,7 @@ type ConfidentialStore interface {
 }
 ```
 
-### `suavex` namespace
+#### `suavex` namespace
 
 The `suavex` namespace is used internally by the MEVM to enable functionality like block building and external API calls via MEVM precompiles. We take this approach to make upstream updates and maintenance easier. Current endpoints include:
 
@@ -111,7 +101,16 @@ The `suavex` namespace is used internally by the MEVM to enable functionality li
 
 Domain specific services which seek to be used by SUAVE must implement the methods in this namespace. More details will be expanded in future iterations.
 
-### Available Precompiles
+## Precompiles
+
+
+Precompile are MEVM contracts that are implemented in native code instead of bytecode. Precompiles additonally can communicate with internal APIs. Currently the MEVM introduces four new types of precompiles:
+- offchain computation that is too expensive in solidity
+- calls to API methods to interact with the Confidential Data Store
+- calls to `sauvex` API Methods to interact with Domain Specific Services 
+- calls to retrieve context for the confidential compute requests
+
+A list of available precompiles in Rigil are as follows:
 
 #### `IsConfidential`
 
@@ -119,7 +118,7 @@ TODO: 🔗 Implementation
 
 Address: `0x42010000000000000000000000000000000000`
 
-Determines if the current execution mode is regular (on-chain) or confidential. Outputs a boolean value.
+Determines if the current execution mode is regular (onchain) or confidential. Outputs a boolean value.
 
 #### `ConfidentialInputs`
 
@@ -135,7 +134,7 @@ TODO: 🔗 Implementation
 
 Address: `0x42020000000000000000000000000000000000`
 
-Handles the storage of values in the confidential store. Requires the caller to be part of the `AllowedPeekers` for the associated bid.
+Handles the storage of data in the confidential store. Requires the caller to be part of the `AllowedPeekers` for the associated bid.
 
 #### `ConfidentialRetrieve`
 
@@ -143,7 +142,7 @@ TODO: 🔗 Implementation
 
 Address: `0x42020001000000000000000000000000000000`
 
-Retrieves values from the confidential store. Also mandates the caller's presence in the `AllowedPeekers` list for the bid.
+Retrieves data from the confidential store. Also mandates the caller's presence in the `AllowedPeekers` list.
 
 #### `NewBid`
 
@@ -152,6 +151,8 @@ TODO: 🔗 Implementation
 Address: `0x42030000000000000000000000000000000000`
 
 Initializes bids within the ConfidentialStore. Prior to storing data, all bids should undergo initialization via this precompile.
+
+*Note: The name Bids are an artefact from early development. Bids represent a "Data Identifier" used when operating on confidential data and no longer have any relation to a bid in an auction. They useful for coordinating on confidential data with out revealing underlying data, for instance a SUAVE transaction can emit logs on chain which reference the `bidId` from a Confidential Compute Request which follow up transactions can now reference.*
 
 #### `FetchBids`
 
@@ -167,7 +168,7 @@ TODO: 🔗 Implementation
 
 Address: `0x42100000000000000000000000000000000000`
 
-Conducts a simulation of the bundle, building a block that includes it. Outputs indicate if the apply was successful and the EGP of the resultant block.
+Performs a simulation of the bundle by building a block that includes it. Outputs indicate if the execution was successful and the Effective Gas Price of the resultant block.
 
 #### `ExtractHint`
 
@@ -183,7 +184,7 @@ TODO: 🔗 Implementation
 
 Address: `0x0042100001000000000000000000000000000000`
 
-Constructs an Ethereum block based on the provided bid. The construction follows a specified order.
+Constructs an Ethereum block based on the provided `bidIds`. The construction follows the order of `bidId`s are given .
 
 #### `SubmitEthBlockBidToRelay`
 
@@ -191,7 +192,7 @@ TODO: 🔗 Implementation
 
 Address: `0x42100002000000000000000000000000000000`
 
-Submits a given builderBid to a boost relay. Outputs any errors that arise during submission.
+Submits a given builderBid to a mev-boost relay. Outputs any errors that arise during submission.
 
 ## Precompiles Governance
 
