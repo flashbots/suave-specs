@@ -5,18 +5,12 @@ description: The MEVM modifies the EVM by adding a new runtime, interpreter, and
 
 <!-- TOC -->
 
-- [MEVM](#mevm)
-    - [Overview](#overview)
-    - [Core Architecture](#core-architecture)
-        - [SuaveExecutionBackend](#suaveexecutionbackend)
-        - [MEVM Interpreter](#mevm-interpreter)
-        - [Confidential APIs](#confidential-apis)
-    - [Suave JSON-RPC](#suave-json-rpc)
-        - [Confidential Execution of Smart Contracts](#confidential-execution-of-smart-contracts)
-        - [suavex namespace](#suavex-namespace)
-            - [Methods](#methods)
-    - [Precompiles Governance](#precompiles-governance)
-    - [Precompiles](#precompiles)
+- [Overview](#overview)
+- [Modified Interpreter](#modified-interpreter)
+- [Precompiles](#precompiles)
+    - [Confidential Data Store APIs](#confidential-data-store-apis)
+    - [suavex namespace](#suavex-namespace)
+    - [Available Precompiles](#available-precompiles)
         - [IsConfidential](#isconfidential)
         - [ConfidentialInputs](#confidentialinputs)
         - [ConfidentialStore](#confidentialstore)
@@ -27,6 +21,7 @@ description: The MEVM modifies the EVM by adding a new runtime, interpreter, and
         - [ExtractHint](#extracthint)
         - [BuildEthBlock](#buildethblock)
         - [SubmitEthBlockBidToRelay](#submitethblockbidtorelay)
+- [Precompiles Governance](#precompiles-governance)
 
 <!-- /TOC -->
 
@@ -36,16 +31,11 @@ description: The MEVM modifies the EVM by adding a new runtime, interpreter, and
 
 ## Overview
 
-This document provides the technical specification for the MEVM, a modified version of the Ethereum Virtual Machine (EVM). The MEVM enables confidential computation via the `SuaveExecutionBackend` and as well exposes additional MEV-specific precompiles for SUAPPs to use. 
+This document provides the technical specification for the MEVM, a modified version of the Ethereum Virtual Machine (EVM). The MEVM is a set of precompiles to interact with APIs, two of these API services are the Confidential Data Store and the SUAVE Execution (SUAVEX) name space. There may be other API endpoints in the future.
 
-## Core Architecture
+## Modified Interpreter
 
-The MEVM modifies the EVM by adding a new:
-- runtime
-- interpreter
-- execution backend
-
-The structure of these modifications is most easily explained visually:
+Under the hood the MEVM is a modified EVM Interpreter which is able to use a new runtime called the `SuaveExecutionBackend`.
 
 ```mermaid
 graph TB
@@ -78,9 +68,7 @@ graph TB
     classDef lightgreen fill:#b3c69f,stroke:#444,stroke-width:2px, color:#333;
 ```
 
-### SuaveExecutionBackend
-
-`SuaveExecutionBackend` is used by precompiles to access the confidential store as well as functionality in the SUAVE ex namespace which is detailed later on.
+The `SuaveExecutionBackend` is responsible for exposing the APIs that precompiles are able to hook into.
 
 ```go
 type SuaveExecutionBackend struct {
@@ -89,76 +77,32 @@ type SuaveExecutionBackend struct {
 }
 ```
 
-### SuaveContext
+## Precompiles
 
-The MEVM provides three differences over the stock EVM interpreter.
 
-- Introduction of `IsConfidential` to the interpreter's configuration allow for introspection on computation mode.
-- Alterations to the `Run` function to accommodate confidential APIs.
-- Modifications to the `Run` function to trace the caller stack.
+Precompile are MEVM contracts that are implemented in native code instead of bytecode. Precompiles additonally can communicate with internal APIs. Currently the MEVM introduces four new types of precompiles:
+- offchain computation that is too expensive in solidity
+- calls to API methods to interact with the Confidential Data Store
+- calls to `sauvex` API Methods to interact with Domain Specific Services 
+- calls to retrieve context for the confidential compute requests
 
-The capabilities enabled by this modified interpreter are exposed to the virtual machine via `SuaveContext` which maintains the runtime state and context for Suave operations.
+### Confidential Data Store APIs
 
-```go
-type SuaveContext struct {
-    Backend                      *SuaveExecutionBackend
-    ConfidentialComputeRequestTx *types.Transaction
-    ConfidentialInputs           []byte
-    CallerStack                  []*common.Address
-}
-
-```
-
-### Confidential APIs
-
-In the [suave-geth](https://github.com/flashbots/suave-geth/tree/main) reference implementation, confidential precompiles have access to the following [Confidential APIs](https://github.com/flashbots/suave-geth/tree/main/suave/core/types.go) during execution.
-
-This is subject to change!
+For more information on the capabilities exposed by the Confidential Data Store, see it's related [🔗 spec](/specs/rigil/confidential-data-store.md). The interface exposed to precompiles:
 
 ```go
-type ConfidentialStoreEngine struct {
-	ctx    context.Context
-	cancel context.CancelFunc
-
-	storage        ConfidentialStorageBackend
-	transportTopic StoreTransportTopic
-
-	daSigner    DASigner
-	chainSigner ChainSigner
-
-	storeUUID      uuid.UUID
-	localAddresses map[common.Address]struct{}
-}
-
-type ConfidentialStorageBackend interface {
-	InitializeBid(bid suave.Bid) error
-	Store(bid suave.Bid, caller common.Address, key string, value []byte) (suave.Bid, error)
-	Retrieve(bid suave.Bid, caller common.Address, key string) ([]byte, error)
+type ConfidentialStore interface {
+	InitializeBid(bid types.Bid) (types.Bid, error)
+	Store(bidId suave.BidId, caller common.Address, key string, value []byte) (suave.Bid, error)
+	Retrieve(bid types.BidId, caller common.Address, key string) ([]byte, error)
 	FetchBidById(suave.BidId) (suave.Bid, error)
 	FetchBidsByProtocolAndBlock(blockNumber uint64, namespace string) []suave.Bid
-	Stop() error
 }
 ```
-
-## Suave JSON-RPC
-
-SUAVE JSON-RPC can be seen as a super set of Ethereum JSON-RPC. This means that the [Ethereum JSON-RPC standard](https://geth.ethereum.org/docs/interacting-with-geth/rpc) remains the same when interacting with the SUAVE chain, with the following exceptions:
-
-1. Suave JSON-RPC has two modes of operation: regular and confidential determined by the truth value of `IsConfidential` in the Confidential Compute Request.
-- *Regular mode* is equivalent to the usual Ethereum virtual machine environment, with all computation occurring onchain and requests are made with SUAVE transactions instead of Confidential Compute Requests.
-- *Confidential mode* accesses additional precompiles, both directly and through a convenient [library](https://github.com/flashbots/suave-geth/blob/main/suave/sol/libraries/Suave.sol). Confidential execution is *not* verifiable during on-chain state transition. The result of the confidential execution is instead cached in the `SuaveTransaction`.
-
-2. New optional argument - `confidential_data` - is added to `eth_sendRawTransaction`, `eth_sendTransaction` and `eth_call` methods.
-- Confidential data is made available to the MEVM via a precompile, but does not become a part of the transaction that makes it to chain.
-
-3. All RPCs that return transaction or receipt objects will do so with type `SuaveTransaction`, a super set of regular Ethereum transactions.
-
 
 ### `suavex` namespace
 
 The `suavex` namespace is used internally by the MEVM to enable functionality like block building and external API calls via MEVM precompiles. We take this approach to make upstream updates and maintenance easier. Current endpoints include:
-
-#### Methods
 
 `suavex_buildEthBlockFromBundles` - takes an array of bundles and transactions, calculates state root and related fields, and returns a valid Ethereum L1 block.
 
@@ -167,94 +111,92 @@ The `suavex` namespace is used internally by the MEVM to enable functionality li
 
 Domain specific services which seek to be used by SUAVE must implement the methods in this namespace. More details will be expanded in future iterations.
 
+### Available Precompiles
 
-## Precompiles
+#### `IsConfidential`
 
-### `IsConfidential`
+TODO: 🔗 Implementation 
 
-Implementation (link-to-github-or-other-source)
-
-Address: `0x42010000`
+Address: `0x42010000000000000000000000000000000000`
 
 Determines if the current execution mode is regular (on-chain) or confidential. Outputs a boolean value.
 
-### `ConfidentialInputs`
+#### `ConfidentialInputs`
 
-Implementation (link-to-github-or-other-source)
+TODO: 🔗 Implementation 
 
-Address: `0x42010001`
+Address: `0x42010001000000000000000000000000000000`
 
 Provides the confidential inputs associated with a confidential computation request. Outputs are in bytes format.
 
-### `ConfidentialStore`
+#### `ConfidentialStore`
 
-Implementation (link-to-github-or-other-source)
+TODO: 🔗 Implementation 
 
-Address: `0x42020000`
+Address: `0x42020000000000000000000000000000000000`
 
 Handles the storage of values in the confidential store. Requires the caller to be part of the `AllowedPeekers` for the associated bid.
 
-### `ConfidentialRetrieve`
+#### `ConfidentialRetrieve`
 
-Implementation (link-to-github-or-other-source)
+TODO: 🔗 Implementation 
 
-Address: `0x42020001`
+Address: `0x42020001000000000000000000000000000000`
 
 Retrieves values from the confidential store. Also mandates the caller's presence in the `AllowedPeekers` list for the bid.
 
-### `NewBid`
+#### `NewBid`
 
-Implementation (link-to-github-or-other-source)
+TODO: 🔗 Implementation 
 
-Address: `0x42030000`
+Address: `0x42030000000000000000000000000000000000`
 
 Initializes bids within the ConfidentialStore. Prior to storing data, all bids should undergo initialization via this precompile.
 
-### `FetchBids`
+#### `FetchBids`
 
-Implementation (link-to-github-or-other-source)
+TODO: 🔗 Implementation 
 
-Address: `0x42030001`
+Address: `0x42030001000000000000000000000000000000`
 
 Retrieves all bids correlating with a specified decryption condition.
 
-### `SimulateBundle`
+#### `SimulateBundle`
 
-Implementation (link-to-github-or-other-source)
+TODO: 🔗 Implementation 
 
-Address: `0x42100000`
+Address: `0x42100000000000000000000000000000000000`
 
 Conducts a simulation of the bundle, building a block that includes it. Outputs indicate if the apply was successful and the EGP of the resultant block.
 
-### `ExtractHint`
+#### `ExtractHint`
 
-Implementation (link-to-github-or-other-source)
+TODO: 🔗 Implementation 
 
-Address: `0x42100037`
+Address: `0x42100037000000000000000000000000000000`
 
 Interprets the bundle data and extracts hints, such as the "To" address and calldata.
 
-### `BuildEthBlock`
+#### `BuildEthBlock`
 
-Implementation (link-to-github-or-other-source)
+TODO: 🔗 Implementation 
 
-Address: `0x42100001`
+Address: `0x0042100001000000000000000000000000000000`
 
 Constructs an Ethereum block based on the provided bid. The construction follows a specified order.
 
-### `SubmitEthBlockBidToRelay`
+#### `SubmitEthBlockBidToRelay`
 
-Implementation (link-to-github-or-other-source)
+TODO: 🔗 Implementation 
 
-Address: `0x42100002`
+Address: `0x42100002000000000000000000000000000000`
 
 Submits a given builderBid to a boost relay. Outputs any errors that arise during submission.
 
 ## Precompiles Governance
 
-Here is a rough outline of the initial governance process for adding precompiles:
-
+Governance process for adding precompiles is in it's early stages but is as follows:
 - Discuss the idea in a [forum post](https://collective.flashbots.net/)
 - Open a PR and provide implementation
 - Feedback and review
-- Possibly merge and deploy in the next network upgrade
+- Possibly merge and deploy in the next network upgrade, or sooner, depending on the precompile

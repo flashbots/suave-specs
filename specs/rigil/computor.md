@@ -3,26 +3,30 @@ title: Computor
 description: SUAVE computors contain all necessary components to accept, process, and route confidential compute requests and results.
 ---
 
-<!-- omit from toc -->
-# Computor
-
-<div class="hideInDocs">
-
-**Table of Contents**
-
 <!-- TOC -->
 
-- [Overview](#overview)
-- [Prerequisites](#prerequisites)
-- [Computor Responsibilities](#computor-responsibilities)
-- [Becoming a Computor](#becoming-a-computor)
-  - [Computor Identification](#computor-identification)
-- [Computor Architecture](#computor-architecture)
-  - [RPC](#rpc)
-  - [SUAVE PoA Chain](#suave-poa-chain)
-  - [MEVM](#mevm)
-  - [Confidential Data Store](#confidential-data-store)
-  - [Domain Specific Services](#domain-specific-services)
+- [Computor](#computor)
+    - [Overview](#overview)
+    - [Prerequisites](#prerequisites)
+    - [Computor Responsibilities](#computor-responsibilities)
+    - [Becoming a Computor](#becoming-a-computor)
+        - [Computor Identification](#computor-identification)
+    - [Computor Architecture](#computor-architecture)
+        - [RPC](#rpc)
+        - [SUAVE PoA Chain](#suave-poa-chain)
+        - [MEVM](#mevm)
+        - [Confidential Data Store](#confidential-data-store)
+        - [Domain Specific Services](#domain-specific-services)
+        - [Precompiles](#precompiles)
+    - [Containers](#containers)
+        - [Confidential Compute Record](#confidential-compute-record)
+        - [ConfidentialComputeRequest](#confidentialcomputerequest)
+        - [Suave Transaction](#suave-transaction)
+    - [Confidential Computation](#confidential-computation)
+        - [Confidential Compute Process](#confidential-compute-process)
+    - [Honest Computor](#honest-computor)
+
+<!-- /TOC -->pecific Services](#domain-specific-services)
   - [Precompiles](#precompiles)
 - [Containers](#containers)
   - [Confidential Compute Record](#confidential-compute-record)
@@ -198,10 +202,19 @@ At present, the protocol relies on the honesty of computors, akin to the relianc
 
 On the Rigil testnet Computors do not live inside of Trusted Execution Environments, and because of this, a malicious computor could alter it's source code to censor Confidential Compute Requests and their results. It is for this reason the initial Computor set is strictly maintained to trusted actors.
 
-## Self Organization
 
-Traditionally, synchrony has been viewed as a cooperative event. However, evidence from the mempool suggests that a collective synchronous display can also be an incidental outcome of signal "jamming" activities, often known as priority gas auctions, between actors competing for blockspace.
 
-In this light, the existing MEV supply chain we have today can be seen as a [Turing Pattern](https://en.wikipedia.org/wiki/Turing_pattern) resulting from instability in the supply chain.
 
-SUAVE computors embrace this phenomenon with the capability to reconfigure their network communication to fit into the specific subsection of the MEV supply network they serve. Currently, SUAVE computors route the outcomes of confidential compute, bundles, and blocks directly to the desired recipient party as the network maintains a small and compact topology. The eventual goal is to foster a more dynamic self-organization to cater to a broader network topology and enable autonomous self organization.
+
+## Suave JSON-RPC
+
+SUAVE JSON-RPC can be seen as a super set of Ethereum JSON-RPC. This means that the [Ethereum JSON-RPC standard](https://geth.ethereum.org/docs/interacting-with-geth/rpc) remains the same when interacting with the SUAVE chain, with the following exceptions:
+
+1. Suave JSON-RPC has two modes of operation: regular and confidential determined by the truth value of `IsConfidential` in the Confidential Compute Request.
+- *Regular mode* is equivalent to the usual Ethereum virtual machine environment, with all computation occurring onchain and requests are made with SUAVE transactions instead of Confidential Compute Requests.
+- *Confidential mode* accesses additional precompiles, both directly and through a convenient [library](https://github.com/flashbots/suave-geth/blob/main/suave/sol/libraries/Suave.sol). Confidential execution is *not* verifiable during on-chain state transition. The result of the confidential execution is instead cached in the `SuaveTransaction`.
+
+2. New optional argument - `confidential_data` - is added to `eth_sendRawTransaction`, `eth_sendTransaction` and `eth_call` methods.
+- Confidential data is made available to the MEVM via a precompile, but does not become a part of the transaction that makes it to chain.
+
+3. All RPCs that return transaction or receipt objects will do so with type `SuaveTransaction`, a super set of regular Ethereum transactions.
