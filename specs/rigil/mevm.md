@@ -116,41 +116,62 @@ A list of available precompiles in Rigil are as follows:
 
 TODO: 🔗 Implementation 
 
-Address: `0x42010000000000000000000000000000000000`
+Address: `0x0000000000000000000000000000000042010000`
+
 
 Determines if the current execution mode is regular (onchain) or confidential. Outputs a boolean value.
+
+```solidity
+function isConfidential() internal view returns (bool b)
+```
 
 #### `ConfidentialInputs`
 
 TODO: 🔗 Implementation 
 
-Address: `0x42010001000000000000000000000000000000`
+Address: `0x0000000000000000000000000000000042010001`
 
 Provides the confidential inputs associated with a confidential computation request. Outputs are in bytes format.
+
+```solidity
+function confidentialInputs() internal view returns (bytes memory)
+```
 
 #### `ConfidentialStore`
 
 TODO: 🔗 Implementation 
 
-Address: `0x42020000000000000000000000000000000000`
+Address: `0x0000000000000000000000000000000042020000`
 
 Handles the storage of data in the confidential store. Requires the caller to be part of the `AllowedPeekers` for the associated bid.
+
+```solidity
+function confidentialStoreStore(BidId bidId, string memory key, bytes memory data1) internal view 
+```
 
 #### `ConfidentialRetrieve`
 
 TODO: 🔗 Implementation 
 
-Address: `0x42020001000000000000000000000000000000`
+Address: `0x0000000000000000000000000000000042020001`
 
 Retrieves data from the confidential store. Also mandates the caller's presence in the `AllowedPeekers` list.
+
+```solidity
+function confidentialStoreRetrieve(BidId bidId, string memory key) internal view returns (bytes memory) 
+```
 
 #### `NewBid`
 
 TODO: 🔗 Implementation 
 
-Address: `0x42030000000000000000000000000000000000`
+Address: `0x0000000000000000000000000000000042030000`
 
 Initializes bids within the ConfidentialStore. Prior to storing data, all bids should undergo initialization via this precompile.
+
+```solidity
+function newBid(uint64 decryptionCondition, address[] memory allowedPeekers, string memory bidType)
+```
 
 *Note: The name Bids are an artefact from early development. Bids represent a "Data Identifier" used when operating on confidential data and no longer have any relation to a bid in an auction. They useful for coordinating on confidential data with out revealing underlying data, for instance a SUAVE transaction can emit logs on chain which reference the `bidId` from a Confidential Compute Request which follow up transactions can now reference.*
 
@@ -158,41 +179,61 @@ Initializes bids within the ConfidentialStore. Prior to storing data, all bids s
 
 TODO: 🔗 Implementation 
 
-Address: `0x42030001000000000000000000000000000000`
+Address: `0x0000000000000000000000000000000042030001`
 
 Retrieves all bids correlating with a specified decryption condition.
+
+```solidity
+function fetchBids(uint64 cond, string memory namespace) internal view returns (Bid[] memory)
+```
 
 #### `SimulateBundle`
 
 TODO: 🔗 Implementation 
 
-Address: `0x42100000000000000000000000000000000000`
+Address: `0x0000000000000000000000000000000042100000`
 
 Performs a simulation of the bundle by building a block that includes it. Outputs indicate if the execution was successful and the Effective Gas Price of the resultant block.
+
+```solidity
+function simulateBundle(bytes memory bundleData) internal view returns (uint64)
+```
 
 #### `ExtractHint`
 
 TODO: 🔗 Implementation 
 
-Address: `0x42100037000000000000000000000000000000`
+Address: `0x0000000000000000000000000000000042100037`
 
 Interprets the bundle data and extracts hints, such as the "To" address and calldata.
+
+```solidity
+function extractHint(bytes memory bundleData) internal view returns (bytes memory)
+```
 
 #### `BuildEthBlock`
 
 TODO: 🔗 Implementation 
 
-Address: `0x0042100001000000000000000000000000000000`
+Address: `0x0000000000000000000000000000000042100001`
 
 Constructs an Ethereum block based on the provided `bidIds`. The construction follows the order of `bidId`s are given .
+
+```solidity
+function buildEthBlock(BuildBlockArgs memory blockArgs, BidId bidId, string memory namespace)
+```
 
 #### `SubmitEthBlockBidToRelay`
 
 TODO: 🔗 Implementation 
 
-Address: `0x42100002000000000000000000000000000000`
+Address: `0x0000000000000000000000000000000042100002`
 
 Submits a given builderBid to a mev-boost relay. Outputs any errors that arise during submission.
+
+```solidity
+function submitEthBlockBidToRelay(string memory relayUrl, bytes memory builderBid)
+```
 
 ## Precompiles Governance
 

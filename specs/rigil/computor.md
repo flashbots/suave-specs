@@ -25,18 +25,7 @@ description: SUAVE computors contain all necessary components to accept, process
     - [Confidential Computation](#confidential-computation)
         - [Confidential Compute Process](#confidential-compute-process)
     - [Honest Computor](#honest-computor)
-
-<!-- /TOC -->pecific Services](#domain-specific-services)
-  - [Precompiles](#precompiles)
-- [Containers](#containers)
-  - [Confidential Compute Record](#confidential-compute-record)
-  - [ConfidentialComputeRequest](#confidentialcomputerequest)
-  - [Suave Transaction](#suave-transaction)
-  - [Bid](#bid)
-- [Confidential Computation](#confidential-computation)
-  - [Confidential Compute Process](#confidential-compute-process)
-- [Honest Computor](#honest-computor)
-- [Self Organization](#self-organization)
+    - [Suave JSON-RPC](#suave-json-rpc)
 
 <!-- /TOC -->
 
