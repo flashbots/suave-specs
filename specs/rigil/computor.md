@@ -3,6 +3,13 @@ title: Computor
 description: SUAVE computors contain all necessary components to accept, process, and route confidential compute requests and results.
 ---
 
+<!-- omit from toc -->
+# Computor
+
+<div class="hideInDocs">
+
+**Table of Contents**
+
 <!-- TOC -->
 
 - [Overview](#overview)

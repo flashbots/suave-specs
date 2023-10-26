@@ -8,6 +8,8 @@ description: The main purpose of the SUAVE chain is to reach (and maintain) cons
 
 <div class="hideInDocs">
 
+**Table of Contents**
+
 <!-- TOC -->
 
 - [Overview](#overview)
