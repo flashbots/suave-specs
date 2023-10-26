@@ -69,7 +69,7 @@ Read more about SUAVE:
 
 This set of specs outlines the Rigil Testnet, a continuation of the star system theme (Centauri, Andromeda, Helios) laid out in [The Future of MEV](https://writings.flashbots.net/mevm-suave-centauri-and-beyond); and the first in a series of SUAVE testnets based on stars in the [(Alpha) Centauri system](https://en.wikipedia.org/wiki/Alpha_Centauri): Rigil Kentaurus (Alpha Centauri A), Toliman (B) and Proxima Centauri (C).
 
-The Rigil Testnet is a sandbox for building MEV applications in a decentralized and private manner that is initially targetted towards developers. Developers are empowered with the MEVM, a modification of the EVM which gives them access to new MEV specific precompiles that allow them to write their applications as smart contracts in Solidity. Further, Rigil offers a live test network for rapid prototyping hosted by Flashbots that uses Goerli ETH for gas and a proof-of-authority consensus mechanism.
+The Rigil Testnet is a sandbox for building MEV applications in a decentralized and private manner that is initially targetted towards developers. Developers are empowered with the MEVM, a modification of the EVM which gives them access to new MEV specific [precompiles](./precompiles.md) that allow them to write their applications as smart contracts in Solidity. Further, Rigil offers a live test network for rapid prototyping hosted by Flashbots that uses Goerli ETH for gas and a proof-of-authority consensus mechanism.
 
 Rigil's architecture is composed of several parts:
 * SUAVE "Computors" - a network of actors that provide private computation for MEV applications
@@ -136,7 +136,7 @@ SUAVE Computors house all components necessary to perform confidential compute a
 
 ## Example Flows
 
-The example flows in the following sections are used to illustrate some of the possibilities for MEV applications on SUAVE. We start at a high level showing how an OFA and Block Builder smart contracts work together to emit a block from a SUAVE node. To understand more deeply the Confindential Compute Request Flow is detailed and from there a deeper dive into the specifics of how the OFA and Block Builder contracts work individually.
+The example flows in the following sections are used to illustrate some of the possibilities for MEV applications on SUAVE. We start at a high level showing how OFA and Block Builder smart contracts work together to emit a block from a SUAVE node. To understand more deeply the Confindential Compute Request Flow is detailed and from there a deeper dive into the specifics of how the OFA and Block Builder contracts work individually.
 
 ### High Level - OFA + Block Builder
 
@@ -173,7 +173,7 @@ If we consider a specific use case, like an order flow auction, the high-level s
 ![OFA example flow](/assets/OFA-example-flow.svg)
 
 1. The user sends a Confidential Compute Request interacting with a SUAPP by calling it's `newBid` function. Included in this request is also the user's L1 transaction as a confidential Input.
-2. The computor will receive the transaction and process it. To do so it first runs the offchain logic assocaited with `newBid` which will extract the transaction's data and then return a callback:
+2. The computor will receive the transaction and process it. To do so it first runs the offchain logic associated with `newBid` which will extract the transaction's data and then return a callback:
 ```go
 return bytes.concat(this.emitHint.selector, abi.encode(hint));
 ```

@@ -71,7 +71,7 @@ A computor has several primary responsibilities within the SUAVE network:
 
 Computors are currently permissioned in the SUAVE network, to become one you need your computor's ECDSA pubkey to be contained within the clique PoA genesis settings.
 
-While permissioned now, Computors will one day become permisisonless.
+While permissioned now, Computors will one day become permissionless.
 
 ### Computor Identification
 
@@ -163,7 +163,7 @@ A computor's signature is used as the integrity gurantee for the computation's r
 
 ### Suave Transaction
 
-The final home of compute results and intentionally leaked data from confidential compute requests is a SUAVE transaciton, see [🔗 SUAVE chain](./suave-chain.md) specs for more details
+The final home of compute results and intentionally leaked data from confidential compute requests is a SUAVE transaction, see [🔗 SUAVE chain](./suave-chain.md) specs for more details
 
 ```go
 type SuaveTransaction struct {
@@ -196,7 +196,7 @@ type Bid struct {
 
 ## Confidential Computation
 
-To successfuly process a request for confidential computation Computors must engage the the Confidential Compute Process.
+To successfuly process a request for confidential computation Computors must engage the Confidential Compute Process.
 
 ### Confidential Compute Process
 
