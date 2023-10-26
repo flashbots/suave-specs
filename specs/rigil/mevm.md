@@ -218,6 +218,31 @@ Interprets the bundle data and extracts hints, such as the "To" address and call
 function extractHint(bytes memory bundleData) internal view returns (bytes memory)
 ```
 
+#### `SubmitBundleJsonRPC`
+
+TODO: 🔗 Implementation 
+
+Address: `0x0000000000000000000000000000000043000001`
+
+Submits bytes as JSONRPC message to the specified URL with the specified method. As this call is intended for bundles, it also signs the params and adds `X-Flashbots-Signature` header, as usual with bundles.  
+Regular eth bundles don't need any processing to be sent.  
+
+```solidity
+function submitBundleJsonRPC(string memory url, string memory method, bytes memory params) internal view returns (bytes memory)
+```
+
+#### `FillMevShareBundleAddress`
+
+TODO: 🔗 Implementation 
+
+Address: `0x0000000000000000000000000000000043200001`
+
+Joins the user's transaction and with the backrun, and returns encoded mev-share bundle. The bundle is ready to be sent via `SubmitBundleJsonRPC`.  
+
+```solidity
+function fillMevShareBundle(BidId bidId) internal view returns (bytes memory)
+```
+
 #### `BuildEthBlock`
 
 TODO: 🔗 Implementation 
