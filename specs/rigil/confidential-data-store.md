@@ -3,23 +3,16 @@ title: Confidential Data Store
 description: This essential component of the SUAVE protocol serves as a secure and privacy-focused storage system.
 ---
 
-<!-- omit from toc -->
-# Confidential Data Store
-
-<div class="hideInDocs">
-
-**Table of Contents**
 <!-- TOC -->
 
 - [Overview](#overview)
-- [Architecture Diagram](#architecture-diagram)
-- [Core Components](#core-components)
-    - [ConfidentialStore](#confidentialstore)
-    - [SUAVE Mempool](#suave-mempool)
-    - [Interface Definitions](#interface-definitions)
+- [Core Functionality](#core-functionality)
+- [Architecture](#architecture)
+    - [Engine](#engine)
+    - [Store](#store)
+    - [Transport](#transport)
 - [Data Management](#data-management)
     - [Initialization & Access Control](#initialization--access-control)
-    - [Store & Retrieve Processes](#store--retrieve-processes)
 - [Security and Confidentiality](#security-and-confidentiality)
 
 <!-- /TOC -->
@@ -104,9 +97,23 @@ type StoreTransportTopic interface {
 *Implementation Note: in our [suave-geth](https://github.com/flashbots/suave-geth/tree/main) reference implementation we provide an implementation using a shared Redis PubSub in RedisPubSubTransport, as well as a crude synchronization protocol. Note that Redis transport only synchronizes current state, there is no initial synchronization - a newly connected node will not have access to old data, for now. This synchronization protocol will be defined in coming specifications.*
 
 
+## Data Management
+
+Data Management is at the heart of the Confidential Data Store, ensuring that data is stored, retrieved, and maintained securely and efficiently.
+
+### Initialization & Access Control
+
+The Confidential Data Store ensures that only legitimate entities can store data, and only authorized parties can retrieve it.
+
+- *Data Registration*: When initializing, it's vital to ensure that only valid data is registered in the system. Data must satisfy specific criteria, such as proper formatting, authentication, and non-duplication, but these requirements do not places restrictions on *what* type of data gets put in, merely that it should follow a high level format.
+
+- *Access Permissions*: A robust access control mechanism restricts data access. Only contracts with appropriate permissions (peekers) can access stored data. This mechanism is currently context-based and the specific access control mechansim is laid out in the [MEVM](./mevm.md) 
+
 ## Security and Confidentiality
 
-Ensuring the confidentiality of the stored data is paramount. Current implementations, while solid, are still works in progress. Future iterations will delve deeper into encryption methodologies, access controls, and auditing mechanisms to fortify data privacy further.
+Ensuring the confidentiality of the stored data is paramount. Current implementations are still works in progress and data should not be considered secure. Future iterations will delve deeper into encryption methodologies, access controls, and auditing mechanisms to fortify data privacy further.
+
+
 
 
 
