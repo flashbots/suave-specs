@@ -48,7 +48,6 @@ This repository hosts the current SUAVE Rigil testnet specifications and design 
 - [Suave Chain](./suave-chain.md)
 - [MEVM](./mevm.md)
 - [Confidential Data Store](./confidential-data-store.md)
-- [Precompiles](./precompiles.md)
 - [Computor](./computor.md)
 - [Bridge](./bridge.md)
 

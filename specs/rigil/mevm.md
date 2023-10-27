@@ -3,6 +3,11 @@ title: MEVM
 description: The MEVM modifies the EVM by adding a new runtime, interpreter, and execution backend so as to enable anyone to create MEV applications.
 ---
 
+<!-- omit from toc -->
+# MEVM
+
+<div class="hideInDocs">
+
 <!-- TOC -->
 
 - [Overview](#overview)
@@ -83,7 +88,7 @@ type SuaveExecutionBackend struct {
 
 #### Confidential Data Store APIs
 
-For more information on the capabilities exposed by the Confidential Data Store, see it's related [🔗 spec](/specs/rigil/confidential-data-store.md). The interface exposed to precompiles:
+For more information on the capabilities exposed by the Confidential Data Store, see it's related [🔗 spec](./confidential-data-store.md). The interface exposed to precompiles:
 
 ```go
 type ConfidentialStore interface {
