@@ -85,17 +85,15 @@ The Rigil testnet is initially focused on a specific set of actors:
 
 1. **Developers** - create smart contracts on SUAVE Chain that define rules for SUAPPs like orderflow auctions, block building, and intent executors.
 2. **Transaction Originators** - leverage unique applications on SUAVE, e.g. to send private transactions or execute your intents.
-3. **Proposers** - outsource block building to SUAVE. Initially, this is focused only on Ethereum.
-4. **Block Builders** - can be implemented as smart contracts inside Suave. In the Rigil Tesnet, Suave has the capability to submit bundles to several external builders to help transaction inclusion during early stages of development.
+3. **Proposers** - outsource block building to SUAVE. Initially, SUAVE is focused only on Ethereum.
+4. **Block Builders** - can be implemented as smart contracts inside Suave. In the Rigil Tesnet, Suave has the capability to submit bundles to external builders to help transaction inclusion during early stages of development.
 5. **Auction Protocols** - can program their auctions as a smart contract.
-
 
 ## Rigil Design Goals
 
-1. **Permissionless** - Allow anyone to deploy SUAVE smart contracts.
+1. **Permissionless** - Allow anyone to deploy smart contracts on SUAVE .
 2. **Easy to use** - Create an environment that is as easy to use and test as possible, enabling rapid prototyping.
 3. **SGX UX Closeness** - Get as close to SGX user experience as possible and minimize breaking changes down the road.
-
 
 ## Design Decisions
 
@@ -104,54 +102,54 @@ Here is a list of design decisions made for the Rigil testnet and associated rea
 - Decision *1*: **Proof-of-Authority Consensus**
     - *reason*: [SUAVE consensus](https://collective.flashbots.net/t/suave-consensus/2152) is an active open question, which whether or not answered does not drastically impact UX of users on **Rigil Testnet**.
 - Decision *2*: **No SGX Nodes (yet)**
-    - reason: SGX SUAVE computors are an active area of research and development and does not drastically impact UX of users on **Rigil Testnet**.
+    - reason: SGX SUAVE Kettles are an active area of research and development and do not drastically impact UX of users on **Rigil Testnet**.
 - Decision *3*: **Weak Data Availability Guarantees**
     - Reason: The Confidential Data Store currently only keeps private data available for one day. [Compute Output Validity and Heterogenous DA](https://collective.flashbots.net/t/suave-ensuring-output-validity-and-heterogenous-da/2184) are active open questions, which whether or not answered does not drastically impact UX on Rigil Testnet.
 - Decision *4*: **Centralized Builder Interoperability**
-    - reason: Blocks emitted from SUAVE computors will have unpredictable inclusion in early development so SUAVE rigil supports a precompile to send bundles to off-SUAVE block builders.
+    - reason: Blocks emitted from SUAVE Kettles will have unpredictable inclusion in early development so SUAVE rigil supports a precompile to send bundles to off-SUAVE block builders.
 
 ## Glossary 
 
-- **User**: sender of confidential compute requests (CCR)
-- **SUAPP**: SUAVE application, smart contracts on Suave chain with rules for confidential computation and functions to submit to target domains (i.e. chains).
+- **User**: humans or computers interacting with SUAPPs, primarily through sending of confidential compute requests (CCR) to Kettles.
+- **SUAPP**: SUAVE application, smart contracts on SUAVE chain with rules for confidential computation and functions to submit to target domains (i.e. chains).
 - **Developer:** creates smart contracts on SUAVE Chain that define rules for SUAPPs.
 - **Confidential Compute Request (CCR) [**[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/suave-chain.md#confidential-compute-request)**]**: A user request to Suave that contains (1) a wrapped transaction, (2) confidential inputs, and (3) a list of programs (contracts) (← list of Exec nodes) allowed to operate on confidential inputs.
-- **Builder solidity**: Solidity with access to precompiles that help facilitate the processing of order flow.
+- **Builder solidity**: solidity with access to precompiles that help facilitate the processing of order flow.
 - **Precompiles [[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/precompiles.md)]:** purpose-built functions with extended capabilities that can be called from Builder Solidity
 - **Computor[[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/computor.md)]**: accepts and processes confidential compute requests and maintains the SUAVE chain; the logical unit of the SUAVE network and main protocol actor.
 - **Confidential Data Store [[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/confidential-data-store.md)]**: stores confidential data from MEV applications (L1 transactions, EIP 712 signed messages, userOps, privateKeys(?), etc).
 - **SUAVE Chain [**[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/suave-chain.md#suave-chain)**]**: a fork of Ethereum designed for usage alongside credible offchain execution in MEV use cases. In Rigil running in PoA mode.
 - **MEVM [[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/mevm.md)]**: modified EVM with MEV-specific precompiles that allow developers to define orderflow auctions and builder rules as smart contracts written in Solidity.
 - **Domain-Specific Services (Execution Node?):** provide functionality to interact with target domains (i.e. for Goerli or Arbitrum, simulate transactions, build bundles, build blocks, …)
-- **RPC** - Receives user transactions, moves confidential input to Confidential Data Store and passes the compute request to MEVM.
-- **OFA** - Application that receives transactions and either facilitates an auction ontop of it, or routes it elsewhere.
-- **Solver** - Actor who takes many user token trades as an input and competes on provide a solution to the mathematically optimal way to route all trades.
-- **Intent** - Refers to “what” the desired outcome of that action should be as opposed to transactions which specify “how” an action should be performed.
-- **Intent Executor** - TODO
-- **Relay** - Component in the mev-boost protocol that is responsible for validating blocks and offering them to validators upon request.
-- **Domains** - TODO
+- **RPC** - receives user transactions, moves confidential input to Confidential Data Store and passes the compute request to MEVM.
+- **OFA** - application that receives transactions and either facilitates an auction ontop of it, or routes it elsewhere.
+- **Solver** - actor who takes many user token trades as an input and competes on provide a solution to the mathematically optimal way to route all trades.
+- **Intent** - refers to “what” the desired outcome of an action on a blockchain should be as opposed to transactions which specify “how” an action should be performed.
+- **Intent Executor** - actor who is responsible for taking consolidated user intents and executing them on a domain.
+- **Relay** - actor in the [mev-boost protocol](https://github.com/flashbots/mev-boost) that is responsible for validating blocks and offering them to validators upon request.
+- **Domains** - [a system with a globally shared state that is mutated by various players through actions](https://arxiv.org/pdf/2112.01472.pdf) (e.g. “transactions”) that execute in a shared execution environment.
 
 ## Architecture
 
-SUAVE Computors house all components necessary to perform confidential compute and are the main protocol actor in the SUAVE protocol. Below is a high level architectural overview.
+SUAVE Kettles house all components necessary to perform confidential compute and are the main protocol actor in the SUAVE protocol. Below is a high level architectural overview.
 
 ![Rigil architecture](/assets/rigil-architecture.svg)
 
-A high level view of how a SUAPP gets onchain and utilizes SUAVE core components is as follows:
+A broad level view of how a SUAPP gets onchain and utilizes SUAVE core components is as follows:
 
-1. **Developers** create contracts, which contain the logic for their SUAPP. A typical flow might look like: validate user L1 transaction, simulate it on L1 state, then do something based on the simulation results. These contracts are deployed to the SUAVE chain by sending to a **Computor**.
+1. **Developers** create contracts, which contain the logic for their SUAPP. A typical flow might look like: intake and validate user L1 transaction, simulate it on L1 state, then do something based on the simulation results. These contracts are deployed to the SUAVE chain by sending to a **Kettle**.
 2. **Users** send *Confidential Compute Requests* directed to a **Computor** or multiple.
-3. Inside the **Computor**:
-   - Requests are routed using the **RPC** to the appropriate services.
-   - The **MEVM** processes the smart contracts and other computations.
-   - Data might be stored in or retrieved from the **Suave Chain State** or **Conf Store** based on SUAPP needs.
+3. Inside the **Kettle**:
+   - Requests are routed using the **RPC** to the MEVM or regular EVM, depending on the context.
+   - The **MEVM** processes the confidential computation or smart contract call.
+   - Data might be stored in or retrieved from the **Suave Chain State** or **Confidential Data Store** based on SUAPP needs.
    - **Precompiles** aid in the efficient execution of certain functions.
    - **Domain-Specific Services** handle execution on different domains and return results to **MEVM**.
-4. The **Suave PoA Chain** results of confidential computation are written to the chain and communicated over p2p network.
+4. The **Suave PoA Chain** stores results of confidential computation.
 
 ## Example Flows
 
-The example flows in the following sections are used to illustrate some of the possibilities for MEV applications on SUAVE. Flows start at a high level showing how an OFA and Block Builder smart contracts work together to emit a block from a SUAVE node. Then to understand the Confindential Compute Request Flow more deeply there is a detailed data flow diagram. Lastly there two deeper dives into the specifics of how the OFA and Block Builder flows work individually.
+The example flows in the following sections are used to illustrate some of the possibilities for SUAPPs on SUAVE. Flows start at a high level showing how an OFA and Block Builder SUAPPs work together to emit a block from a SUAVE Kettle. Then to understand the Confindential Compute Request Flow more deeply, there is a detailed data flow diagram, followed by two deeper dives into the specifics of how the OFA and Block Builder flows work individually.
 
 ### High Level - OFA + Block Builder
 
