@@ -286,10 +286,10 @@ TODO: 🔗 Implementation
 
 Address: `0xTBD`	
 
-Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transaction bytes.
+Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transaction bytes. `signingKey` is hex encoded string of the ECDSA private key without the 0x prefix.
 
 ```solidity
-function signEthTransaction(bytes memory txn , bytes memory signingKey) view returns (bytes memory)
+function signEthTransaction(bytes memory txn , string memory signingKey) view returns (bytes memory)
 ```
 
 
