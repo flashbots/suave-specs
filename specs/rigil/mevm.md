@@ -3,31 +3,30 @@ title: MEVM
 description: The MEVM modifies the EVM by adding a new runtime, interpreter, and execution backend so as to enable anyone to create MEV applications.
 ---
 
-<!-- omit from toc -->
-# MEVM
-
-<div class="hideInDocs">
-
-**Table of Contents**
-
 <!-- TOC -->
 
-- [Overview](#overview)
-- [Modified Interpreter](#modified-interpreter)
-        - [Confidential Data Store APIs](#confidential-data-store-apis)
-        - [suavex namespace](#suavex-namespace)
-- [Precompiles](#precompiles)
-        - [IsConfidential](#isconfidential)
-        - [ConfidentialInputs](#confidentialinputs)
-        - [ConfidentialStore](#confidentialstore)
-        - [ConfidentialRetrieve](#confidentialretrieve)
-        - [NewBid](#newbid)
-        - [FetchBids](#fetchbids)
-        - [SimulateBundle](#simulatebundle)
-        - [ExtractHint](#extracthint)
-        - [BuildEthBlock](#buildethblock)
-        - [SubmitEthBlockBidToRelay](#submitethblockbidtorelay)
-- [Precompiles Governance](#precompiles-governance)
+- [MEVM](#mevm)
+    - [Overview](#overview)
+    - [Modified Interpreter](#modified-interpreter)
+            - [Confidential Data Store APIs](#confidential-data-store-apis)
+            - [suavex namespace](#suavex-namespace)
+    - [Precompiles](#precompiles)
+            - [IsConfidential](#isconfidential)
+            - [ConfidentialInputs](#confidentialinputs)
+            - [ConfidentialStore](#confidentialstore)
+            - [ConfidentialRetrieve](#confidentialretrieve)
+            - [NewBid](#newbid)
+            - [FetchBids](#fetchbids)
+            - [SimulateBundle](#simulatebundle)
+            - [ExtractHint](#extracthint)
+            - [SubmitBundleJsonRPC](#submitbundlejsonrpc)
+            - [FillMevShareBundleAddress](#fillmevsharebundleaddress)
+            - [BuildEthBlock](#buildethblock)
+            - [SubmitEthBlockBidToRelay](#submitethblockbidtorelay)
+            - [SignEth1559Transaction](#signeth1559transaction)
+    - [Precompile Call Authorization](#precompile-call-authorization)
+    - [Precompiles Governance](#precompiles-governance)
+    - [Security and Confidentiality](#security-and-confidentiality)
 
 <!-- /TOC -->
 
@@ -273,6 +272,19 @@ Submits a given builderBid to a mev-boost relay. Outputs any errors that arise d
 ```solidity
 function submitEthBlockBidToRelay(string memory relayUrl, bytes memory builderBid)
 ```
+
+#### `SignEthTransaction`
+
+TODO: 🔗 Implementation 
+
+Address: `0xTBD`	
+
+Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transaction bytes.
+
+```solidity
+function signEthTransaction(bytes memory txn , bytes memory signingKey) view returns (bytes memory)
+```
+
 
 ##  Precompile Call Authorization
 `checkIsPrecompileCallAllowed` implements the access control functionality. It validates whether a precompile and associated callers are authorized to access specific data. Key security functionality is as follows:
