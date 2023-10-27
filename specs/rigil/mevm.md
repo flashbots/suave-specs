@@ -5,28 +5,27 @@ description: The MEVM modifies the EVM by adding a new runtime, interpreter, and
 
 <!-- TOC -->
 
-- [MEVM](#mevm)
-    - [Overview](#overview)
-    - [Modified Interpreter](#modified-interpreter)
-            - [Confidential Data Store APIs](#confidential-data-store-apis)
-            - [suavex namespace](#suavex-namespace)
-    - [Precompiles](#precompiles)
-            - [IsConfidential](#isconfidential)
-            - [ConfidentialInputs](#confidentialinputs)
-            - [ConfidentialStore](#confidentialstore)
-            - [ConfidentialRetrieve](#confidentialretrieve)
-            - [NewBid](#newbid)
-            - [FetchBids](#fetchbids)
-            - [SimulateBundle](#simulatebundle)
-            - [ExtractHint](#extracthint)
-            - [SubmitBundleJsonRPC](#submitbundlejsonrpc)
-            - [FillMevShareBundleAddress](#fillmevsharebundleaddress)
-            - [BuildEthBlock](#buildethblock)
-            - [SubmitEthBlockBidToRelay](#submitethblockbidtorelay)
-            - [SignEthTransaction](#signethtransaction)
-    - [Precompile Call Authorization](#precompile-call-authorization)
-    - [Precompiles Governance](#precompiles-governance)
-    - [Security and Confidentiality](#security-and-confidentiality)
+- [Overview](#overview)
+- [Modified Interpreter](#modified-interpreter)
+        - [Confidential Data Store APIs](#confidential-data-store-apis)
+        - [suavex namespace](#suavex-namespace)
+- [Precompiles](#precompiles)
+        - [IsConfidential](#isconfidential)
+        - [ConfidentialInputs](#confidentialinputs)
+        - [ConfidentialStore](#confidentialstore)
+        - [ConfidentialRetrieve](#confidentialretrieve)
+        - [NewBid](#newbid)
+        - [FetchBids](#fetchbids)
+        - [SimulateBundle](#simulatebundle)
+        - [ExtractHint](#extracthint)
+        - [SubmitBundleJsonRPC](#submitbundlejsonrpc)
+        - [FillMevShareBundleAddress](#fillmevsharebundleaddress)
+        - [BuildEthBlock](#buildethblock)
+        - [SubmitEthBlockBidToRelay](#submitethblockbidtorelay)
+        - [SignEthTransaction](#signethtransaction)
+- [Precompile Call Authorization](#precompile-call-authorization)
+- [Precompiles Governance](#precompiles-governance)
+- [Security and Confidentiality](#security-and-confidentiality)
 
 <!-- /TOC -->
 
@@ -279,7 +278,7 @@ TODO: 🔗 Implementation
 
 Address: `0xTBD`	
 
-Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transaction bytes. `txn` is an RLP encoding of the transaction. `signingKey` is hex encoded string of the ECDSA private key without the 0x prefix. `chainId` is a hex encoded string. 
+Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transaction bytes. `txn` is binary encoding of the transaction. `signingKey` is hex encoded string of the ECDSA private key *without the 0x prefix*. `chainId` is a hex encoded string *with 0x prefix*. 
 
 ```solidity
 function signEthTransaction(bytes memory txn, string memory chainId, string memory signingKey) view returns (bytes memory)
