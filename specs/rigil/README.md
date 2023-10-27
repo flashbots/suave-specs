@@ -1,6 +1,6 @@
 ---
 title: Rigil Testnet
-description: Rigil is the first testnet for SUAVE. It is an experimental sandbox and foundation for building MEV applications in a decentralized and private manner.
+description: Rigil is the first testnet for SUAVE. It is a sandbox and foundation for building MEV applications in a decentralized and private manner, focused on developers.
 ---
 
 <!-- omit from toc -->
@@ -45,10 +45,10 @@ This repository hosts the current SUAVE Rigil testnet specifications and design 
 ---
 
 # Specs
+Specs are recommended to be read in the following order:
 - [Suave Chain](./suave-chain.md)
 - [MEVM](./mevm.md)
 - [Confidential Data Store](./confidential-data-store.md)
-- [Precompiles](./precompiles.md)
 - [Computor](./computor.md)
 - [Bridge](./bridge.md)
 
@@ -70,12 +70,12 @@ Read more about SUAVE:
 
 This set of specs outlines the Rigil Testnet, a continuation of the star system theme (Centauri, Andromeda, Helios) laid out in [The Future of MEV](https://writings.flashbots.net/mevm-suave-centauri-and-beyond); and the first in a series of SUAVE testnets based on stars in the [(Alpha) Centauri system](https://en.wikipedia.org/wiki/Alpha_Centauri): Rigil Kentaurus (Alpha Centauri A), Toliman (B) and Proxima Centauri (C).
 
-The Rigil Testnet is a sandbox for the development of MEV applications, termed SUAPPs, in both a decentralized and confidential environment. The MEVM, an adaptation of the EVM, grants developers access to unique MEV-specific precompiles. Leveraging the MEVM, developers can seamlessly represent MEV supply chain intricacies relevant to their needs through smart contracts in Solidity. By augmenting your dApp with a SUAPP, transactions and intents linked to your application can confidentially connect to a network of searchers, solvers, decentralized block builders, and more. Rigil offers a live test network for rapid prototyping hosted by Flashbots that uses Goerli ETH for gas and a proof-of-authority consensus mechanism.
+The Rigil Testnet is a sandbox for the development of MEV applications, termed SUAPPs, in a decentralized and confidential manner that is initially targetted towards developers.  The MEVM, an adaptation of the EVM, allows developers to write SUAPPs as smart contracts by giving access to unique MEV-specific precompiles. By augmenting your dApp with a SUAPP, transactions and intents linked to your application can confidentially connect to a network of searchers, solvers, block builders, and more. Rigil offers a live test network for rapid prototyping hosted by Flashbots that uses Goerli ETH for gas and a proof-of-authority consensus mechanism.
 
 Rigil's architecture is composed of several parts:
 * SUAVE "Computors": a network of actors that provide confidential computation for SUAPPs.
-* Confidential data storage: a private place to store data (e.g. user transactions)
-* SUAVE Chain: to store SUAPPs and public data
+* Confidential Data Storage: a private place to store data (e.g. user transactions).
+* SUAVE Chain: to store SUAPPs and public data.
 * MEVM: a modified EVM that exposes confidential execution and storage APIs to developers
 
 The goal of the Rigil testnet is to gather feedback on developer experience and harden the overall SUAVE software stack. The testnet is not intended to be a long-lived network and will be decomissioned after launch of the next testnet Toliman.
@@ -138,8 +138,10 @@ SUAVE Computors house all components necessary to perform confidential compute a
 
 ![Rigil architecture](/assets/rigil-architecture.svg)
 
+A high level view of how a SUAPP gets onchain and utilizes SUAVE core components is as follows:
+
 1. **Developers** create contracts, which contain the logic for their SUAPP. A typical flow might look like: validate user L1 transaction, simulate it on L1 state, then do something based on the simulation results. These contracts are deployed to the SUAVE chain by sending to a **Computor**.
-2. **Users** send confidential compute requests directed to a **Computor** or multiple.
+2. **Users** send *Confidential Compute Requests* directed to a **Computor** or multiple.
 3. Inside the **Computor**:
    - Requests are routed using the **RPC** to the appropriate services.
    - The **MEVM** processes the smart contracts and other computations.
