@@ -24,6 +24,8 @@ description: This essential component of the SUAVE protocol serves as a secure a
 
 <!-- /TOC -->
 
+</div>
+
 ## Overview
 This document provides the technical specification for the the Confidential Data Store, a privacy-centric networked storage system, specifically tailored to enable programmable privacy in SUAPPs. 
 
