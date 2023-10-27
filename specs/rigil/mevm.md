@@ -23,7 +23,7 @@ description: The MEVM modifies the EVM by adding a new runtime, interpreter, and
             - [FillMevShareBundleAddress](#fillmevsharebundleaddress)
             - [BuildEthBlock](#buildethblock)
             - [SubmitEthBlockBidToRelay](#submitethblockbidtorelay)
-            - [SignEth1559Transaction](#signeth1559transaction)
+            - [SignEthTransaction](#signeth1559transaction)
     - [Precompile Call Authorization](#precompile-call-authorization)
     - [Precompiles Governance](#precompiles-governance)
     - [Security and Confidentiality](#security-and-confidentiality)
