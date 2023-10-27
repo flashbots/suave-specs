@@ -3,13 +3,6 @@ title: MEVM
 description: The MEVM modifies the EVM by adding a new runtime, interpreter, and execution backend so as to enable anyone to create MEV applications.
 ---
 
-<!-- omit from toc -->
-# MEVM
-
-<div class="hideInDocs">
-
-**Table of Contents**
-
 <!-- TOC -->
 
 - [MEVM](#mevm)
@@ -30,7 +23,7 @@ description: The MEVM modifies the EVM by adding a new runtime, interpreter, and
             - [FillMevShareBundleAddress](#fillmevsharebundleaddress)
             - [BuildEthBlock](#buildethblock)
             - [SubmitEthBlockBidToRelay](#submitethblockbidtorelay)
-            - [SignEthTransaction](#signeth1559transaction)
+            - [SignEthTransaction](#signethtransaction)
     - [Precompile Call Authorization](#precompile-call-authorization)
     - [Precompiles Governance](#precompiles-governance)
     - [Security and Confidentiality](#security-and-confidentiality)
@@ -286,10 +279,10 @@ TODO: 🔗 Implementation
 
 Address: `0xTBD`	
 
-Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transaction bytes. `signingKey` is hex encoded string of the ECDSA private key without the 0x prefix.
+Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transaction bytes. `txn` is an RLP encoding of the transaction. `signingKey` is hex encoded string of the ECDSA private key without the 0x prefix. `chainId` is a hex encoded string. 
 
 ```solidity
-function signEthTransaction(bytes memory txn , string memory signingKey) view returns (bytes memory)
+function signEthTransaction(bytes memory txn, string memory chainId, string memory signingKey) view returns (bytes memory)
 ```
 
 
