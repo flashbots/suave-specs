@@ -46,9 +46,9 @@ Specifications for the SUAVE protocol are split into two main tracks, Centauri a
 
 **Andromeda* is the secure instantiation using SGX and cryptography, focusing on privacy with trust minimization. The plan is a progression of three milestones in the direction of better hardening and trust minimization.*
 
-**Proto-Collisions* are plans to sync up between these two development tracks. They represents points where parts of Centauri testnets can be run in secure and trust minimized fashion. Permissioned components from Proto-Collisions, if self-contained, could be run on mainnet.*
+**Proto-Collisions* are plans to sync up between these two development tracks. They represents points where parts of Centauri testnets can be run in secure and trust minimized fashion. Permissioned components from Proto-Collisions, if self-contained, could be used with Ethereum mainnet.*
 
-**Collision* is where the entirety of the SUAVE protocol can be safely deployed to Ethereum mainnet in a trust minimized and permissionless fashion.*
+**Collision* is where the entirety of the SUAVE protocol can be safely deployed for use with Ethereum mainnet in a trust minimized and permissionless fashion.*
 
 ![SUAVE Roadmap](/assets/future_roadmap_draft.png)
 
