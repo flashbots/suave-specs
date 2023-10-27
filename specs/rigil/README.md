@@ -70,7 +70,7 @@ Read more about SUAVE:
 
 This set of specs outlines the Rigil Testnet, a continuation of the star system theme (Centauri, Andromeda, Helios) laid out in [The Future of MEV](https://writings.flashbots.net/mevm-suave-centauri-and-beyond); and the first in a series of SUAVE testnets based on stars in the [(Alpha) Centauri system](https://en.wikipedia.org/wiki/Alpha_Centauri): Rigil Kentaurus (Alpha Centauri A), Toliman (B) and Proxima Centauri (C).
 
-The Rigil Testnet serves as a sandbox for the development of MEV applications, termed SUAPPs, in both a decentralized and confidential environment. The MEVM, an adaptation of the EVM, grants developers access to unique MEV-specific precompiles. Leveraging the MEVM, developers can seamlessly represent MEV supply chain intricacies relevant to their needs through smart contracts in Solidity. By augmenting your dApp with a SUAPP, transactions and intents linked to your application can confidentially connect to a network of searchers, solvers, decentralized block builders, and more. Rigil offers a live test network for rapid prototyping hosted by Flashbots that uses Goerli ETH for gas and a proof-of-authority consensus mechanism.
+The Rigil Testnet is a sandbox for the development of MEV applications, termed SUAPPs, in both a decentralized and confidential environment. The MEVM, an adaptation of the EVM, grants developers access to unique MEV-specific precompiles. Leveraging the MEVM, developers can seamlessly represent MEV supply chain intricacies relevant to their needs through smart contracts in Solidity. By augmenting your dApp with a SUAPP, transactions and intents linked to your application can confidentially connect to a network of searchers, solvers, decentralized block builders, and more. Rigil offers a live test network for rapid prototyping hosted by Flashbots that uses Goerli ETH for gas and a proof-of-authority consensus mechanism.
 
 Rigil's architecture is composed of several parts:
 * SUAVE "Computors": a network of actors that provide confidential computation for SUAPPs.
@@ -192,7 +192,7 @@ If we consider a specific use case, like an order flow auction, the high-level s
 ![OFA example flow](/assets/OFA-example-flow.svg)
 
 1. The user sends a Confidential Compute Request interacting with a SUAPP by calling it's `newBid` function. Included in this request is also the user's L1 transaction as a confidential Input.
-2. The computor will receive the transaction and process it. To do so it first runs the offchain logic assocaited with `newBid` which will extract the transaction's data and then return a callback:
+2. The computor will receive the transaction and process it. To do so it first runs the offchain logic associated with `newBid` which will extract the transaction's data and then return a callback:
 ```go
 return bytes.concat(this.emitHint.selector, abi.encode(hint));
 ```
