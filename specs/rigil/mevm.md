@@ -3,13 +3,6 @@ title: MEVM
 description: The MEVM modifies the EVM by adding a new runtime, interpreter, and execution backend so as to enable anyone to create MEV applications.
 ---
 
-<!-- omit from toc -->
-# MEVM
-
-<div class="hideInDocs">
-
-**Table of Contents**
-
 <!-- TOC -->
 
 - [Overview](#overview)
@@ -25,9 +18,14 @@ description: The MEVM modifies the EVM by adding a new runtime, interpreter, and
         - [FetchBids](#fetchbids)
         - [SimulateBundle](#simulatebundle)
         - [ExtractHint](#extracthint)
+        - [SubmitBundleJsonRPC](#submitbundlejsonrpc)
+        - [FillMevShareBundleAddress](#fillmevsharebundleaddress)
         - [BuildEthBlock](#buildethblock)
         - [SubmitEthBlockBidToRelay](#submitethblockbidtorelay)
+        - [SignEthTransaction](#signethtransaction)
+- [Precompile Call Authorization](#precompile-call-authorization)
 - [Precompiles Governance](#precompiles-governance)
+- [Security and Confidentiality](#security-and-confidentiality)
 
 <!-- /TOC -->
 
@@ -273,6 +271,19 @@ Submits a given builderBid to a mev-boost relay. Outputs any errors that arise d
 ```solidity
 function submitEthBlockBidToRelay(string memory relayUrl, bytes memory builderBid)
 ```
+
+#### `SignEthTransaction`
+
+TODO: 🔗 Implementation 
+
+Address: `0xTBD`	
+
+Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transaction bytes. `txn` is binary encoding of the transaction. `signingKey` is hex encoded string of the ECDSA private key *without the 0x prefix*. `chainId` is a hex encoded string *with 0x prefix*. 
+
+```solidity
+function signEthTransaction(bytes memory txn, string memory chainId, string memory signingKey) view returns (bytes memory)
+```
+
 
 ##  Precompile Call Authorization
 `checkIsPrecompileCallAllowed` implements the access control functionality. It validates whether a precompile and associated callers are authorized to access specific data. Key security functionality is as follows:
