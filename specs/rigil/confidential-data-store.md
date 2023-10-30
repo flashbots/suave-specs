@@ -3,10 +3,10 @@ title: Confidential Data Store
 description: This essential component of the SUAVE protocol serves as a secure and privacy-focused storage system.
 ---
 
+<div class="hideInDocs">
+
 <!-- omit from toc -->
 # Confidential Data Store
-
-<div class="hideInDocs">
 
 **Table of Contents**
 

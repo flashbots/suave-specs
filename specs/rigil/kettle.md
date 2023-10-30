@@ -3,10 +3,10 @@ title: Kettle
 description: SUAVE Kettles contain all necessary components to accept, process, and route confidential compute requests and results.
 ---
 
+<div class="hideInDocs">
+
 <!-- omit from toc -->
 # Kettle
-
-<div class="hideInDocs">
 
 **Table of Contents**
 
