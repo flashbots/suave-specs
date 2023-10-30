@@ -84,7 +84,7 @@ type SuaveTransaction struct {
 	S       *big.Int
 }
 ```
-In the future the signature fields here will represent various different types of proof of computation and more. If the IsConfidential flag is set to false on RPC requests then the transaction will be treated as normal with null values in `ExecutionNode`, `ConfidentialComputeRequest`, and `ConfidentialComputeResult`.
+In the future the signature fields here will represent various different types of proof of computation and more.
 
 ## Node Requirements and Setup
 
