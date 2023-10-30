@@ -14,23 +14,23 @@ description: SUAVE Kettles contain all necessary components to accept, process, 
 
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)
-- [Kettle Responsibilities](#Kettle-responsibilities)
-- [Becoming a Kettle](#becoming-a-Kettle)
-    - [Kettle Identification](#Kettle-identification)
-- [Kettle Architecture](#Kettle-architecture)
-    - [RPC](#rpc)
-    - [SUAVE PoA Chain](#suave-poa-chain)
-    - [MEVM](#mevm)
-    - [Confidential Data Store](#confidential-data-store)
-    - [Domain Specific Services](#domain-specific-services)
+- [Kettle Responsibilities](#kettle-responsibilities)
+- [Becoming a Kettle](#becoming-a-kettle)
+  - [Kettle Identification](#kettle-identification)
+- [Kettle Architecture](#kettle-architecture)
+  - [RPC](#rpc)
+  - [SUAVE PoA Chain](#suave-poa-chain)
+  - [MEVM](#mevm)
+  - [Confidential Data Store](#confidential-data-store)
+  - [Domain Specific Services](#domain-specific-services)
 - [Containers](#containers)
-    - [Confidential Compute Record](#confidential-compute-record)
-    - [ConfidentialComputeRequest](#confidentialcomputerequest)
-    - [Suave Transaction](#suave-transaction)
-- [Honest Kettle](#honest-Kettle)
+  - [Confidential Compute Record](#confidential-compute-record)
+  - [ConfidentialComputeRequest](#confidentialcomputerequest)
+  - [Suave Transaction](#suave-transaction)
+- [Honest Kettle](#honest-kettle)
 - [Confidential Computation](#confidential-computation)
-    - [Confidential Compute Process](#confidential-compute-process)
-    - [Suave JSON-RPC](#suave-json-rpc)
+  - [Confidential Compute Process](#confidential-compute-process)
+  - [Suave JSON-RPC](#suave-json-rpc)
 
 <!-- /TOC -->
 
@@ -98,7 +98,7 @@ For more details see the [🔗 MEVM](./mevm.md) spec.
 
 ### Confidential Data Store
 
-The Confidential Store serves as a secure and privacy-focused storage system, exposing a key-value store for safeguarding confidential compute and orderflow related data. Only those with appropriate permissions (peekers) can access the stored data, thus ensuring privacy and control.
+The Confidential Store serves as a secure and privacy-focused storage system, exposing a key-value store for safeguarding confidential compute and order flow related data. Only those with appropriate permissions (peekers) can access the stored data, thus ensuring privacy and control.
 
 For more details see the [🔗 Confidential Data Store](./confidential-data-store.md) spec.
 
