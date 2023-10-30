@@ -48,7 +48,7 @@ Specs are recommended to be read in the following order:
 - [Suave Chain](./suave-chain.md)
 - [MEVM](./mevm.md)
 - [Confidential Data Store](./confidential-data-store.md)
-- [Computor](./computor.md)
+- [Kettle](./kettle.md)
 - [Bridge](./bridge.md)
 
 ---
@@ -116,7 +116,7 @@ Here is a list of design decisions made for the Rigil testnet and associated rea
 - **Confidential Compute Request (CCR) [**[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/suave-chain.md#confidential-compute-request)**]**: A user request to Suave that contains (1) a wrapped transaction, (2) confidential inputs, and (3) a list of programs (contracts) (← list of Exec nodes) allowed to operate on confidential inputs.
 - **Builder solidity**: solidity with access to precompiles that help facilitate the processing of order flow.
 - **Precompiles [[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/precompiles.md)]:** purpose-built functions with extended capabilities that can be called from Builder Solidity
-- **Computor[[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/computor.md)]**: accepts and processes confidential compute requests and maintains the SUAVE chain; the logical unit of the SUAVE network and main protocol actor.
+- **Kettle[[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/kettle.md)]**: accepts and processes confidential compute requests and maintains the SUAVE chain; the logical unit of the SUAVE network and main protocol actor.
 - **Confidential Data Store [[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/confidential-data-store.md)]**: stores confidential data from MEV applications (L1 transactions, EIP 712 signed messages, userOps, privateKeys(?), etc).
 - **SUAVE Chain [**[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/suave-chain.md#suave-chain)**]**: a fork of Ethereum designed for usage alongside credible offchain execution in MEV use cases. In Rigil running in PoA mode.
 - **MEVM [[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/mevm.md)]**: modified EVM with MEV-specific precompiles that allow developers to define orderflow auctions and builder rules as smart contracts written in Solidity.
@@ -138,7 +138,7 @@ SUAVE Kettles house all components necessary to perform confidential compute and
 A broad level view of how a SUAPP gets onchain and utilizes SUAVE core components is as follows:
 
 1. **Developers** create contracts, which contain the logic for their SUAPP. A typical flow might look like: intake and validate user L1 transaction, simulate it on L1 state, then do something based on the simulation results. These contracts are deployed to the SUAVE chain by sending to a **Kettle**.
-2. **Users** send *Confidential Compute Requests* directed to a **Computor** or multiple.
+2. **Users** send *Confidential Compute Requests* directed to a **Kettle** or multiple.
 3. Inside the **Kettle**:
    - Requests are routed using the **RPC** to the MEVM or regular EVM, depending on the context.
    - The **MEVM** processes the confidential computation or smart contract call.
@@ -157,15 +157,15 @@ Below we can see the journey of orderflow from transaction, to searcher back-run
 
 ![OFA + Block Builder flow](/assets/OFA_And_Block_Flow.svg)
 
-1. A user sends their L1 transaction, EIP-712 message, UserOp, or Intent into a SUAVE computor.
+1. A user sends their L1 transaction, EIP-712 message, UserOp, or Intent into a SUAVE Kettle.
 2. MEVM processes this L1 transaction, extracts a hint, and does two things:
     - Stores the L1 transaction in the confidential data store
     - Sends a SUAVE transaction to the mempool which when executed emits the hint as a log
 3. Searchers will be listening on two different lanes for hints:
     - The fast lane which is the mempool
     - The global lane which is the SUAVE chain, which is slower, but will surface any hints that may have been censored by your specific peer in the mempool
-4. Once a hint is received, searchers craft a backrun transaction and send them to a SUAVE computor.
-5. SUAVE computors will process the backrun, combine it into a bundle with the original transaction, include the bundle in a block, and then submit the block to a relay.
+4. Once a hint is received, searchers craft a backrun transaction and send them to a SUAVE Kettle.
+5. SUAVE Kettles will process the backrun, combine it into a bundle with the original transaction, include the bundle in a block, and then submit the block to a relay.
 
 *Optionally*, bundles can be sent straight to a centralized block builder.
 
@@ -173,7 +173,7 @@ Below we can see the journey of orderflow from transaction, to searcher back-run
 
 The SUAVE-enabled node and the MEVM support multiple new data types, which are all specified in the [SUAVE Chain spec](./suave-chain.md#custom-types).
 
-The diagram below showcases how these different types interact to enable confidential computation on SUAVE computors.
+The diagram below showcases how these different types interact to enable confidential computation on SUAVE Kettles.
 
 ![Rigil transaction flow](/assets/rigil-tx-flow.svg)
 
@@ -191,7 +191,7 @@ If we consider a specific use case, like an order flow auction, the high-level s
 ![OFA example flow](/assets/OFA-example-flow.svg)
 
 1. The user sends a Confidential Compute Request interacting with a SUAPP by calling it's `newBid` function. Included in this request is also the user's L1 transaction as a confidential Input.
-2. The computor will receive the transaction and process it. To do so it first runs the offchain logic associated with `newBid` which will extract the transaction's data and then return a callback:
+2. The Kettle will receive the transaction and process it. To do so it first runs the offchain logic associated with `newBid` which will extract the transaction's data and then return a callback:
 ```go
 return bytes.concat(this.emitHint.selector, abi.encode(hint));
 ```
@@ -204,7 +204,7 @@ function emitHint(Suave.Bid calldata bid, bytes memory hint) public {
 3. The callback is inserted into the calldata of a SUAVE transaction and then shipped off to the SUAVE mempool.
 4. The transaction will get picked up, inserted in a block, and propagated.
 5. From here a searcher monitoring the chain and this specific OFA will see the log emitted and begin processing.
-6. Once the searcher has a backrun crafted for the opportunity it will send it to the Computor as a Confidential Compute Request with the backrun transaction in the confidential inputs.
+6. Once the searcher has a backrun crafted for the opportunity it will send it to the Kettle as a Confidential Compute Request with the backrun transaction in the confidential inputs.
 7. The MEVM node will receive and process the searcher's Confidential Compute Request based on the contracts logic. In this case it will:
     - Grab referenced User Transaction to be placed behind
     - Submit to domain specific service for simulation and validation
@@ -221,7 +221,7 @@ Blocks built from SUAVE will have unpredictable inclusion in the beginning, but 
 ![Block Building Flow](/assets/block-building-flow.svg)
 
 1. The user sends a Confidential Compute Request that specifies calling `buildBlock` on the onchain block builder contract.
-2. The Computor receives and processes the transaction; specifically the logic will:
+2. The Kettle receives and processes the transaction; specifically the logic will:
 - grab all bundles that are stored in the block builders confidential data store
 - simulate all bundles
 - sort bundles via arbitrary logic but in this gas by effective gas price
