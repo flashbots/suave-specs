@@ -84,7 +84,6 @@ type SuaveTransaction struct {
 	S       *big.Int
 }
 ```
-In the future the signature fields here will represent various different types of proof of computation and more.
 
 ## Node Requirements and Setup
 
