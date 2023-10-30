@@ -7,15 +7,15 @@
 [![Docs at https://suave.flashbots.net/](https://img.shields.io/badge/read-SUAVE%20docs-blue.svg)](https://suave.flashbots.net/)
 [![Join the discourse at https://collective.flashbots.net/](https://img.shields.io/badge/chat-on%20Flashbots%20forum-blue.svg)](https://collective.flashbots.net/)
 
-This repository hosts the current SUAVE specifications.
-
-</div>
+This repository hosts the current SUAVE protocol specifications. For SUAPP developers please check out our [developer docs](https://suave.flashbots.net/).
 
 Discussions about design rationale and proposed changes can be brought up and discussed on the [Flashbots forum](https://collective.flashbots.net/). Solidified, agreed-upon changes to the spec can be made through pull requests.
 
 <div class="warning">
 
-⚠️ The SUAVE protocol is still in a state where [the code](https://github.com/flashbots/suave-geth) is the most up-to-date protocol spec. The goal of these notes is to gradually evolve into an implementation agnostic specification. ⚠️
+⚠️ The SUAVE protocol is still in a state where [the code](https://github.com/flashbots/suave-geth) is the most up-to-date protocol spec. The goal of these notes is to gradually evolve into an implementation-agnostic specification. ⚠️
+
+</div>
 
 </div>
 
@@ -31,18 +31,24 @@ Read more about SUAVE:
 
 ---
 
-# Specs
+# Specs - In-development
 
-Specifications for the SUAVE protocol are currently organized by testnet during early protocol development. Several testnets might be developed in parallel.
-
-## In-development Specifications
+Specifications for the SUAVE protocol are split into two main tracks, Centauri and Andromeda.
 
 | Testnet                       | Phase                                               | ChainID    | Specs                                                                                                                                                                                                                                                         |
 | ----------------------------- | --------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**Rigil**](./specs/rigil/)   | [Big Bang](/assets/future_roadmap_draft.png)        | `16813125` | • [SUAVE chain](./specs/rigil/suave-chain.md) <br/> • [MEVM](./specs/rigil/mevm.md) <br/> • [Confidential Data Store](./specs/rigil/confidential-data-store.md) <br/> • [Precompiles](./specs/rigil/precompiles.md) <br/> • [Bridge](./specs/rigil/bridge.md) |
+| [**Rigil**](./specs/rigil/)   | [Big Bang](/assets/future_roadmap_draft.png)        | `16813125` | • [SUAVE chain](./specs/rigil/suave-chain.md) <br/> • [MEVM](./specs/rigil/mevm.md) <br/> • [Confidential Data Store](./specs/rigil/confidential-data-store.md) <br/> • [Bridge](./specs/rigil/bridge.md) <br/> • [Kettle](./specs/rigil/kettle.md) |
 | [**Sirrah**](./specs/sirrah/) | [Proto-Collision](/assets/future_roadmap_draft.png) |            |                                                                                                                                                                                                                                                               |
 
 ## Roadmap
+
+**Centauri* is focused on exploration and developer experience, serving as a spec for the secure instantiation. The plan is a progression of three testnets in the direction of increasing functionality and scalability.*
+
+**Andromeda* is the secure instantiation using SGX and cryptography, focusing on privacy with trust minimization. The plan is a progression of three milestones in the direction of better hardening and trust minimization.*
+
+**Proto-Collisions* are plans to sync up between these two development tracks. They represents points where parts of Centauri testnets can be run in secure and trust minimized fashion. Permissioned components from Proto-Collisions, if self-contained, could be used with Ethereum mainnet.*
+
+**Collision* is where the entirety of the SUAVE protocol can be safely deployed for use with Ethereum mainnet in a trust minimized and permissionless fashion.*
 
 ![SUAVE Roadmap](/assets/future_roadmap_draft.png)
 
