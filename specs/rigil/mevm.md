@@ -155,14 +155,25 @@ type ConfidentialEthBackend interface {
 
 SUAVE JSON-RPC can be seen as a super set of Ethereum JSON-RPC. This means that the [Ethereum JSON-RPC standard](https://geth.ethereum.org/docs/interacting-with-geth/rpc) remains the same when interacting with the SUAVE chain, with the following exceptions:
 
-1. New `IsConfidential` and `ExecutionNode` fields are added to the transaction arguments used in the `eth_sendTransaction` and `eth_call` methods.
-    1. If `IsConfidential` is set to true, the call will be performed as a confidential call, using the SUAVE Computor passed in when constructing a `ConfidentialComputeRequest`.
-    2. A `SuaveTransaction` is the result of `eth_sendTransaction`. If `IsConfidential` is unset or false in the request, this `SuaveTransaction` will be processed as a regular Ethereum Legacy or EIP1559 transaction.
+We overload the methods in the `eth_` namespace to use them to send MEVM transactions too. This is only enabled for suave chain?
+All RPCs that return transaction or receipt objects will do so with type `SuaveTransaction`, a super set of regular Ethereum transactions.
 
-2. New optional argument - `confidential_data` - is added to `eth_sendRawTransaction`, `eth_sendTransaction` and `eth_call` methods.
-    1. Confidential data is made available to the MEVM via a precompile, but does not become a part of the transaction that makes it to chain.
+### eth_sendRawTransaction
 
-3. All RPCs that return transaction or receipt objects will do so with type `SuaveTransaction`, a super set of regular Ethereum transactions.
+Creates new message call transaction or a contract creation for signed `ConfidentialComputeRequest`.
+
+### eth_call
+
+Executes a new message call immediately without creating a transaction on the block chain.
+
+**Parameters**
+
+- `IsConfidential`: Set to true to execute as a confidential request to access to the `MEVM` methods.
+- `ExecutionAddress`: `address` - (optional) The execution address that performs the execution.
+
+### eth_executionAddress
+
+Returns the address of the available execution addresses available in the Kettle.
 
 ### `suavex` namespace
 
