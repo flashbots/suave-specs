@@ -1,10 +1,10 @@
 ---
-title: Computor
-description: SUAVE computors contain all necessary components to accept, process, and route confidential compute requests and results.
+title: Kettle
+description: SUAVE Kettles contain all necessary components to accept, process, and route confidential compute requests and results.
 ---
 
 <!-- omit from toc -->
-# Computor
+# Kettle
 
 <div class="hideInDocs">
 
@@ -14,10 +14,10 @@ description: SUAVE computors contain all necessary components to accept, process
 
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)
-- [Computor Responsibilities](#computor-responsibilities)
-- [Becoming a Computor](#becoming-a-computor)
-    - [Computor Identification](#computor-identification)
-- [Computor Architecture](#computor-architecture)
+- [Kettle Responsibilities](#Kettle-responsibilities)
+- [Becoming a Kettle](#becoming-a-Kettle)
+    - [Kettle Identification](#Kettle-identification)
+- [Kettle Architecture](#Kettle-architecture)
     - [RPC](#rpc)
     - [SUAVE PoA Chain](#suave-poa-chain)
     - [MEVM](#mevm)
@@ -27,7 +27,7 @@ description: SUAVE computors contain all necessary components to accept, process
     - [Confidential Compute Record](#confidential-compute-record)
     - [ConfidentialComputeRequest](#confidentialcomputerequest)
     - [Suave Transaction](#suave-transaction)
-- [Honest Computor](#honest-computor)
+- [Honest Kettle](#honest-Kettle)
 - [Confidential Computation](#confidential-computation)
     - [Confidential Compute Process](#confidential-compute-process)
     - [Suave JSON-RPC](#suave-json-rpc)
@@ -38,15 +38,15 @@ description: SUAVE computors contain all necessary components to accept, process
 
 ## Overview
 
-This document provides the technical specification for the SUAVE computor: one of the main protocol actors in the SUAVE protocol. The computor contains all necessary components to accept, process, and route confidential compute requests and results. Below the expected behavior of an "honest computor" with respect to Rigil testnet version of the SUAVE protocol is outlined.
+This document provides the technical specification for the SUAVE Kettle: one of the main protocol actors in the SUAVE protocol. The Kettle contains all necessary components to accept, process, and route confidential compute requests and results. Below the expected behavior of an "honest Kettle" with respect to Rigil testnet version of the SUAVE protocol is outlined.
 
 ## Prerequisites
 
 All terminology, functions, and protocol mechanics defined in [SUAVE chain](./suave-chain.md), [Confidential Data Store](./confidential-data-store.md), and [MEVM](./mevm.md) are prerequisites for this document and used throughout. Please see the [Rigil overview](../../README.md) before continuing and use as a reference throughout.
 
-## Computor Responsibilities
+## Kettle Responsibilities
 
-A computor has several primary responsibilities within the SUAVE network:
+A Kettle has several primary responsibilities within the SUAVE network:
 
 1. **Handling Confidential Compute Requests:**
     - Process `ConfidentialComputeRequest` received from users or other network nodes.
@@ -64,17 +64,17 @@ A computor has several primary responsibilities within the SUAVE network:
     - Broadcast the results of confidential computations to the appropriate parties within the SUAVE network.
     - Ensure the propagation of results adheres to the confidentiality and privacy requirements of the SUAVE protocol.
 
-## Becoming a Computor
+## Becoming a Kettle
 
-Currently Computors are not permissioned, but participation in the confidential data store synchronization protocol is. To join the network you must run the entire Computor software stack and connect to the existing network via boot node or known peer. Eventually Computor's will be associated with an onchain registry.
+Currently Kettles are not permissioned, but participation in the confidential data store synchronization protocol is. To join the network you must run the entire Kettle software stack and connect to the existing network via boot node or known peer. Eventually Kettle's will be associated with an onchain registry.
 
-### Computor Identification
+### Kettle Identification
 
-A unique identifier in the form of Ethereum compatible public key must be generated for each computor to ensure proper tracking and verification of Confidential Computation, as well as responsibility assignment within the network.
+A unique identifier in the form of Ethereum compatible public key must be generated for each Kettle to ensure proper tracking and verification of Confidential Computation, as well as responsibility assignment within the network.
 
-## Computor Architecture
+## Kettle Architecture
 
-SUAVE Computors house all components necessary to perform confidential computation and result routing. Below is a high level architectural diagram followed by descriptions of the main components.
+SUAVE Kettles house all components necessary to perform confidential computation and result routing. Below is a high level architectural diagram followed by descriptions of the main components.
 
 ![Rigil architecture](/assets/rigil-architecture.svg)
 
@@ -86,7 +86,7 @@ This component is similar to RPCs in any ethereum or blockchain client and are r
 
 The SUAVE chain maintains consensus about smart contract code for SUAPPs. Additionaly it can also be used to store and/or broadcast data for better censorship guarantees.
 
-Computors are required to keep a lively copy of the SUAVE chain state in order to process Confidential Compute Requests, but these liveliness requirements are currently not defined in the Rigil Computor.
+Kettles are required to keep a lively copy of the SUAVE chain state in order to process Confidential Compute Requests, but these liveliness requirements are currently not defined in the Rigil Kettle.
 
 For more details see the [🔗 SUAVE chain](./suave-chain.md) spec.
 
@@ -104,13 +104,13 @@ For more details see the [🔗 Confidential Data Store](./confidential-data-stor
 
 ### Domain Specific Services
 
-Domain Specific Services allow computors to scale horizontally by hosting nodes for other domains in separate processes that can be queried at confidential compute time. Computors currently are not responsible for publicly committing to their domain specific services so support for a specific domain is done on computor-by-computor basis. In the event a computor attempts to process your confidential compute request for a domain it does not support it will simply return a failure on the computation and will not propagate the failure to the rest of the network so other computors can still attempt to process.
+Domain Specific Services allow Kettles to scale horizontally by hosting nodes for other domains in separate processes that can be queried at confidential compute time. Kettles currently are not responsible for publicly committing to their domain specific services so support for a specific domain is done on Kettle-by-Kettle basis. In the event a Kettle attempts to process your confidential compute request for a domain it does not support it will simply return a failure on the computation and will not propagate the failure to the rest of the network so other Kettles can still attempt to process.
 
 For more details on how to support the needed APIs to enable a domain see [🔗 SUAVE Execution API](./confidential-data-store.md) spec.
 
 ## Containers
 
-The core data types used inside the computor.
+The core data types used inside the Kettle.
 
 ### Confidential Compute Record
 
@@ -145,7 +145,7 @@ type ConfidentialComputeRequest struct {
 }
 ```
 
-A computor's signature is used as the integrity gurantee for the computation's results. Eventually this can include arbitrary proofs such zero-knowledge proofs.
+A Kettle's signature is used as the integrity gurantee for the computation's results. Eventually this can include arbitrary proofs such zero-knowledge proofs.
 
 ### Suave Transaction
 
@@ -166,26 +166,26 @@ type SuaveTransaction struct {
 ```
 
 
-## Honest Computor
+## Honest Kettle
 
-At present, the protocol relies on the honesty of computors, akin to the reliance on honest block builders and relays. An honest computor performs the aforementioned duties of:
+At present, the protocol relies on the honesty of Kettles, akin to the reliance on honest block builders and relays. An honest Kettle performs the aforementioned duties of:
 
 - **Handling Confidential Compute Requests**
 - **Maintaining Confidential Data Privacy**
 - **Maintaining the Confidential Data Store**
 - **Propagating Confidential Compute Results**
 
-On the Rigil testnet Computors do not live inside of Trusted Execution Environments, and because of this, a malicious computor could alter it's source code to censor Confidential Compute Requests and their results.
+On the Rigil testnet Kettles do not live inside of Trusted Execution Environments, and because of this, a malicious Kettle could alter it's source code to censor Confidential Compute Requests and their results.
 
 ## Confidential Computation
 
-To successfuly process a request for confidential computation Computors must engage the Confidential Compute Process.
+To successfuly process a request for confidential computation Kettles must engage the Confidential Compute Process.
 
 ### Confidential Compute Process
 
 Confidential compute is defined by use of an [offchain function call](https://docs.soliditylang.org/en/latest/contracts.html#view-functions), signified in solidity via the `view` modifier.
 
-These view functions are used in conjunction with plaintext access to decrypted data to perform confidential computation on the decrypted data. From there results and a signature of integrity are propagated along with the initial request. The confidential data is propagated separately via the confidential data store, but other Computors do not need the underlying data as they will trust any valid signature attesting to the computation's integrity. 
+These view functions are used in conjunction with plaintext access to decrypted data to perform confidential computation on the decrypted data. From there results and a signature of integrity are propagated along with the initial request. The confidential data is propagated separately via the confidential data store, but other Kettles do not need the underlying data as they will trust any valid signature attesting to the computation's integrity. 
 
 ![Confidential Compute Process](../../assets/CCR.png)
 

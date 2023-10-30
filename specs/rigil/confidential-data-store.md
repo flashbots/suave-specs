@@ -35,7 +35,7 @@ This document provides the technical specification for the the Confidential Data
    SUAPPs define both the shape and operations performed on user data which is put into the confidential data store. Users send data to SUAPPs, and ultimately the confidential data store, through confidential compute requests.
 
 2. **Confidential Data Transfer**:  
-   Once Computors successfully carry out confidential compute requests, the results are disseminated to other Computors using a dedicated transport protocol.
+   Once Kettles successfully carry out confidential compute requests, the results are disseminated to other Kettles using a dedicated transport protocol.
 
 3. **Data Modeling**:  
    The confidential data store adopts a straightforward key-value storage paradigm. This allows flexibility in accommodating various data types:

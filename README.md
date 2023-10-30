@@ -9,14 +9,13 @@
 
 This repository hosts the current SUAVE protocol specifications. For SUAPP developers please check out our [developer docs](https://suave.flashbots.net/).
 
+Discussions about design rationale and proposed changes can be brought up and discussed on the [Flashbots forum](https://collective.flashbots.net/). Solidified, agreed-upon changes to the spec can be made through pull requests.
+
 <div class="warning">
 
 ⚠️ The SUAVE protocol is still in a state where [the code](https://github.com/flashbots/suave-geth) is the most up-to-date protocol spec. The goal of these notes is to gradually evolve into an implementation agnostic specification. ⚠️
 
 </div>
-
-Discussions about design rationale and proposed changes can be brought up and discussed on the [Flashbots forum](https://collective.flashbots.net/). Solidified, agreed-upon changes to the spec can be made through pull requests.
-
 
 </div>
 
@@ -38,7 +37,7 @@ Specifications for the SUAVE protocol are split into two main tracks, Centauri a
 
 | Testnet                       | Phase                                               | ChainID    | Specs                                                                                                                                                                                                                                                         |
 | ----------------------------- | --------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**Rigil**](./specs/rigil/)   | [Big Bang](/assets/future_roadmap_draft.png)        | `16813125` | • [SUAVE chain](./specs/rigil/suave-chain.md) <br/> • [MEVM](./specs/rigil/mevm.md) <br/> • [Confidential Data Store](./specs/rigil/confidential-data-store.md) <br/> • [Bridge](./specs/rigil/bridge.md) <br/> • [Computor](./specs/rigil/computor.md) |
+| [**Rigil**](./specs/rigil/)   | [Big Bang](/assets/future_roadmap_draft.png)        | `16813125` | • [SUAVE chain](./specs/rigil/suave-chain.md) <br/> • [MEVM](./specs/rigil/mevm.md) <br/> • [Confidential Data Store](./specs/rigil/confidential-data-store.md) <br/> • [Bridge](./specs/rigil/bridge.md) <br/> • [Kettle](./specs/rigil/kettle.md) |
 | [**Sirrah**](./specs/sirrah/) | [Proto-Collision](/assets/future_roadmap_draft.png) |            |                                                                                                                                                                                                                                                               |
 
 ## Roadmap
@@ -47,9 +46,9 @@ Specifications for the SUAVE protocol are split into two main tracks, Centauri a
 
 **Andromeda* is the secure instantiation using SGX and cryptography, focusing on privacy with trust minimization. The plan is a progression of three milestones in the direction of better hardening and trust minimization.*
 
-**Proto-Collisions* are plans to sync up between these two development tracks. They represents points where parts of Centauri testnets can be run in secure and trust minimized fashion. Permissioned components from Proto-Collisions, if self-contained, could be run on mainnet.*
+**Proto-Collisions* are plans to sync up between these two development tracks. They represents points where parts of Centauri testnets can be run in secure and trust minimized fashion. Permissioned components from Proto-Collisions, if self-contained, could be used with Ethereum mainnet.*
 
-**Collision* is where the entirety of the SUAVE protocol can be safely deployed to Ethereum mainnet in a trust minimized and permissionless fashion.*
+**Collision* is where the entirety of the SUAVE protocol can be safely deployed for use with Ethereum mainnet in a trust minimized and permissionless fashion.*
 
 ![SUAVE Roadmap](/assets/future_roadmap_draft.png)
 
