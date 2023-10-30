@@ -8,8 +8,6 @@ description: The MEVM modifies the EVM by adding a new runtime, interpreter, and
 
 <div class="hideInDocs">
 
-**Table of Contents**
-
 <!-- TOC -->
 
 - [Overview](#overview)
@@ -29,6 +27,7 @@ description: The MEVM modifies the EVM by adding a new runtime, interpreter, and
     - [`FillMevShareBundleAddress`](#fillmevsharebundleaddress)
     - [`BuildEthBlock`](#buildethblock)
     - [`SubmitEthBlockBidToRelay`](#submitethblockbidtorelay)
+    - [SignEthTransaction](#signethtransaction)
 - [Precompile Call Authorization](#precompile-call-authorization)
 - [Precompiles Governance](#precompiles-governance)
 - [Security and Confidentiality](#security-and-confidentiality)
@@ -89,7 +88,7 @@ type SuaveExecutionBackend struct {
 
 #### Confidential Data Store APIs
 
-For more information on the capabilities exposed by the Confidential Data Store, see it's related [🔗 spec](/specs/rigil/confidential-data-store.md). The interface exposed to precompiles:
+For more information on the capabilities exposed by the Confidential Data Store, see it's related [🔗 spec](./confidential-data-store.md). The interface exposed to precompiles:
 
 ```go
 type ConfidentialStore interface {
@@ -277,6 +276,19 @@ Submits a given builderBid to a mev-boost relay. Outputs any errors that arise d
 ```solidity
 function submitEthBlockBidToRelay(string memory relayUrl, bytes memory builderBid)
 ```
+
+#### `SignEthTransaction`
+
+TODO: 🔗 Implementation 
+
+Address: `0xTBD`	
+
+Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transaction bytes. `txn` is binary encoding of the transaction. `signingKey` is hex encoded string of the ECDSA private key *without the 0x prefix*. `chainId` is a hex encoded string *with 0x prefix*. 
+
+```solidity
+function signEthTransaction(bytes memory txn, string memory chainId, string memory signingKey) view returns (bytes memory)
+```
+
 
 ##  Precompile Call Authorization
 `checkIsPrecompileCallAllowed` implements the access control functionality. It validates whether a precompile and associated callers are authorized to access specific data. Key security functionality is as follows:
