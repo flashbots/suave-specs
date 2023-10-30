@@ -3,9 +3,13 @@ title: Bridge
 description: A description of our current bridge implementation, which is meant to enable rapid prototyping.
 ---
 
+<div class="hideInDocs">
+
 <!-- no toc -->
 <!-- omit from toc -->
 # Bridge
+
+</div>
 
 SUAVE uses a simple and highly trusted bridge with the Goerli Ethereum network to transfer assets for gas and MEV applications.
 

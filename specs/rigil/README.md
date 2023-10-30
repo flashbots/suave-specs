@@ -3,10 +3,10 @@ title: Rigil Testnet
 description: Rigil is the first testnet for SUAVE. It is a sandbox and foundation for building MEV applications in a decentralized and private manner, focused on developers.
 ---
 
+<div class="hideInDocs">
+
 <!-- omit from toc -->
 # SUAVE Rigil Testnet
-
-<div class="hideInDocs">
 
 [![Docs at https://suave.flashbots.net/](https://img.shields.io/badge/read-SUAVE%20docs-blue.svg)](https://suave.flashbots.net/)
 [![Join the discourse at https://collective.flashbots.net/](https://img.shields.io/badge/chat-on%20Flashbots%20forum-blue.svg)](https://collective.flashbots.net/)

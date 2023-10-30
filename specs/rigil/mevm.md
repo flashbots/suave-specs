@@ -3,10 +3,10 @@ title: MEVM
 description: The MEVM modifies the EVM by adding a new runtime, interpreter, and execution backend so as to enable anyone to create MEV applications.
 ---
 
+<div class="hideInDocs">
+
 <!-- omit from toc -->
 # MEVM
-
-<div class="hideInDocs">
 
 <!-- TOC -->
 
