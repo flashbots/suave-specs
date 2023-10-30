@@ -281,7 +281,7 @@ function submitEthBlockBidToRelay(string memory relayUrl, bytes memory builderBi
 
 TODO: 🔗 Implementation 
 
-Address: `0xTBD`	
+Address: `0x0000000000000000000000000000000040100001`	
 
 Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transaction bytes. `txn` is binary encoding of the transaction. `signingKey` is hex encoded string of the ECDSA private key *without the 0x prefix*. `chainId` is a hex encoded string *with 0x prefix*. 
 
