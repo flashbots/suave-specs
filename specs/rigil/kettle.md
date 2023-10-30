@@ -204,13 +204,21 @@ This sequence diagram represents the interactions between various components whe
 
 ### Suave JSON-RPC
 
-SUAVE JSON-RPC can be seen as a super set of Ethereum JSON-RPC. This means that the [Ethereum JSON-RPC standard](https://geth.ethereum.org/docs/interacting-with-geth/rpc) remains the same when interacting with the SUAVE chain, with the following exceptions:
+SUAVE JSON-RPC can be seen as a super set of Ethereum JSON-RPC. This means that the [Ethereum JSON-RPC standard](https://geth.ethereum.org/docs/interacting-with-geth/rpc) remains the same when interacting with the SUAVE chain. Some methods in the `eth_` namespace are overloaded to support the confidential compute requests.
 
-1. Suave JSON-RPC has two modes of operation: regular and confidential determined by the truth value of `IsConfidential` in the Confidential Compute Request.
-- *Regular mode* is equivalent to the usual Ethereum virtual machine environment, with all computation occurring onchain and requests are made with SUAVE transactions instead of Confidential Compute Requests.
-- *Confidential mode* accesses additional precompiles, both directly and through a convenient [library](https://github.com/flashbots/suave-geth/blob/main/suave/sol/libraries/Suave.sol). Confidential execution is *not* verifiable during on-chain state transition. The result of the confidential execution is instead cached in the `SuaveTransaction`.
+### eth_sendRawTransaction
 
-2. New optional argument - `confidential_data` - is added to `eth_sendRawTransaction`, `eth_sendTransaction` and `eth_call` methods.
-- Confidential data is made available to the MEVM via a precompile, but does not become a part of the transaction that makes it to chain.
+Creates new message call transaction or a contract creation for a signed `ConfidentialComputeRequest`.
 
-3. All RPCs that return transaction or receipt objects will do so with type `SuaveTransaction`, a super set of regular Ethereum transactions.
+### eth_call
+
+Executes a new message call immediately without creating a transaction on the block chain. It follows the same format as the default `eth_call` with two extra parameters:
+
+**Parameters**
+
+- `IsConfidential`: Set to true to execute as a confidential request and access the `MEVM` methods.
+- `ExecutionAddress`: `address` - (optional) The execution address that performs the execution.
+
+### eth_executionAddress
+
+Returns the list of available addresses in the Kettle to execute the confidential compute request.
