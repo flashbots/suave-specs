@@ -153,27 +153,24 @@ type ConfidentialEthBackend interface {
 
 ## Suave JSON-RPC
 
-SUAVE JSON-RPC can be seen as a super set of Ethereum JSON-RPC. This means that the [Ethereum JSON-RPC standard](https://geth.ethereum.org/docs/interacting-with-geth/rpc) remains the same when interacting with the SUAVE chain, with the following exceptions:
-
-We overload the methods in the `eth_` namespace to use them to send MEVM transactions too. This is only enabled for suave chain?
-All RPCs that return transaction or receipt objects will do so with type `SuaveTransaction`, a super set of regular Ethereum transactions.
+SUAVE JSON-RPC can be seen as a super set of Ethereum JSON-RPC. This means that the [Ethereum JSON-RPC standard](https://geth.ethereum.org/docs/interacting-with-geth/rpc) remains the same when interacting with the SUAVE chain. Some methods in the `eth_` namespace are overloaded to support the confidential compute requests.
 
 ### eth_sendRawTransaction
 
-Creates new message call transaction or a contract creation for signed `ConfidentialComputeRequest`.
+Creates new message call transaction or a contract creation for a signed `ConfidentialComputeRequest`.
 
 ### eth_call
 
-Executes a new message call immediately without creating a transaction on the block chain.
+Executes a new message call immediately without creating a transaction on the block chain. It follows the same format as the default `eth_call` with two extra parameters:
 
 **Parameters**
 
-- `IsConfidential`: Set to true to execute as a confidential request to access to the `MEVM` methods.
+- `IsConfidential`: Set to true to execute as a confidential request and access the `MEVM` methods.
 - `ExecutionAddress`: `address` - (optional) The execution address that performs the execution.
 
 ### eth_executionAddress
 
-Returns the address of the available execution addresses available in the Kettle.
+Returns the list of available addresses in the Kettle to execute the confidential compute request.
 
 ### `suavex` namespace
 
