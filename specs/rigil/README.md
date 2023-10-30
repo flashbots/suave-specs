@@ -72,9 +72,9 @@ This set of specs outlines the Rigil Testnet, a continuation of the star system 
 The Rigil Testnet, targeted towards developers, serves as a dedicated sandbox for creating SUAPPs (MEV applications) in a way that's both decentralized and confidential. It features the MEVM, a variant of the EVM, which equips developers with the ability to write SUAPPs as smart contracts by giving them access to unique MEV-specific precompiles. Integrating a SUAPP into your dApp allows transactions and intents to confidentially interface with a network of searchers, solvers, block builders, and more. Rigil provides a live, Flashbots-hosted test network for rapid prototyping that uses Goerli ETH for gas and operates with a proof-of-authority consensus mechanism.
 
 Rigil's architecture is composed of several parts:
-* SUAVE "Kettles": a network of actors that provide confidential computation for SUAPPs.
+* SUAVE Kettles: a network of actors that provide confidential computation for SUAPPs.
 * Confidential Data Storage: a private place to store data (e.g. user transactions).
-* SUAVE Chain: a public place to store data (e.g. intentionally leaked information) and SUAPP logic.
+* SUAVE Chain: a public place to store data (e.g. intentionally leaked information) and SUAPP logic (e.g. deployed smart contracts).
 * MEVM: a modified EVM that exposes confidential computation and storage APIs to developers
 
 The goal of the Rigil testnet is to gather feedback on developer experience and harden the overall SUAVE software stack. The testnet is not intended to be a long-lived network and will be decommissioned after the launch of the next testnet Toliman.
@@ -104,7 +104,7 @@ Here is a list of design decisions made for the Rigil testnet and associated rea
 - Decision *2*: **No SGX Nodes (yet)**
     - reason: SGX SUAVE Kettles are an active area of research and development and do not drastically impact the UX of users on **Rigil Testnet**.
 - Decision *3*: **Weak Data Availability Guarantees**
-    - Reason: The Confidential Data Store currently only keeps private data available for one day. [Compute Output Validity and Heterogenous DA](https://collective.flashbots.net/t/suave-ensuring-output-validity-and-heterogenous-da/2184) are active open questions, which whether or not answered does not drastically impact the UX on Rigil Testnet.
+    - Reason: The Confidential Data Store currently only keeps private data available for one day. [Compute Output Validity and Heterogenous DA](https://collective.flashbots.net/t/suave-ensuring-output-validity-and-heterogenous-da/2184) are active open questions, which whether or not answered do not drastically impact the UX on Rigil Testnet.
 - Decision *4*: **Centralized Builder Interoperability**
     - reason: Blocks emitted from SUAVE Kettles will have unpredictable inclusion in early development so SUAVE rigil supports a precompile to send bundles to off-SUAVE block builders.
 
@@ -113,14 +113,14 @@ Here is a list of design decisions made for the Rigil testnet and associated rea
 - **User**: humans or computers interacting with SUAPPs, primarily through sending confidential compute requests (CCR) to Kettles.
 - **SUAPP**: SUAVE application, smart contracts on SUAVE chain with rules for confidential computation and functions to submit to target domains (i.e. chains).
 - **Developer:** creates smart contracts on SUAVE Chain that define rules for SUAPPs.
-- **Confidential Compute Request (CCR) [**[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/suave-chain.md#confidential-compute-request)**]**: A user request to Suave that contains (1) a wrapped transaction, (2) confidential inputs, and (3) a list of programs (contracts) (← list of Exec nodes) allowed to operate on confidential inputs.
-- **Builder solidity**: solidity with access to precompiles that help facilitate the processing of order flow.
+- **Confidential Compute Request (CCR) [**[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/suave-chain.md#confidential-compute-request)**]**: A user request to Suave that contains (1) SUAPP information such as to and calldata, (2) confidential inputs, and (3) a list of SUAPPs and Kettles allowed to operate on confidential inputs.
+- **Builder solidity**: solidity with access to precompiles that help facilitate the processing of transactions and intents.
 - **Precompiles [[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/precompiles.md)]:** purpose-built functions with extended capabilities that can be called from Builder Solidity
 - **Kettle[[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/kettle.md)]**: accepts and processes confidential compute requests and maintains the SUAVE chain; the logical unit of the SUAVE network and main protocol actor.
-- **Confidential Data Store [[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/confidential-data-store.md)]**: stores confidential data from MEV applications (L1 transactions, EIP 712 signed messages, userOps, privateKeys(?), etc).
-- **SUAVE Chain [**[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/suave-chain.md#suave-chain)**]**: a fork of Ethereum designed for usage alongside credible offchain execution in MEV use cases. In Rigil running in PoA mode.
-- **MEVM [[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/mevm.md)]**: modified EVM with MEV-specific precompiles that allow developers to define order flow auctions and builder rules as smart contracts written in Solidity.
-- **Domain-Specific Services (Execution Node?):** provide functionality to interact with target domains (i.e. for Goerli or Arbitrum, simulate transactions, build bundles, build blocks, …)
+- **Confidential Data Store [[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/confidential-data-store.md)]**: stores confidential data for SUAPPs (L1 transactions, EIP 712 signed messages, userOps, private keys, and more).
+- **SUAVE Chain [**[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/suave-chain.md#suave-chain)**]**: a fork of Ethereum designed for usage alongside credible confidential execution in MEV use cases.
+- **Domain-Specific Services:** provide functionality to interact with target domains (i.e. for Goerli or Arbitrum, simulate transactions, build bundles, build blocks, …)
+- **MEVM [[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/mevm.md)]**: modified EVM with a set of precompiles to interact with APIs for Confidential Data Store, Domain-Specific Services, and more.
 - **RPC** - receives user transactions, moves confidential input to the Confidential Data Store, and passes the compute request to MEVM.
 - **OFA** - an application that receives transactions and either facilitates an auction on top of it or routes it elsewhere.
 - **Solver** - actor who takes many user token trades as input and competes to provide a solution to the mathematically optimal way to route all trades.
