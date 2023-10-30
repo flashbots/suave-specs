@@ -1,6 +1,6 @@
 ---
 title: MEVM
-description: The MEVM modifies the EVM by adding a new runtime, interpreter, and execution backend so as to enable anyone to create MEV applications.
+description: The MEVM modifies the EVM by adding a new runtime, interpreter, and execution backend to enable anyone to create MEV applications.
 ---
 
 <div class="hideInDocs">
@@ -23,11 +23,11 @@ description: The MEVM modifies the EVM by adding a new runtime, interpreter, and
 
 ## Overview
 
-This document provides the technical specification for the MEVM, a modified version of the Ethereum Virtual Machine (EVM). The MEVM is a set of precompiles to interact with APIs, two of these API services are the Confidential Data Store and the SUAVE Execution (SUAVEX) name space. There may be other API endpoints in the future.
+This document provides the technical specification for the MEVM, a modified version of the Ethereum Virtual Machine (EVM). The MEVM is a set of precompiles to interact with APIs; two of these API services are the Confidential Data Store and the SUAVE Execution (SUAVEX) namespace. There may be other API endpoints in the future.
 
 ## Modified Interpreter
 
-Under the hood the MEVM is a modified EVM Interpreter which is able to use a new runtime called the `SuaveExecutionBackend`.
+Under the hood, the MEVM is a modified EVM Interpreter which is able to use a new runtime called the `SuaveExecutionBackend`.
 
 ```mermaid
 graph TB
@@ -60,7 +60,7 @@ graph TB
     classDef lightgreen fill:#b3c69f,stroke:#444,stroke-width:2px, color:#333;
 ```
 
-The `SuaveExecutionBackend` is responsible for exposing the APIs that precompiles are able to hook into.
+The `SuaveExecutionBackend` is responsible for exposing the APIs that precompiles can hook into.
 
 ```go
 type SuaveExecutionBackend struct {
@@ -71,7 +71,7 @@ type SuaveExecutionBackend struct {
 
 #### Confidential Data Store APIs
 
-For more information on the capabilities exposed by the Confidential Data Store, see it's related [🔗 spec](./confidential-data-store.md). The interface exposed to precompiles:
+For more information on the capabilities exposed by the Confidential Data Store, see its related [🔗 spec](./confidential-data-store.md). The interface exposed to precompiles:
 
 ```go
 type ConfidentialStore interface {
@@ -99,4 +99,4 @@ BuildEthBlockFromBundles(ctx context.Context, buildArgs *types.BuildBlockArgs, b
 BuildEthBlock(ctx context.Context, buildArgs *types.BuildBlockArgs, txs types.Transactions) (*engine.ExecutionPayloadEnvelope, error)
 ```
 
-Domain specific services which seek to be used by SUAVE must implement the methods in this namespace. More details will be expanded in future iterations.
+Domain-specific services which seek to be used by SUAVE must implement the methods in this namespace. More details will be expanded in future iterations.

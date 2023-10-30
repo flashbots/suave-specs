@@ -108,7 +108,7 @@ Here is a list of design decisions made for the Rigil testnet and associated rea
 - Decision *4*: **Centralized Builder Interoperability**
     - reason: Blocks emitted from SUAVE Kettles will have unpredictable inclusion in early development so SUAVE rigil supports a precompile to send bundles to off-SUAVE block builders.
 
-## Glossary 
+## Glossary
 
 - **User**: humans or computers interacting with SUAPPs, primarily through sending confidential compute requests (CCR) to Kettles.
 - **SUAPP**: SUAVE application, smart contracts on SUAVE chain with rules for confidential computation and functions to submit to target domains (i.e. chains).
@@ -191,7 +191,7 @@ If we consider a specific use case, like an order flow auction, the high-level s
 ![OFA example flow](/assets/OFA-example-flow.svg)
 
 1. The user sends a Confidential Compute Request interacting with a SUAPP by calling its `newBid` function. Included in this request is also the user's L1 transaction as a confidential Input.
-2. The Kettle will receive the transaction and process it. To do so it first runs the offchain logic associated with `newBid` which will extract the transaction's data and then return a callback:
+2. The Kettle will receive the transaction and process it. To do so it first runs the off-chain logic associated with `newBid` which will extract the transaction's data and then return a callback:
 ```go
 return bytes.concat(this.emitHint.selector, abi.encode(hint));
 ```
@@ -207,7 +207,7 @@ function emitHint(Suave.Bid calldata bid, bytes memory hint) public {
 6. Once the searcher has a backrun crafted for the opportunity it will send it to the Kettle as a Confidential Compute Request with the backrun transaction in the confidential inputs.
 7. The MEVM node will receive and process the searcher's Confidential Compute Request based on the contracts logic. In this case, it will:
     - Grab referenced User Transaction to be placed behind
-    - Submit to domain specific service for simulation and validation
+    - Submit to domain-specific service for simulation and validation
     - Construct a bundle object with two transactions
 8. From there, in this example, the MEVM will then forward the bundle to pre-configured off-SUAVE block builders, but could as easily also forward to onchain block builders.
 
