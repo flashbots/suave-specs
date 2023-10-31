@@ -37,9 +37,9 @@ description: SUAVE Kettles contain all necessary components to accept, process, 
 
 <!-- /TOC -->
 
-</div>
-
 ## Overview
+
+</div>
 
 This document provides the technical specification for the SUAVE Kettle, one of the primary protocol actors in the SUAVE protocol. The Kettle contains all necessary components to accept, process, and route confidential compute requests and results. Below, the expected behavior of an "honest Kettle" for the Rigil testnet version of the SUAVE protocol is outlined.
 

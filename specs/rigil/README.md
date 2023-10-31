@@ -128,7 +128,7 @@ Here is a list of design decisions made for the Rigil testnet and associated rea
 - **Intent** - refers to “what” the desired outcome of an action on a blockchain should be as opposed to transactions which specify “how” an action should be performed.
 - **Intent Executor** - actor who is responsible for taking consolidated user intents and executing them on a domain.
 - **Relay** - actor in the [mev-boost protocol](https://github.com/flashbots/mev-boost) that is responsible for validating blocks and offering them to validators upon request.
-- **Domains** - [a system with a globally shared state that is mutated by various players through actions](https://arxiv.org/pdf/2112.01472.pdf) (e.g. “transactions”) that execute in a shared execution environment.
+- **Domains** - [a system with a globally shared state that is mutated by various players through actions](https://arxiv.org/abs/2112.01472) (e.g. “transactions”) that execute in a shared execution environment.
 
 ## Architecture
 

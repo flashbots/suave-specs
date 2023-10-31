@@ -21,9 +21,9 @@ description: The MEVM modifies the EVM by adding a new runtime, interpreter, and
 
 ---
 
-</div>
-
 ## Overview
+
+</div>
 
 This document provides the technical specification for the MEVM, a modified version of the Ethereum Virtual Machine (EVM). The MEVM is a set of precompiles to interact with APIs; two of these API services are the Confidential Data Store and the SUAVE Execution (SUAVEX) namespace. There may be other API endpoints in the future.
 
