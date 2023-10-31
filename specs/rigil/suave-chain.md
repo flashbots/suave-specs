@@ -27,9 +27,9 @@ description: The primary purpose of the SUAVE chain is to reach (and maintain) c
 
 ---
 
-</div>
-
 ## Overview
+
+</div>
 
 This document outlines the specifications for the SUAVE Rigil chain.
 
