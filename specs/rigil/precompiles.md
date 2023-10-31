@@ -37,25 +37,9 @@ description: Precompile are MEVM contracts that are implemented in native code i
 
 Precompile are MEVM contracts that are implemented in native code instead of bytecode. Precompiles additionally can communicate with internal APIs. Currently the MEVM supports all existing Ethereum Precompiles up to Dencun, and introduces four new classes of precompiles:
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-1. off-chain computation that is too expensive in solidity
-=======
-1. offchain computation that is too expensive in solidity
->>>>>>> 176ace3 (undo off-chain)
-2. calls to API methods to interact with the Confidential Data Store
-3. calls to `suavex` API Methods to interact with Domain-Specific Services
-=======
 1. offchain computation that is too expensive in solidity
 2. calls to API methods to interact with the Confidential Data Store
-3. calls to `suavex` API Methods to interact with Domain Specific Services
->>>>>>> c8bd884 (standalone precompiles.md (#47))
-=======
-1. off-chain computation that is too expensive in solidity
-2. calls to API methods to interact with the Confidential Data Store
 3. calls to `suavex` API Methods to interact with Domain-Specific Services
->>>>>>> 8752c78 (grammar fixes)
 4. calls to retrieve context for the confidential compute requests
 
 ## Available Precompiles
