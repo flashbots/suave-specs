@@ -114,14 +114,14 @@ Here is a list of design decisions made for the Rigil testnet and associated rea
 - **User**: humans or computers interacting with SUAPPs, primarily through sending confidential compute requests (CCR) to Kettles.
 - **SUAPP**: SUAVE application, smart contracts on SUAVE chain with rules for confidential computation and functions to submit to target domains (i.e. chains).
 - **Developer:** creates smart contracts on SUAVE Chain that define rules for SUAPPs.
-- **Confidential Compute Request (CCR) [**[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/suave-chain.md#confidential-compute-request)**]**: A user request to Suave that contains (1) SUAPP information such as to and calldata, (2) confidential inputs, and (3) a list of SUAPPs and Kettles allowed to operate on confidential inputs.
+- **Confidential Compute Request (CCR) [[🔗spec](./kettle.md#confidential-compute-process)]**: A user request to Suave that contains (1) SUAPP information such as to and calldata, (2) confidential inputs, and (3) a list of SUAPPs and Kettles allowed to operate on confidential inputs.
 - **Builder solidity**: solidity with access to precompiles that help facilitate the processing of transactions and intents.
-- **Precompiles [[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/precompiles.md)]:** purpose-built functions with extended capabilities that can be called from Builder Solidity
-- **Kettle[[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/kettle.md)]**: accepts and processes confidential compute requests and maintains the SUAVE chain; the logical unit of the SUAVE network and main protocol actor.
-- **Confidential Data Store [[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/confidential-data-store.md)]**: stores confidential data for SUAPPs (L1 transactions, EIP 712 signed messages, userOps, private keys, and more).
-- **SUAVE Chain [**[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/suave-chain.md#suave-chain)**]**: a fork of Ethereum designed for usage alongside credible confidential execution in MEV use cases.
-- **Domain-Specific Services:** provide functionality to interact with target domains (i.e. for Goerli or Arbitrum, simulate transactions, build bundles, build blocks, …)
-- **MEVM [[🔗spec](https://github.com/flashbots/suave-specs/blob/initial/specs/rigil/mevm.md)]**: modified EVM with a set of precompiles to interact with APIs for Confidential Data Store, Domain-Specific Services, and more.
+- **Precompiles [[🔗spec](./precompiles.md)]:** purpose-built functions with extended capabilities that can be called from Builder Solidity
+- **Kettle[[🔗spec](kettle.md)]**: accepts and processes confidential compute requests and maintains the SUAVE chain; the logical unit of the SUAVE network and main protocol actor.
+- **Confidential Data Store [[🔗spec](./confidential-data-store.md)]**: stores confidential data for SUAPPs (L1 transactions, EIP 712 signed messages, userOps, private keys, and more).
+- **SUAVE Chain [[🔗spec](./suave-chain.md)]**: a fork of Ethereum designed for usage alongside credible confidential execution in MEV use cases.
+- **Domain-Specific Services[[🔗spec](./kettle.md#domain-specific-services)**]**: provide functionality to interact with target domains (i.e. for Goerli or Arbitrum, simulate transactions, build bundles, build blocks, …)
+- **MEVM [[🔗spec](./mevm.md)]**: modified EVM with a set of precompiles to interact with APIs for Confidential Data Store, Domain-Specific Services, and more.
 - **RPC** - receives user transactions, moves confidential input to the Confidential Data Store, and passes the compute request to MEVM.
 - **OFA** - an application that receives transactions and either facilitates an auction on top of it or routes it elsewhere.
 - **Solver** - actor who takes many user token trades as input and competes to provide a solution to the mathematically optimal way to route all trades.
@@ -172,7 +172,7 @@ Below we can see the journey of order flow from transaction, to searcher back-ru
 
 ### Confidential Compute Request Flow
 
-The SUAVE-enabled node and the MEVM support multiple new data types, which are all specified in the [SUAVE Chain spec](./suave-chain.md#custom-types).
+The SUAVE Kettle and the MEVM support multiple new data types, which are all specified in the [Kettle spec](./kettle.md#containers).
 
 The diagram below showcases how these different types interact to enable confidential computation on SUAVE Kettles.
 
@@ -203,13 +203,13 @@ function emitHint(Suave.Bid calldata bid, bytes memory hint) public {
 }
 ```
 3. The callback is inserted into the calldata of a SUAVE transaction and then shipped off to the SUAVE mempool.
-4. The transaction will get picked up, inserted in a block, and propagated.
+4. The transaction will get picked up, inserted in a SUAVE block, and propagated to SUAVE Kettles.
 5. From here a searcher monitoring the chain and this specific OFA will see the log emitted and begin processing.
 6. Once the searcher has a backrun crafted for the opportunity it will send it to the Kettle as a Confidential Compute Request with the backrun transaction in the confidential inputs.
-7. The MEVM node will receive and process the searcher's Confidential Compute Request based on the contracts logic. In this case, it will:
+7. The Kettle will receive and process the searcher's Confidential Compute Request based on the contracts logic. In this case, it will:
     - Grab referenced User Transaction to be placed behind
+    - Construct a bundle object with the two transactions
     - Submit to domain-specific service for simulation and validation
-    - Construct a bundle object with two transactions
 8. From there, in this example, the MEVM will then forward the bundle to pre-configured off-SUAVE block builders, but could as easily also forward to onchain block builders.
 
 
