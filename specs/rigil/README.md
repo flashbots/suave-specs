@@ -47,6 +47,7 @@ This repository hosts the current SUAVE Rigil testnet specifications and design 
 Specs are recommended to be read in the following order:
 - [Suave Chain](./suave-chain.md)
 - [MEVM](./mevm.md)
+- [Precompiles](./precompiles.md)
 - [Confidential Data Store](./confidential-data-store.md)
 - [Kettle](./kettle.md)
 - [Bridge](./bridge.md)
@@ -108,7 +109,7 @@ Here is a list of design decisions made for the Rigil testnet and associated rea
 - Decision *4*: **Centralized Builder Interoperability**
     - reason: Blocks emitted from SUAVE Kettles will have unpredictable inclusion in early development so SUAVE rigil supports a precompile to send bundles to off-SUAVE block builders.
 
-## Glossary 
+## Glossary
 
 - **User**: humans or computers interacting with SUAPPs, primarily through sending confidential compute requests (CCR) to Kettles.
 - **SUAPP**: SUAVE application, smart contracts on SUAVE chain with rules for confidential computation and functions to submit to target domains (i.e. chains).
