@@ -109,7 +109,7 @@ For more details, see the [🔗 Confidential Data Store](./confidential-data-sto
 
 Domain-Specific Services allow Kettles to scale horizontally by hosting nodes for other domains in separate processes that can be queried at confidential compute time. Kettles currently are not responsible for publicly committing to their domain-specific services, so support for a specific domain is done on Kettle-by-Kettle basis. If a Kettle attempts to process your confidential compute request for a domain it does not support, it will simply return a failure on the computation and will not propagate the failure to the rest of the network so other Kettles can still attempt to process.
 
-For more details on supporting the needed APIs to enable a domain, see [🔗 SUAVE Execution API](./confidential-data-store.md) spec.
+For more details on supporting the needed APIs to enable a domain, see below [🔗 SUAVE Execution API](#suave-json-rpc) spec.
 
 ## Containers
 
