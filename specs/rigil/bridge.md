@@ -18,8 +18,8 @@ The current bridge implementation is meant to enable rapid prototyping. It is no
 ## Components
 
 The bridge code consists of two components:
-1. on-chain `GasBridge` contract
-2. off-chain `relayerClient`
+1. onchain `GasBridge` contract
+2. offchain `relayerClient`
 
 An implementation of a `GasBridge` smart contract and the trusted `relayerClient` backend can be found [here](https://github.com/flashbots/suave-bridge/blob/master/contracts/GasBridge.sol) and [here](https://github.com/flashbots/suave-bridge/blob/master/internal/bridge.go) respectively.
 

@@ -39,7 +39,7 @@ Precompile are MEVM contracts that are implemented in native code instead of byt
 
 1. offchain computation that is too expensive in solidity
 2. calls to API methods to interact with the Confidential Data Store
-3. calls to `suavex` API Methods to interact with Domain Specific Services
+3. calls to `suavex` API Methods to interact with Domain-Specific Services
 4. calls to retrieve context for the confidential compute requests
 
 ## Available Precompiles
@@ -205,7 +205,6 @@ Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transactio
 ```solidity
 function signEthTransaction(bytes memory txn, string memory chainId, string memory signingKey) view returns (bytes memory)
 ```
-
 
 ## Precompiles Governance
 

@@ -208,7 +208,7 @@ function emitHint(Suave.Bid calldata bid, bytes memory hint) public {
 6. Once the searcher has a backrun crafted for the opportunity it will send it to the Kettle as a Confidential Compute Request with the backrun transaction in the confidential inputs.
 7. The MEVM node will receive and process the searcher's Confidential Compute Request based on the contracts logic. In this case, it will:
     - Grab referenced User Transaction to be placed behind
-    - Submit to domain specific service for simulation and validation
+    - Submit to domain-specific service for simulation and validation
     - Construct a bundle object with two transactions
 8. From there, in this example, the MEVM will then forward the bundle to pre-configured off-SUAVE block builders, but could as easily also forward to onchain block builders.
 
