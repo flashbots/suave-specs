@@ -69,7 +69,7 @@ Suave-geth is based on geth v1.12.0 ([`e501b3`](https://github.com/flashbots/sua
 
 ## Suave Transaction
 
-The SUAVE protocol adds a new transaction type to the base Ethereum protocol of which it is called a `SuaveTransaction`. The purpose of this new transaction type is to process fees for off-chain computation and to support the new data primitives associated with confidential compute. Blocks on the SUAVE chain consist of lists of SUAVE transactions. This new transaction type facilitates and captures key information involved in Confidential Compute Requests, which are detailed in the [Kettle](./kettle.md) spec. These fields encapsulate the result and record of a confidential computation request. It includes the `ConfidentialComputeRequest`, signed by the user, which ensures that the result comes from the expected SUAVE Kettle, as the `SuaveTransaction`'s signer must match the `ExecutionNode`. Additionally, it includes the original request as the `ConfidentialComputeRecord`.
+The SUAVE protocol adds a new transaction type to the base Ethereum protocol of which it is called a `SuaveTransaction`. The purpose of this new transaction type is to process fees for offchain computation and to support the new data primitives associated with confidential compute. Blocks on the SUAVE chain consist of lists of SUAVE transactions. This new transaction type facilitates and captures key information involved in Confidential Compute Requests, which are detailed in the [Kettle](./kettle.md) spec. These fields encapsulate the result and record of a confidential computation request. It includes the `ConfidentialComputeRequest`, signed by the user, which ensures that the result comes from the expected SUAVE Kettle, as the `SuaveTransaction`'s signer must match the `ExecutionNode`. Additionally, it includes the original request as the `ConfidentialComputeRecord`.
 
 ```go
 type SuaveTransaction struct {
@@ -100,7 +100,7 @@ type SuaveTransaction struct {
 
 ## Gas and Transaction Fees
 
-The SUAVE chain employs the same gas pricing mechanism as Ethereum pre-Cancun hardfork (no blob transactions) where gas prices adjust based on network demand. Nodes currently track Confidential Compute Request gas usage but only charge a small flat fee for it, and there is no cap for off-chain compute.
+The SUAVE chain employs the same gas pricing mechanism as Ethereum pre-Cancun hardfork (no blob transactions) where gas prices adjust based on network demand. Nodes currently track Confidential Compute Request gas usage but only charge a small flat fee for it, and there is no cap for offchain compute.
 
 Currently, SUAVE transactions can only be expressed as Legacy transaction types, but they will get converted into EIP-1559 base fee model under the hood.
 

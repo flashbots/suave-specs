@@ -39,7 +39,11 @@ Precompile are MEVM contracts that are implemented in native code instead of byt
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 1. off-chain computation that is too expensive in solidity
+=======
+1. offchain computation that is too expensive in solidity
+>>>>>>> 176ace3 (undo off-chain)
 2. calls to API methods to interact with the Confidential Data Store
 3. calls to `suavex` API Methods to interact with Domain-Specific Services
 =======

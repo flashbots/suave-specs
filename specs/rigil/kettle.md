@@ -69,7 +69,7 @@ A Kettle has several primary responsibilities within the SUAVE network:
 
 ## Becoming a Kettle
 
-Currently, Kettles are not permissioned, but participation in the confidential data store synchronization protocol is. To join the network, you must run the entire Kettle software stack and connect to the existing network via bootnode or known peer. Eventually, Kettles will be associated with an on-chain registry.
+Currently, Kettles are not permissioned, but participation in the confidential data store synchronization protocol is. To join the network, you must run the entire Kettle software stack and connect to the existing network via bootnode or known peer. Eventually, Kettles will be associated with an onchain registry.
 
 ### Kettle Identification
 
@@ -139,7 +139,7 @@ type ConfidentialComputeRecord struct {
 
 ### ConfidentialComputeRequest
 
-This type enables users to request the MEVM to compute over their data via the `eth_sendRawTransaction` method. After processing, the request's `ConfidentialComputeRecord` is embedded into `SuaveTransaction.ConfidentialComputeRequest` and serves as an on-chain record of computation.
+This type enables users to request the MEVM to compute over their data via the `eth_sendRawTransaction` method. After processing, the request's `ConfidentialComputeRecord` is embedded into `SuaveTransaction.ConfidentialComputeRequest` and serves as an onchain record of computation.
 
 ```go
 type ConfidentialComputeRequest struct {
@@ -186,7 +186,7 @@ To successfully process a request for confidential computation, Kettles must eng
 
 ### Confidential Compute Process
 
-Confidential compute is defined by the use of an [off-chain function call](https://docs.soliditylang.org/en/latest/contracts.html#view-functions), signified in solidity via the `view` modifier.
+Confidential compute is defined by the use of an [offchain function call](https://docs.soliditylang.org/en/latest/contracts.html#view-functions), signified in solidity via the `view` modifier.
 
 These view functions are used with plaintext access to decrypted data to perform confidential computation on the decrypted data. Results and a signature of integrity are propagated along with the initial request. The confidential data is propagated separately via the confidential data store, but other Kettles do not need the underlying data as they will trust any valid signature attesting to the computation's integrity.
 
