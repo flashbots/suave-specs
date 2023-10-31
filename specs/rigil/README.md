@@ -203,13 +203,13 @@ function emitHint(Suave.Bid calldata bid, bytes memory hint) public {
 }
 ```
 3. The callback is inserted into the calldata of a SUAVE transaction and then shipped off to the SUAVE mempool.
-4. The transaction will get picked up, inserted in a block, and propagated.
+4. The transaction will get picked up, inserted in a SUAVE block, and propagated to SUAVE Kettles.
 5. From here a searcher monitoring the chain and this specific OFA will see the log emitted and begin processing.
 6. Once the searcher has a backrun crafted for the opportunity it will send it to the Kettle as a Confidential Compute Request with the backrun transaction in the confidential inputs.
-7. The MEVM node will receive and process the searcher's Confidential Compute Request based on the contracts logic. In this case, it will:
+7. The Kettle will receive and process the searcher's Confidential Compute Request based on the contracts logic. In this case, it will:
     - Grab referenced User Transaction to be placed behind
+    - Construct a bundle object with the two transactions
     - Submit to domain-specific service for simulation and validation
-    - Construct a bundle object with two transactions
 8. From there, in this example, the MEVM will then forward the bundle to pre-configured off-SUAVE block builders, but could as easily also forward to onchain block builders.
 
 
