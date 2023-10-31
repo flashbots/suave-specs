@@ -14,6 +14,8 @@ description: The MEVM modifies the EVM by adding a new runtime, interpreter, and
 - [Modified Interpreter](#modified-interpreter)
     - [Confidential Data Store APIs](#confidential-data-store-apis)
     - [`suavex` namespace](#suavex-namespace)
+- [Precompile Call Authorization](#precompile-call-authorization)
+- [Security and Confidentiality](#security-and-confidentiality)
 
 <!-- /TOC -->
 
@@ -99,4 +101,22 @@ BuildEthBlockFromBundles(ctx context.Context, buildArgs *types.BuildBlockArgs, b
 BuildEthBlock(ctx context.Context, buildArgs *types.BuildBlockArgs, txs types.Transactions) (*engine.ExecutionPayloadEnvelope, error)
 ```
 
-Domain-specific services which seek to be used by SUAVE must implement the methods in this namespace. More details will be expanded in future iterations.
+Domain specific services which seek to be used by SUAVE must implement the methods in this namespace. More details will be expanded in future iterations.
+
+
+##  Precompile Call Authorization
+`checkIsPrecompileCallAllowed` implements the access control functionality. It validates whether a precompile and associated callers are authorized to access specific data. Key security functionality is as follows:
+
+1. **Universal Access**: If data allows the "any peeker", the function searches the `CallerStack` for a caller different from the precompile, granting access upon finding one.
+
+2. **Restricted Access and Validation**:
+   - The function checks if the precompile is explicitly authorized to access bid data.
+   - It then validates each caller in the `CallerStack` against the `AllowedPeekers` list. If an authorized caller is found, access is granted.
+
+3. **Error Handling**:
+   - Access is denied, with an error returned, if no authorized caller is found or if the precompile lacks authorization and is not a special case (like confStore addresses).
+
+
+## Security and Confidentiality
+
+`checkIsPrecompileCallAllowed` ensures that either the precompile or one of its callers must be authorized for access, enhancing security by strict validation of permissions. This approach is necessary for maintaining data integrity and preventing unauthorized access, but ultimately not entirely sufficient for total confidentiality. Future iterations will delve deeper into encryption methodologies, access controls, and auditing mechanisms to fortify data privacy further, as well as Trusted Execution Environment to ensure access control is maintained.

@@ -25,9 +25,8 @@ description: Precompile are MEVM contracts that are implemented in native code i
   - [`BuildEthBlock`](#buildethblock)
   - [`SubmitEthBlockBidToRelay`](#submitethblockbidtorelay)
   - [`SignEthTransaction`](#signethtransaction)
-- [Precompile Call Authorization](#precompile-call-authorization)
 - [Precompiles Governance](#precompiles-governance)
-- [Security and Confidentiality](#security-and-confidentiality)
+>>>>>>> c8bd884 (standalone precompiles.md (#47))
 
 <!-- /TOC -->
 
@@ -39,9 +38,15 @@ description: Precompile are MEVM contracts that are implemented in native code i
 
 Precompile are MEVM contracts that are implemented in native code instead of bytecode. Precompiles additionally can communicate with internal APIs. Currently the MEVM supports all existing Ethereum Precompiles up to Dencun, and introduces four new classes of precompiles:
 
+<<<<<<< HEAD
 1. off-chain computation that is too expensive in solidity
 2. calls to API methods to interact with the Confidential Data Store
 3. calls to `suavex` API Methods to interact with Domain-Specific Services
+=======
+1. offchain computation that is too expensive in solidity
+2. calls to API methods to interact with the Confidential Data Store
+3. calls to `suavex` API Methods to interact with Domain Specific Services
+>>>>>>> c8bd884 (standalone precompiles.md (#47))
 4. calls to retrieve context for the confidential compute requests
 
 ## Available Precompiles
@@ -209,19 +214,6 @@ function signEthTransaction(bytes memory txn, string memory chainId, string memo
 ```
 
 
-##  Precompile Call Authorization
-`checkIsPrecompileCallAllowed` implements the access control functionality. It validates whether a precompile and associated callers are authorized to access specific data. Key security functionality is as follows:
-
-1. **Universal Access**: If data allows the "any peeker", the function searches the `CallerStack` for a caller different from the precompile, granting access upon finding one.
-
-2. **Restricted Access and Validation**:
-   - The function checks if the precompile is explicitly authorized to access bid data.
-   - It then validates each caller in the `CallerStack` against the `AllowedPeekers` list. If an authorized caller is found, access is granted.
-
-3. **Error Handling**:
-   - Access is denied, with an error returned, if no authorized caller is found or if the precompile lacks authorization and is not a special case (like confStore addresses).
-
-
 ## Precompiles Governance
 
 Governance process for adding precompiles is in it's early stages but is as follows:
@@ -229,8 +221,3 @@ Governance process for adding precompiles is in it's early stages but is as foll
 - Open a PR and provide implementation
 - Feedback and review
 - Possibly merge and deploy in the next network upgrade, or sooner, depending on the precompile
-
-
-## Security and Confidentiality
-
-`checkIsPrecompileCallAllowed` ensures that either the precompile or one of its callers must be authorized for access, enhancing security by strict validation of permissions. This approach is necessary for maintaining data integrity and preventing unauthorized access, but ultimately not entirely sufficient for total confidentiality. Future iterations will delve deeper into encryption methodologies, access controls, and auditing mechanisms to fortify data privacy further, as well as Trusted Execution Environment to ensure access control is maintained.

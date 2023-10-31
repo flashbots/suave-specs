@@ -47,6 +47,7 @@ This repository hosts the current SUAVE Rigil testnet specifications and design 
 Specs are recommended to be read in the following order:
 - [Suave Chain](./suave-chain.md)
 - [MEVM](./mevm.md)
+- [Precompiles](./precompiles.md)
 - [Confidential Data Store](./confidential-data-store.md)
 - [Kettle](./kettle.md)
 - [Bridge](./bridge.md)
