@@ -44,7 +44,9 @@ This repository hosts the current SUAVE Rigil testnet specifications and design 
 ---
 
 # Specs
-Specs are recommended to be read in the following order:
+
+We recommend that you read the specs in the following order:
+
 - [Suave Chain](./suave-chain.md)
 - [MEVM](./mevm.md)
 - [Precompiles](./precompiles.md)
@@ -70,7 +72,9 @@ Read more about SUAVE:
 
 This set of specs outlines the Rigil Testnet, a continuation of the star system theme (Centauri, Andromeda, Helios) laid out in [The Future of MEV](https://writings.flashbots.net/mevm-suave-centauri-and-beyond); and the first in a series of SUAVE testnets based on stars in the [(Alpha) Centauri system](https://en.wikipedia.org/wiki/Alpha_Centauri): Rigil Kentaurus (Alpha Centauri A), Toliman (B) and Proxima Centauri (C).
 
-The Rigil Testnet, targeted towards developers, serves as a dedicated sandbox for creating SUAPPs (MEV applications) in a way that's both decentralized and confidential. It features the MEVM, a variant of the EVM, which equips developers with the ability to write SUAPPs as smart contracts by giving them access to unique MEV-specific precompiles. Integrating a SUAPP into your dApp allows transactions and intents to confidentially interface with a network of searchers, solvers, block builders, and more. Rigil provides a live, Flashbots-hosted test network for rapid prototyping that uses Goerli ETH for gas and operates with a proof-of-authority consensus mechanism.
+The Rigil Testnet, targeted towards developers, serves as a dedicated sandbox for creating SUAPPs (MEV applications) in a way that's both decentralized and confidential. It features the MEVM, a variant of the EVM, which equips developers with the ability to write SUAPPs as smart contracts by giving them access to unique MEV-specific precompiles. SUAPPs can send transactions and intents confidentially to a network of searchers, solvers, block builders, and more. 
+
+Rigil provides a live, Flashbots-hosted test network for rapid prototyping that uses Goerli ETH for gas and operates with a proof-of-authority consensus mechanism.
 
 Rigil's architecture is composed of several parts:
 * SUAVE Kettles: a network of actors that provide confidential computation for SUAPPs.
@@ -87,7 +91,7 @@ The Rigil testnet is initially focused on a specific set of actors:
 1. **Developers** - create smart contracts on SUAVE Chain that define rules for SUAPPs like order flow auctions, block building, and intent executors.
 2. **Transaction Originators** - leverage unique applications on SUAVE, e.g. to send private transactions or execute your intents.
 3. **Proposers** - outsource block building to SUAVE. Initially, SUAVE is focused only on Ethereum.
-4. **Block Builders** - can be implemented as smart contracts inside Suave. In the Rigil Tesnet, SUAVE Rigil has the ability to submit bundles to external builders to help transaction inclusion during the early stages of development.
+4. **Block Builders** - can be implemented as smart contracts inside Suave. In the Rigil Tesnet, SUAPPs can submit bundles to external builders to help with transaction inclusion during the early stages of development.
 5. **Auction Protocols** - can program their auctions as a smart contract.
 
 ## Rigil Design Goals
@@ -101,13 +105,13 @@ The Rigil testnet is initially focused on a specific set of actors:
 Here is a list of design decisions made for the Rigil testnet and associated reasoning:
 
 - Decision *1*: **Proof-of-Authority Consensus**
-    - *reason*: [SUAVE consensus](https://collective.flashbots.net/t/suave-consensus/2152) is an active open question, which whether or not answered do not drastically impact the UX of users on **Rigil Testnet**.
+    - *reason*: [SUAVE consensus](https://collective.flashbots.net/t/suave-consensus/2152) is an active open question which, whether or answered not, does not drastically impact the UX of users on **Rigil Testnet**.
 - Decision *2*: **No SGX Nodes (yet)**
     - reason: SGX SUAVE Kettles are an active area of research and development and do not drastically impact the UX of users on **Rigil Testnet**.
 - Decision *3*: **Weak Data Availability Guarantees**
-    - Reason: The Confidential Data Store currently only keeps private data available for one day. [Compute Output Validity and Heterogenous DA](https://collective.flashbots.net/t/suave-ensuring-output-validity-and-heterogenous-da/2184) are active open questions, which whether or not answered do not drastically impact the UX on Rigil Testnet.
+    - Reason: The Confidential Data Store currently only keeps private data available for one day. [Compute Output Validity and Heterogenous DA](https://collective.flashbots.net/t/suave-ensuring-output-validity-and-heterogenous-da/2184) are active open questions which, whether or answered not, does not drastically impact the UX on Rigil Testnet.
 - Decision *4*: **Centralized Builder Interoperability**
-    - reason: Blocks emitted from SUAVE Kettles will have unpredictable inclusion in early development so SUAVE rigil supports a precompile to send bundles to off-SUAVE block builders.
+    - reason: Blocks emitted from SUAVE Kettles will have unpredictable inclusion in early development so Rigil Testnet supports a precompile to send bundles to off-SUAVE block builders.
 
 ## Glossary
 
@@ -119,8 +123,8 @@ Here is a list of design decisions made for the Rigil testnet and associated rea
 - **Precompiles [[🔗spec](./precompiles.md)]:** purpose-built functions with extended capabilities that can be called from Builder Solidity
 - **Kettle[[🔗spec](kettle.md)]**: accepts and processes confidential compute requests and maintains the SUAVE chain; the logical unit of the SUAVE network and main protocol actor.
 - **Confidential Data Store [[🔗spec](./confidential-data-store.md)]**: stores confidential data for SUAPPs (L1 transactions, EIP 712 signed messages, userOps, private keys, and more).
-- **SUAVE Chain [[🔗spec](./suave-chain.md)]**: a fork of Ethereum designed for usage alongside credible confidential execution in MEV use cases.
-- **Domain-Specific Services[[🔗spec](./kettle.md#domain-specific-services)**]**: provide functionality to interact with target domains (i.e. for Goerli or Arbitrum, simulate transactions, build bundles, build blocks, …)
+- **SUAVE Chain [[🔗spec](./suave-chain.md)]**: a fork of Ethereum designed to facilitate credible, confidential execution in MEV use cases.
+- **Domain-Specific Services [[🔗spec](./kettle.md#domain-specific-services)]**: provide functionality to interact with target domains (i.e. for Goerli or Arbitrum, simulate transactions, build bundles, build blocks, …)
 - **MEVM [[🔗spec](./mevm.md)]**: modified EVM with a set of precompiles to interact with APIs for Confidential Data Store, Domain-Specific Services, and more.
 - **RPC** - receives user transactions, moves confidential input to the Confidential Data Store, and passes the compute request to MEVM.
 - **OFA** - an application that receives transactions and either facilitates an auction on top of it or routes it elsewhere.

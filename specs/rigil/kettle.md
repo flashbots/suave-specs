@@ -63,7 +63,7 @@ A Kettle has several primary responsibilities within the SUAVE network:
     - Ensure synchronization of confidential data across the network.
 
 3. **Propagating Confidential Compute Requests and Results:**
-	- Forward bundles and blocks emitted from confidential computation to block builders and relays.
+	  - Forward bundles and blocks emitted from confidential computation to block builders and relays.
     - Broadcast the results of confidential computations to the appropriate parties within the SUAVE network.
     - Ensure the propagation of results adheres to the confidentiality and privacy requirements of the SUAVE protocol.
 
