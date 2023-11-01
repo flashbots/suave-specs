@@ -43,8 +43,8 @@ This document provides the technical specification for the the Confidential Data
    The confidential data store adopts a straightforward key-value storage paradigm. This allows flexibility in accommodating various data types:
    - Transactions, UserOps, and EIP 712 signed messages.
    - Bundles, simulation results, and intermediate values.
-   - Partial and full block.
-   - And other extensible data entities.
+   - Partial and full blocks.
+   - Other extensible data entities.
 
 4. **Access Control**:
    To enable programmable privacy, only contracts bearing the correct permissions, termed 'peekers', are permitted to get and put data.
@@ -58,7 +58,7 @@ The Confidential Data Store consists of three main components: Engine, Storage, 
 
 ### Engine
 
-The `ConfidentialStoreEngine` is the central component in the Confidential Data Store's architecture and is responsible for coordinating data storage operations and data synchronization across the network. Integrated with the MEVM, it facilitates storage interactions via precompiled contracts. The code snippet below outlines its composition in our current [suave-geth](https://github.com/flashbots/suave-geth/tree/main)  reference implementation:
+The `ConfidentialStoreEngine` is the central component in the Confidential Data Store's architecture and is responsible for coordinating data storage operations and data synchronization across the network. Integrated with the MEVM, it facilitates storage interactions via precompiled contracts. The code snippet below outlines its composition in our current [suave-geth](https://github.com/flashbots/suave-geth/tree/main) reference implementation:
 
 ```go
 type ConfidentialStoreEngine struct {
@@ -91,7 +91,7 @@ type ConfidentialStorageBackend interface {
 }
 ```
 
-*Implementation Note: in our [suave-geth](https://github.com/flashbots/suave-geth/tree/main) reference implementation, we provide two `ConfidentialStorageBackend` the LocalConfidentialStore, storing data in memory in a simple dictionary and RedisStoreBackend, storing data in Redis. Redis was chosen to allow for fast iteration, but is not meant to be a long term solution.*
+*Implementation Note: in our [suave-geth](https://github.com/flashbots/suave-geth/tree/main) reference implementation, we provide two `ConfidentialStorageBackend`: the LocalConfidentialStore, storing data in memory in a simple dictionary; and RedisStoreBackend, storing data in Redis. Redis was chosen to allow for fast iteration, but is not meant to be a long term solution.*
 
 ### Transport
 

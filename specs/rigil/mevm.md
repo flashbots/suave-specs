@@ -107,7 +107,7 @@ Domain specific services which seek to be used by SUAVE must implement the metho
 ##  Precompile Call Authorization
 `checkIsPrecompileCallAllowed` implements the access control functionality. It validates whether a precompile and associated callers are authorized to access specific data. Key security functionality is as follows:
 
-1. **Universal Access**: If data allows the "any peeker", the function searches the `CallerStack` for a caller different from the precompile, granting access upon finding one.
+1. **Universal Access**: If a `ConfidentialComputeRequest` allows "any peeker", the function searches the `CallerStack` for a caller different from the precompile, granting access upon finding one.
 
 2. **Restricted Access and Validation**:
    - The function checks if the precompile is explicitly authorized to access bid data.

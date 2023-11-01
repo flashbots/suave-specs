@@ -69,7 +69,9 @@ Suave-geth is based on geth v1.12.0 ([`e501b3`](https://github.com/flashbots/sua
 
 ## Suave Transaction
 
-The SUAVE protocol adds a new transaction type to the base Ethereum protocol of which it is called a `SuaveTransaction`. The purpose of this new transaction type is to process fees for offchain computation and to support the new data primitives associated with confidential compute. Blocks on the SUAVE chain consist of lists of SUAVE transactions. This new transaction type facilitates and captures key information involved in Confidential Compute Requests, which are detailed in the [Kettle](./kettle.md) spec. These fields encapsulate the result and record of a confidential computation request. It includes the `ConfidentialComputeRequest`, signed by the user, which ensures that the result comes from the expected SUAVE Kettle, as the `SuaveTransaction`'s signer must match the `ExecutionNode`. Additionally, it includes the original request as the `ConfidentialComputeRecord`.
+The SUAVE protocol adds a new transaction type to the base Ethereum protocol called a `SuaveTransaction`. The purpose of this new transaction type is to process fees for offchain computation and to support the new data primitives associated with confidential compute. 
+
+Blocks on the SUAVE chain consist of lists of SUAVE transactions. This new transaction type facilitates and captures key information involved in Confidential Compute Requests and their subsequent results. Any `ConfidentialComputeRequest`, signed by the user, specifies an `ExecutionNode`. SUAVE transactions are valid if and only if they are signed by the `ExecutionNode` specified by the user in the original `ConfidentialComputeRequest`, which is included as the `ConfidentialComputeRecord`.
 
 ```go
 type SuaveTransaction struct {
@@ -110,7 +112,7 @@ Currently, SUAVE transactions can only be expressed as Legacy transaction types,
 
 - **Security Risk**: The protocol is unaudited. The protocol currently does not make any guarantees about the confidentiality of data in the network outside of a best effort.
 - **DoS Risk**: Nodes have not yet been reviewed, and there may be DoS vectors at this early stage.
-- **Secure Key Management**: Storing private keys on Suave is experimental and should be considered unsecured.
+- **Secure Key Management**: Storing private keys on Suave is experimental and should be considered insecure.
 
 If you find a security vulnerability in SUAVE, please email us at security@flashbots.net.
 
