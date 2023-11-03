@@ -31,7 +31,6 @@ This repository hosts the current SUAVE Rigil testnet specifications and design 
   - [Users](#users)
   - [Rigil Design Goals](#rigil-design-goals)
   - [Design Decisions](#design-decisions)
-  - [Glossary](#glossary)
   - [Architecture](#architecture)
   - [Example Flows](#example-flows)
     - [High Level - OFA + Block Builder](#high-level---ofa--block-builder)
@@ -112,27 +111,6 @@ Here is a list of design decisions made for the Rigil testnet and associated rea
     - Reason: The Confidential Data Store currently only keeps private data available for one day. [Compute Output Validity and Heterogenous DA](https://collective.flashbots.net/t/suave-ensuring-output-validity-and-heterogenous-da/2184) are active open questions which, whether or answered not, does not drastically impact the UX on Rigil Testnet.
 - Decision *4*: **Centralized Builder Interoperability**
     - reason: Blocks emitted from SUAVE Kettles will have unpredictable inclusion in early development so Rigil Testnet supports a precompile to send bundles to off-SUAVE block builders.
-
-## Glossary
-
-- **User**: humans or computers interacting with SUAPPs, primarily through sending confidential compute requests (CCR) to Kettles.
-- **SUAPP**: SUAVE application, smart contracts on SUAVE chain with rules for confidential computation and functions to submit to target domains (i.e. chains).
-- **Developer:** creates smart contracts on SUAVE Chain that define rules for SUAPPs.
-- **Confidential Compute Request (CCR) [[🔗spec](./kettle.md#confidential-compute-process)]**: A user request to Suave that contains (1) SUAPP information such as to and calldata, (2) confidential inputs, and (3) a list of SUAPPs and Kettles allowed to operate on confidential inputs.
-- **Builder solidity**: solidity with access to precompiles that help facilitate the processing of transactions and intents.
-- **Precompiles [[🔗spec](./precompiles.md)]:** purpose-built functions with extended capabilities that can be called from Builder Solidity
-- **Kettle[[🔗spec](kettle.md)]**: accepts and processes confidential compute requests and maintains the SUAVE chain; the logical unit of the SUAVE network and main protocol actor.
-- **Confidential Data Store [[🔗spec](./confidential-data-store.md)]**: stores confidential data for SUAPPs (L1 transactions, EIP 712 signed messages, userOps, private keys, and more).
-- **SUAVE Chain [[🔗spec](./suave-chain.md)]**: a fork of Ethereum designed to facilitate credible, confidential execution in MEV use cases.
-- **Domain-Specific Services [[🔗spec](./kettle.md#domain-specific-services)]**: provide functionality to interact with target domains (i.e. for Goerli or Arbitrum, simulate transactions, build bundles, build blocks, …)
-- **MEVM [[🔗spec](./mevm.md)]**: modified EVM with a set of precompiles to interact with APIs for Confidential Data Store, Domain-Specific Services, and more.
-- **RPC** - receives user transactions, moves confidential input to the Confidential Data Store, and passes the compute request to MEVM.
-- **OFA** - an application that receives transactions and either facilitates an auction on top of it or routes it elsewhere.
-- **Solver** - actor who takes many user token trades as input and competes to provide a solution to the mathematically optimal way to route all trades.
-- **Intent** - refers to “what” the desired outcome of an action on a blockchain should be as opposed to transactions which specify “how” an action should be performed.
-- **Intent Executor** - actor who is responsible for taking consolidated user intents and executing them on a domain.
-- **Relay** - actor in the [mev-boost protocol](https://github.com/flashbots/mev-boost) that is responsible for validating blocks and offering them to validators upon request.
-- **Domains** - [a system with a globally shared state that is mutated by various players through actions](https://arxiv.org/abs/2112.01472) (e.g. “transactions”) that execute in a shared execution environment.
 
 ## Architecture
 
