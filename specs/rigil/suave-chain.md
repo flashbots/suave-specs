@@ -43,7 +43,6 @@ In the initial phases of development, the SUAVE chain runs a proof-of-authority 
 
 - **Network ID**: `16813125`
 - **Chain ID**: `16813125`
-- **RPC Endpoint**: `https://rpc.rigil.suave.flashbots.net`
 
 ### Genesis Settings
 

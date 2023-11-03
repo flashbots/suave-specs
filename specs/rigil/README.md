@@ -72,7 +72,7 @@ Read more about SUAVE:
 
 This set of specs outlines the Rigil Testnet, a continuation of the star system theme (Centauri, Andromeda, Helios) laid out in [The Future of MEV](https://writings.flashbots.net/mevm-suave-centauri-and-beyond); and the first in a series of SUAVE testnets based on stars in the [(Alpha) Centauri system](https://en.wikipedia.org/wiki/Alpha_Centauri): Rigil Kentaurus (Alpha Centauri A), Toliman (B) and Proxima Centauri (C).
 
-The Rigil Testnet, targeted towards developers, serves as a dedicated sandbox for creating SUAPPs (MEV applications) in a way that's both decentralized and confidential. It features the MEVM, a variant of the EVM, which equips developers with the ability to write SUAPPs as smart contracts by giving them access to unique MEV-specific precompiles. SUAPPs can send transactions and intents confidentially to a network of searchers, solvers, block builders, and more.
+The Rigil Testnet is a developer focused sandbox for creating SUAPPs (MEV applications) in a way that's both decentralized and confidential. It features the MEVM, a variant of the EVM, which equips developers with the ability to write SUAPPs as smart contracts by giving them access to unique MEV-specific precompiles. SUAPPs can send transactions and intents confidentially to a network of searchers, solvers, block builders, and more.
 
 Rigil provides a live, Flashbots-hosted test network for rapid prototyping that uses Goerli ETH for gas and operates with a proof-of-authority consensus mechanism.
 
