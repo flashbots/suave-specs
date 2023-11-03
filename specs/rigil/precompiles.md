@@ -14,8 +14,8 @@ description: Precompile are MEVM contracts that are implemented in native code i
 - [Available Precompiles](#available-precompiles)
   - [`IsConfidential`](#isconfidential)
   - [`ConfidentialInputs`](#confidentialinputs)
-  - [`ConfidentialStoreStore`](#confidentialstorestore)
-  - [`ConfidentialStoreRetrieve`](#confidentialstoreretrieve)
+  - [`ConfidentialStore`](#confidentialstore)
+  - [`ConfidentialRetrieve`](#confidentialretrieve)
   - [`NewBid`](#newbid)
   - [`FetchBids`](#fetchbids)
   - [`EthCall`](#ethcall)
@@ -49,7 +49,7 @@ A list of available precompiles in Rigil are as follows:
 
 ### `IsConfidential`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/3c636ace40bb81d17bc95e383707da70779a016d/core/vm/contracts_suave.go#L43)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave.go#L43)
 
 Address: `0x0000000000000000000000000000000042010000`
 
@@ -62,7 +62,7 @@ function isConfidential() internal view returns (bool b)
 
 ### `ConfidentialInputs`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/3c636ace40bb81d17bc95e383707da70779a016d/core/vm/contracts_suave.go#L77)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave.go#L77)
 
 Address: `0x0000000000000000000000000000000042010001`
 
@@ -72,33 +72,33 @@ Provides the confidential inputs associated with a confidential computation requ
 function confidentialInputs() internal view returns (bytes memory)
 ```
 
-### `ConfidentialStoreStore`
+### `ConfidentialStore`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/3c636ace40bb81d17bc95e383707da70779a016d/core/vm/contracts_suave.go#L121)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave.go#L121)
 
 Address: `0x0000000000000000000000000000000042020000`
 
 Handles the storage of data in the confidential store. Requires the caller to be part of the `AllowedPeekers` for the associated bid.
 
 ```solidity
-function confidentialStoreStore(BidId bidId, string memory key, bytes memory data1) internal view
+function confidentialStore(BidId bidId, string memory key, bytes memory data1) internal view
 ```
 
-### `ConfidentialStoreRetrieve`
+### `ConfidentialRetrieve`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/3c636ace40bb81d17bc95e383707da70779a016d/core/vm/contracts_suave.go#L176)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave.go#L176)
 
 Address: `0x0000000000000000000000000000000042020001`
 
 Retrieves data from the confidential store. Also mandates the caller's presence in the `AllowedPeekers` list.
 
 ```solidity
-function confidentialStoreRetrieve(BidId bidId, string memory key) internal view returns (bytes memory)
+function confidentialRetrieve(BidId bidId, string memory key) internal view returns (bytes memory)
 ```
 
 ### `NewBid`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/3c636ace40bb81d17bc95e383707da70779a016d/core/vm/contracts_suave.go#L237)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave.go#L237)
 
 Address: `0x0000000000000000000000000000000042030000`
 
@@ -112,7 +112,7 @@ function newBid(uint64 decryptionCondition, address[] memory allowedPeekers, str
 
 ### `FetchBids`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/3c636ace40bb81d17bc95e383707da70779a016d/core/vm/contracts_suave.go#L291)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave.go#L291)
 
 Address: `0x0000000000000000000000000000000042030001`
 
@@ -124,7 +124,7 @@ function fetchBids(uint64 cond, string memory namespace) internal view returns (
 
 ### `EthCall`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/3c636ace40bb81d17bc95e383707da70779a016d/core/vm/contracts_suave_eth.go#L193)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L193)
 
 Address: `0x0000000000000000000000000000000042100003`
 
@@ -136,7 +136,7 @@ Uses the `eth_call` JSON RPC method to let you simulate a function call and retu
 
 ### `SimulateBundle`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/3c636ace40bb81d17bc95e383707da70779a016d/core/vm/contracts_suave_eth.go#L115)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L115)
 
 Address: `0x0000000000000000000000000000000042100000`
 
@@ -148,7 +148,7 @@ function simulateBundle(bytes memory bundleData) internal view returns (uint64)
 
 ### `ExtractHint`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/3c636ace40bb81d17bc95e383707da70779a016d/core/vm/contracts_suave_eth.go#L159)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L159)
 
 Address: `0x0000000000000000000000000000000042100037`
 
@@ -160,7 +160,7 @@ function extractHint(bytes memory bundleData) internal view returns (bytes memor
 
 ### `SubmitBundleJsonRPC`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/3c636ace40bb81d17bc95e383707da70779a016d/core/vm/contracts_suave_eth.go#L547)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L547)
 
 Address: `0x0000000000000000000000000000000043000001`
 
@@ -173,7 +173,7 @@ function submitBundleJsonRPC(string memory url, string memory method, bytes memo
 
 ### `FillMevShareBundleAddress`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/3c636ace40bb81d17bc95e383707da70779a016d/core/vm/contracts_suave_eth.go#L613)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L613)
 
 Address: `0x0000000000000000000000000000000043200001`
 
@@ -185,7 +185,7 @@ function fillMevShareBundle(BidId bidId) internal view returns (bytes memory)
 
 ### `BuildEthBlock`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/3c636ace40bb81d17bc95e383707da70779a016d/core/vm/contracts_suave_eth.go#L267)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L267)
 
 Address: `0x0000000000000000000000000000000042100001`
 
@@ -197,7 +197,7 @@ function buildEthBlock(BuildBlockArgs memory blockArgs, BidId bidId, string memo
 
 ### `SubmitEthBlockBidToRelay`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/3c636ace40bb81d17bc95e383707da70779a016d/core/vm/contracts_suave_eth.go#L456)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L456)
 
 Address: `0x0000000000000000000000000000000042100002`
 
@@ -209,7 +209,7 @@ function submitEthBlockBidToRelay(string memory relayUrl, bytes memory builderBi
 
 ### `SignEthTransaction`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/3c636ace40bb81d17bc95e383707da70779a016d/core/vm/contracts_suave_eth.go#L62)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L62)
 
 Address: `0x0000000000000000000000000000000040100001`
 
