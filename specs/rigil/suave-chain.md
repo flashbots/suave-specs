@@ -1,6 +1,7 @@
 ---
 title: Suave Chain
 description: The primary purpose of the SUAVE chain is to reach (and maintain) consensus about smart contract code for SUAPPs, as well as be a global information leak broadcast system.
+custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/suave-chain.md"
 ---
 
 <div class="hideInDocs">
@@ -68,7 +69,7 @@ Suave-geth is based on geth v1.12.0 ([`e501b3`](https://github.com/flashbots/sua
 
 ## Suave Transaction
 
-The SUAVE protocol adds a new transaction type to the base Ethereum protocol called a `SuaveTransaction`. The purpose of this new transaction type is to process fees for offchain computation and to support the new data primitives associated with confidential compute. 
+The SUAVE protocol adds a new transaction type to the base Ethereum protocol called a `SuaveTransaction`. The purpose of this new transaction type is to process fees for offchain computation and to support the new data primitives associated with confidential compute.
 
 Blocks on the SUAVE chain consist of lists of SUAVE transactions. This new transaction type facilitates and captures key information involved in Confidential Compute Requests and their subsequent results. Any `ConfidentialComputeRequest`, signed by the user, specifies an `ExecutionNode`. SUAVE transactions are valid if and only if they are signed by the `ExecutionNode` specified by the user in the original `ConfidentialComputeRequest`, which is included as the `ConfidentialComputeRecord`.
 

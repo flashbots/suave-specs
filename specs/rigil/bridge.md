@@ -1,6 +1,7 @@
 ---
 title: Bridge
 description: A description of our current bridge implementation, which is meant to enable rapid prototyping.
+custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/bridge.md"
 ---
 
 <div class="hideInDocs">
