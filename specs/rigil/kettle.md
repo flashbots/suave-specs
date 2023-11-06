@@ -1,6 +1,7 @@
 ---
 title: Kettle
 description: SUAVE Kettles contain all necessary components to accept, process, and route confidential compute requests and results.
+custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/kettle.md"
 ---
 
 <div class="hideInDocs">

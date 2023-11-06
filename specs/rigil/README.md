@@ -1,6 +1,7 @@
 ---
 title: Rigil Testnet
 description: Rigil is the first testnet for SUAVE. It is a sandbox and foundation for building MEV applications in a decentralized and private manner, focused on developers.
+custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/README.md"
 ---
 
 <div class="hideInDocs">
