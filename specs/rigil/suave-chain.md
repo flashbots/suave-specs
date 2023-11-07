@@ -120,7 +120,9 @@ If you find a security vulnerability in SUAVE, please email us at security@flash
 
 ## TransactionRequest Serialization & Signing
 
-Transactions sent by users of SUAVE can take on two forms: standard (legacy) Ethereum transactions, and `ConfidentialComputeRequest`s.
+Transactions sent by users of SUAVE can take on two forms: 
+1. Standard (legacy) Ethereum transaction
+2. `ConfidentialComputeRequest`
 
 Standard transactions are used to tranfer SUAVE-ETH and deploy smart contracts to SUAVE. ConfidentialComputeRequests are a new [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) transaction type, used to interact with SUAVE smart contracts.
 
