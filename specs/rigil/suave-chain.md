@@ -71,15 +71,14 @@ Suave-geth is based on geth v1.12.0 ([`e501b3`](https://github.com/flashbots/sua
 
 The SUAVE protocol adds a new transaction type to the base Ethereum protocol called a `SuaveTransaction`. The purpose of this new transaction type is to process fees for offchain computation and to support the new data primitives associated with confidential compute.
 
-Blocks on the SUAVE chain consist of lists of SUAVE transactions. This new transaction type facilitates and captures key information involved in Confidential Compute Requests and their subsequent results. Any `ConfidentialComputeRequest`, signed by the user, specifies an `ExecutionNode`. SUAVE transactions are valid if and only if they are signed by the `ExecutionNode` specified by the user in the original `ConfidentialComputeRequest`, which is included as the `ConfidentialComputeRecord`.
+Blocks on the SUAVE chain consist of lists of SUAVE transactions. This new transaction type facilitates and captures key information involved in Confidential Compute Requests and their subsequent results. Any `ConfidentialComputeRequest`, signed by the user, specifies an `KettleAddress`. SUAVE transactions are valid if and only if they are signed by the `KettleAddress` specified by the user in the original `ConfidentialComputeRequest`, which is included as the `ConfidentialComputeRecord`.
 
 ```go
 type SuaveTransaction struct {
-	ExecutionNode              common.Address
 	ConfidentialComputeRequest ConfidentialComputeRecord
 	ConfidentialComputeResult  []byte
 
-	// ExecutionNode's signature
+	// Kettle's signature
 	ChainID *big.Int
 	V       *big.Int
 	R       *big.Int
