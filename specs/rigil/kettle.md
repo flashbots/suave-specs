@@ -1,6 +1,7 @@
 ---
 title: Kettle
 description: SUAVE Kettles contain all necessary components to accept, process, and route confidential compute requests and results.
+custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/kettle.md"
 ---
 
 <div class="hideInDocs">
@@ -30,7 +31,7 @@ description: SUAVE Kettles contain all necessary components to accept, process, 
 - [Honest Kettle](#honest-kettle)
 - [Confidential Computation](#confidential-computation)
   - [Confidential Compute Process](#confidential-compute-process)
-  - [Suave JSON-RPC](#suave-json-rpc)
+- [Suave JSON-RPC](#suave-json-rpc)
   - [eth\_sendRawTransaction](#eth_sendrawtransaction)
   - [eth\_call](#eth_call)
   - [eth\_executionAddress](#eth_executionaddress)
@@ -205,7 +206,7 @@ This sequence diagram represents the interactions between various components whe
 
 - *Transaction Hash Output*: Following the Suave transaction, a transaction hash is produced and returned to the request's originator, precisely like in the Ethereum process.
 
-### Suave JSON-RPC
+## Suave JSON-RPC
 
 SUAVE JSON-RPC can be seen as a super set of Ethereum JSON-RPC. This means the [Ethereum JSON-RPC standard](https://geth.ethereum.org/docs/interacting-with-geth/rpc) remains the same when interacting with the SUAVE chain. Some methods in the `eth_` namespace are overloaded to support the confidential compute requests.
 

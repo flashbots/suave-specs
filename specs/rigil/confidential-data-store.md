@@ -1,6 +1,7 @@
 ---
 title: Confidential Data Store
 description: This essential component of the SUAVE protocol serves as a secure and privacy-focused storage system.
+custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/confidential-data-store.md"
 ---
 
 <div class="hideInDocs">

@@ -1,6 +1,7 @@
 ---
 title: Rigil Testnet
 description: Rigil is the first testnet for SUAVE. It is a sandbox and foundation for building MEV applications in a decentralized and private manner, focused on developers.
+custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/README.md"
 ---
 
 <div class="hideInDocs">
@@ -72,7 +73,7 @@ Read more about SUAVE:
 
 This set of specs outlines the Rigil Testnet, a continuation of the star system theme (Centauri, Andromeda, Helios) laid out in [The Future of MEV](https://writings.flashbots.net/mevm-suave-centauri-and-beyond); and the first in a series of SUAVE testnets based on stars in the [(Alpha) Centauri system](https://en.wikipedia.org/wiki/Alpha_Centauri): Rigil Kentaurus (Alpha Centauri A), Toliman (B) and Proxima Centauri (C).
 
-The Rigil Testnet, targeted towards developers, serves as a dedicated sandbox for creating SUAPPs (MEV applications) in a way that's both decentralized and confidential. It features the MEVM, a variant of the EVM, which equips developers with the ability to write SUAPPs as smart contracts by giving them access to unique MEV-specific precompiles. SUAPPs can send transactions and intents confidentially to a network of searchers, solvers, block builders, and more. 
+The Rigil Testnet is a developer focused sandbox for creating SUAPPs (MEV applications) in a way that's both decentralized and confidential. It features the MEVM, a variant of the EVM, which equips developers with the ability to write SUAPPs as smart contracts by giving them access to unique MEV-specific precompiles. SUAPPs can send transactions and intents confidentially to a network of searchers, solvers, block builders, and more.
 
 Rigil provides a live, Flashbots-hosted test network for rapid prototyping that uses Goerli ETH for gas and operates with a proof-of-authority consensus mechanism.
 
@@ -115,24 +116,7 @@ Here is a list of design decisions made for the Rigil testnet and associated rea
 
 ## Glossary
 
-- **User**: humans or computers interacting with SUAPPs, primarily through sending confidential compute requests (CCR) to Kettles.
-- **SUAPP**: SUAVE application, smart contracts on SUAVE chain with rules for confidential computation and functions to submit to target domains (i.e. chains).
-- **Developer:** creates smart contracts on SUAVE Chain that define rules for SUAPPs.
-- **Confidential Compute Request (CCR) [[🔗spec](./kettle.md#confidential-compute-process)]**: A user request to Suave that contains (1) SUAPP information such as to and calldata, (2) confidential inputs, and (3) a list of SUAPPs and Kettles allowed to operate on confidential inputs.
-- **Builder solidity**: solidity with access to precompiles that help facilitate the processing of transactions and intents.
-- **Precompiles [[🔗spec](./precompiles.md)]:** purpose-built functions with extended capabilities that can be called from Builder Solidity
-- **Kettle[[🔗spec](kettle.md)]**: accepts and processes confidential compute requests and maintains the SUAVE chain; the logical unit of the SUAVE network and main protocol actor.
-- **Confidential Data Store [[🔗spec](./confidential-data-store.md)]**: stores confidential data for SUAPPs (L1 transactions, EIP 712 signed messages, userOps, private keys, and more).
-- **SUAVE Chain [[🔗spec](./suave-chain.md)]**: a fork of Ethereum designed to facilitate credible, confidential execution in MEV use cases.
-- **Domain-Specific Services [[🔗spec](./kettle.md#domain-specific-services)]**: provide functionality to interact with target domains (i.e. for Goerli or Arbitrum, simulate transactions, build bundles, build blocks, …)
-- **MEVM [[🔗spec](./mevm.md)]**: modified EVM with a set of precompiles to interact with APIs for Confidential Data Store, Domain-Specific Services, and more.
-- **RPC** - receives user transactions, moves confidential input to the Confidential Data Store, and passes the compute request to MEVM.
-- **OFA** - an application that receives transactions and either facilitates an auction on top of it or routes it elsewhere.
-- **Solver** - actor who takes many user token trades as input and competes to provide a solution to the mathematically optimal way to route all trades.
-- **Intent** - refers to “what” the desired outcome of an action on a blockchain should be as opposed to transactions which specify “how” an action should be performed.
-- **Intent Executor** - actor who is responsible for taking consolidated user intents and executing them on a domain.
-- **Relay** - actor in the [mev-boost protocol](https://github.com/flashbots/mev-boost) that is responsible for validating blocks and offering them to validators upon request.
-- **Domains** - [a system with a globally shared state that is mutated by various players through actions](https://arxiv.org/abs/2112.01472) (e.g. “transactions”) that execute in a shared execution environment.
+See [`glossary.md`](./glossary.md).
 
 ## Architecture
 
@@ -227,10 +211,10 @@ Blocks built from SUAVE will have unpredictable inclusion in the beginning, but 
 
 1. The user sends a Confidential Compute Request that specifies calling `buildBlock` on the onchain block builder contract.
 2. The Kettle receives and processes the transaction; specifically, the logic will:
-- grab all bundles that are stored in the block builders' confidential data store
-- simulate all bundles
-- sort bundles via arbitrary logic but in this gas by effective gas price
-- compute state root and package into a block
+   - grab all bundles that are stored in the block builders' confidential data store
+   - simulate all bundles
+   - sort bundles via arbitrary logic but in this gas by effective gas price
+   - compute state root and package into a block
 3. Optional: Similar to the above, the confidential compute result can be a callback which will emit a log of the block's bid value onchain as well as a header that a validator can view.
 4. Similar to sending to a centralized block builder, the MEVM will then send the block to a centralized relay where it is free to access by validators.
 
