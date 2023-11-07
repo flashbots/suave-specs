@@ -122,13 +122,15 @@ If you find a security vulnerability in SUAVE, please email us at security@flash
 
 Transactions sent by users of SUAVE can take on two forms: standard (legacy) Ethereum transactions, and `ConfidentialComputeRequest`s.
 
-Standard transactions are used to tranfer SUAVE-ETH and deploy smart contracts to SUAVE. ConfidentialComputeRequests are used to interact with SUAVE smart contracts.
+Standard transactions are used to tranfer SUAVE-ETH and deploy smart contracts to SUAVE. ConfidentialComputeRequests are a new [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) transaction type, used to interact with SUAVE smart contracts.
 
-All transactions are encoded with the [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) RLP-encoding scheme (with [EIP-2930](https://eips.ethereum.org/EIPS/eip-2930) allowed), but `ConfidentialComputeRequest` takes on a special signature scheme that deviates slightly from the traditional scheme.
+All transactions are encoded with the [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) RLP-encoding scheme (with [EIP-2930](https://eips.ethereum.org/EIPS/eip-2930) allowed), but `ConfidentialComputeRequest` takes on a special signature scheme that deviates slightly from the traditional method.
 
 ![confidential compute request signature scheme](../../assets/rigil-ccRequest-signature-flow.png)
 
-From the client perspective (i.e. a JSON-RPC client connected to SUAVE-geth) `ConfidentialComputeRequest` looks something like this:
+ConfidentialComputeRequests adopt this unique signing scheme to keep `confidentialInputs` off-chain. The ConfidentialComputeRecord, which is signed by the sender, contains only the _hash_ of `confidentialInputs`. This record is stored on the SUAVE chain, making verification of `confidentialInputs` possible without exposing the actual data on-chain.
+
+In javascript, a `ConfidentialComputeRequest` has the following structure:
 
 ```js
 const cRequest = {
@@ -143,14 +145,25 @@ const cRequest = {
   }
 ```
 
+Note: new fields: `confidentialInputs` and `executionNode`.
+
 To serialize, sign, and send this request, the client must first RLP-encode the request as a `ConfidentialComputeRecord` and sign its hash.
 
+Note: the following is pseudo-code. `rlp`, `keccak256`, and `wallet.sign` implementations may differ.
+
 ```js
-const cRecord = {
-  ...cRequest,
-  type: '0x42',
-}
-const rlpRecord = rlp(cRecord.type, [
+const {
+  nonce,
+  gasPrice,
+  gas,
+  to,
+  value,
+  data,
+  executionNode,
+  confidentialInputs,
+  chainId,
+} = cRequest
+const rlpRecord = rlp('0x42', [
     nonce,
     gasPrice,
     gas,
@@ -161,12 +174,14 @@ const rlpRecord = rlp(cRecord.type, [
     keccak256(confidentialInputs),
     chainId,
   ])
-const signedRecord = wallet.sign(keccak256(rlpRecord))
+const {v, r, s} = wallet.sign(keccak256(rlpRecord))
+cRecord = {...cRecord, v, r, s }
 ```
 
 Then, the final request is re-encoded with RLP as follows:
 
 ```js
+// assume (v, r, s) have been added to cRecord
 const tx = rlp('0x43', [
     cRecord.nonce,
     cRecord.gasPrice,
