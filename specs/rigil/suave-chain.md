@@ -87,37 +87,6 @@ type SuaveTransaction struct {
 }
 ```
 
-## Node Requirements and Setup
-
-- **Hardware**:
-    - Minimum 8GB RAM, four cores, 50GB SSD (How big do we expect the chain to grow?)
-    - These requirements will eventually incorporate Trusted Execution Environments (TEEs).
-- **Software**: [suave-geth](https://github.com/flashbots/suave-geth/)
-- **Setup Steps**:
-    1. Clone suave-geth
-    2. Start the devnet: `make devnet-up`
-    3. Create transactions: `go run suave/devenv/cmd/main.go`
-
----
-
-## Gas and Transaction Fees
-
-The SUAVE chain employs the same gas pricing mechanism as Ethereum pre-Cancun hardfork (no blob transactions) where gas prices adjust based on network demand. Nodes currently track Confidential Compute Request gas usage but only charge a small flat fee for it, and there is no cap for offchain compute.
-
-Currently, SUAVE transactions can only be expressed as Legacy transaction types, but they will get converted into EIP-1559 base fee model under the hood.
-
----
-
-## Security Considerations
-
-- **Security Risk**: The protocol is unaudited. The protocol currently does not make any guarantees about the confidentiality of data in the network outside of a best effort.
-- **DoS Risk**: Nodes have not yet been reviewed, and there may be DoS vectors at this early stage.
-- **Secure Key Management**: Storing private keys on Suave is experimental and should be considered insecure.
-
-If you find a security vulnerability in SUAVE, please email us at security@flashbots.net.
-
----
-
 ## TransactionRequest Serialization & Signing
 
 Transactions sent by users of SUAVE can take on two forms: 
@@ -207,3 +176,32 @@ This is then sent to SUAVE via `eth_sendRawTransaction`:
 ```js
 wallet.request('eth_sendRawTransaction', [tx])
 ```
+
+## Node Requirements and Setup
+
+- **Hardware**:
+    - Minimum 8GB RAM, four cores, 50GB SSD (How big do we expect the chain to grow?)
+    - These requirements will eventually incorporate Trusted Execution Environments (TEEs).
+- **Software**: [suave-geth](https://github.com/flashbots/suave-geth/)
+- **Setup Steps**:
+    1. Clone suave-geth
+    2. Start the devnet: `make devnet-up`
+    3. Create transactions: `go run suave/devenv/cmd/main.go`
+
+---
+
+## Gas and Transaction Fees
+
+The SUAVE chain employs the same gas pricing mechanism as Ethereum pre-Cancun hardfork (no blob transactions) where gas prices adjust based on network demand. Nodes currently track Confidential Compute Request gas usage but only charge a small flat fee for it, and there is no cap for offchain compute.
+
+Currently, SUAVE transactions can only be expressed as Legacy transaction types, but they will get converted into EIP-1559 base fee model under the hood.
+
+---
+
+## Security Considerations
+
+- **Security Risk**: The protocol is unaudited. The protocol currently does not make any guarantees about the confidentiality of data in the network outside of a best effort.
+- **DoS Risk**: Nodes have not yet been reviewed, and there may be DoS vectors at this early stage.
+- **Secure Key Management**: Storing private keys on Suave is experimental and should be considered insecure.
+
+If you find a security vulnerability in SUAVE, please email us at security@flashbots.net.
