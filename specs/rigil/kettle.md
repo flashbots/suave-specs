@@ -129,7 +129,7 @@ type ConfidentialComputeRecord struct {
 	Value    *big.Int
 	Data     []byte
 
-	ExecutionNode          common.Address
+	KettleAddress          common.Address
 	ConfidentialInputsHash common.Hash
 
 	ChainID *big.Int
@@ -157,11 +157,10 @@ The final home of compute results and intentionally leaked data from confidentia
 
 ```go
 type SuaveTransaction struct {
-	ExecutionNode              common.Address
 	ConfidentialComputeRequest ConfidentialComputeRecord
 	ConfidentialComputeResult  []byte
 
-	// ExecutionNode's signature
+	// Kettle's signature
 	ChainID *big.Int
 	V       *big.Int
 	R       *big.Int
