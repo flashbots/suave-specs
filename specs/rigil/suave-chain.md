@@ -146,7 +146,7 @@ const rlpRecord = rlp('0x42', [
     chainId,
   ])
 const {v, r, s} = wallet.sign(keccak256(rlpRecord))
-cRecord = {...cRecord, v, r, s }
+cRecord = {...cRecord, v, r, s}
 ```
 
 Then, the final request is re-encoded with RLP as follows:
