@@ -87,6 +87,16 @@ type SuaveTransaction struct {
 }
 ```
 
+### Suave Transaction Types
+
+`SuaveTransaction` is the primary transaction type which is returned when requesting transactions from endpoints like `eth_getTransactionByHash` or `eth_getBlockByNumber`, but SUAVE introduces two other important transaction types: `ConfidentialComputeRequest` and `ConfidentialComputeRecord`. All new types are detailed in the following table:
+
+| Name | EIP-2718 Tx Type | Description |
+| ---- | ---------------- | ----------- |
+| SuaveTransaction | `0x50` | SUAVE transaction; product of executed ConfidentialComputeRequest |
+| ConfidentialComputeRequest | `0x43` | Sent by users to interact with SUAVE smart contracts using confidential inputs |
+| ConfidentialComputeRecord | `0x42` | Artifact of ConfidentialComputeRequest; represents record that is stored on SUAVE chain |
+
 ## TransactionRequest Serialization & Signing
 
 Transactions sent by users of SUAVE can take on two forms: 
