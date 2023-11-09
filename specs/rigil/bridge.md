@@ -4,7 +4,7 @@ description: A description of our current bridge implementation, which is meant 
 custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/bridge.md"
 ---
 
-<div class="hideInDocs">
+<div className="hide-in-docs">
 
 <!-- no toc -->
 <!-- omit from toc -->

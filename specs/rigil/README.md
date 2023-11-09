@@ -4,7 +4,7 @@ description: Rigil is the first testnet for SUAVE. It is a sandbox and foundatio
 custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/README.md"
 ---
 
-<div class="hideInDocs">
+<div className="hide-in-docs">
 
 <!-- omit from toc -->
 # SUAVE Rigil Testnet
@@ -92,7 +92,7 @@ The Rigil testnet is initially focused on a specific set of actors:
 1. **Developers** - create smart contracts on SUAVE Chain that define rules for SUAPPs like order flow auctions, block building, and intent executors.
 2. **Transaction Originators** - leverage unique applications on SUAVE, e.g. to send private transactions or execute your intents.
 3. **Proposers** - outsource block building to SUAVE. Initially, SUAVE is focused only on Ethereum.
-4. **Block Builders** - can be implemented as smart contracts inside Suave. In the Rigil Tesnet, SUAPPs can submit bundles to external builders to help with transaction inclusion during the early stages of development.
+4. **Block Builders** - can be implemented as smart contracts inside Suave. In the Rigil Testnet, SUAPPs can submit bundles to external builders to help with transaction inclusion during the early stages of development.
 5. **Auction Protocols** - can program their auctions as a smart contract.
 
 ## Rigil Design Goals

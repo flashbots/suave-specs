@@ -1,7 +1,7 @@
 <!-- no toc -->
 # ☀️ SUAVE Protocol Specifications
 
-<div class="hideInDocs">
+<div className="hide-in-docs">
 
 [![Rigil specs ./specs/rigil/](https://img.shields.io/badge/jump%20into-Rigil%20Specs-purple.svg)](./specs/rigil/)
 [![Docs at https://suave.flashbots.net/](https://img.shields.io/badge/read-SUAVE%20docs-blue.svg)](https://suave.flashbots.net/)
@@ -58,11 +58,11 @@ Specifications for the SUAVE protocol are split into two main tracks, Centauri a
 
 You are welcome to open PRs and issues. We invite you to discuss your ideas in the [Flashbots Forum](https://collective.flashbots.net/) for greater visibility and to avoid doing work that is unlikely to be widely accepted and merged into the core specs.
 
-<div class="hideInDocs">
+<div className="hide-in-docs">
 
 For creating tables of contents, we use the ["Markdown All in One" VS code extension](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one). This extension comes with a lot of keyboard shortcuts, which may override the ones you are already using. You can disable keyboard shortcuts for this extension by going to "Settings -> Keyboard Shortcuts" (cmd+K cmd+S) and searching for `markdown.ext` (see [#22](https://github.com/flashbots/suave-specs/pull/22) for more details).
 
-However, we don't need the ToCs and some other content (like this paragraph) rendered in the documentation frontend. Therefore, please add the `<div class="hideInDocs"></div>` to any content that should not appear in the FE.
+However, we don't need the ToCs and some other content (like this paragraph) rendered in the documentation frontend. Therefore, please add the `<div className="hide-in-docs"></div>` to any content that should not appear in the FE.
 
 </div>
 
