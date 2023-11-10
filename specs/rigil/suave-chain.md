@@ -115,7 +115,7 @@ In javascript, a `ConfidentialComputeRequest` has the following structure:
 ```js
 const cRequest = {
   confidentialInputs: '0x000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000fd7b22626c6f636b4e756d626572223a22307830222c22747873223a5b2230786638363538303064383235323038393461646263653931303332643333396338336463653834316336346566643261393232383165653664383230336538383038343032303131386164613038376337386234353663653762343234386237313565353164326465656236343031363032343832333735663130663037396663666637373934383830653731613035373366336364343133396437323037643165316235623263323365353438623061316361336533373034343739656334653939316362356130623661323930225d2c2270657263656e74223a31307d000000',
-  executionNode: '0xb5feafbdd752ad52afb7e1bd2e40432a485bbb7f',
+  kettleAddress: '0xb5feafbdd752ad52afb7e1bd2e40432a485bbb7f',
   to: '0x8f21Fdd6B4f4CacD33151777A46c122797c8BF17',
   gasPrice: 10000000000n,
   gas: 420000n,
@@ -125,7 +125,7 @@ const cRequest = {
   }
 ```
 
-Note: new fields: `confidentialInputs` and `executionNode`.
+Note: new fields: `confidentialInputs` and `kettleAddress`.
 
 To serialize, sign, and send this request, the client must first RLP-encode the request as a `ConfidentialComputeRecord` and sign its hash.
 
@@ -139,20 +139,19 @@ const {
   to,
   value,
   data,
-  executionNode,
+  kettleAddress,
   confidentialInputs,
   chainId,
 } = cRequest
 const rlpRecord = rlp('0x42', [
+    kettleAddress,
+    keccak256(confidentialInputs),
     nonce,
     gasPrice,
     gas,
     to,
     value,
     data,
-    executionNode,
-    keccak256(confidentialInputs),
-    chainId,
   ])
 const {v, r, s} = wallet.sign(keccak256(rlpRecord))
 cRecord = {...cRecord, v, r, s}
@@ -169,7 +168,7 @@ const tx = rlp('0x43', [
     cRecord.to,
     cRecord.value,
     cRecord.data,
-    cRecord.executionNode,
+    cRecord.kettleAddress,
     keccak256(cRequest.confidentialInputs),
     cRecord.chainId,
     cRecord.v === 27n ? '0x' : '0x1', // yParity
