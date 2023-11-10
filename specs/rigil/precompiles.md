@@ -4,7 +4,7 @@ description: Precompile are MEVM contracts that are implemented in native code i
 custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/precompiles.md"
 ---
 
-<div class="hideInDocs">
+<div className="hide-in-docs">
 
 <!-- omit from toc -->
 # Precompiles

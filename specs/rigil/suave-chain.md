@@ -4,7 +4,7 @@ description: The primary purpose of the SUAVE chain is to reach (and maintain) c
 custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/suave-chain.md"
 ---
 
-<div class="hideInDocs">
+<div className="hide-in-docs">
 
 <!-- omit from toc -->
 # Suave Chain
@@ -102,7 +102,7 @@ Transactions sent by users of SUAVE can take on two forms:
 1. Standard (legacy) Ethereum transaction
 2. `ConfidentialComputeRequest`
 
-Standard transactions are used to tranfer SUAVE-ETH and deploy smart contracts to SUAVE. ConfidentialComputeRequests are a new [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) transaction type, used to interact with SUAVE smart contracts.
+Standard transactions are used to transfer SUAVE-ETH and deploy smart contracts to SUAVE. ConfidentialComputeRequests are a new [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) transaction type, used to interact with SUAVE smart contracts.
 
 All transactions are encoded with the [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) RLP-encoding scheme (with [EIP-2930](https://eips.ethereum.org/EIPS/eip-2930) allowed), but `ConfidentialComputeRequest` takes on a special signature scheme that deviates slightly from the traditional method.
 

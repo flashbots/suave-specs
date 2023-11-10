@@ -4,7 +4,7 @@ description: The MEVM modifies the EVM by adding a new runtime, interpreter, and
 custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/mevm.md"
 ---
 
-<div class="hideInDocs">
+<div className="hide-in-docs">
 
 <!-- omit from toc -->
 # MEVM
