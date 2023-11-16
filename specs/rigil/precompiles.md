@@ -172,7 +172,7 @@ Regular eth bundles don't need any processing to be sent.
 function submitBundleJsonRPC(string memory url, string memory method, bytes memory params) internal view returns (bytes memory)
 ```
 
-### `FillMevShareBundleAddress`
+### `FillMevShareBundle`
 
 [🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L613)
 
