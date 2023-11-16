@@ -13,7 +13,7 @@ Discussions about design rationale and proposed changes can be brought up and di
 
 <div class="warning">
 
-⚠️ The SUAVE protocol is still in a state where [the code](https://github.com/flashbots/suave-geth) is the most up-to-date protocol spec. The goal of these notes is to gradually evolve into an implementation-agnostic specification. ⚠️
+⚠️ The SUAVE protocol is still in a alpha state, and [the code](https://github.com/flashbots/suave-geth) is the most up-to-date protocol spec. The goal of these notes is to gradually evolve into an implementation-agnostic specification. ⚠️
 
 </div>
 
@@ -28,6 +28,8 @@ SUAVE - *Single Unifying Auction for Value Expression* - is a platform for build
 Read more about SUAVE:
 - https://writings.flashbots.net/the-future-of-mev-is-suave
 - https://writings.flashbots.net/mevm-suave-centauri-and-beyond
+
+See also: [suave-geth](https://github.com/flashbots/suave-geth), [suapp-examples](https://github.com/flashbots/suapp-examples)
 
 ---
 
