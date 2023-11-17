@@ -103,13 +103,13 @@ function confidentialRetrieve(BidId bidId, string memory key) internal view retu
 
 Address: `0x0000000000000000000000000000000042030000`
 
-Initializes bids within the ConfidentialStore. Prior to storing data, all bids should undergo initialization via this precompile.
+Initializes bids within the ConfidentialStore. `AllowedPeekers` specifies which addresses can "get" data. `AllowedStores` specifies which addresses can "set" data. Prior to storing data, all bids should undergo initialization via this precompile.
 
 ```solidity
-function newBid(uint64 decryptionCondition, address[] memory allowedPeekers, string memory bidType)
+function newBid(uint64 decryptionCondition, address[] memory allowedPeekers, address[] memory allowedStores, string memory bidType)
 ```
 
-*Note: The name Bids are an artefact from early development. Bids represent a "Data Identifier" used when operating on confidential data and no longer have any relation to a bid in an auction. They useful for coordinating on confidential data with out revealing underlying data, for instance a SUAVE transaction can emit logs on chain which reference the `bidId` from a Confidential Compute Request which follow up transactions can now reference.*
+*Note: The name "Bid" is an artefact from early development. Bids represent a "Data Identifier" used when operating on confidential data and no longer have any relation to a bid in an auction. They are useful for coordinating confidential data without revealing it. For instance, a SUAVE transaction can emit logs on chain which reference the `bidId` from a Confidential Compute Request which future transactions can reference.*
 
 ### `FetchBids`
 
@@ -172,7 +172,7 @@ Regular eth bundles don't need any processing to be sent.
 function submitBundleJsonRPC(string memory url, string memory method, bytes memory params) internal view returns (bytes memory)
 ```
 
-### `FillMevShareBundleAddress`
+### `FillMevShareBundle`
 
 [🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L613)
 
