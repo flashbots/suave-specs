@@ -16,7 +16,7 @@ This repository hosts the current SUAVE Rigil testnet specifications and design 
 
 <div class="warning">
 
-⚠️ The SUAVE protocol is still in a state where [the code](https://github.com/flashbots/suave-geth) is the most up-to-date protocol spec. The goal of these notes is to gradually evolve into an implementation-agnostic specification. ⚠️
+⚠️ The SUAVE protocol is still in a state where [the code](https://github.com/flashbots/suave-geth) is the most up-to-date protocol spec and [open questions](#open-questions) are being researched. The goal of these notes is to gradually evolve into an implementation-agnostic specification. ⚠️
 
 </div>
 
@@ -34,6 +34,7 @@ This repository hosts the current SUAVE Rigil testnet specifications and design 
   - [Design Decisions](#design-decisions)
   - [Glossary](#glossary)
   - [Architecture](#architecture)
+  - [Open Questions](#open-questions)
   - [Example Flows](#example-flows)
     - [High Level - OFA + Block Builder](#high-level---ofa--block-builder)
     - [Confidential Compute Request Flow](#confidential-compute-request-flow)
@@ -135,6 +136,15 @@ A broad-level view of how a SUAPP gets onchain and utilizes SUAVE core component
    - **Precompiles** aid in the efficient execution of certain functions.
    - **Domain-Specific Services** handle execution on different domains and return results to **MEVM**.
 4. The **Suave PoA Chain** stores results of confidential computation.
+
+## Open Questions
+
+The are multiple open questions that need to be solved in the long term about SUAVE architecture. A non-exhaustive list of questions are:
+
+- [Consensus Requirements](https://collective.flashbots.net/t/current-thinking-for-consensus/2695?u=quintus)
+- [Output Validity and Heterogenous DA](https://collective.flashbots.net/t/suave-ensuring-output-validity-and-heterogenous-da/2184)
+- [SUAVE Economic Security Models](https://collective.flashbots.net/t/suave-economic-security-models/1070)
+- [Bridge Request For Comments](https://collective.flashbots.net/t/suave-bridge/2696)
 
 ## Example Flows
 
