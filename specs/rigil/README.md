@@ -141,8 +141,9 @@ A broad-level view of how a SUAPP gets onchain and utilizes SUAVE core component
 
 The are multiple open questions that need to be solved in the long term about SUAVE architecture. A non-exhaustive list of questions are:
 
+- [Consensus Requirements](https://collective.flashbots.net/t/current-thinking-for-consensus/2695?u=quintus)
 - [Output Validity and Heterogenous DA](https://collective.flashbots.net/t/suave-ensuring-output-validity-and-heterogenous-da/2184)
-- [SUAVE Economic Security Models](https://collective.flashbots.net/t/suave-economic-security-models/1070)
+- [SUAVE Economic Security Models](https://collective.flashbots.net/t/suave-economic-security-models/1070) 
 
 ## Example Flows
 
