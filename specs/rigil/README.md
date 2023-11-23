@@ -143,7 +143,8 @@ The are multiple open questions that need to be solved in the long term about SU
 
 - [Consensus Requirements](https://collective.flashbots.net/t/current-thinking-for-consensus/2695?u=quintus)
 - [Output Validity and Heterogenous DA](https://collective.flashbots.net/t/suave-ensuring-output-validity-and-heterogenous-da/2184)
-- [SUAVE Economic Security Models](https://collective.flashbots.net/t/suave-economic-security-models/1070) 
+- [SUAVE Economic Security Models](https://collective.flashbots.net/t/suave-economic-security-models/1070)
+- [Bridge Request For Comments](https://collective.flashbots.net/t/suave-bridge/2696)
 
 ## Example Flows
 
