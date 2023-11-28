@@ -140,7 +140,7 @@ type ConfidentialComputeRecord struct {
 
 ### ConfidentialComputeRequest
 
-This type enables users to request the MEVM to compute over their data via the `eth_sendRawTransaction` method. After processing, the request's `ConfidentialComputeRecord` is embedded into `SuaveTransaction.ConfidentialComputeRequest` and serves as an onchain record of computation.
+This type enables users to request the MEVM to compute over their data via the `eth_sendRawTransaction` method. After processing, the request's `ConfidentialComputeRecord` is embedded into `SuaveTransaction.ConfidentialComputeRequest` and serves as an onchain record of computation. After a `ConfidentialComputeRequest` received from `eth_sendRawTransaction` or `eth_sendTransaction` is executed, it must be transformed into a `SuaveTransaction` and sent to the suave chain's mempool.
 
 ```go
 type ConfidentialComputeRequest struct {
@@ -149,7 +149,9 @@ type ConfidentialComputeRequest struct {
 }
 ```
 
-A Kettle's signature is used as the integrity guarantee for the computation's results. Eventually, this can include arbitrary proofs such as zero-knowledge proofs.
+During execution of a `ConfidentialComputeRequest` logs can be emitted, and any log that matches the standard `Suave.OnchainMessage` must be put into the `Messages` field of the resulting `SuaveTransaction`.
+
+The resulting `SuaveTransaction` must be signed by the kettle. The signature is used as the integrity guarantee for the computation's results. Eventually, this can include arbitrary proofs such as zero-knowledge proofs.
 
 ### Suave Transaction
 
@@ -158,7 +160,7 @@ The final home of compute results and intentionally leaked data from confidentia
 ```go
 type SuaveTransaction struct {
 	ConfidentialComputeRequest ConfidentialComputeRecord
-	ConfidentialComputeResult  []byte
+	Messages []core.Message
 
 	// Kettle's signature
 	ChainID *big.Int
@@ -211,7 +213,7 @@ SUAVE JSON-RPC can be seen as a super set of Ethereum JSON-RPC. This means the [
 
 ### eth_sendRawTransaction
 
-Creates new message call transaction or a contract creation for a signed `ConfidentialComputeRequest`.
+Send a transaction to the suave chain's mempool. Supports all transaction types, including `ConfidentialComputeRequest` and `SuaveTransaction`.
 
 ### eth_call
 

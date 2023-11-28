@@ -73,10 +73,12 @@ The SUAVE protocol adds a new transaction type to the base Ethereum protocol cal
 
 Blocks on the SUAVE chain consist of lists of SUAVE transactions. This new transaction type facilitates and captures key information involved in Confidential Compute Requests and their subsequent results. Any `ConfidentialComputeRequest`, signed by the user, specifies an `KettleAddress`. SUAVE transactions are valid if and only if they are signed by the `KettleAddress` specified by the user in the original `ConfidentialComputeRequest`, which is included as the `ConfidentialComputeRecord`.
 
+When executing a `SuaveTransaction` instead of performing a state transition based on calldata, execute all messages from the `Messages` field in a sequence. If any of the messages fail to apply or revert, the transaction's execution should be marked as reverted and should not be applied to the chain state. Gas usage of all of the messages applied must not exceed the one specified in `ConfidentialComputeRequest`. Chain state changes done by previous messages should be visible to subsequent messages.
+
 ```go
 type SuaveTransaction struct {
 	ConfidentialComputeRequest ConfidentialComputeRecord
-	ConfidentialComputeResult  []byte
+	Messages []core.Message
 
 	// Kettle's signature
 	ChainID *big.Int
@@ -98,11 +100,12 @@ type SuaveTransaction struct {
 
 ## TransactionRequest Serialization & Signing
 
-Transactions sent by users of SUAVE can take on two forms: 
+Transactions sent by users of SUAVE can take on: 
 1. Standard (legacy) Ethereum transaction
 2. `ConfidentialComputeRequest`
+3. `SuaveTransaction`
 
-Standard transactions are used to transfer SUAVE-ETH and deploy smart contracts to SUAVE. ConfidentialComputeRequests are a new [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) transaction type, used to interact with SUAVE smart contracts.
+Standard transactions are used to transfer SUAVE-ETH and deploy smart contracts to SUAVE. `ConfidentialComputeRequest` is a new [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) transaction type, used to interact with SUAVE smart contracts. `SuaveTransaction` is also a new EIP-2718 transaction type, and is the result of kettle executing a `ConfidentialComputeRequest`.
 
 All transactions are encoded with the [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) RLP-encoding scheme (with [EIP-2930](https://eips.ethereum.org/EIPS/eip-2930) allowed), but `ConfidentialComputeRequest` takes on a special signature scheme that deviates slightly from the traditional method.
 
