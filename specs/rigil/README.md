@@ -100,7 +100,7 @@ The Rigil testnet is initially focused on a specific set of actors:
 
 1. **Permissionless** - Allow anyone to deploy smart contracts on SUAVE.
 2. **Easy to use** - Create an environment that is as easy to use and test as possible, enabling rapid prototyping.
-3. **SGX UX Closeness** - Get as close to the SGX user experience as possible and minimize breaking changes down the road.
+3. **SGX UX Closeness** - The DevEx on Rigil should be forward-compatible with future constraints imposed by trusted enclaves (i.e. SGX).
 
 ## Design Decisions
 
