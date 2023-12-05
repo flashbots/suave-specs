@@ -107,11 +107,11 @@ The Rigil testnet is initially focused on a specific set of actors:
 Here is a list of design decisions made for the Rigil testnet and associated reasoning:
 
 - Decision *1*: **Proof-of-Authority Consensus**
-    - *reason*: [SUAVE consensus](https://collective.flashbots.net/t/suave-consensus/2152) is an active open question which, whether or answered not, does not drastically impact the UX of users on **Rigil Testnet**.
+    - *reason*: [SUAVE consensus](https://collective.flashbots.net/t/suave-consensus/2152) is an active open question which, whether answered or not, does not drastically impact the UX of users on **Rigil Testnet**.
 - Decision *2*: **No SGX Nodes (yet)**
     - reason: SGX SUAVE Kettles are an active area of research and development and do not drastically impact the UX of users on **Rigil Testnet**.
 - Decision *3*: **Weak Data Availability Guarantees**
-    - Reason: The Confidential Data Store currently only keeps private data available for one day. [Compute Output Validity and Heterogenous DA](https://collective.flashbots.net/t/suave-ensuring-output-validity-and-heterogenous-da/2184) are active open questions which, whether or answered not, does not drastically impact the UX on Rigil Testnet.
+    - Reason: The Confidential Data Store currently only keeps private data available for one day. [Compute Output Validity and Heterogenous DA](https://collective.flashbots.net/t/suave-ensuring-output-validity-and-heterogenous-da/2184) are active open questions which, whether answered or not, does not drastically impact the UX on Rigil Testnet.
 - Decision *4*: **Centralized Builder Interoperability**
     - reason: Blocks emitted from SUAVE Kettles will have unpredictable inclusion in early development so Rigil Testnet supports a precompile to send bundles to off-SUAVE block builders.
 
