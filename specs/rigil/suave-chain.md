@@ -98,11 +98,11 @@ type SuaveTransaction struct {
 
 ## TransactionRequest Serialization & Signing
 
-Transactions sent by users of SUAVE can take on two forms: 
+Messages sent by users of SUAVE can take on two forms: 
 1. Standard (legacy) Ethereum transaction
 2. `ConfidentialComputeRequest`
 
-Standard transactions are used to transfer SUAVE-ETH and deploy smart contracts to SUAVE. ConfidentialComputeRequests are a new [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) transaction type, used to interact with SUAVE smart contracts.
+Standard transactions are used to transfer SUAVE-ETH and deploy smart contracts to SUAVE chain. ConfidentialComputeRequests are a new [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) message type, used to interact with SUAVE smart contracts.
 
 All transactions are encoded with the [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) RLP-encoding scheme (with [EIP-2930](https://eips.ethereum.org/EIPS/eip-2930) allowed), but `ConfidentialComputeRequest` takes on a special signature scheme that deviates slightly from the traditional method.
 
