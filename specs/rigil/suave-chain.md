@@ -88,7 +88,7 @@ type SuaveTransaction struct {
 
 ### Suave Transaction Types
 
-`SuaveTransaction` is the primary transaction type which is returned when requesting transactions from endpoints like `eth_getTransactionByHash` or `eth_getBlockByNumber`, but SUAVE introduces two other important transaction types: `ConfidentialComputeRequest` and `ConfidentialComputeRecord`. All new types are detailed in the following table:
+`SuaveTransaction` is the primary transaction type which is returned when requesting transactions from endpoints like `eth_getTransactionByHash` or `eth_getBlockByNumber`, but SUAVE introduces two other important message types: `ConfidentialComputeRequest` and `ConfidentialComputeRecord`. All new types are detailed in the following table:
 
 | Name | EIP-2718 Tx Type | Description |
 | ---- | ---------------- | ----------- |
@@ -102,7 +102,7 @@ Messages sent by users of SUAVE can take on two forms:
 1. Standard (legacy) Ethereum transaction
 2. `ConfidentialComputeRequest`
 
-Standard transactions are used to transfer SUAVE-ETH and deploy smart contracts to SUAVE chain. ConfidentialComputeRequests are a new [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) message type, used to interact with SUAVE smart contracts. Note that 'ConfidentialComputeRequests' are not classified as 'transactions' imply changes to the state of a database/blockchain. Kettles do not provide persistent storage guarantees and are instead intended to convert inputs to outputs (like transactions targeted at blockchains).
+Standard transactions are used to transfer SUAVE-ETH and deploy smart contracts to SUAVE chain. ConfidentialComputeRequests are a new [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) message type, used to interact with SUAVE smart contracts. Note that 'ConfidentialComputeRequests' are **not** classified as 'transactions' since 'transaction' implies changes to the state of a database/blockchain. Kettles do not provide persistent storage guarantees and are instead intended to convert inputs to outputs (like transactions targeted at blockchains).
 
 All transactions are encoded with the [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) RLP-encoding scheme (with [EIP-2930](https://eips.ethereum.org/EIPS/eip-2930) allowed), but `ConfidentialComputeRequest` takes on a special signature scheme that deviates slightly from the traditional method.
 
