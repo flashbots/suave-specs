@@ -23,10 +23,11 @@ custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil
   - [`SimulateBundle`](#simulatebundle)
   - [`ExtractHint`](#extracthint)
   - [`SubmitBundleJsonRPC`](#submitbundlejsonrpc)
-  - [`FillMevShareBundleAddress`](#fillmevsharebundleaddress)
+  - [`FillMevShareBundle`](#fillmevsharebundle)
   - [`BuildEthBlock`](#buildethblock)
   - [`SubmitEthBlockBidToRelay`](#submitethblockbidtorelay)
   - [`SignEthTransaction`](#signethtransaction)
+  - [`SignMessage`](#signmessage)
 - [Precompiles Governance](#precompiles-governance)
 
 <!-- /TOC -->
@@ -219,6 +220,19 @@ Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transactio
 ```solidity
 function signEthTransaction(bytes memory txn, string memory chainId, string memory signingKey) view returns (bytes memory)
 ```
+
+### `SignMessage`
+
+[🔗 Implementation - WIP]()
+
+Address: `0x0000000000000000000000000000000040100003`
+
+Signs an arbitrary digest represented as bytes and returns bytes representing signed message. `digest` is bytes representation of the digest. `signingKey` is hex encoded string of the ECDSA private key *without the 0x prefix*.
+
+```solidity
+function signMessage(bytes memory digest, string memory signingKey) view returns (bytes memory)
+```
+
 
 ## Precompiles Governance
 
