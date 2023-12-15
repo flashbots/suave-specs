@@ -84,7 +84,7 @@ Rigil's architecture is composed of several parts:
 * SUAVE Chain: a public place to store data (e.g. intentionally leaked information) and SUAPP logic (e.g. deployed smart contracts).
 * MEVM: a modified EVM that exposes confidential computation and storage APIs to developers
 
-The goal of the Rigil testnet is to gather feedback on developer experience and harden the overall SUAVE software stack. The testnet is not intended to be a long-lived network and will be decommissioned after the launch of the next testnet Toliman.
+The goal of the Rigil testnet is to gather feedback on developer experience and harden the overall SUAVE software stack. The testnet is not intended to be a long-lived network and will be decommissioned after the launch of the next testnet Toliman. Note that TEEs are not used in this testnet and all privacy is trust-based.
 
 ## Users
 
