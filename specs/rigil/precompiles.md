@@ -28,7 +28,7 @@ custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil
   - [`SubmitEthBlockBidToRelay`](#submitethblockbidtorelay)
   - [`SignEthTransaction`](#signethtransaction)
   - [`ensureTxnValid`](#ensuretxnvalid)
-  - [`getABIEncodedCallData`](#getabiencodedcalldata)
+  - [`getCallData`](#getcalldata)
 - [Precompiles Governance](#precompiles-governance)
 
 <!-- /TOC -->
@@ -231,13 +231,21 @@ Address: `0x0000000000000000000000000000000040100003`
 
 Reverts if the input `bytes` do not contain a well-formed, RLP-encoded transaction.
 
-### `getABIEncodedCallData`
+```solidity
+function ensureTxnValid(bytes memory input) view
+```
+
+### `getCallData`
 
 [🔗 Implementation - WIP]()
 
 Address: `0x0000000000000000000000000000000040100004`
 
 Takes an RLP-encoded transaction and returns its call data.
+
+```solidity
+function getCallData(bytes memory input) view returns (bytes memory)
+```
 
 ## Precompiles Governance
 
