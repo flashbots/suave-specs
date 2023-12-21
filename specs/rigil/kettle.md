@@ -224,4 +224,4 @@ Executes a new message call immediately without creating a transaction on the bl
 
 ### eth_executionAddress
 
-Returns the list of available addresses in the Kettle to execute the confidential compute request.
+Returns the list of available addresses in the Kettle to execute a confidential compute request. Kettle owners can register multiple addresses to sign transactions with from their Kettle. Users can pick which address the Kettle must use to sign their transactions.
