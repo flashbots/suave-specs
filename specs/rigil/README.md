@@ -157,7 +157,7 @@ Below we can see the journey of order flow from transaction, to searcher back-ru
 ![OFA + Block Builder flow](/assets/OFA_And_Block_Flow.svg)
 
 1. A user sends their L1 transaction, EIP-712 message, UserOp, or Intent into a SUAVE Kettle.
-2. MEVM processes this L1 transaction, extracts a hint, and does two things:
+2. MEVM processes this L1 transaction, extracts a hint (data intentionally leaked by the contract), and does two things:
     - Stores the L1 transaction in the confidential data store
     - Sends a SUAVE transaction to the mempool which when executed emits the hint as a log
 3. Searchers will be listening on two different lanes for hints:
