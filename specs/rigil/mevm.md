@@ -77,12 +77,13 @@ type SuaveExecutionBackend struct {
 For more information on the capabilities exposed by the Confidential Data Store, see its related [🔗 spec](./confidential-data-store.md). The interface exposed to precompiles:
 
 ```go
-type ConfidentialStore interface {
-	InitializeBid(bid types.Bid) (types.Bid, error)
-	Store(bidId suave.BidId, caller common.Address, key string, value []byte) (suave.Bid, error)
-	Retrieve(bid types.BidId, caller common.Address, key string) ([]byte, error)
-	FetchBidById(suave.BidId) (suave.Bid, error)
-	FetchBidsByProtocolAndBlock(blockNumber uint64, namespace string) []suave.Bid
+type ConfidentialStorageBackend interface {
+	InitRecord(record suave.DataRecord) error
+	Store(record suave.DataRecord, caller common.Address, key string, value []byte) (suave.DataRecord, error)
+	Retrieve(record suave.DataRecord, caller common.Address, key string) ([]byte, error)
+	FetchRecordByID(suave.DataId) (suave.DataRecord, error)
+	FetchRecordsByProtocolAndBlock(blockNumber uint64, namespace string) []suave.DataRecord
+	Stop() error
 }
 ```
 
@@ -111,7 +112,7 @@ Domain specific services which seek to be used by SUAVE must implement the metho
 1. **Universal Access**: If a `ConfidentialComputeRequest` allows "any peeker", the function searches the `CallerStack` for a caller different from the precompile, granting access upon finding one.
 
 2. **Restricted Access and Validation**:
-   - The function checks if the precompile is explicitly authorized to access bid data.
+   - The function checks if the precompile is explicitly authorized to access the data record.
    - It then validates each caller in the `CallerStack` against the `AllowedPeekers` list. If an authorized caller is found, access is granted.
 
 3. **Error Handling**:

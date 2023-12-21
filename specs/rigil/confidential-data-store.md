@@ -81,13 +81,12 @@ type ConfidentialStoreEngine struct {
 `ConfidentialStorageBackend` is the interface that a storage backend for the Confidential Storage Engine must implement.
 
 ```go
-
 type ConfidentialStorageBackend interface {
-	InitializeBid(bid suave.Bid) error
-	Store(bid suave.Bid, caller common.Address, key string, value []byte) (suave.Bid, error)
-	Retrieve(bid suave.Bid, caller common.Address, key string) ([]byte, error)
-	FetchBidById(suave.BidId) (suave.Bid, error)
-	FetchBidsByProtocolAndBlock(blockNumber uint64, namespace string) []suave.Bid
+	InitRecord(record suave.DataRecord) error
+	Store(record suave.DataRecord, caller common.Address, key string, value []byte) (suave.DataRecord, error)
+	Retrieve(record suave.DataRecord, caller common.Address, key string) ([]byte, error)
+	FetchRecordByID(suave.DataId) (suave.DataRecord, error)
+	FetchRecordsByProtocolAndBlock(blockNumber uint64, namespace string) []suave.DataRecord
 	Stop() error
 }
 ```
