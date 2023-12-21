@@ -134,7 +134,7 @@ A broad-level view of how a SUAPP gets onchain and utilizes SUAVE core component
    - The **MEVM** processes the confidential computation or smart contract call.
    - Data might be stored in or retrieved from the **Suave Chain State** or **Confidential Data Store** based on SUAPP needs.
    - **Precompiles** aid in the efficient execution of certain functions.
-   - **Domain-Specific Services** handle execution on different domains and return results to **MEVM**.
+   - **Domain-Specific Services** handle execution on different domains (such as simulation against Ethereum state) and return results to **MEVM**.
 4. The **Suave PoA Chain** stores results of confidential computation.
 
 ## Open Questions
