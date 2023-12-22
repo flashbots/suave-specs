@@ -189,23 +189,23 @@ If we consider a specific use case, like an order flow auction, the high-level s
 
 ![OFA example flow](/assets/OFA-example-flow.svg)
 
-1. The user sends a Confidential Compute Request interacting with a SUAPP by calling its `newBid` function. Included in this request is also the user's L1 transaction as a confidential Input.
-2. The Kettle will receive the transaction and process it. To do so it first runs the offchain logic associated with `newBid` which will extract the transaction's data and then return a callback:
+1. The user sends a Confidential Compute Request interacting with a SUAPP by calling its `newTransaction` function. Included in this request is also the user's L1 transaction as a confidential Input.
+2. The Kettle will receive the transaction and process it. To do so it first runs the offchain logic associated with `newTransaction` which will extract the transaction's data and then return a callback:
 ```go
-return bytes.concat(this.emitHint.selector, abi.encode(hint));
+return bytes.concat(this.emitDataRecord.selector, abi.encode(dataRecord));
 ```
 which points to another function:
 ```go
-function emitHint(Suave.Bid calldata bid, bytes memory hint) public {
-    emit HintEvent(bid.id, hint);
+function emitDataRecord(Suave.DataRecord calldata dataRecord) public {
+    emit DataRecordEvent(dataRecord.id, dataRecord.decryptionCondition, dataRecord.allowedPeekers);
 }
 ```
 3. The callback is inserted into the calldata of a SUAVE transaction and then shipped off to the SUAVE mempool.
 4. The transaction will get picked up, inserted in a SUAVE block, and propagated to SUAVE Kettles.
 5. From here a searcher monitoring the chain and this specific OFA will see the log emitted and begin processing.
 6. Once the searcher has a backrun crafted for the opportunity it will send it to the Kettle as a Confidential Compute Request with the backrun transaction in the confidential inputs.
-7. The Kettle will receive and process the searcher's Confidential Compute Request based on the contracts logic. In this case, it will:
-    - Grab referenced User Transaction to be placed behind
+7. The Kettle will receive and process the searcher's Confidential Compute Request based on the contract's logic. In this case, it will:
+    - Grab the referenced User Transaction to be placed behind
     - Construct a bundle object with the two transactions
     - Submit to domain-specific service for simulation and validation
 8. From there, in this example, the MEVM will then forward the bundle to pre-configured off-SUAVE block builders, but could as easily also forward to onchain block builders.
