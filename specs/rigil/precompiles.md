@@ -23,10 +23,12 @@ custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil
   - [`SimulateBundle`](#simulatebundle)
   - [`ExtractHint`](#extracthint)
   - [`SubmitBundleJsonRPC`](#submitbundlejsonrpc)
-  - [`FillMevShareBundleAddress`](#fillmevsharebundleaddress)
+  - [`FillMevShareBundle`](#fillmevsharebundle)
   - [`BuildEthBlock`](#buildethblock)
   - [`SubmitEthBlockBidToRelay`](#submitethblockbidtorelay)
   - [`SignEthTransaction`](#signethtransaction)
+  - [`ensureTxnValid`](#ensuretxnvalid)
+  - [`getCallData`](#getcalldata)
 - [Precompiles Governance](#precompiles-governance)
 
 <!-- /TOC -->
@@ -216,6 +218,31 @@ Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transactio
 
 ```solidity
 function signEthTransaction(bytes memory txn, string memory chainId, string memory signingKey) view returns (bytes memory)
+```
+
+### `ensureTxnValid`
+
+
+[🔗 Implementation - WIP]()
+
+Address: `0x0000000000000000000000000000000040100003`
+
+Reverts if the input `bytes` do not contain a well-formed, RLP-encoded transaction.
+
+```solidity
+function ensureTxnValid(bytes memory input) view
+```
+
+### `getCallData`
+
+[🔗 Implementation - WIP]()
+
+Address: `0x0000000000000000000000000000000040100004`
+
+Takes an RLP-encoded transaction and returns its call data.
+
+```solidity
+function getCallData(bytes memory input) view returns (bytes memory)
 ```
 
 ## Precompiles Governance
