@@ -1,4 +1,5 @@
 ---
+---
 title: Precompiles
 description: Precompile are MEVM contracts that are implemented in native code instead of bytecode.
 custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/precompiles.md"
@@ -6,7 +7,10 @@ custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil
 
 <div className="hide-in-docs">
 
+
 # Precompiles
+
+
 
 - [Overview](#overview)
 - [Available Precompiles](#available-precompiles)
@@ -15,6 +19,7 @@ custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil
   - [`confidentialInputs`](#confidentialInputs)
   - [`confidentialRetrieve`](#confidentialRetrieve)
   - [`confidentialStore`](#confidentialStore)
+  - [`contextGet`](#contextGet)
   - [`doHTTPRequest`](#doHTTPRequest)
   - [`ethcall`](#ethcall)
   - [`extractHint`](#extractHint)
@@ -30,6 +35,8 @@ custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil
   - [`submitBundleJsonRPC`](#submitBundleJsonRPC)
   - [`submitEthBlockToRelay`](#submitEthBlockToRelay)
 - [Precompiles Governance](#precompiles-governance)
+
+
 
 ---
 
@@ -58,6 +65,7 @@ Determines if the current execution mode is regular (onchain) or confidential. O
 function isConfidential() internal view returns (bool b)
 ```
 
+
 ### `buildEthBlock`
 
 Address: `0x0000000000000000000000000000000042100001`
@@ -72,7 +80,7 @@ Inputs:
 
 - `blockArgs` (BuildBlockArgs): Arguments to build the block
 - `dataId` (DataId): ID of the data record with mev-share bundle data
-- `namespace` (string):
+- `namespace` (string): 
 
 Outputs:
 
@@ -88,6 +96,8 @@ Provides the confidential inputs associated with a confidential computation requ
 ```solidity
 function confidentialInputs() internal view returns (bytes memory)
 ```
+
+
 
 Outputs:
 
@@ -127,6 +137,26 @@ Inputs:
 - `dataId` (DataId): ID of the data record to store
 - `key` (string): Key slot of the data to store
 - `value` (bytes): Value of the data to store
+
+
+
+### `contextGet`
+
+Address: `0x0000000000000000000000000000000053300003`
+
+Retrieves a value from the context
+
+```solidity
+function contextGet(string memory key) internal view returns (bytes memory)
+```
+
+Inputs:
+
+- `key` (string): Key of the value to retrieve
+
+Outputs:
+
+- `value` (bytes): Value of the key
 
 ### `doHTTPRequest`
 
@@ -230,6 +260,8 @@ Initializes a new remote builder session
 function newBuilder() internal view returns (string memory)
 ```
 
+
+
 Outputs:
 
 - `sessionid` (string): ID of the remote builder session
@@ -262,8 +294,12 @@ Address: `0x0000000000000000000000000000000053200003`
 Generates a private key in ECDA secp256k1 format
 
 ```solidity
-function privateKeyGen() internal view returns (string memory)
+function privateKeyGen(CryptoSignature crypto) internal view returns (string memory)
 ```
+
+Inputs:
+
+- `crypto` (CryptoSignature): Type of the private key to generate
 
 Outputs:
 
@@ -273,7 +309,7 @@ Outputs:
 
 Address: `0x0000000000000000000000000000000040100001`
 
-Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transaction bytes. `txn` is binary encoding of the transaction. `signingKey` is hex encoded string of the ECDSA private key _without the 0x prefix_. `chainId` is a hex encoded string _with 0x prefix_.
+Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transaction bytes. `txn` is binary encoding of the transaction. `signingKey` is hex encoded string of the ECDSA private key *without the 0x prefix*. `chainId` is a hex encoded string *with 0x prefix*.
 
 ```solidity
 function signEthTransaction(bytes memory txn, string memory chainId, string memory signingKey) internal view returns (bytes memory)
@@ -296,12 +332,13 @@ Address: `0x0000000000000000000000000000000040100003`
 Signs a message and returns the signature.
 
 ```solidity
-function signMessage(bytes memory digest, string memory signingKey) internal view returns (bytes memory)
+function signMessage(bytes memory digest, CryptoSignature crypto, string memory signingKey) internal view returns (bytes memory)
 ```
 
 Inputs:
 
 - `digest` (bytes): Message to sign
+- `crypto` (CryptoSignature): Type of the private key to generate
 - `signingKey` (string): Hex encoded string of the ECDSA private key
 
 Outputs:
@@ -384,11 +421,12 @@ Outputs:
 
 - `blockBid` (bytes): Error message if any
 
+
 ## Precompiles Governance
 
 The governance process for adding precompiles is in it's early stages but is as follows:
-
 - Discuss the idea in a [forum post](https://collective.flashbots.net/c/suave/27)
 - Open a PR and provide implementation
 - Feedback and review
 - Possibly merge and deploy in the next network upgrade, or sooner, depending on the precompile
+
