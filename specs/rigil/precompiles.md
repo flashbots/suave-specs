@@ -1,5 +1,4 @@
 ---
----
 title: Precompiles
 description: Precompile are MEVM contracts that are implemented in native code instead of bytecode.
 custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/precompiles.md"
@@ -7,10 +6,11 @@ custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil
 
 <div className="hide-in-docs">
 
+<!-- omit from toc -->
 
 # Precompiles
 
-
+<!-- TOC -->
 
 - [Overview](#overview)
 - [Available Precompiles](#available-precompiles)
@@ -35,8 +35,6 @@ custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil
   - [`submitBundleJsonRPC`](#submitBundleJsonRPC)
   - [`submitEthBlockToRelay`](#submitEthBlockToRelay)
 - [Precompiles Governance](#precompiles-governance)
-
-
 
 ---
 
@@ -65,7 +63,6 @@ Determines if the current execution mode is regular (onchain) or confidential. O
 function isConfidential() internal view returns (bool b)
 ```
 
-
 ### `buildEthBlock`
 
 Address: `0x0000000000000000000000000000000042100001`
@@ -80,7 +77,7 @@ Inputs:
 
 - `blockArgs` (BuildBlockArgs): Arguments to build the block
 - `dataId` (DataId): ID of the data record with mev-share bundle data
-- `namespace` (string): 
+- `namespace` (string):
 
 Outputs:
 
@@ -96,8 +93,6 @@ Provides the confidential inputs associated with a confidential computation requ
 ```solidity
 function confidentialInputs() internal view returns (bytes memory)
 ```
-
-
 
 Outputs:
 
@@ -137,8 +132,6 @@ Inputs:
 - `dataId` (DataId): ID of the data record to store
 - `key` (string): Key slot of the data to store
 - `value` (bytes): Value of the data to store
-
-
 
 ### `contextGet`
 
@@ -260,8 +253,6 @@ Initializes a new remote builder session
 function newBuilder() internal view returns (string memory)
 ```
 
-
-
 Outputs:
 
 - `sessionid` (string): ID of the remote builder session
@@ -309,7 +300,7 @@ Outputs:
 
 Address: `0x0000000000000000000000000000000040100001`
 
-Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transaction bytes. `txn` is binary encoding of the transaction. `signingKey` is hex encoded string of the ECDSA private key *without the 0x prefix*. `chainId` is a hex encoded string *with 0x prefix*.
+Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transaction bytes. `txn` is binary encoding of the transaction. `signingKey` is hex encoded string of the ECDSA private key _without the 0x prefix_. `chainId` is a hex encoded string _with 0x prefix_.
 
 ```solidity
 function signEthTransaction(bytes memory txn, string memory chainId, string memory signingKey) internal view returns (bytes memory)
@@ -421,12 +412,11 @@ Outputs:
 
 - `blockBid` (bytes): Error message if any
 
-
 ## Precompiles Governance
 
 The governance process for adding precompiles is in it's early stages but is as follows:
+
 - Discuss the idea in a [forum post](https://collective.flashbots.net/c/suave/27)
 - Open a PR and provide implementation
 - Feedback and review
 - Possibly merge and deploy in the next network upgrade, or sooner, depending on the precompile
-
