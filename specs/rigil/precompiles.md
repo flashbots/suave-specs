@@ -4,11 +4,11 @@ description: Precompile are MEVM contracts that are implemented in native code i
 custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/precompiles.md"
 ---
 
-<div className="hide-in-docs">
 
 <!-- omit from toc -->
 # Precompiles
 
+<div className="hide-in-docs">
 <!-- TOC -->
 
 - [Overview](#overview)
@@ -23,7 +23,7 @@ custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil
   - [`SimulateBundle`](#simulatebundle)
   - [`ExtractHint`](#extracthint)
   - [`SubmitBundleJsonRPC`](#submitbundlejsonrpc)
-  - [`FillMevShareBundleAddress`](#fillmevsharebundleaddress)
+  - [`FillMevShareBundle`](#fillmevsharebundle)
   - [`BuildEthBlock`](#buildethblock)
   - [`SubmitEthBlockBidToRelay`](#submitethblockbidtorelay)
   - [`SignEthTransaction`](#signethtransaction)

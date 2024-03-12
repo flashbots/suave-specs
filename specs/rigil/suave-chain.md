@@ -4,10 +4,11 @@ description: The primary purpose of the SUAVE chain is to reach (and maintain) c
 custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/suave-chain.md"
 ---
 
-<div className="hide-in-docs">
 
 <!-- omit from toc -->
 # Suave Chain
+
+<div className="hide-in-docs">
 
 **Table of Contents**
 
@@ -20,6 +21,8 @@ custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil
 - [Consensus Mechanism: Proof-of-Authority (Clique)](#consensus-mechanism-proof-of-authority-clique)
   - [Geth Version](#geth-version)
 - [Suave Transaction](#suave-transaction)
+  - [Suave Transaction Types](#suave-transaction-types)
+- [TransactionRequest Serialization \& Signing](#transactionrequest-serialization--signing)
 - [Node Requirements and Setup](#node-requirements-and-setup)
 - [Gas and Transaction Fees](#gas-and-transaction-fees)
 - [Security Considerations](#security-considerations)
@@ -90,15 +93,15 @@ type SuaveTransaction struct {
 
 `SuaveTransaction` is the primary transaction type which is returned when requesting transactions from endpoints like `eth_getTransactionByHash` or `eth_getBlockByNumber`, but SUAVE introduces two other important message types: `ConfidentialComputeRequest` and `ConfidentialComputeRecord`. All new types are detailed in the following table:
 
-| Name | EIP-2718 Tx Type | Description |
-| ---- | ---------------- | ----------- |
-| SuaveTransaction | `0x50` | SUAVE transaction; product of executed ConfidentialComputeRequest |
-| ConfidentialComputeRequest | `0x43` | Sent by users to interact with SUAVE smart contracts using confidential inputs |
-| ConfidentialComputeRecord | `0x42` | Artifact of ConfidentialComputeRequest; represents record that is stored on SUAVE chain |
+| Name                       | EIP-2718 Tx Type | Description                                                                             |
+| -------------------------- | ---------------- | --------------------------------------------------------------------------------------- |
+| SuaveTransaction           | `0x50`           | SUAVE transaction; product of executed ConfidentialComputeRequest                       |
+| ConfidentialComputeRequest | `0x43`           | Sent by users to interact with SUAVE smart contracts using confidential inputs          |
+| ConfidentialComputeRecord  | `0x42`           | Artifact of ConfidentialComputeRequest; represents record that is stored on SUAVE chain |
 
 ## TransactionRequest Serialization & Signing
 
-Messages sent by users of SUAVE can take on two forms: 
+Messages sent by users of SUAVE can take on two forms:
 1. Standard (legacy) Ethereum transaction
 2. `ConfidentialComputeRequest`
 

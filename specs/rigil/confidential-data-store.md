@@ -4,10 +4,11 @@ description: This essential component of the SUAVE protocol serves as a secure a
 custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/confidential-data-store.md"
 ---
 
-<div className="hide-in-docs">
 
 <!-- omit from toc -->
 # Confidential Data Store
+
+<div className="hide-in-docs">
 
 **Table of Contents**
 
