@@ -4,10 +4,11 @@ description: Rigil is the first testnet for SUAVE. It is a sandbox and foundatio
 custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/README.md"
 ---
 
-<div className="hide-in-docs">
 
 <!-- omit from toc -->
 # SUAVE Rigil Testnet
+
+<div className="hide-in-docs">
 
 [![Docs at https://suave.flashbots.net/](https://img.shields.io/badge/read-SUAVE%20docs-blue.svg)](https://suave.flashbots.net/)
 [![Join the discourse at https://collective.flashbots.net/](https://img.shields.io/badge/chat-on%20Flashbots%20forum-blue.svg)](https://collective.flashbots.net/)
@@ -66,11 +67,12 @@ Read more about SUAVE:
 - https://writings.flashbots.net/the-future-of-mev-is-suave
 - https://writings.flashbots.net/mevm-suave-centauri-and-beyond
 
-</div>
 
 ---
 
 # Rigil Overview
+
+</div>
 
 This set of specs outlines the Rigil Testnet, a continuation of the star system theme (Centauri, Andromeda, Helios) laid out in [The Future of MEV](https://writings.flashbots.net/mevm-suave-centauri-and-beyond); and the first in a series of SUAVE testnets based on stars in the [(Alpha) Centauri system](https://en.wikipedia.org/wiki/Alpha_Centauri): Rigil Kentaurus (Alpha Centauri A), Toliman (B) and Proxima Centauri (C).
 

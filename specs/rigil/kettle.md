@@ -4,10 +4,11 @@ description: SUAVE Kettles contain all necessary components to accept, process, 
 custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/kettle.md"
 ---
 
-<div className="hide-in-docs">
 
 <!-- omit from toc -->
 # Kettle
+
+<div className="hide-in-docs">
 
 **Table of Contents**
 
