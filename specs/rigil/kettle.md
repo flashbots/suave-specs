@@ -27,7 +27,7 @@ custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil
   - [Domain-Specific Services](#domain-specific-services)
 - [Containers](#containers)
   - [Confidential Compute Record](#confidential-compute-record)
-  - [ConfidentialComputeRequest](#confidentialcomputerequest)
+  - [Confidential Compute Request](#confidential-compute-request)
   - [Suave Transaction](#suave-transaction)
 - [Honest Kettle](#honest-kettle)
 - [Confidential Computation](#confidential-computation)
@@ -139,7 +139,7 @@ type ConfidentialComputeRecord struct {
 ```
 
 
-### ConfidentialComputeRequest
+### Confidential Compute Request
 
 This type enables users to request the MEVM to compute over their data via the `eth_sendRawTransaction` method. After processing, the request's `ConfidentialComputeRecord` is embedded into `SuaveTransaction.ConfidentialComputeRequest` and serves as an onchain record of computation.
 
