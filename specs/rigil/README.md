@@ -30,23 +30,23 @@ This repository hosts the current SUAVE Rigil testnet specifications and design 
 - [Specs](#specs)
 - [About SUAVE](#about-suave)
 - [Rigil Overview](#rigil-overview)
-  - [Users](#users)
-  - [Rigil Design Goals](#rigil-design-goals)
-  - [Design Decisions](#design-decisions)
-  - [Glossary](#glossary)
-  - [Architecture](#architecture)
-  - [Open Questions](#open-questions)
-  - [Example Flows](#example-flows)
-    - [High Level - OFA + Block Builder](#high-level---ofa--block-builder)
-    - [Confidential Compute Request Flow](#confidential-compute-request-flow)
-    - [OFA Example](#ofa-example)
-    - [Block Building Example](#block-building-example)
+- [Users](#users)
+- [Rigil Design Goals](#rigil-design-goals)
+- [Design Decisions](#design-decisions)
+- [Glossary](#glossary)
+- [Architecture](#architecture)
+- [Open Questions](#open-questions)
+- [Example Flows](#example-flows)
+  - [High Level - OFA + Block Builder](#high-level---ofa--block-builder)
+  - [Confidential Compute Request Flow](#confidential-compute-request-flow)
+  - [OFA Example](#ofa-example)
+  - [Block Building Example](#block-building-example)
 
 <!-- /TOC -->
 
 ---
 
-# Specs
+## Specs
 
 We recommend that you read the specs in the following order:
 
@@ -59,7 +59,7 @@ We recommend that you read the specs in the following order:
 
 ---
 
-# About SUAVE
+## About SUAVE
 
 SUAVE - Single Unifying Auction for Value Expression - is a platform for building MEV applications such as OFAs, block builders, and intent executors in a decentralized and private way. SUAVE does not replace other blockchains: it is intended to aggregate and coordinate all the things that ultimately change the state of other chains.
 
@@ -70,7 +70,7 @@ Read more about SUAVE:
 
 ---
 
-# Rigil Overview
+## Rigil Overview
 
 </div>
 
