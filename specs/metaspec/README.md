@@ -24,7 +24,7 @@ SUAVE specifications are Markdown documents written in natural language, with th
 
 ### Frontmatter
 
-A spec must being with frontmatter. Frontmatter is a preamble to the document placed right at the start, delimited with --- and containing YAML data. The frontmatter for the present spec looks like this:
+A spec must being with frontmatter. Frontmatter is a preamble to the document, is delimited with `---`, and contains YAML data. The frontmatter for the present spec is as follows:
 
 ```
 ---
