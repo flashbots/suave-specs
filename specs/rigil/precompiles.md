@@ -15,18 +15,25 @@ custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil
 - [Available Precompiles](#available-precompiles)
   - [`IsConfidential`](#isconfidential)
   - [`ConfidentialInputs`](#confidentialinputs)
+  - [`ContextGet`](#contextget)
   - [`ConfidentialStore`](#confidentialstore)
   - [`ConfidentialRetrieve`](#confidentialretrieve)
   - [`NewDataRecord`](#newdatarecord)
   - [`FetchDataRecords`](#fetchdatarecords)
+  - [`DoHttpRequest`](#dohttprequest)
   - [`EthCall`](#ethcall)
   - [`SimulateBundle`](#simulatebundle)
   - [`ExtractHint`](#extracthint)
+  - [`SimulateTransaction`](#simulatetransaction)
   - [`SubmitBundleJsonRPC`](#submitbundlejsonrpc)
   - [`FillMevShareBundle`](#fillmevsharebundle)
+  - [`NewBuilder`](#newbuilder)
   - [`BuildEthBlock`](#buildethblock)
   - [`SubmitEthBlockBidToRelay`](#submitethblockbidtorelay)
   - [`SignEthTransaction`](#signethtransaction)
+  - [`SignMessage`](#signmessage)
+  - [`PrivateKeyGen`](#privatekeygen)
+  - [`RandomBytes`](#randombytes)
 - [Precompiles Governance](#precompiles-governance)
 
 <!-- /TOC -->
@@ -50,10 +57,7 @@ A list of available precompiles in Rigil are as follows:
 
 ### `IsConfidential`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave.go#L43)
-
 Address: `0x0000000000000000000000000000000042010000`
-
 
 Determines if the current execution mode is regular (onchain) or confidential. Outputs a boolean value.
 
@@ -63,7 +67,7 @@ function isConfidential() internal view returns (bool b)
 
 ### `ConfidentialInputs`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave.go#L77)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave.go#L38)
 
 Address: `0x0000000000000000000000000000000042010001`
 
@@ -73,9 +77,21 @@ Provides the confidential inputs associated with a confidential computation requ
 function confidentialInputs() internal view returns (bytes memory)
 ```
 
+### `ContextGet`
+
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave.go#L311)
+
+Address: `0x0000000000000000000000000000000053300003`
+
+Retrieves a value from the context of a given function call.
+
+```solidity
+function contextGet(string memory key) internal returns (bytes memory)
+```
+
 ### `ConfidentialStore`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave.go#L121)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave.go#L53)
 
 Address: `0x0000000000000000000000000000000042020000`
 
@@ -87,7 +103,7 @@ function confidentialStore(DataId dataId, string memory key, bytes memory data1)
 
 ### `ConfidentialRetrieve`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave.go#L176)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave.go#L82)
 
 Address: `0x0000000000000000000000000000000042020001`
 
@@ -99,7 +115,7 @@ function confidentialRetrieve(DataId dataId, string memory key) internal view re
 
 ### `NewDataRecord`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave.go#L237)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave.go#L111)
 
 Address: `0x0000000000000000000000000000000042030000`
 
@@ -111,7 +127,7 @@ function newDataRecord(uint64 decryptionCondition, address[] memory allowedPeeke
 
 ### `FetchDataRecords`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave.go#L291)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave.go#L130)
 
 Address: `0x0000000000000000000000000000000042030001`
 
@@ -121,9 +137,21 @@ Retrieves all data records correlating with a specified decryption condition.
 function fetchDataRecords(uint64 cond, string memory namespace) internal view returns (DataRecord[] memory)
 ```
 
+### `DoHttpRequest`
+
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave.go#L213)
+
+Address: `0x0000000000000000000000000000000043200002`
+
+Performs any arbitrary HTTP request and returns the response.
+
+```solidity
+function doHTTPRequest(HttpRequest memory request) internal returns (bytes memory)
+```
+
 ### `EthCall`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L193)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave_eth.go#L111)
 
 Address: `0x0000000000000000000000000000000042100003`
 
@@ -133,9 +161,21 @@ Uses the `eth_call` JSON RPC method to let you simulate a function call and retu
  function ethcall(address contractAddr, bytes memory input1) internal view returns (bytes memory)
 ```
 
+### `SimulateTransaction`
+
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave.go#L298)
+
+Address: `0x0000000000000000000000000000000053200002`
+
+Simulates a transaction on a remote builder session, often used in tandem with [`newBuilder`](#newbuilder).
+
+```solidity
+function simulateTransaction(string memory sessionid, bytes memory txn) internal returns (SimulateTransactionResult memory)
+```
+
 ### `SimulateBundle`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L115)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave_eth.go#L65)
 
 Address: `0x0000000000000000000000000000000042100000`
 
@@ -147,7 +187,7 @@ function simulateBundle(bytes memory bundleData) internal view returns (uint64)
 
 ### `ExtractHint`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L159)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave_eth.go#L88)
 
 Address: `0x0000000000000000000000000000000042100037`
 
@@ -159,7 +199,7 @@ function extractHint(bytes memory bundleData) internal view returns (bytes memor
 
 ### `SubmitBundleJsonRPC`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L547)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave_eth.go#L376)
 
 Address: `0x0000000000000000000000000000000043000001`
 
@@ -172,7 +212,7 @@ function submitBundleJsonRPC(string memory url, string memory method, bytes memo
 
 ### `FillMevShareBundle`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L613)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave_eth.go#L414)
 
 Address: `0x0000000000000000000000000000000043200001`
 
@@ -182,9 +222,22 @@ Joins the user's transaction and with the backrun, and returns encoded mev-share
 function fillMevShareBundle(DataId dataId) internal view returns (bytes memory)
 ```
 
+### `NewBuilder`
+
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave.go#L294)
+
+Address: `0x0000000000000000000000000000000053200001`
+
+Initializes a new builder session, which would be used for simulating transactions and bundles as they arrive in a more efficient manner.
+
+
+```solidity
+function newBuilder() internal returns (string memory)
+```
+
 ### `BuildEthBlock`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L267)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave_eth.go#L115)
 
 Address: `0x0000000000000000000000000000000042100001`
 
@@ -196,7 +249,7 @@ function buildEthBlock(BuildBlockArgs memory blockArgs, DataId dataId, string me
 
 ### `SubmitEthBlockBidToRelay`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L456)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave_eth.go#L305)
 
 Address: `0x0000000000000000000000000000000042100002`
 
@@ -208,7 +261,7 @@ function submitEthBlockBidToRelay(string memory relayUrl, bytes memory builderBi
 
 ### `SignEthTransaction`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L62)
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave_eth.go#L33)
 
 Address: `0x0000000000000000000000000000000040100001`
 
@@ -216,6 +269,42 @@ Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transactio
 
 ```solidity
 function signEthTransaction(bytes memory txn, string memory chainId, string memory signingKey) view returns (bytes memory)
+```
+
+### `SignMessage`
+
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave.go#L145)
+
+Address: `0x0000000000000000000000000000000040100003`
+
+Signs a message and returns the signature.
+
+```solidity
+function signMessage(bytes memory digest, CryptoSignature crypto, string memory signingKey) internal returns (bytes memory)
+```
+
+### `PrivateKeyGen`
+
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave_eth.go#L287)
+
+Address: `0x0000000000000000000000000000000053200003`
+
+Generates a private key in ECDA secp256k1 format.
+
+```solidity
+function privateKeyGen(CryptoSignature crypto) internal returns (string memory)
+```
+
+### `RandomBytes`
+
+[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/23d7a718572088ecf2f3e2457d676bcbf27cecfa/core/vm/contracts_suave.go#L42)
+
+Address: `0x000000000000000000000000000000007770000b`
+
+Generates a number of random bytes, given by the argument numBytes.
+
+```solidity
+function randomBytes(uint8 numBytes) internal returns (bytes memory)
 ```
 
 ## Precompiles Governance
