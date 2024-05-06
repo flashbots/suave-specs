@@ -1,21 +1,21 @@
 ---
+---
+
 title: Precompiles
 description: Precompile are MEVM contracts that are implemented in native code instead of bytecode.
 custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/precompiles.md"
+
 ---
 
 <div className="hide-in-docs">
 
-<!-- omit from toc -->
-
 # Precompiles
-
-<!-- TOC -->
 
 - [Overview](#overview)
 - [Available Precompiles](#available-precompiles)
   - [`IsConfidential`](#isconfidential)
   - [`buildEthBlock`](#buildEthBlock)
+  - [`buildEthBlockTo`](#buildEthBlockTo)
   - [`confidentialInputs`](#confidentialInputs)
   - [`confidentialRetrieve`](#confidentialRetrieve)
   - [`confidentialStore`](#confidentialStore)
@@ -28,6 +28,7 @@ custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil
   - [`newBuilder`](#newBuilder)
   - [`newDataRecord`](#newDataRecord)
   - [`privateKeyGen`](#privateKeyGen)
+  - [`randomBytes`](#randomBytes)
   - [`signEthTransaction`](#signEthTransaction)
   - [`signMessage`](#signMessage)
   - [`simulateBundle`](#simulateBundle)
@@ -67,17 +68,39 @@ function isConfidential() internal view returns (bool b)
 
 Address: `0x0000000000000000000000000000000042100001`
 
-Constructs an Ethereum block based on the provided `bidIds`. The construction follows the order of `bidId`s are given.
+Constructs an Ethereum block based on the provided data records. No blobs are returned.
 
 ```solidity
-function buildEthBlock(BuildBlockArgs memory blockArgs, DataId dataId, string memory namespace) internal view returns (bytes memory, bytes memory)
+function buildEthBlock(BuildBlockArgs memory blockArgs, DataId dataId, string memory relayUrl) internal view returns (bytes memory, bytes memory)
 ```
 
 Inputs:
 
 - `blockArgs` (BuildBlockArgs): Arguments to build the block
 - `dataId` (DataId): ID of the data record with mev-share bundle data
-- `namespace` (string):
+- `relayUrl` (string): If specified the built block will be submitted to the relay
+
+Outputs:
+
+- `blockBid` (bytes): Block Bid encoded in JSON
+- `executionPayload` (bytes): Execution payload encoded in JSON
+
+### `buildEthBlockTo`
+
+Address: `0x0000000000000000000000000000000042100006`
+
+Constructs an Ethereum block based on the provided data records. No blobs are returned.
+
+```solidity
+function buildEthBlockTo(string memory executionNodeURL, BuildBlockArgs memory blockArgs, DataId dataId, string memory relayUrl) internal view returns (bytes memory, bytes memory)
+```
+
+Inputs:
+
+- `executionNodeURL` (string): URL (or service name) of the execution node
+- `blockArgs` (BuildBlockArgs): Arguments to build the block
+- `dataId` (DataId): ID of the data record with mev-share bundle data
+- `relayUrl` (string): If specified the built block will be submitted to the relay
 
 Outputs:
 
@@ -102,7 +125,7 @@ Outputs:
 
 Address: `0x0000000000000000000000000000000042020001`
 
-Retrieves data from the confidential store. Also mandates the caller&#39;s presence in the `AllowedPeekers` list.
+Retrieves data from the confidential store. Also mandates the caller's presence in the `AllowedPeekers` list.
 
 ```solidity
 function confidentialRetrieve(DataId dataId, string memory key) internal view returns (bytes memory)
@@ -121,7 +144,7 @@ Outputs:
 
 Address: `0x0000000000000000000000000000000042020000`
 
-Handles the storage of data in the confidential store. Requires the caller to be part of the `AllowedPeekers` for the associated bid.
+Stores data in the confidential store. Requires the caller to be part of the `AllowedPeekers` for the associated data record.
 
 ```solidity
 function confidentialStore(DataId dataId, string memory key, bytes memory value) internal view returns ()
@@ -229,7 +252,7 @@ Outputs:
 
 Address: `0x0000000000000000000000000000000043200001`
 
-Joins the user&#39;s transaction and with the backrun, and returns encoded mev-share bundle. The bundle is ready to be sent via `SubmitBundleJsonRPC`.
+Joins the user's transaction and with the backrun, and returns encoded mev-share bundle. The bundle is ready to be sent via `SubmitBundleJsonRPC`.
 
 ```solidity
 function fillMevShareBundle(DataId dataId) internal view returns (bytes memory)
@@ -261,7 +284,7 @@ Outputs:
 
 Address: `0x0000000000000000000000000000000042030000`
 
-Initializes data records within the ConfidentialStore. Prior to storing data, all bids should undergo initialization via this precompile.
+Initializes data records within the ConfidentialStore. Prior to storing data, all data records should undergo initialization via this precompile.
 
 ```solidity
 function newDataRecord(uint64 decryptionCondition, address[] memory allowedPeekers, address[] memory allowedStores, string memory dataType) internal view returns (DataRecord memory)
@@ -296,11 +319,29 @@ Outputs:
 
 - `privateKey` (string): Hex encoded string of the ECDSA private key. Exactly as a signMessage precompile wants.
 
+### `randomBytes`
+
+Address: `0x000000000000000000000000000000007770000b`
+
+Generates a number of random bytes, given by the argument numBytes.
+
+```solidity
+function randomBytes(uint8 numBytes) internal view returns (bytes memory)
+```
+
+Inputs:
+
+- `numBytes` (uint8): Number of random bytes to generate
+
+Outputs:
+
+- `value` (bytes): Randomly-generated bytes
+
 ### `signEthTransaction`
 
 Address: `0x0000000000000000000000000000000040100001`
 
-Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transaction bytes. `txn` is binary encoding of the transaction. `signingKey` is hex encoded string of the ECDSA private key _without the 0x prefix_. `chainId` is a hex encoded string _with 0x prefix_.
+Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transaction bytes. `txn` is binary encoding of the transaction.
 
 ```solidity
 function signEthTransaction(bytes memory txn, string memory chainId, string memory signingKey) internal view returns (bytes memory)
@@ -308,9 +349,9 @@ function signEthTransaction(bytes memory txn, string memory chainId, string memo
 
 Inputs:
 
-- `txn` (bytes): Transaction to sign encoded in RLP
-- `chainId` (string): Id of the chain to sign for
-- `signingKey` (string): Hex encoded string of the ECDSA private key
+- `txn` (bytes): Transaction to sign (RLP encoded)
+- `chainId` (string): Id of the chain to sign for (hex encoded, with 0x prefix)
+- `signingKey` (string): Hex encoded string of the ECDSA private key (without 0x prefix)
 
 Outputs:
 
@@ -377,7 +418,7 @@ Outputs:
 
 Address: `0x0000000000000000000000000000000043000001`
 
-Submits bytes as JSONRPC message to the specified URL with the specified method. As this call is intended for bundles, it also signs the params and adds `X-Flashbots-Signature` header, as usual with bundles. Regular eth bundles don&#39;t need any processing to be sent.
+Submits bytes as JSONRPC message to the specified URL with the specified method. As this call is intended for bundles, it also signs the params and adds `X-Flashbots-Signature` header, as usual with bundles. Regular eth bundles don't need any processing to be sent.
 
 ```solidity
 function submitBundleJsonRPC(string memory url, string memory method, bytes memory params) internal view returns (bytes memory)
