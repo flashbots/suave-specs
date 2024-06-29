@@ -12,7 +12,7 @@ custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/tolim
 
 </div>
 
-SUAVE uses a simple and highly trusted bridge with the Goerli Ethereum network to transfer assets for gas and MEV applications.
+SUAVE uses a simple and highly trusted bridge with the Holesky Ethereum network to transfer assets for gas and MEV applications.
 
 The current bridge implementation is meant to enable rapid prototyping. It is not meant for production / mainnet usage.
 

@@ -1,6 +1,6 @@
 ---
 title: Toliman Testnet
-description: Toliman is the first testnet for SUAVE. It is a sandbox and foundation for building MEV applications in a decentralized and private manner, focused on developers.
+description: Toliman is the second testnet for SUAVE. It is a sandbox and foundation for building MEV applications in a decentralized and private manner, focused on developers.
 custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/toliman/README.md"
 ---
 
@@ -74,19 +74,24 @@ Read more about SUAVE:
 
 </div>
 
-This set of specs outlines the Toliman Testnet, a continuation of the star system theme (Centauri, Andromeda, Helios) laid out in [The Future of MEV](https://writings.flashbots.net/mevm-suave-centauri-and-beyond); and the first in a series of SUAVE testnets based on stars in the [(Alpha) Centauri system](https://en.wikipedia.org/wiki/Alpha_Centauri): Toliman Kentaurus (Alpha Centauri A), Toliman (B) and Proxima Centauri (C).
+This set of specs outlines the Toliman Testnet, a continuation of the star system theme (Centauri, Andromeda, Helios) laid out in [The Future of MEV](https://writings.flashbots.net/mevm-suave-centauri-and-beyond); and the second in a series of SUAVE testnets based on stars in the [(Alpha) Centauri system](https://en.wikipedia.org/wiki/Alpha_Centauri): Toliman Kentaurus (Alpha Centauri A), Toliman (B) and Proxima Centauri (C).
 
 The Toliman Testnet is a developer focused sandbox for creating SUAPPs (MEV applications) in a way that's both decentralized and confidential. It features the MEVM, a variant of the EVM, which equips developers with the ability to write SUAPPs as smart contracts by giving them access to unique MEV-specific precompiles. SUAPPs can send transactions and intents confidentially to a network of searchers, solvers, block builders, and more.
 
-Toliman provides a live, Flashbots-hosted test network for rapid prototyping that uses Goerli ETH for gas and operates with a proof-of-authority consensus mechanism.
+Toliman provides a live, Flashbots-hosted test network for rapid prototyping that uses ETH for gas and operates with a proof-of-authority consensus mechanism.
 
 Toliman's architecture is composed of several parts:
-* SUAVE Kettles: a network of actors that provide confidential computation for SUAPPs.
+* SUAVE Kettles: a network of actors that provide confidential computation for SUAPPs. These all operate in Trusted Execution Environments (TEEs).
 * Confidential Data Storage: a private place to store data (e.g. user transactions).
 * SUAVE Chain: a public place to store data (e.g. intentionally leaked information) and SUAPP logic (e.g. deployed smart contracts).
 * MEVM: a modified EVM that exposes confidential computation and storage APIs to developers
 
-The goal of the Toliman testnet is to gather feedback on developer experience and harden the overall SUAVE software stack. The testnet is not intended to be a long-lived network and will be decommissioned after the launch of the next testnet Toliman.
+The goal of the Toliman testnet is to gather feedback on developer experience and harden the overall SUAVE software stack. The testnet is not intended to be a long-lived network and will be decommissioned after the launch of the next testnet: Proxima.
+
+You can learn more about TEEs and SUAVE via the links below:
+
+* [Speedrunning a TEE Coprocessor](https://writings.flashbots.net/suave-tee-coprocessor)
+* [Flashwares session: What are TEEs?](https://collective.flashbots.net/t/flashwares-i-tees-feat-intel-sgx/3405#what-are-tees-1)
 
 ## Users
 
@@ -102,7 +107,6 @@ The Toliman testnet is initially focused on a specific set of actors:
 
 1. **Permissionless** - Allow anyone to deploy smart contracts on SUAVE.
 2. **Easy to use** - Create an environment that is as easy to use and test as possible, enabling rapid prototyping.
-3. **SGX UX Closeness** - The DevEx on Toliman should be forward-compatible with future constraints imposed by trusted enclaves (i.e. SGX).
 
 ## Design Decisions
 
@@ -110,12 +114,8 @@ Here is a list of design decisions made for the Toliman testnet and associated r
 
 - Decision *1*: **Proof-of-Authority Consensus**
     - *reason*: [SUAVE consensus](https://collective.flashbots.net/t/suave-consensus/2152) is an active open question which, whether answered or not, does not drastically impact the UX of users on **Toliman Testnet**.
-- Decision *2*: **No SGX Nodes (yet)**
-    - reason: SGX SUAVE Kettles are an active area of research and development and do not drastically impact the UX of users on **Toliman Testnet**.
-- Decision *3*: **Weak Data Availability Guarantees**
-    - Reason: The Confidential Data Store currently only keeps private data available for one day. [Compute Output Validity and Heterogenous DA](https://collective.flashbots.net/t/suave-ensuring-output-validity-and-heterogenous-da/2184) are active open questions which, whether answered or not, does not drastically impact the UX on Toliman Testnet.
-- Decision *4*: **Centralized Builder Interoperability**
-    - reason: Blocks emitted from SUAVE Kettles will have unpredictable inclusion in early development so Toliman Testnet supports a precompile to send bundles to off-SUAVE block builders.
+- Decision *2*: **Weak Data Availability Guarantees**
+    - Reason: The Confidential Data Store on the first SUAVE testnet - Rigil - only kept private data available for one day. Toliman keeps it available for two weeks. [Compute Output Validity and Heterogenous DA](https://collective.flashbots.net/t/suave-ensuring-output-validity-and-heterogenous-da/2184) are still active open questions which, whether answered or not, do not drastically impact the UX on Toliman Testnet.
 
 ## Glossary
 
@@ -183,7 +183,6 @@ Transaction Flow:
 2. Once the RPC receives the Confidential Compute Request, it will extract the confidential inputs and send them to the confidential data store. It will then send the Compute Request to the MEVM to process.
 3. Confidential Compute Phase - During this phase, the MEVM will process the compute transaction similar to an EVM transaction except it will also have access to the confidential inputs. After doing the initial computation with the confidential data, it will then grab the results and information from the Compute Transaction and put them into their final home a SUAVE transaction.
 4. Block Inclusion - Once the SUAVE transaction has been created it will then quickly be included in a block by a SUAVE proposer.
-
 
 ### OFA Example
 
