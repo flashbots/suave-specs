@@ -31,7 +31,7 @@ custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil
 
 </div>
 
-This document provides the technical specification for the the Confidential Data Store, a privacy-centric networked storage system specifically tailored to enable programmable privacy in SUAPPs.
+This document provides the technical specification for the Confidential Data Store, a privacy-centric networked storage system specifically tailored to enable programmable privacy in SUAPPs.
 
 ## Core Functionality
 
