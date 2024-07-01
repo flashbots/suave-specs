@@ -125,7 +125,7 @@ See [`glossary.md`](./glossary.md).
 
 SUAVE Kettles house all components necessary to perform confidential compute and are the main protocol actor in the SUAVE protocol. Below is a high-level architectural overview.
 
-![Toliman architecture](/assets/toliman-architecture.svg)
+![Toliman architecture](/assets/architecture.svg)
 
 A broad-level view of how a SUAPP gets onchain and utilizes SUAVE core components is as follows:
 
@@ -141,7 +141,7 @@ A broad-level view of how a SUAPP gets onchain and utilizes SUAVE core component
 
 ## Open Questions
 
-The are multiple open questions that need to be solved in the long term about SUAVE architecture. A non-exhaustive list of questions are:
+There are multiple open questions that need to be solved in the long term about SUAVE architecture. A non-exhaustive list of questions are:
 
 - [Consensus Requirements](https://collective.flashbots.net/t/current-thinking-for-consensus/2695?u=quintus)
 - [Output Validity and Heterogenous DA](https://collective.flashbots.net/t/suave-ensuring-output-validity-and-heterogenous-da/2184)

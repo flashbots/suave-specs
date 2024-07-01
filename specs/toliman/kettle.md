@@ -81,7 +81,7 @@ A unique identifier in the form of an Ethereum-compatible public key must be gen
 
 SUAVE Kettles house all components necessary to perform confidential computation and result routing. Below is a high-level architectural diagram followed by descriptions of the main components.
 
-![Toliman architecture](/assets/toliman-architecture.svg)
+![Toliman architecture](/assets/architecture.svg)
 
 ### RPC
 
