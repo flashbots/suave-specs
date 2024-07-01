@@ -51,7 +51,7 @@ Precompile are MEVM contracts that are implemented in native code instead of byt
 
 ## Available Precompiles
 
-A list of available precompiles in Rigil are as follows:
+A list of available precompiles in Toliman are as follows:
 
 ### `IsConfidential`
 
