@@ -1,35 +1,41 @@
 ---
+---
+
 title: Precompiles
 description: Precompile are MEVM contracts that are implemented in native code instead of bytecode.
 custom_edit_url: "https://github.com/flashbots/suave-specs/edit/main/specs/rigil/precompiles.md"
+
 ---
 
-
-<!-- omit from toc -->
-# Precompiles
-
 <div className="hide-in-docs">
-<!-- TOC -->
+
+# Precompiles
 
 - [Overview](#overview)
 - [Available Precompiles](#available-precompiles)
   - [`IsConfidential`](#isconfidential)
-  - [`ConfidentialInputs`](#confidentialinputs)
-  - [`ConfidentialStore`](#confidentialstore)
-  - [`ConfidentialRetrieve`](#confidentialretrieve)
-  - [`NewDataRecord`](#newdatarecord)
-  - [`FetchDataRecords`](#fetchdatarecords)
-  - [`EthCall`](#ethcall)
-  - [`SimulateBundle`](#simulatebundle)
-  - [`ExtractHint`](#extracthint)
-  - [`SubmitBundleJsonRPC`](#submitbundlejsonrpc)
-  - [`FillMevShareBundle`](#fillmevsharebundle)
-  - [`BuildEthBlock`](#buildethblock)
-  - [`SubmitEthBlockBidToRelay`](#submitethblockbidtorelay)
-  - [`SignEthTransaction`](#signethtransaction)
+  - [`buildEthBlock`](#buildEthBlock)
+  - [`buildEthBlockTo`](#buildEthBlockTo)
+  - [`confidentialInputs`](#confidentialInputs)
+  - [`confidentialRetrieve`](#confidentialRetrieve)
+  - [`confidentialStore`](#confidentialStore)
+  - [`contextGet`](#contextGet)
+  - [`doHTTPRequest`](#doHTTPRequest)
+  - [`ethcall`](#ethcall)
+  - [`extractHint`](#extractHint)
+  - [`fetchDataRecords`](#fetchDataRecords)
+  - [`fillMevShareBundle`](#fillMevShareBundle)
+  - [`newBuilder`](#newBuilder)
+  - [`newDataRecord`](#newDataRecord)
+  - [`privateKeyGen`](#privateKeyGen)
+  - [`randomBytes`](#randomBytes)
+  - [`signEthTransaction`](#signEthTransaction)
+  - [`signMessage`](#signMessage)
+  - [`simulateBundle`](#simulateBundle)
+  - [`simulateTransaction`](#simulateTransaction)
+  - [`submitBundleJsonRPC`](#submitBundleJsonRPC)
+  - [`submitEthBlockToRelay`](#submitEthBlockToRelay)
 - [Precompiles Governance](#precompiles-governance)
-
-<!-- /TOC -->
 
 ---
 
@@ -50,10 +56,7 @@ A list of available precompiles in Rigil are as follows:
 
 ### `IsConfidential`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave.go#L43)
-
 Address: `0x0000000000000000000000000000000042010000`
-
 
 Determines if the current execution mode is regular (onchain) or confidential. Outputs a boolean value.
 
@@ -61,9 +64,50 @@ Determines if the current execution mode is regular (onchain) or confidential. O
 function isConfidential() internal view returns (bool b)
 ```
 
-### `ConfidentialInputs`
+### `buildEthBlock`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave.go#L77)
+Address: `0x0000000000000000000000000000000042100001`
+
+Constructs an Ethereum block based on the provided data records. No blobs are returned.
+
+```solidity
+function buildEthBlock(BuildBlockArgs memory blockArgs, DataId dataId, string memory relayUrl) internal view returns (bytes memory, bytes memory)
+```
+
+Inputs:
+
+- `blockArgs` (BuildBlockArgs): Arguments to build the block
+- `dataId` (DataId): ID of the data record with mev-share bundle data
+- `relayUrl` (string): If specified the built block will be submitted to the relay
+
+Outputs:
+
+- `blockBid` (bytes): Block Bid encoded in JSON
+- `executionPayload` (bytes): Execution payload encoded in JSON
+
+### `buildEthBlockTo`
+
+Address: `0x0000000000000000000000000000000042100006`
+
+Constructs an Ethereum block based on the provided data records. No blobs are returned.
+
+```solidity
+function buildEthBlockTo(string memory executionNodeURL, BuildBlockArgs memory blockArgs, DataId dataId, string memory relayUrl) internal view returns (bytes memory, bytes memory)
+```
+
+Inputs:
+
+- `executionNodeURL` (string): URL (or service name) of the execution node
+- `blockArgs` (BuildBlockArgs): Arguments to build the block
+- `dataId` (DataId): ID of the data record with mev-share bundle data
+- `relayUrl` (string): If specified the built block will be submitted to the relay
+
+Outputs:
+
+- `blockBid` (bytes): Block Bid encoded in JSON
+- `executionPayload` (bytes): Execution payload encoded in JSON
+
+### `confidentialInputs`
 
 Address: `0x0000000000000000000000000000000042010001`
 
@@ -73,21 +117,11 @@ Provides the confidential inputs associated with a confidential computation requ
 function confidentialInputs() internal view returns (bytes memory)
 ```
 
-### `ConfidentialStore`
+Outputs:
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave.go#L121)
+- `confindentialData` (bytes): Confidential inputs
 
-Address: `0x0000000000000000000000000000000042020000`
-
-Handles the storage of data in the confidential store. Requires the caller to be part of the `AllowedPeekers` for the associated bid.
-
-```solidity
-function confidentialStore(DataId dataId, string memory key, bytes memory data1) internal view
-```
-
-### `ConfidentialRetrieve`
-
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave.go#L176)
+### `confidentialRetrieve`
 
 Address: `0x0000000000000000000000000000000042020001`
 
@@ -97,82 +131,124 @@ Retrieves data from the confidential store. Also mandates the caller's presence 
 function confidentialRetrieve(DataId dataId, string memory key) internal view returns (bytes memory)
 ```
 
-### `NewDataRecord`
+Inputs:
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave.go#L237)
+- `dataId` (DataId): ID of the data record to retrieve
+- `key` (string): Key slot of the data to retrieve
 
-Address: `0x0000000000000000000000000000000042030000`
+Outputs:
 
-Initializes data records within the ConfidentialStore. `AllowedPeekers` specifies which addresses can "get" data. `AllowedStores` specifies which addresses can "set" data. Prior to storing data, all bids should undergo initialization via this precompile.
+- `value` (bytes): Value of the data
 
-```solidity
-function newDataRecord(uint64 decryptionCondition, address[] memory allowedPeekers, address[] memory allowedStores, string memory dataType)
-```
+### `confidentialStore`
 
-### `FetchDataRecords`
+Address: `0x0000000000000000000000000000000042020000`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave.go#L291)
-
-Address: `0x0000000000000000000000000000000042030001`
-
-Retrieves all data records correlating with a specified decryption condition.
+Stores data in the confidential store. Requires the caller to be part of the `AllowedPeekers` for the associated data record.
 
 ```solidity
-function fetchDataRecords(uint64 cond, string memory namespace) internal view returns (DataRecord[] memory)
+function confidentialStore(DataId dataId, string memory key, bytes memory value) internal view returns ()
 ```
 
-### `EthCall`
+Inputs:
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L193)
+- `dataId` (DataId): ID of the data record to store
+- `key` (string): Key slot of the data to store
+- `value` (bytes): Value of the data to store
+
+### `contextGet`
+
+Address: `0x0000000000000000000000000000000053300003`
+
+Retrieves a value from the context
+
+```solidity
+function contextGet(string memory key) internal view returns (bytes memory)
+```
+
+Inputs:
+
+- `key` (string): Key of the value to retrieve
+
+Outputs:
+
+- `value` (bytes): Value of the key
+
+### `doHTTPRequest`
+
+Address: `0x0000000000000000000000000000000043200002`
+
+Performs an HTTP request and returns the response. `request` is the request to perform.
+
+```solidity
+function doHTTPRequest(HttpRequest memory request) internal view returns (bytes memory)
+```
+
+Inputs:
+
+- `request` (HttpRequest): Request to perform
+
+Outputs:
+
+- `httpResponse` (bytes): Body of the response
+
+### `ethcall`
 
 Address: `0x0000000000000000000000000000000042100003`
 
 Uses the `eth_call` JSON RPC method to let you simulate a function call and return the response.
 
 ```solidity
- function ethcall(address contractAddr, bytes memory input1) internal view returns (bytes memory)
+function ethcall(address contractAddr, bytes memory input1) internal view returns (bytes memory)
 ```
 
-### `SimulateBundle`
+Inputs:
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L115)
+- `contractAddr` (address): Address of the contract to call
+- `input1` (bytes): Data to send to the contract
 
-Address: `0x0000000000000000000000000000000042100000`
+Outputs:
 
-Performs a simulation of the bundle by building a block that includes it. Outputs indicate if the execution was successful and the Effective Gas Price of the resultant block.
+- `callOutput` (bytes): Output of the contract call
 
-```solidity
-function simulateBundle(bytes memory bundleData) internal view returns (uint64)
-```
-
-### `ExtractHint`
-
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L159)
+### `extractHint`
 
 Address: `0x0000000000000000000000000000000042100037`
 
-Interprets the bundle data and extracts hints, such as the "To" address and calldata.
+Interprets the bundle data and extracts hints, such as the `To` address and calldata.
 
 ```solidity
 function extractHint(bytes memory bundleData) internal view returns (bytes memory)
 ```
 
-### `SubmitBundleJsonRPC`
+Inputs:
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L547)
+- `bundleData` (bytes): Bundle object encoded in JSON
 
-Address: `0x0000000000000000000000000000000043000001`
+Outputs:
 
-Submits bytes as JSONRPC message to the specified URL with the specified method. As this call is intended for bundles, it also signs the params and adds `X-Flashbots-Signature` header, as usual with bundles.
-Regular eth bundles don't need any processing to be sent.
+- `hints` (bytes): List of hints encoded in JSON
+
+### `fetchDataRecords`
+
+Address: `0x0000000000000000000000000000000042030001`
+
+Retrieves all data records correlating with a specified decryption condition and namespace
 
 ```solidity
-function submitBundleJsonRPC(string memory url, string memory method, bytes memory params) internal view returns (bytes memory)
+function fetchDataRecords(uint64 cond, string memory namespace) internal view returns (DataRecord[] memory)
 ```
 
-### `FillMevShareBundle`
+Inputs:
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L613)
+- `cond` (uint64): Filter for the decryption condition
+- `namespace` (string): Filter for the namespace of the data records
+
+Outputs:
+
+- `dataRecords` (DataRecord[]): List of data records that match the filter
+
+### `fillMevShareBundle`
 
 Address: `0x0000000000000000000000000000000043200001`
 
@@ -182,46 +258,206 @@ Joins the user's transaction and with the backrun, and returns encoded mev-share
 function fillMevShareBundle(DataId dataId) internal view returns (bytes memory)
 ```
 
-### `BuildEthBlock`
+Inputs:
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L267)
+- `dataId` (DataId): ID of the data record with mev-share bundle data
 
-Address: `0x0000000000000000000000000000000042100001`
+Outputs:
 
-Constructs an Ethereum block based on the provided `bidIds`. The construction follows the order of `bidId`s are given .
+- `encodedBundle` (bytes): Mev-Share bundle encoded in JSON
 
-```solidity
-function buildEthBlock(BuildBlockArgs memory blockArgs, DataId dataId, string memory namespace)
-```
+### `newBuilder`
 
-### `SubmitEthBlockBidToRelay`
+Address: `0x0000000000000000000000000000000053200001`
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L456)
-
-Address: `0x0000000000000000000000000000000042100002`
-
-Submits a given builderBid to a mev-boost relay. Outputs any errors that arise during submission.
+Initializes a new remote builder session
 
 ```solidity
-function submitEthBlockBidToRelay(string memory relayUrl, bytes memory builderBid)
+function newBuilder() internal view returns (string memory)
 ```
 
-### `SignEthTransaction`
+Outputs:
 
-[🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L62)
+- `sessionid` (string): ID of the remote builder session
+
+### `newDataRecord`
+
+Address: `0x0000000000000000000000000000000042030000`
+
+Initializes data records within the ConfidentialStore. Prior to storing data, all data records should undergo initialization via this precompile.
+
+```solidity
+function newDataRecord(uint64 decryptionCondition, address[] memory allowedPeekers, address[] memory allowedStores, string memory dataType) internal view returns (DataRecord memory)
+```
+
+Inputs:
+
+- `decryptionCondition` (uint64): Up to which block this data record is valid. Used during `fillMevShareBundle` precompie.
+- `allowedPeekers` (address[]): Addresses which can get data
+- `allowedStores` (address[]): Addresses can set data
+- `dataType` (string): Namespace of the data
+
+Outputs:
+
+- `dataRecord` (DataRecord): Data record that was created
+
+### `privateKeyGen`
+
+Address: `0x0000000000000000000000000000000053200003`
+
+Generates a private key in ECDA secp256k1 format
+
+```solidity
+function privateKeyGen(CryptoSignature crypto) internal view returns (string memory)
+```
+
+Inputs:
+
+- `crypto` (CryptoSignature): Type of the private key to generate
+
+Outputs:
+
+- `privateKey` (string): Hex encoded string of the ECDSA private key. Exactly as a signMessage precompile wants.
+
+### `randomBytes`
+
+Address: `0x000000000000000000000000000000007770000b`
+
+Generates a number of random bytes, given by the argument numBytes.
+
+```solidity
+function randomBytes(uint8 numBytes) internal view returns (bytes memory)
+```
+
+Inputs:
+
+- `numBytes` (uint8): Number of random bytes to generate
+
+Outputs:
+
+- `value` (bytes): Randomly-generated bytes
+
+### `signEthTransaction`
 
 Address: `0x0000000000000000000000000000000040100001`
 
-Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transaction bytes. `txn` is binary encoding of the transaction. `signingKey` is hex encoded string of the ECDSA private key *without the 0x prefix*. `chainId` is a hex encoded string *with 0x prefix*.
+Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transaction bytes. `txn` is binary encoding of the transaction.
 
 ```solidity
-function signEthTransaction(bytes memory txn, string memory chainId, string memory signingKey) view returns (bytes memory)
+function signEthTransaction(bytes memory txn, string memory chainId, string memory signingKey) internal view returns (bytes memory)
 ```
+
+Inputs:
+
+- `txn` (bytes): Transaction to sign (RLP encoded)
+- `chainId` (string): Id of the chain to sign for (hex encoded, with 0x prefix)
+- `signingKey` (string): Hex encoded string of the ECDSA private key (without 0x prefix)
+
+Outputs:
+
+- `signedTxn` (bytes): Signed transaction encoded in RLP
+
+### `signMessage`
+
+Address: `0x0000000000000000000000000000000040100003`
+
+Signs a message and returns the signature.
+
+```solidity
+function signMessage(bytes memory digest, CryptoSignature crypto, string memory signingKey) internal view returns (bytes memory)
+```
+
+Inputs:
+
+- `digest` (bytes): Message to sign
+- `crypto` (CryptoSignature): Type of the private key to generate
+- `signingKey` (string): Hex encoded string of the ECDSA private key
+
+Outputs:
+
+- `signature` (bytes): Signature of the message with the private key
+
+### `simulateBundle`
+
+Address: `0x0000000000000000000000000000000042100000`
+
+Performs a simulation of the bundle by building a block that includes it.
+
+```solidity
+function simulateBundle(bytes memory bundleData) internal view returns (uint64)
+```
+
+Inputs:
+
+- `bundleData` (bytes): Bundle encoded in JSON
+
+Outputs:
+
+- `effectiveGasPrice` (uint64): Effective Gas Price of the resultant block
+
+### `simulateTransaction`
+
+Address: `0x0000000000000000000000000000000053200002`
+
+Simulates a transaction on a remote builder session
+
+```solidity
+function simulateTransaction(string memory sessionid, bytes memory txn) internal view returns (SimulateTransactionResult memory)
+```
+
+Inputs:
+
+- `sessionid` (string): ID of the remote builder session
+- `txn` (bytes): Txn to simulate encoded in RLP
+
+Outputs:
+
+- `simulationResult` (SimulateTransactionResult): Result of the simulation
+
+### `submitBundleJsonRPC`
+
+Address: `0x0000000000000000000000000000000043000001`
+
+Submits bytes as JSONRPC message to the specified URL with the specified method. As this call is intended for bundles, it also signs the params and adds `X-Flashbots-Signature` header, as usual with bundles. Regular eth bundles don't need any processing to be sent.
+
+```solidity
+function submitBundleJsonRPC(string memory url, string memory method, bytes memory params) internal view returns (bytes memory)
+```
+
+Inputs:
+
+- `url` (string): URL to send the request to
+- `method` (string): JSONRPC method to call
+- `params` (bytes): JSONRPC input params encoded in RLP
+
+Outputs:
+
+- `errorMessage` (bytes): Error message if any
+
+### `submitEthBlockToRelay`
+
+Address: `0x0000000000000000000000000000000042100002`
+
+Submits a given builderBid to a mev-boost relay.
+
+```solidity
+function submitEthBlockToRelay(string memory relayUrl, bytes memory builderBid) internal view returns (bytes memory)
+```
+
+Inputs:
+
+- `relayUrl` (string): URL of the relay to submit to
+- `builderBid` (bytes): Block bid to submit encoded in JSON
+
+Outputs:
+
+- `blockBid` (bytes): Error message if any
 
 ## Precompiles Governance
 
 The governance process for adding precompiles is in it's early stages but is as follows:
-- Discuss the idea in a [forum post](https://collective.flashbots.net/)
+
+- Discuss the idea in a [forum post](https://collective.flashbots.net/c/suave/27)
 - Open a PR and provide implementation
 - Feedback and review
 - Possibly merge and deploy in the next network upgrade, or sooner, depending on the precompile
