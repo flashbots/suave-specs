@@ -194,21 +194,36 @@ Constructs an Ethereum block based on the provided `bidIds`. The construction fo
 function buildEthBlock(BuildBlockArgs memory blockArgs, DataId dataId, string memory namespace)
 ```
 
-### `SubmitEthBlockBidToRelay`
+### `pseudorandomBytes`
 
 [🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L456)
 
-Address: `0x0000000000000000000000000000000042100002`
+Address: `0x0000000000000000000000000000000040100002`
 
-Submits a given builderBid to a mev-boost relay. Outputs any errors that arise during submission.
+Generates pseudorandom bytes associated with the contract, derived from the currently active newtork master key `msk`.
+
+More specifically it generates a stream of blocks up to `len` size, where each block `i` is computed as `sha3(abi.encode(mpk, msg.sender, x, i))`. In this way the `x` is for domain separation, `i` is for counting, and `msg.sender` provides domain separation at the contract level.
 
 ```solidity
-function submitEthBlockBidToRelay(string memory relayUrl, bytes memory builderBid)
+function pseudorandomBytes(bytes32 memory x, uint len) returns (bytes);
 ```
 
 ### `SignEthTransaction`
 
 [🔗 Implementation](https://github.com/flashbots/suave-geth/blob/b328d64689930a40eae0a6e834805f3feab6b58f/core/vm/contracts_suave_eth.go#L62)
+
+Address: `0x0000000000000000000000000000000040100001`
+
+Signs an Ethereum Transaction, 1559 or Legacy, and returns raw signed transaction bytes. `txn` is binary encoding of the transaction. `signingKey` is hex encoded string of the ECDSA private key *without the 0x prefix*. `chainId` is a hex encoded string *with 0x prefix*.
+
+```solidity
+function signEthTransaction(bytes memory txn, string memory chainId, string memory signingKey) view returns (bytes memory)
+```
+
+
+### `SignEthTransaction`
+
+TODO: 🔗 Implementation
 
 Address: `0x0000000000000000000000000000000040100001`
 
