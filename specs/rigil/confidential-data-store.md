@@ -56,7 +56,7 @@ This document provides the technical specification for the the Confidential Data
 
 The Confidential Data Store consists of three main components: Engine, Storage, and Transport. The Engine is the main orchestrating component responsible for managing calls to Storage, as well as sending and receiving synchronization messages over the Transport. The MEVM is able to directly interact with the Confidential Store Engine through precompiles.
 
-![Confidential Data Store Diagram](/assets/rigil_confidential_data_store.svg)
+![Confidential Data Store Diagram](/assets/confidential_data_store.svg)
 
 ### Engine
 
