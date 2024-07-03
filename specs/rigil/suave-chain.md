@@ -109,7 +109,7 @@ Standard transactions are used to transfer SUAVE-ETH and deploy smart contracts 
 
 All transactions are encoded with the [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718) RLP-encoding scheme (with [EIP-2930](https://eips.ethereum.org/EIPS/eip-2930) allowed), but `ConfidentialComputeRequest` takes on a special signature scheme that deviates slightly from the traditional method.
 
-![confidential compute request signature scheme](../../assets/rigil-ccRequest-signature-flow.png)
+![confidential compute request signature scheme](../../assets/ccRequest-signature-flow.png)
 
 ConfidentialComputeRequests adopt this unique signing scheme to keep `confidentialInputs` off-chain. The ConfidentialComputeRecord, which is signed by the sender, contains only the _hash_ of `confidentialInputs`. This record is stored on the SUAVE chain, making verification of `confidentialInputs` possible without exposing the actual data on-chain.
 
