@@ -176,7 +176,7 @@ The SUAVE Kettle and the MEVM support multiple new data types, which are all spe
 
 The diagram below showcases how these different types interact to enable confidential computation on SUAVE Kettles.
 
-![Rigil transaction flow](/assets/rigil-tx-flow.svg)
+![Rigil transaction flow](/assets/tx-flow.svg)
 
 Transaction Flow:
 1. User sends a Confidential Compute Request to the RPC - Confidential Compute Requests are made up of two components, Compute Transaction and Confidential Inputs. The Compute request will reference data inside of the Confidential Inputs that the MEVM is able to use during computation.
