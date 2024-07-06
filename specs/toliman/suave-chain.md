@@ -45,8 +45,7 @@ In the initial phases of development, the SUAVE chain runs a proof-of-authority 
 
 ### Network Parameters
 
-- **Network ID**: `16813125`
-- **Chain ID**: `16813125`
+- **Chain ID**: `33626250`
 
 ### Genesis Settings
 
